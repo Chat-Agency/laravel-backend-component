@@ -10,7 +10,7 @@ use ChatAgency\LaravelBackendComponents\Contracts\LaravelBackendComponent;
 
 class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
 {
-    protected string $context = 'backend.';
+    protected string $path = 'backend.';
 
     protected bool $useLocal = false;
 
@@ -52,14 +52,14 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
 
     public function getContext() : string
     {
-        return config('laravel-backend-component.context') ?? $this->getNamespace().$this->context;
+        return config('laravel-backend-component.path') ?? $this->getNamespace().$this->path;
     }
 
     public function getPath() : string
     {
-        $context = $this->getContext();
+        $path = $this->getContext();
 
-        return $context.$this->name;
+        return $path.$this->name;
     }
 
     public function setLivewire(bool $livewire = true) : self
@@ -131,9 +131,9 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
         return $this->themeManager;
     }
 
-    public function setContext(string $context) : self
+    public function setContext(string $path) : self
     {
-        $this->context = $context;
+        $this->path = $path;
 
         return $this;
     }
@@ -223,7 +223,7 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
         return [
             'name' => $this->name,
             'value' => $this->getValue(),
-            'context' => $this->getContext(),
+            'path' => $this->getContext(),
             'path' => $this->getPath(),
             'attributes' => $this->getAttributes(),
             'sub_components' => $this->getSubComponents(),

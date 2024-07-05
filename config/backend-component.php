@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'context' => 'backend.',
+    'path' => 'backend.',
     'themes' => [
         'path' => '_theme',
     ],
