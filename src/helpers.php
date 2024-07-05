@@ -1,7 +1,7 @@
 <?php
 
 use ChatAgency\LaravelBackendComponents\BackendComponent;
-use ChatAgency\LaravelBackendComponents\Concerns\ThemeBag;
+use ChatAgency\LaravelBackendComponents\Contracts\ThemeBag;
 use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
 
 /**

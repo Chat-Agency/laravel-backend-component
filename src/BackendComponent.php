@@ -2,14 +2,16 @@
 
 namespace ChatAgency\LaravelBackendComponents;
 
-use ChatAgency\LaravelBackendComponents\Concerns\LaravelBackendComponent;
-use ChatAgency\LaravelBackendComponents\Concerns\ThemeBag;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Contracts\Support\Arrayable;
+use ChatAgency\LaravelBackendComponents\Contracts\ThemeBag;
+use ChatAgency\LaravelBackendComponents\Contracts\LaravelBackendComponent;
 
 class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
 {
     protected string $context = 'dynamic.';
+
+    protected bool $unsetNamespace = false;
 
     protected string|BackendComponent|null $value = null;
 
@@ -34,9 +36,14 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
         return new static($name);
     }
 
+    public function getNamespace() : string | null
+    {
+        return $this->unsetNamespace ? null : \BackendComponentNamespace();
+    }
+
     public function getContext(): string
     {
-        return config('laravel-backend-component.context') ?? \BackendComponentNamespace().$this->context;
+        return config('laravel-backend-component.context') ?? $this->getNamespace().$this->context;
     }
 
     public function getPath(): string

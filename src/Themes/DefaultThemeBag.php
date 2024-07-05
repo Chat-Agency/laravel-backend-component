@@ -2,7 +2,7 @@
 
 namespace ChatAgency\LaravelBackendComponents\Themes;
 
-use ChatAgency\LaravelBackendComponents\Concerns\ThemeBag;
+use ChatAgency\LaravelBackendComponents\Contracts\ThemeBag;
 
 class DefaultThemeBag implements ThemeBag
 {

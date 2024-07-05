@@ -1,6 +1,6 @@
 <?php
 
-namespace ChatAgency\LaravelBackendComponents\Concerns;
+namespace ChatAgency\LaravelBackendComponents\Contracts;
 
 interface ThemeBag
 {

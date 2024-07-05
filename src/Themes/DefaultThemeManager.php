@@ -2,13 +2,15 @@
 
 namespace ChatAgency\LaravelBackendComponents\Themes;
 
-use ChatAgency\LaravelBackendComponents\Concerns\ThemeBag;
-use ChatAgency\LaravelBackendComponents\Concerns\ThemeManager;
+use ChatAgency\LaravelBackendComponents\Contracts\ThemeBag;
+use ChatAgency\LaravelBackendComponents\Contracts\ThemeManager;
 use Illuminate\Support\Str;
 
 class DefaultThemeManager implements ThemeManager
 {
     protected string $defaultPath = '_themes.tailwind';
+
+    protected bool $unsetNamespace = false;
 
     public static function make(): self
     {
