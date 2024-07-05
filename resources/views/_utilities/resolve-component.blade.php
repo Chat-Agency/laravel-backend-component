@@ -1,5 +1,5 @@
 @php
-    $path = $component->getPath();
+    $path = $component->getComponentPath();
     $componentArray =  $component->toArray();
 @endphp
 

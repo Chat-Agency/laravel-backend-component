@@ -50,16 +50,14 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
         return $this->useLocal ? null : \BackendComponentNamespace();
     }
 
-    public function getContext() : string
+    public function getPath() : string
     {
         return config('laravel-backend-component.path') ?? $this->getNamespace().$this->path;
     }
 
-    public function getPath() : string
+    public function getComponentPath() : string
     {
-        $path = $this->getContext();
-
-        return $path.$this->name;
+        return $this->getPath().$this->name;
     }
 
     public function setLivewire(bool $livewire = true) : self
@@ -218,13 +216,13 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
 
         return $this;
     }
+    
     public function toArray() : array
     {
         return [
             'name' => $this->name,
             'value' => $this->getValue(),
-            'path' => $this->getContext(),
-            'path' => $this->getPath(),
+            'path' => $this->getComponentPath(),
             'attributes' => $this->getAttributes(),
             'sub_components' => $this->getSubComponents(),
             'themes' => [
