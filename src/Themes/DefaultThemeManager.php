@@ -10,16 +10,16 @@ class DefaultThemeManager implements ThemeManager
 {
     protected string $defaultPath = '_themes.tailwind';
 
-    protected bool $unsetNamespace = false;
+    protected bool $useLocal = false;
 
     public static function make(): self
     {
         return new static();
     }
 
-    public function unsetNamespace($unset = true) : self
+    public function useLocal($local = true) : self
     {
-        $this->unsetNamespace = $unset;
+        $this->useLocal = $local;
 
         return $this;
     }
@@ -27,7 +27,7 @@ class DefaultThemeManager implements ThemeManager
     public function getThemePath(): string
     {
         return config('themes.path')
-            ?? ($this->unsetNamespace ? null : BackendComponentNamespace())
+            ?? ($this->useLocal ? null : BackendComponentNamespace())
                 .$this->defaultPath
                 .'.';
     }

@@ -2,6 +2,7 @@
 
 use ChatAgency\LaravelBackendComponents\BackendComponent;
 use ChatAgency\LaravelBackendComponents\Contracts\ThemeBag;
+use ChatAgency\LaravelBackendComponents\Contracts\ThemeManager;
 use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
 
 /**
@@ -34,16 +35,8 @@ if (! function_exists('isBackendComponent')) {
 if (! function_exists('bladeThemes')) {
     function bladeThemes(array $themes)
     {
-        return DefaultThemeManager::make()
-            ->bladeThemes($themes);
-    }
-}
-
-if (! function_exists('bladeTheme')) {
-    function bladeTheme(string $type, string|array|null $theme = null)
-    {
-        return DefaultThemeManager::make()
-            ->bladeTheme($type, $theme);
+        return resolveThemeManager($themes['config'] ?? [])
+            ->bladeThemes($themes['theming'] ?? []);
     }
 }
 
@@ -52,5 +45,12 @@ if (! function_exists('resolveTheme')) {
     {
         return DefaultThemeManager::make()
             ->resolveTheme($styleGroup, $style);
+    }
+}
+
+if (! function_exists('resolveThemeManager')) {
+    function resolveThemeManager(array $config) : ThemeManager
+    {
+        return $config['manager'] ?? DefaultThemeManager::make();
     }
 }

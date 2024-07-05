@@ -5,15 +5,16 @@ namespace ChatAgency\LaravelBackendComponents;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Arrayable;
 use ChatAgency\LaravelBackendComponents\Contracts\ThemeBag;
+use ChatAgency\LaravelBackendComponents\Contracts\ThemeManager;
 use ChatAgency\LaravelBackendComponents\Contracts\LaravelBackendComponent;
 
 class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
 {
     protected string $context = 'backend.';
 
-    protected bool $unsetNamespace = false;
+    protected bool $useLocal = false;
 
-    protected string|BackendComponent|null $value = null;
+    protected string | BackendComponent | null $value = null;
 
     protected array $attributes = [];
 
@@ -28,7 +29,8 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
     protected ?string $livewireKey = null;
 
     public function __construct(
-        protected string $name
+        protected string $name,
+        protected ThemeManager | null $themeManager = null
     ) {}
 
     public static function make($name): static
@@ -36,16 +38,16 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
         return new static($name);
     }
 
-    public function unsetNamespace($unset = true) : self
+    public function useLocal($local = true) : self
     {
-        $this->unsetNamespace = $unset;
+        $this->useLocal = $local;
 
         return $this;
     }
 
     public function getNamespace() : string | null
     {
-        return $this->unsetNamespace ? null : \BackendComponentNamespace();
+        return $this->useLocal ? null : \BackendComponentNamespace();
     }
 
     public function getContext(): string
@@ -122,6 +124,11 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
     public function getExtra(string $name): mixed
     {
         return $this->getExtras()[$name] ?? null;
+    }
+
+    public function getThemeManager() : ThemeManager | null
+    {
+        return $this->themeManager;
     }
 
     public function setContext(string $context): self
@@ -205,6 +212,12 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
         return $this;
     }
 
+    public function setThemeManager(ThemeManager $themeManager) : self
+    {
+        $this->themeManager = $themeManager;
+
+        return $this;
+    }
     public function toArray(): array
     {
         return [
@@ -214,7 +227,12 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
             'path' => $this->getPath(),
             'attributes' => $this->getAttributes(),
             'sub_components' => $this->getSubComponents(),
-            'themes' => $this->getThemes(),
+            'themes' => [
+                'theming' =>  $this->getThemes(),
+                'config' => [
+                    'manager' => $this->getThemeManager(),
+                ],
+            ],
             'extra' => $this->getExtras(),
             'is_livewire' => $this->isLivewire(),
             'livewire_key' => $this->getLivewireKey(),
@@ -232,4 +250,5 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
             ->with('component', $this);
 
     }
+
 }

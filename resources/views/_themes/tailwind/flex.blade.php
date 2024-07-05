@@ -3,7 +3,7 @@
 
     $styles = [
         'gap-sm' => 'gap-1',
-        'align-middle' => 'align-middle',
+        'items-center' => 'items-center',
     ];
     
     $value .= resolveTheme($styles, $flex);
