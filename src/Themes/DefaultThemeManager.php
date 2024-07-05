@@ -17,10 +17,17 @@ class DefaultThemeManager implements ThemeManager
         return new static();
     }
 
+    public function unsetNamespace($unset = true) : self
+    {
+        $this->unsetNamespace = $unset;
+
+        return $this;
+    }
+
     public function getThemePath(): string
     {
         return config('themes.path')
-            ?? BackendComponentNamespace()
+            ?? ($this->unsetNamespace ? null : BackendComponentNamespace())
                 .$this->defaultPath
                 .'.';
     }

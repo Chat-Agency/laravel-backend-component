@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'context' => 'dynamic.',
+    'context' => 'backend.',
     'themes' => [
         'path' => '_theme',
     ],

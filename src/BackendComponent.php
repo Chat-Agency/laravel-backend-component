@@ -9,7 +9,7 @@ use ChatAgency\LaravelBackendComponents\Contracts\LaravelBackendComponent;
 
 class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
 {
-    protected string $context = 'dynamic.';
+    protected string $context = 'backend.';
 
     protected bool $unsetNamespace = false;
 
@@ -34,6 +34,13 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
     public static function make($name): static
     {
         return new static($name);
+    }
+
+    public function unsetNamespace($unset = true) : self
+    {
+        $this->unsetNamespace = $unset;
+
+        return $this;
     }
 
     public function getNamespace() : string | null
