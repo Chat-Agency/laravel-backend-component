@@ -17,9 +17,8 @@
         $extra = $attrs['extra'] ?? [];
 
         $value = $attrs['value'] ?? $value;
-        $theme = bladeThemes($themes);
 
-        $localAttrs['class'] = $theme ?? 'loading-spinner hidden animate-spin h-5 w-5 text-brand-primary';
+        $localAttrs['class'] = bladeThemes($themes);
     }
 
 @endphp

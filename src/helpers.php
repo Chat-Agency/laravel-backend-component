@@ -16,9 +16,9 @@ if (! function_exists('BackendComponentNamespace')) {
 }
 
 if (! function_exists('makeBackendComponent')) {
-    function makeBackendComponent(string $type): BackendComponent
+    function makeBackendComponent(string $name): BackendComponent
     {
-        return new BackendComponent($type);
+        return new BackendComponent($name);
     }
 }
 

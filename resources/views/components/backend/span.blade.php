@@ -7,11 +7,7 @@
     $localAttrs = [];
     $value = null;
 
-    // Additional values
-    $loading = null;
-    $confirm = null;
-
-     if($hasAttrs) {
+    if($hasAttrs) {
 
         $localAttrs = $attrs['attributes'] ?? [];
 
@@ -23,19 +19,10 @@
         $value = $attrs['value'] ?? $value;
         $localAttrs['class'] = bladeThemes($themes);
 
-        //dd($themes);
-
-        // Additional components
-        $loading = $subComponents['loading'] ?? null;
-        $confirm = $extra['confirm'] ?? null;
     }
 
 @endphp
 
-<button 
+<span
     {{ $attributes->merge($localAttrs) }} 
-    @if($confirm) onClick="confirm('{{ $confirm }}') || event.preventDefault();" @endif>
-   
-    {{ $value }} {{ $slot }} {{ $loading }}
-
-</button>
+> {{ $value }} {{ $slot }}</span>
