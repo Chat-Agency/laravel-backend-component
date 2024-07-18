@@ -5,16 +5,18 @@ namespace ChatAgency\LaravelBackendComponents;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Arrayable;
 use ChatAgency\LaravelBackendComponents\Contracts\ThemeBag;
+use ChatAgency\LaravelBackendComponents\Enums\ComponentsEnum;
 use ChatAgency\LaravelBackendComponents\Contracts\ThemeManager;
+use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
 use ChatAgency\LaravelBackendComponents\Contracts\LaravelBackendComponent;
 
-class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
+class ComponentBuilder implements Arrayable, Htmlable, LaravelBackendComponent
 {
-    protected string $path = 'backend.';
+    protected string | null $path = null;
 
     protected bool $useLocal = false;
 
-    protected string | BackendComponent | null $value = null;
+    protected string | ComponentBuilder | null $value = null;
 
     protected array $attributes = [];
 
@@ -28,12 +30,14 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
 
     protected ?string $livewireKey = null;
 
+    protected array $livewireParams = [];
+
     public function __construct(
-        protected string $name,
-        protected ThemeManager | null $themeManager = null
+        protected string | ComponentsEnum $name,
+        protected ThemeManager $themeManager = new DefaultThemeManager
     ) {}
 
-    public static function make($name, ThemeManager | null $themeManager = null) : static
+    public static function make($name, ThemeManager $themeManager = new DefaultThemeManager) : static
     {
         return new static($name, $themeManager);
     }
@@ -43,6 +47,17 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
         $this->useLocal = $local;
 
         return $this;
+    }
+
+    public function getName()
+    {
+        $name = $this->name;
+        
+        if ($name instanceof ComponentsEnum) {
+            return $name->value;
+        }
+        
+        return $this->name;
     }
 
     public function getNamespace() : string | null
@@ -57,7 +72,7 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
 
     public function getComponentPath() : string
     {
-        return $this->getPath().$this->name;
+        return $this->getPath().$this->getName();
     }
 
     public function setLivewire(bool $livewire = true) : self
@@ -84,7 +99,7 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
         return $this->livewireKey;
     }
 
-    public function getValue() : string|BackendComponent|null
+    public function getValue() : string| ComponentBuilder |null
     {
         return $this->value;
     }
@@ -109,7 +124,7 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
         return $this->themes;
     }
 
-    public function getTheme(string $name) : string|ThemeBag|null
+    public function getTheme(string $name) : string| ThemeBag |null
     {
         return $this->getThemes()[$name] ?? null;
     }
@@ -129,6 +144,11 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
         return $this->themeManager;
     }
 
+    public function getLivewireParams() : array
+    {
+        return $this->livewireParams;
+    }
+
     public function setContext(string $path) : self
     {
         $this->path = $path;
@@ -143,7 +163,7 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
         return $this;
     }
 
-    public function setValue(string|BackendComponent $value) : self
+    public function setValue(string|ComponentBuilder $value) : self
     {
         $this->value = $value;
 
@@ -166,7 +186,7 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
         return $this;
     }
 
-    public function setSubComponent($name, BackendComponent $subComponent) : self
+    public function setSubComponent($name, ComponentBuilder $subComponent) : self
     {
         $this->subComponents[$name] = $subComponent;
 
@@ -210,6 +230,12 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
         return $this;
     }
 
+    public function setLivewireParams(array $livewireParams) : self
+    {
+        $this->livewireParams = $livewireParams;
+
+        return $this;
+    }
     public function setThemeManager(ThemeManager $themeManager) : self
     {
         $this->themeManager = $themeManager;
@@ -220,7 +246,7 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
     public function toArray() : array
     {
         return [
-            'name' => $this->name,
+            'name' => $this->getName(),
             'value' => $this->getValue(),
             'path' => $this->getComponentPath(),
             'attributes' => $this->getAttributes(),
@@ -234,12 +260,18 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
             'extra' => $this->getExtras(),
             'is_livewire' => $this->isLivewire(),
             'livewire_key' => $this->getLivewireKey(),
+            'livewire_params' => $this->getLivewireParams(),
         ];
     }
 
     public function __toString() : string
     {
-        return json_encode($this->toArray());
+        $component = $this->toArray();
+        $themeManager = $this->getThemeManager();
+
+        $component['themes']['config']['manager'] = $themeManager::class;
+        
+        return json_encode($component);
     }
 
     public function toHtml()
@@ -248,5 +280,4 @@ class BackendComponent implements Arrayable, Htmlable, LaravelBackendComponent
             ->with('component', $this);
 
     }
-
 }

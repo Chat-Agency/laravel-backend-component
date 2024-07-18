@@ -1,14 +1,23 @@
 @php
-    $path = $component->getComponentPath();
-    $componentArray =  $component->toArray();
+    /** @var \ChatAgency\LaravelBackendComponents\Contracts\LaravelBackendComponent $component */
 @endphp
 
 @if($component->isLivewire())
-    @if ($component->livewireKey())
-        @livewire($path, $componentArray, key($component->getLivewireKey()))
+    @php
+        $name = $component->getName();
+        $params = $component->getLivewireParams();
+        $key = $component->getLivewireKey();
+    @endphp
+    
+    @if ($key)
+        @livewire($name, $params, key($key))
     @else 
-        @livewire($path, $componentArray)
+        @livewire($name, $params)
     @endif 
 @else
+    @php
+        $path = $component->getComponentPath();
+        $componentArray =  $component->toArray();
+    @endphp
     <x-dynamic-component :component="$path" :attrs="$componentArray" />
 @endif 
