@@ -2,16 +2,15 @@
 
 namespace ChatAgency\LaravelBackendComponents;
 
-use ChatAgency\LaravelBackendComponents\Contracts\Builder;
-use ChatAgency\LaravelBackendComponents\Enums\ComponentsEnum;
+use BackedEnum;
 use ChatAgency\LaravelBackendComponents\Contracts\ThemeManager;
 use ChatAgency\LaravelBackendComponents\Contracts\BackendComponent;
 use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
 
-class ComponentBuilder implements Builder
+class ComponentBuilder 
 {
     public static function make(
-        string | ComponentsEnum $name,
+        string | BackedEnum $name,
         ThemeManager | null $themeManager = null
     ) : BackendComponent
     {

@@ -2,13 +2,13 @@
 
 namespace ChatAgency\LaravelBackendComponents;
 
+use BackedEnum;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Arrayable;
 use ChatAgency\LaravelBackendComponents\Contracts\ThemeBag;
-use ChatAgency\LaravelBackendComponents\Enums\ComponentsEnum;
 use ChatAgency\LaravelBackendComponents\Contracts\ThemeManager;
-use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
 use ChatAgency\LaravelBackendComponents\Contracts\BackendComponent;
+use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
 
 class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
 {
@@ -33,7 +33,7 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
     protected array $livewireParams = [];
 
     public function __construct(
-        protected string | ComponentsEnum $name,
+        protected string | BackedEnum $name,
         protected ThemeManager $themeManager = new DefaultThemeManager
     ) {}
 
@@ -48,7 +48,7 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
     {
         $name = $this->name;
         
-        if ($name instanceof ComponentsEnum) {
+        if ($name instanceof BackedEnum) {
             return $name->value;
         }
         
@@ -231,9 +231,17 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
 
         return $this;
     }
+    
     public function setThemeManager(ThemeManager $themeManager) : self
     {
         $this->themeManager = $themeManager;
+
+        return $this;
+    }
+    
+    public function setPath(string $path) : self
+    {
+        $this->path = $path;
 
         return $this;
     }
