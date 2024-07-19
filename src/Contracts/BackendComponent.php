@@ -2,4 +2,6 @@
 
 namespace ChatAgency\LaravelBackendComponents\Contracts;
 
-interface LaravelBackendComponent {}
+interface BackendComponent {
+    
+}

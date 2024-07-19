@@ -2,10 +2,8 @@
 
 namespace ChatAgency\LaravelBackendComponents\Builders;
 
-use ChatAgency\LaravelBackendComponents\ComponentBuilder;
 
-class InputBuilder extends ComponentBuilder
+class InputBuilder 
 {
-    protected string | null $path = 'inputs.';
     
 }
