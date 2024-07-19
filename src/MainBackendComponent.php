@@ -10,13 +10,13 @@ use ChatAgency\LaravelBackendComponents\Contracts\ThemeManager;
 use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
 use ChatAgency\LaravelBackendComponents\Contracts\BackendComponent;
 
-class DefaultBackendComponent implements Arrayable, Htmlable, BackendComponent
+class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
 {
     protected string | null $path = null;
 
     protected bool $useLocal = false;
 
-    protected string | DefaultBackendComponent | null $value = null;
+    protected string | MainBackendComponent | null $value = null;
 
     protected array $attributes = [];
 
@@ -44,7 +44,7 @@ class DefaultBackendComponent implements Arrayable, Htmlable, BackendComponent
         return $this;
     }
 
-    public function getName()
+    public function getName() : string
     {
         $name = $this->name;
         
@@ -62,7 +62,7 @@ class DefaultBackendComponent implements Arrayable, Htmlable, BackendComponent
 
     public function getPath() : string
     {
-        return config('laravel-backend-component.path') ?? $this->getNamespace().$this->path;
+        return $this->getNamespace().$this->path;
     }
 
     public function getComponentPath() : string
@@ -89,12 +89,12 @@ class DefaultBackendComponent implements Arrayable, Htmlable, BackendComponent
         return $this;
     }
 
-    public function getLivewireKey() : ?string
+    public function getLivewireKey() : string | null
     {
         return $this->livewireKey;
     }
 
-    public function getValue() : string| DefaultBackendComponent |null
+    public function getValue() : string| MainBackendComponent |null
     {
         return $this->value;
     }
@@ -104,7 +104,7 @@ class DefaultBackendComponent implements Arrayable, Htmlable, BackendComponent
         return $this->attributes;
     }
 
-    public function getAttribute(string $name) : ?string
+    public function getAttribute(string $name) : string | null
     {
         return $this->getAttributes()[$name] ?? null;
     }
@@ -158,7 +158,7 @@ class DefaultBackendComponent implements Arrayable, Htmlable, BackendComponent
         return $this;
     }
 
-    public function setValue(string|DefaultBackendComponent $value) : self
+    public function setValue(string|MainBackendComponent $value) : self
     {
         $this->value = $value;
 
@@ -181,7 +181,7 @@ class DefaultBackendComponent implements Arrayable, Htmlable, BackendComponent
         return $this;
     }
 
-    public function setSubComponent($name, DefaultBackendComponent $subComponent) : self
+    public function setSubComponent($name, MainBackendComponent $subComponent) : self
     {
         $this->subComponents[$name] = $subComponent;
 

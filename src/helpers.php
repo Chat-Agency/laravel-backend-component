@@ -1,8 +1,9 @@
 <?php
 
-use ChatAgency\LaravelBackendComponents\BackendComponent;
 use ChatAgency\LaravelBackendComponents\Contracts\ThemeBag;
+use ChatAgency\LaravelBackendComponents\MainBackendComponent;
 use ChatAgency\LaravelBackendComponents\Contracts\ThemeManager;
+use ChatAgency\LaravelBackendComponents\Contracts\BackendComponent;
 use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
 
 /**
@@ -16,9 +17,9 @@ if (! function_exists('BackendComponentNamespace')) {
 }
 
 if (! function_exists('makeBackendComponent')) {
-    function makeBackendComponent(string $name): BackendComponent
+    function makeBackendComponent(string $name): MainBackendComponent
     {
-        return new BackendComponent($name);
+        return new MainBackendComponent($name);
     }
 }
 

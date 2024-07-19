@@ -26,8 +26,7 @@ class DefaultThemeManager implements ThemeManager
 
     public function getThemePath(): string
     {
-        return config('themes.path')
-            ?? ($this->useLocal ? null : BackendComponentNamespace())
+        return ($this->useLocal ? null : BackendComponentNamespace())
                 .$this->defaultPath
                 .'.';
     }
