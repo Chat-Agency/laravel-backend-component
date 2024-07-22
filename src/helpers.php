@@ -17,7 +17,7 @@ if (! function_exists('BackendComponentNamespace')) {
 }
 
 if (! function_exists('makeBackendComponent')) {
-    function makeBackendComponent(string $name): MainBackendComponent
+    function makeBackendComponent( string | \BackedEnum $name): MainBackendComponent
     {
         return new MainBackendComponent($name);
     }

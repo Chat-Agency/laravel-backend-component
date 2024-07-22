@@ -23,7 +23,14 @@
 
 @endphp
 
-<span
-    {{ $attributes->merge($localAttrs) }} > 
+<div
+    {{ $attributes->merge($localAttrs) }}> 
+        
         {{ $value }} {{ $slot }}
-</span>
+        
+        @foreach($subComponents as $subComponent)
+            {{ $subComponent }}
+        @endforeach
+
+
+</div>

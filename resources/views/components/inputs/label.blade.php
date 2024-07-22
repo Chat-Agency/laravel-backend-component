@@ -18,12 +18,11 @@
 
         $value = $attrs['value'] ?? $value;
         $localAttrs['class'] = bladeThemes($themes);
-
     }
 
 @endphp
 
-<span
+<label
     {{ $attributes->merge($localAttrs) }} > 
         {{ $value }} {{ $slot }}
-</span>
+</label>
