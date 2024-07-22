@@ -14,11 +14,11 @@
 
      if($hasAttrs) {
 
-        $localAttrs = $attrs['attributes'] ?? [];
+        $localAttrs = $attrs['attributes'] ?? $localAttrs;
 
         $value = $attrs['value'] ?? null;
         $themes = $attrs['themes'] ?? [];
-        $subComponents = $attrs['sub_components'] ?? [];
+        $subComponents = $attrs['sub_components'] ?? $subComponents;
         $extra = $attrs['extra'] ?? [];
         $localAttrs['class'] = $localAttrs['class'] ?? null;
 

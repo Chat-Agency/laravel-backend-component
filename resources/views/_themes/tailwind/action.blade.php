@@ -13,7 +13,7 @@
         'success' => $allButtons.$allDarkButtons.$allActions.'bg-green-700 hover:bg-green-800 focus:ring-green-300',
         'secondary' => $allButtons.$allDarkButtons.$allActions.'bg-gray-700 hover:bg-gray-800 focus:ring-gray-300',
         'info' => $allButtons.$allDarkButtons.$allActions.'bg-cyan-600 hover:bg-cyan-700 focus:ring-cyan-300',
-        'warning' => $allButtons.$allDarkButtons.$allActions.'bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-500',
+        'warning' => $allButtons.$allDarkButtons.$allActions.'bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-600',
         'secondary-light' => $allButtons.$allDarkButtons.$allActions.'bg-gray-500 hover:bg-gray-600 focus:ring-gray-300',
 
         // lighter

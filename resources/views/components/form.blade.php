@@ -12,17 +12,16 @@
     $value = null;
     $subComponents = [];
 
-
     $methodInput = null;
     $subComponents = [];
     $buttonDefault = null;
 
     if($hasAttrs) {
 
-        $localAttrs = $attrs['attributes'] ?? [];
+        $localAttrs = $attrs['attributes'] ?? $localAttrs;
 
         $value = $attrs['value'] ?? null;
-        $themes = $attrs['themes'] ?? [];
+        $themes = $attrs['themes'] ?? $subComponents;
         $subComponents = $attrs['sub_components'] ?? [];
         $extra = $attrs['extra'] ?? [];
         $localAttrs['class'] = $localAttrs['class'] ?? null;
@@ -62,7 +61,7 @@
         {{{ $component }}}
     @endforeach
 
-    {{  $buttonDefault }}
+    {{ $buttonDefault }}
 
     {{ $methodInput }}
 
