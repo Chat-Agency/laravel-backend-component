@@ -10,6 +10,8 @@
     $hasAttrs = !empty($attrs) ? true : false;
     $localAttrs = [];
     $value = null;
+    $subComponents = [];
+
 
     $methodInput = null;
     $subComponents = [];
@@ -23,9 +25,10 @@
         $themes = $attrs['themes'] ?? [];
         $subComponents = $attrs['sub_components'] ?? [];
         $extra = $attrs['extra'] ?? [];
+        $localAttrs['class'] = $localAttrs['class'] ?? null;
 
         $value = $attrs['value'] ?? $value;
-        $localAttrs['class'] = bladeThemes($themes);
+        $localAttrs['class'] .= bladeThemes($themes);
 
         $method = $localAttrs['method'] ?? null;
 
@@ -53,18 +56,16 @@
 
 @endphp
 
-<form
-    
-    {{ $attributes->merge($localAttrs) }} 
+<form {{ $attributes->merge($localAttrs) }} 
 >   
-    {{ $methodInput }}
-
-    {{ $value }} {{ $slot }}
-
     @foreach($subComponents as $component)
         {{{ $component }}}
     @endforeach
 
     {{  $buttonDefault }}
+
+    {{ $methodInput }}
+
+    {{ $value }} {{ $slot }}
 
 </form>

@@ -6,6 +6,7 @@
     $hasAttrs = !empty($attrs) ? true : false;
     $localAttrs = [];
     $value = null;
+    $subComponents = [];
 
     if($hasAttrs) {
 
@@ -15,22 +16,21 @@
         $themes = $attrs['themes'] ?? [];
         $subComponents = $attrs['sub_components'] ?? [];
         $extra = $attrs['extra'] ?? [];
+        $localAttrs['class'] = $localAttrs['class'] ?? null;
 
         $value = $attrs['value'] ?? $value;
-        $localAttrs['class'] = bladeThemes($themes);
+        $localAttrs['class'] .= bladeThemes($themes);
 
     }
 
 @endphp
 
-<div
-    {{ $attributes->merge($localAttrs) }}> 
+<div {{ $attributes->merge($localAttrs) }}> 
         
-        {{ $value }} {{ $slot }}
-        
-        @foreach($subComponents as $subComponent)
-            {{ $subComponent }}
-        @endforeach
+    @foreach($subComponents as $subComponent)
+        {{ $subComponent }}
+    @endforeach
 
+    {{ $value }} {{ $slot }}
 
 </div>

@@ -15,10 +15,11 @@
         $themes = $attrs['themes'] ?? [];
         $subComponents = $attrs['sub_components'] ?? [];
         $extra = $attrs['extra'] ?? [];
+        $localAttrs['class'] = $localAttrs['class'] ?? null;
 
         $value = $attrs['value'] ?? $value;
 
-        $localAttrs['class'] = bladeThemes($themes);
+        $localAttrs['class'] .= bladeThemes($themes);
     }
 
 @endphp
