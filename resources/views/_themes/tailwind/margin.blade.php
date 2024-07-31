@@ -2,7 +2,7 @@
 
     $styles = [
         'top-sm' => 'mt-3',
-        'buttom-sm' => 'mb-3',
+        'bottom-sm' => 'mb-3',
     ];
     
     $value = resolveTheme($styles, $margin);

@@ -8,6 +8,7 @@ Enum InputComponentEnum : string
     case LEGEND = 'legend';
     case FIELDSET = 'fieldset';
     case TEXT = 'text';
+    case EMAIL = 'email';
     case CHECKBOX = 'checkbox';
     case RADIO = 'radio';
     case SELECT = 'select';
