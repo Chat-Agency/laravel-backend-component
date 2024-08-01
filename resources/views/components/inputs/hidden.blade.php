@@ -3,5 +3,5 @@
 ])
 
 <x-laravel-backend-component::inputs.text 
-    type="hidden"
+    {{ $attributes->merge(['type' => 'hidden']) }}
     :attrs="$attrs" />

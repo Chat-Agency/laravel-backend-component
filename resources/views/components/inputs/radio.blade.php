@@ -3,5 +3,5 @@
 ])
 
 <x-laravel-backend-component::inputs.text 
-    type="radio"
+    {{ $attributes->merge(['type' => 'radio']) }}
     :attrs="$attrs" />

@@ -12,6 +12,11 @@ use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
 
 class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
 {
+    /**
+     * Package namespace
+     */
+    protected string | null $namespace = null;
+
     protected string | null $path = null;
 
     protected bool $useLocal = false;
@@ -52,12 +57,14 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
             return $name->value;
         }
         
-        return $this->name;
+        return $name;
     }
 
     public function getNamespace() : string | null
     {
-        return $this->useLocal ? null : \BackendComponentNamespace();
+        return $this->useLocal 
+            ? null : 
+            ($this->namespace ?? \BackendComponentNamespace());
     }
 
     public function getPath() : string
@@ -144,13 +151,20 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
         return $this->livewireParams;
     }
 
-    public function setContext(string $path) : self
+    public function setNamespace(string $namespace) : self
+    {
+        $this->namespace = $namespace;
+
+        return $this;
+    }
+    
+    public function setPath(string $path) : self
     {
         $this->path = $path;
 
         return $this;
     }
-
+    
     public function setType(?string $name = null) : self
     {
         $this->name = $name;
@@ -239,13 +253,6 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
         return $this;
     }
     
-    public function setPath(string $path) : self
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-    
     public function toArray() : array
     {
         return [
@@ -286,4 +293,5 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
             ->with('component', $this);
 
     }
+
 }

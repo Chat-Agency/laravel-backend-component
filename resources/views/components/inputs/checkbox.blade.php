@@ -3,5 +3,5 @@
 ])
 
 <x-laravel-backend-component::inputs.text 
-    type="checkbox"
+    {{ $attributes->merge(['type' => 'checkbox']) }}
     :attrs="$attrs" />

@@ -46,7 +46,9 @@ interface BackendComponent {
 
     public function getLivewireParams() : array;
 
-    public function setContext(string $path) : self;
+    public function setNamespace(string $namespace) : self;
+
+    public function setPath(string $path) : self;
 
     public function setType(?string $name = null) : self;
 

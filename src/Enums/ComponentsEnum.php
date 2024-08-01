@@ -8,6 +8,7 @@ enum  ComponentsEnum : string
     case BUTTON = 'button';
     case LINK = 'link';
     case DIV = 'div';
+    case PARAGRAPH = 'paragraph';
     case SPAN = 'span';
     case FORM = 'form';
 }
