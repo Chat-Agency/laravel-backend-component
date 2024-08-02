@@ -11,7 +11,7 @@
      * https://github.com/laravel/jetstream/blob/5.x/stubs/livewire/resources/views/components/modal.blade.php
      */
     
-    $hasAttrs = !empty($attrs) ? true : false;
+    $hasAttrs = !empty($attrs);
     $localAttrs = [];
     $value = null;
     $subComponents = [];

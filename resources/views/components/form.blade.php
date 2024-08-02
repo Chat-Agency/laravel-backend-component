@@ -4,10 +4,10 @@
 
 @php
     
-    use ChatAgency\LaravelBackendComponents\Enums\InputComponentEnum;
+    use ChatAgency\LaravelBackendComponents\Enums\InputEnum;
     use ChatAgency\LaravelBackendComponents\Enums\ComponentEnum;
     
-    $hasAttrs = !empty($attrs) ? true : false;
+    $hasAttrs = !empty($attrs);
     $localAttrs = [];
     $value = null;
     $subComponents = [];
@@ -34,7 +34,7 @@
         if($method) {
             $localAttrs['method'] = strtoupper($method) == 'GET' ? 'GET' : 'POST';
 
-            $methodInput = makeBackendComponent(InputComponentEnum::HIDDEN)
+            $methodInput = makeBackendComponent(InputEnum::HIDDEN)
                 ->setPath('inputs.')
                 ->setAttribute('name', '_method' )
                 ->setAttribute('value', $method );

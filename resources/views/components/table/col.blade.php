@@ -4,9 +4,7 @@
 
 @php
     $hasAttrs = !empty($attrs);
-    $localAttrs = [
-        'type' => 'text',
-    ];
+    $localAttrs = [];
     //$value = null;
 
     if($hasAttrs) {
@@ -26,4 +24,4 @@
 
 @endphp
 
-<input {{ $attributes->merge($localAttrs) }} />
+<col {{ $attributes->merge($localAttrs) }} />

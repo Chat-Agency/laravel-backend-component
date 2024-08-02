@@ -2,9 +2,9 @@
 
 namespace ChatAgency\LaravelBackendComponents\Contracts;
 
-use ChatAgency\LaravelBackendComponents\Enums\ComponentsEnum;
+use ChatAgency\LaravelBackendComponents\Enums\ComponentEnum;
 
 interface StaticBuilder
 {
-    public static function make(string | ComponentsEnum $name, ThemeManager | null $themeManager = null) : BackendComponent;
+    public static function make(string | ComponentEnum $name, ThemeManager | null $themeManager = null) : BackendComponent;
 }

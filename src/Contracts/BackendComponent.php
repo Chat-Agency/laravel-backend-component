@@ -2,7 +2,7 @@
 
 namespace ChatAgency\LaravelBackendComponents\Contracts;
 
-use ChatAgency\LaravelBackendComponents\Enums\ComponentsEnum;
+use ChatAgency\LaravelBackendComponents\Enums\ComponentEnum;
 use ChatAgency\LaravelBackendComponents\MainBackendComponent;
 use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
 

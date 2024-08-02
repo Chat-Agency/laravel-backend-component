@@ -2,7 +2,7 @@
 
 namespace  ChatAgency\LaravelBackendComponents\Enums;
 
-Enum TableComponentEnum : string
+Enum TableEnum : string
 {
     case TABLE = 'table';
     case THEAD = 'thead';
@@ -11,4 +11,7 @@ Enum TableComponentEnum : string
     case TR = 'tr';
     case TH = 'th';
     case TD = 'td';
+    case CAPTION = 'caption';
+    case COLGROUP = 'colgroup';
+    case COL = 'col';
 }

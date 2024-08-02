@@ -16,16 +16,15 @@
         $themes = $attrs['themes'] ?? [];
         $subComponents = $attrs['sub_components'] ?? $subComponents;
         $extra = $attrs['extra'] ?? [];
-        $value = $attrs['value'] ?? $value;
-
         $localAttrs['class'] = $localAttrs['class'] ?? null;
-        $localAttrs['class'] .= bladeThemes($themes);
 
+        $value = $attrs['value'] ?? $value;
+        $localAttrs['class'] .= bladeThemes($themes);
     }
 
 @endphp
 
-<table {{ $attributes->merge($localAttrs) }} > 
+<caption {{ $attributes->merge($localAttrs) }} > 
     
     @foreach($subComponents as $subComponent)
         {{ $subComponent }}
@@ -33,4 +32,4 @@
 
     {{ $value }} {{ $slot }}
 
-</table>
+</caption>

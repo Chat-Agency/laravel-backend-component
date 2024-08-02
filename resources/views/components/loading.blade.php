@@ -3,7 +3,7 @@
 ])
 
 @php
-    $hasAttrs = !empty($attrs) ? true : false;
+    $hasAttrs = !empty($attrs);
     $localAttrs = [];
     $value = null;
 

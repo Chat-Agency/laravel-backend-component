@@ -2,7 +2,7 @@
 
 namespace  ChatAgency\LaravelBackendComponents\Enums;
 
-enum  ComponentsEnum : string
+enum  ComponentEnum : string
 {
     case TEMPLATE = 'template';
     case BUTTON = 'button';

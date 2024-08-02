@@ -2,7 +2,7 @@
 
 namespace  ChatAgency\LaravelBackendComponents\Enums;
 
-enum  ListsEnum : string
+enum  HeaderEnum : string
 {
     case OL = 'ol';
     case UL = 'ul';
