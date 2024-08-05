@@ -10,6 +10,7 @@ Enum InputEnum : string
     case TEXT = 'text';
     case EMAIL = 'email';
     case SEARCH = 'search';
+    case SELECT = 'select';
     case CHECKBOX = 'checkbox';
     case RADIO = 'radio';
     case OPTGROUP = 'optgroup';
