@@ -2,33 +2,23 @@
 
 namespace ChatAgency\LaravelBackendComponents\Builders;
 
-use BackedEnum;
+use \BackedEnum;
 use ChatAgency\LaravelBackendComponents\MainBackendComponent;
 use ChatAgency\LaravelBackendComponents\Contracts\ThemeManager;
 use ChatAgency\LaravelBackendComponents\Contracts\StaticBuilder;
 use ChatAgency\LaravelBackendComponents\Contracts\BackendComponent;
 use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
 
-/**
- * Sets component's and theme's path 
- * to the local view folder:
- * 
- * component - resource/views/components
- * themes - resource/views/_themes
- */
-class LocalBuilder implements StaticBuilder
+class CustomBuilder implements StaticBuilder
 {
     public static function make(
         string | BackedEnum $name,
         ThemeManager | null $themeManager = null
     ) : BackendComponent
     {
-        
-        $themes = $themeManager ?? (new DefaultThemeManager)->useLocal();
+        $component = new MainBackendComponent($name, $themeManager ?? new DefaultThemeManager);
 
-        $component = (new MainBackendComponent($name, $themes))
-            ->useLocal();
-        
+        $component->setPath('custom.');
 
         return  $component;
     }

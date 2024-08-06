@@ -10,13 +10,12 @@ use ChatAgency\LaravelBackendComponents\Contracts\BackendComponent;
 use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
 
 /**
- * Sets component's and theme's path 
+ * Sets theme's path 
  * to the local view folder:
  * 
- * component - resource/views/components
  * themes - resource/views/_themes
  */
-class LocalBuilder implements StaticBuilder
+class LocalThemeBuilder implements StaticBuilder
 {
     public static function make(
         string | BackedEnum $name,
@@ -26,8 +25,7 @@ class LocalBuilder implements StaticBuilder
         
         $themes = $themeManager ?? (new DefaultThemeManager)->useLocal();
 
-        $component = (new MainBackendComponent($name, $themes))
-            ->useLocal();
+        $component = (new MainBackendComponent($name, $themes));
         
 
         return  $component;

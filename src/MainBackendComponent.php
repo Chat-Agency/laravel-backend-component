@@ -29,6 +29,8 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
 
     protected array $themes = [];
 
+    protected array $slots = [];
+
     protected array $extras = [];
 
     protected bool $isLiveWire = false;
@@ -131,6 +133,17 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
         return $this->getThemes()[$name] ?? null;
     }
 
+
+    public function getSlots() : array
+    {
+        return $this->slots;
+    }
+
+    public function getSlot(string $name) : BackendComponent
+    {
+        return $this->getSlots()[$name] ?? null;
+    }
+
     public function getExtras() : array
     {
         return $this->extras;
@@ -195,16 +208,23 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
         return $this;
     }
 
-    public function setSubComponent($name, MainBackendComponent $subComponent) : self
+    public function setSubComponent(MainBackendComponent $subComponent, string $name = null) : self
     {
-        $this->subComponents[$name] = $subComponent;
+        if($name) {
+            $this->subComponents[$name] = $subComponent;
+            return $this;
+        }
+
+        $this->subComponents[] = $subComponent;
 
         return $this;
     }
 
     public function setSubComponents(array $subComponents) : self
     {
-        $this->subComponents = $subComponents;
+        foreach($subComponents as $name => $subComponent) {
+            $this->setSubComponent($subComponent, $name);
+        }
 
         return $this;
     }
@@ -218,7 +238,24 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
 
     public function setThemes(array $themes) : self
     {
-        $this->themes = $themes;
+        foreach($themes as $name => $theme) {
+            $this->setTheme($name, $theme);
+        }
+
+        return $this;
+    }
+    public function setSlot(string $name, BackendComponent $slot) : self
+    {
+        $this->slots[$name] = $slot;
+
+        return $this;
+    }
+
+    public function setSlots(array $slots) : self
+    {
+        foreach($slots as $name => $slot) {
+            $this->setSlot($name, $slot);
+        }
 
         return $this;
     }
@@ -267,6 +304,7 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
                     'manager' => $this->getThemeManager(),
                 ],
             ],
+            'slots' => $this->getSlots(),
             'extra' => $this->getExtras(),
             'is_livewire' => $this->isLivewire(),
             'livewire_key' => $this->getLivewireKey(),

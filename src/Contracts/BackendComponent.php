@@ -37,7 +37,10 @@ interface BackendComponent {
     public function getThemes() : array;
 
     public function getTheme(string $name) : string| ThemeBag | null;
+    public function getSlots() : array;
 
+    public function getSlot(string $name) : BackendComponent;
+    
     public function getExtras() : array;
 
     public function getExtra(string $name) : mixed;
@@ -58,12 +61,15 @@ interface BackendComponent {
 
     public function setAttributes(array $attributes) : self;
 
-    public function setSubComponent($name, MainBackendComponent $subComponent) : self;
+    public function setSubComponent(MainBackendComponent $subComponent, string $name = null) : self;
 
     public function setSubComponents(array $subComponents) : self;
 
     public function setTheme(string $name, string|ThemeBag $theme) : self;
+    public function setSlot(string $name, BackendComponent $slot) : self;
 
+    public function setSlots(array $slots) : self;
+    
     public function setThemes(array $themes) : self;
 
     public function setExtra(string $name, mixed $value) : self;

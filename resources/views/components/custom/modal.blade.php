@@ -39,10 +39,14 @@
         $themes = $attrs['themes'] ?? [];
         $subComponents = $attrs['sub_components'] ?? $subComponents;
         $extra = $attrs['extra'] ?? [];
+        $slots = $attrs['slots'] ?? [];
+
         $localAttrs['class'] = $localAttrs['class'] ?? null;
 
         $value = $attrs['value'] ?? $value;
         $localAttrs['class'] .= bladeThemes($themes);
+        
+        $button = $slots['button'] ?? $button;
 
         // <x-dynamic.button @click="showModal = true" type="button" class="py-2 px-3 bg-slate-500 text-white rounded hover:bg-slate-600 focus:ring-gray-300">{{ $buttonLabel ?? 'Open Modal' }}</x-dynamic.button>
     }
@@ -53,7 +57,7 @@
    
     <!-- Trigger for Modal -->
     
-    {{ $button ?? $defaultButton }}
+    {{ $button }}
     
     <div
         x-show="showModal"
@@ -62,7 +66,10 @@
         class="fixed {{ $size == 'full' ? 'flex' : null }} inset-0 overflow-y-auto px-4 py-6 z-50">
         
 
-        <div x-show="showModal" class="fixed inset-0 transform transition-all" x-on:click="showModal = false" x-transition:enter="ease-out duration-300"
+        <div x-show="showModal" 
+            class="fixed inset-0 transform transition-all" 
+            x-on:click="showModal = false" 
+            x-transition:enter="ease-out duration-300"
             x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100"
             x-transition:leave="ease-in duration-200"
