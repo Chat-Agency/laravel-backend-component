@@ -26,7 +26,7 @@ interface BackendComponent {
 
     public function getLivewireKey() : string | null;
     
-    public function getValue() : string| MainBackendComponent |null;
+    public function getContent() : string| MainBackendComponent |null;
 
     public function getAttributes() : array;
 
@@ -55,9 +55,9 @@ interface BackendComponent {
 
     public function setType(?string $name = null) : self;
 
-    public function setValue(string|MainBackendComponent $value) : self;
+    public function setContent(string|MainBackendComponent $content) : self;
 
-    public function setAttribute(string $name, $value) : self;
+    public function setAttribute(string $name, $content) : self;
 
     public function setAttributes(array $attributes) : self;
 
@@ -72,7 +72,7 @@ interface BackendComponent {
     
     public function setThemes(array $themes) : self;
 
-    public function setExtra(string $name, mixed $value) : self;
+    public function setExtra(string $name, mixed $content) : self;
 
     public function setExtras(array $extras) : self;
 

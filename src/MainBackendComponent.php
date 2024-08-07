@@ -21,7 +21,7 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
 
     protected bool $useLocal = false;
 
-    protected string | MainBackendComponent | null $value = null;
+    protected string | MainBackendComponent | null $content = null;
 
     protected array $attributes = [];
 
@@ -103,9 +103,9 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
         return $this->livewireKey;
     }
 
-    public function getValue() : string| MainBackendComponent |null
+    public function getContent() : string| MainBackendComponent |null
     {
-        return $this->value;
+        return $this->content;
     }
 
     public function getAttributes() : array
@@ -185,24 +185,24 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
         return $this;
     }
 
-    public function setValue(string|MainBackendComponent $value) : self
+    public function setContent(string|MainBackendComponent $content) : self
     {
-        $this->value = $value;
+        $this->content = $content;
 
         return $this;
     }
 
-    public function setAttribute(string $name, $value) : self
+    public function setAttribute(string $name, $content) : self
     {
-        $this->attributes[$name] = $value;
+        $this->attributes[$name] = $content;
 
         return $this;
     }
 
     public function setAttributes(array $attributes) : self
     {
-        foreach ($attributes as $name => $value) {
-            $this->setAttribute($name, $value);
+        foreach ($attributes as $name => $content) {
+            $this->setAttribute($name, $content);
         }
 
         return $this;
@@ -260,17 +260,17 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
         return $this;
     }
 
-    public function setExtra(string $name, mixed $value) : self
+    public function setExtra(string $name, mixed $content) : self
     {
-        $this->extras[$name] = $value;
+        $this->extras[$name] = $content;
 
         return $this;
     }
 
     public function setExtras(array $extras) : self
     {
-        foreach ($extras as $name => $value) {
-            $this->setExtra($name, $value);
+        foreach ($extras as $name => $content) {
+            $this->setExtra($name, $content);
         }
 
         return $this;
@@ -294,7 +294,7 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
     {
         return [
             'name' => $this->getName(),
-            'value' => $this->getValue(),
+            'content' => $this->getContent(),
             'path' => $this->getComponentPath(),
             'attributes' => $this->getAttributes(),
             'sub_components' => $this->getSubComponents(),

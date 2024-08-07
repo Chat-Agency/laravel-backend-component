@@ -16,13 +16,13 @@
 
         $localAttrs = $attrs['attributes'] ?? $localAttrs;
 
-        $value = $attrs['value'] ?? null;
+        $value = $attrs['content'] ?? null;
         $themes = $attrs['themes'] ?? [];
         $subComponents = $attrs['sub_components'] ?? $subComponents;
         $extra = $attrs['extra'] ?? [];
         $localAttrs['class'] = $localAttrs['class'] ?? null;
 
-        $value = $attrs['value'] ?? $value;
+        $value = $attrs['content'] ?? $value;
         $localAttrs['class'] .= bladeThemes($themes);
 
         //dd($themes);

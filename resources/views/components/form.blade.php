@@ -20,13 +20,13 @@
 
         $localAttrs = $attrs['attributes'] ?? $localAttrs;
 
-        $value = $attrs['value'] ?? null;
+        $value = $attrs['content'] ?? null;
         $themes = $attrs['themes'] ?? $subComponents;
         $subComponents = $attrs['sub_components'] ?? [];
         $extra = $attrs['extra'] ?? [];
         $localAttrs['class'] = $localAttrs['class'] ?? null;
 
-        $value = $attrs['value'] ?? $value;
+        $value = $attrs['content'] ?? $value;
         $localAttrs['class'] .= bladeThemes($themes);
 
         $method = $localAttrs['method'] ?? null;
@@ -49,7 +49,7 @@
             $buttonDefault = makeBackendComponent(ComponentEnum::BUTTON)
                 ->setTheme('action', 'default')
                 ->setTheme('padding', 'button')
-                ->setValue(__('Send'));
+                ->setContent(__('Send'));
         }
     }
 
