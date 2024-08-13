@@ -4,8 +4,8 @@
 
 @php
     
-    use ChatAgency\LaravelBackendComponents\Enums\InputEnum;
-    use ChatAgency\LaravelBackendComponents\Enums\ComponentEnum;
+    use ChatAgency\BackendComponents\Enums\InputEnum;
+    use ChatAgency\BackendComponents\Enums\ComponentEnum;
     
     $hasAttrs = !empty($attrs);
     $localAttrs = [];

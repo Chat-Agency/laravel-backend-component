@@ -1,6 +1,6 @@
 <?php
 
-namespace ChatAgency\LaravelBackendComponents\Contracts;
+namespace ChatAgency\BackendComponents\Contracts;
 
 interface ThemeManager {
     public static function make(): self;

@@ -1,5 +1,5 @@
 <?php
 
-use ChatAgency\LaravelBackendComponents\Tests\TestCase;
+use ChatAgency\BackendComponents\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

@@ -1,9 +1,9 @@
 <?php
 
-namespace ChatAgency\LaravelBackendComponents\Themes;
+namespace ChatAgency\BackendComponents\Themes;
 
-use ChatAgency\LaravelBackendComponents\Contracts\ThemeBag;
-use ChatAgency\LaravelBackendComponents\Contracts\ThemeManager;
+use ChatAgency\BackendComponents\Contracts\ThemeBag;
+use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use Illuminate\Support\Str;
 
 class DefaultThemeManager implements ThemeManager

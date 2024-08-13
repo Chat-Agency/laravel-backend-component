@@ -1,14 +1,14 @@
 <?php
 
-namespace ChatAgency\LaravelBackendComponents;
+namespace ChatAgency\BackendComponents;
 
 use BackedEnum;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Arrayable;
-use ChatAgency\LaravelBackendComponents\Contracts\ThemeBag;
-use ChatAgency\LaravelBackendComponents\Contracts\ThemeManager;
-use ChatAgency\LaravelBackendComponents\Contracts\BackendComponent;
-use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
+use ChatAgency\BackendComponents\Contracts\ThemeBag;
+use ChatAgency\BackendComponents\Contracts\ThemeManager;
+use ChatAgency\BackendComponents\Contracts\BackendComponent;
+use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 
 class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
 {

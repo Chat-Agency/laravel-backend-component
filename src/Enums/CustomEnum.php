@@ -1,6 +1,6 @@
 <?php
 
-namespace  ChatAgency\LaravelBackendComponents\Enums;
+namespace  ChatAgency\BackendComponents\Enums;
 
 enum  CustomEnum : string
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace ChatAgency\LaravelBackendComponents;
+namespace ChatAgency\BackendComponents;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class LaravelBackendComponentsServiceProvider extends PackageServiceProvider
+class BackendComponentsServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {

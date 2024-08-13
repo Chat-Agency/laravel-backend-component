@@ -1,10 +1,10 @@
 <?php
 
-use ChatAgency\LaravelBackendComponents\Contracts\ThemeBag;
-use ChatAgency\LaravelBackendComponents\MainBackendComponent;
-use ChatAgency\LaravelBackendComponents\Contracts\ThemeManager;
-use ChatAgency\LaravelBackendComponents\Contracts\BackendComponent;
-use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
+use ChatAgency\BackendComponents\Contracts\ThemeBag;
+use ChatAgency\BackendComponents\MainBackendComponent;
+use ChatAgency\BackendComponents\Contracts\ThemeManager;
+use ChatAgency\BackendComponents\Contracts\BackendComponent;
+use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 
 /**
  * Utility classes

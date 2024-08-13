@@ -1,8 +1,8 @@
 <?php
 
-namespace ChatAgency\LaravelBackendComponents\Tests;
+namespace ChatAgency\BackendComponents\Tests;
 
-use ChatAgency\LaravelBackendComponents\LaravelBackendComponentServiceProvider;
+use ChatAgency\BackendComponents\LaravelBackendComponentServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace ChatAgency\LaravelBackendComponents;
+namespace ChatAgency\BackendComponents;
 
 use BackedEnum;
-use ChatAgency\LaravelBackendComponents\Contracts\ThemeManager;
-use ChatAgency\LaravelBackendComponents\Contracts\StaticBuilder;
-use ChatAgency\LaravelBackendComponents\Contracts\BackendComponent;
-use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
+use ChatAgency\BackendComponents\Contracts\ThemeManager;
+use ChatAgency\BackendComponents\Contracts\StaticBuilder;
+use ChatAgency\BackendComponents\Contracts\BackendComponent;
+use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 
 class ComponentBuilder implements StaticBuilder
 {

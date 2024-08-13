@@ -1,5 +1,5 @@
 @php
-    /** @var \ChatAgency\LaravelBackendComponents\Contracts\LaravelBackendComponent $component */
+    /** @var \ChatAgency\BackendComponents\Contracts\LaravelBackendComponent $component */
 @endphp
 
 @if($component->isLivewire())

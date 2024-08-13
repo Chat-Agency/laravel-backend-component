@@ -4,12 +4,16 @@
 ])
 
 @php
+
     
     /** 
      * Based on Jetstream
      * Dialog component
      * https://github.com/laravel/jetstream/blob/5.x/stubs/livewire/resources/views/components/modal.blade.php
      */
+
+    use ChatAgency\BackendComponents\Enums\ComponentEnum;
+    use ChatAgency\BackendComponents\ComponentBuilder;
     
     $hasAttrs = !empty($attrs);
     $localAttrs = [];
@@ -19,6 +23,8 @@
     $title = $title ?? null;
     $footer = $footer ?? null;
     $button = $button ?? null;
+    $overlay = $overlay ?? ComponentBuilder::make(ComponentEnum::DIV)
+        ->setAttribute('class', 'absolute inset-0 bg-gray-500 dark:bg-gray-700 opacity-75');
 
     $sizes = [
         'sm' => 'sm:max-w-sm',
@@ -26,7 +32,9 @@
         'lg' => 'sm:max-w-lg',
         'xl' => 'sm:max-w-xl',
         '2xl' => 'sm:max-w-2xl',
-        'full' => 'flex flex-col w-full top-5 bottom-5 ',
+        '3xl' => 'sm:max-w-3xl',
+        '4xl' => 'sm:max-w-4xl',
+        'full' => 'flex flex-col w-full top-5 bottom-5',
     ];
 
     $maxWidth = $sizes[$size ?? '2xl'];
@@ -47,9 +55,11 @@
         $localAttrs['class'] .= bladeThemes($themes);
         
         $button = $slots['button'] ?? $button;
+        $overlay = $slots['overlay'] ?? $overlay;
 
-        // <x-dynamic.button @click="showModal = true" type="button" class="py-2 px-3 bg-slate-500 text-white rounded hover:bg-slate-600 focus:ring-gray-300">{{ $buttonLabel ?? 'Open Modal' }}</x-dynamic.button>
+        $maxWidth = $extra['size'] ?? null ? $sizes[$extra['size'] ?? '2xl'] : $maxWidth;
     }
+    
     
 @endphp
 
@@ -76,10 +86,11 @@
             x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0"
         >
-            <div class="absolute inset-0 bg-gray-500 dark:bg-gray-700 opacity-75"></div>
+            {{-- <div class="absolute inset-0 bg-gray-500 dark:bg-gray-700 opacity-75"></div> --}}
+            {{ $overlay }}
         </div>
 
-        <div x-show="showModal" class="{{ $maxWidth }} {{ $size == 'full' ? null : 'mb-6' }} bg-white dark:bg-slate-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto"
+        <div x-show="showModal" class="{{ $maxWidth }} {{ $size == 'full' ? null : 'mb-6' }} overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto"
             x-trap.inert.noscroll="showModal"
             x-transition:enter="ease-out duration-300"
             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"

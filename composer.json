@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "ChatAgency\\LaravelBackendComponents\\": "src/",
-            "ChatAgency\\LaravelBackendComponents\\Database\\Factories\\": "database/factories/"
+            "ChatAgency\\BackendComponents\\": "src/",
+            "ChatAgency\\BackendComponents\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ChatAgency\\LaravelBackendComponents\\Tests\\": "tests/",
+            "ChatAgency\\BackendComponents\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -73,7 +73,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ChatAgency\\LaravelBackendComponents\\LaravelBackendComponentsServiceProvider"
+                "ChatAgency\\BackendComponents\\BackendComponentsServiceProvider"
             ]
         }
     },

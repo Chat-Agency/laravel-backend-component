@@ -1,8 +1,8 @@
 <?php
 
-namespace ChatAgency\LaravelBackendComponents\Contracts;
+namespace ChatAgency\BackendComponents\Contracts;
 
-use ChatAgency\LaravelBackendComponents\Enums\ComponentEnum;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
 
 interface StaticBuilder
 {

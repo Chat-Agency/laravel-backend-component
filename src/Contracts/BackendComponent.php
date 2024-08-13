@@ -1,10 +1,8 @@
 <?php
 
-namespace ChatAgency\LaravelBackendComponents\Contracts;
+namespace ChatAgency\BackendComponents\Contracts;
 
-use ChatAgency\LaravelBackendComponents\Enums\ComponentEnum;
-use ChatAgency\LaravelBackendComponents\MainBackendComponent;
-use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
+use ChatAgency\BackendComponents\MainBackendComponent;
 
 interface BackendComponent {
     

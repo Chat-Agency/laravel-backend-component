@@ -1,8 +1,8 @@
 <?php
 
-namespace ChatAgency\LaravelBackendComponents\Themes;
+namespace ChatAgency\BackendComponents\Themes;
 
-use ChatAgency\LaravelBackendComponents\Contracts\ThemeBag;
+use ChatAgency\BackendComponents\Contracts\ThemeBag;
 
 class DefaultThemeBag implements ThemeBag
 {

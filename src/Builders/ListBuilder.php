@@ -1,13 +1,13 @@
 <?php
 
-namespace ChatAgency\LaravelBackendComponents\Builders;
+namespace ChatAgency\BackendComponents\Builders;
 
 use \BackedEnum;
-use ChatAgency\LaravelBackendComponents\MainBackendComponent;
-use ChatAgency\LaravelBackendComponents\Contracts\ThemeManager;
-use ChatAgency\LaravelBackendComponents\Contracts\StaticBuilder;
-use ChatAgency\LaravelBackendComponents\Contracts\BackendComponent;
-use ChatAgency\LaravelBackendComponents\Themes\DefaultThemeManager;
+use ChatAgency\BackendComponents\MainBackendComponent;
+use ChatAgency\BackendComponents\Contracts\ThemeManager;
+use ChatAgency\BackendComponents\Contracts\StaticBuilder;
+use ChatAgency\BackendComponents\Contracts\BackendComponent;
+use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 
 class ListBuilder implements StaticBuilder
 {
