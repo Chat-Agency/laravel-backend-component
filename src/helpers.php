@@ -34,10 +34,9 @@ if (! function_exists('isBackendComponent')) {
  * Bade theming
  */
 if (! function_exists('bladeThemes')) {
-    function bladeThemes(array $themes)
+    function bladeThemes(array $themes, ThemeManager $manager = new DefaultThemeManager)
     {
-        return resolveThemeManager($themes['config'] ?? [])
-            ->bladeThemes($themes['theming'] ?? []);
+        return $manager->bladeThemes($themes['theming'] ?? []);
     }
 }
 
