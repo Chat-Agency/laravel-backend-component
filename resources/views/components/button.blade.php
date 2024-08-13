@@ -25,7 +25,6 @@
         $value = $attrs['content'] ?? $value;
         $localAttrs['class'] .= $themes;
 
-        //dd($themes);
         $confirm = $extra['confirm'] ?? null;
     }
 

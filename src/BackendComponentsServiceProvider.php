@@ -16,7 +16,6 @@ class BackendComponentsServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-backend-component')
-            ->hasConfigFile()
             ->hasViews('laravel-backend-component');
 
         include_once 'helpers.php';
