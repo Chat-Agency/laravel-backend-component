@@ -1,36 +1,16 @@
 <?php
 
-namespace ChatAgency\BackendComponents\Tests;
+namespace Tests;
 
-use ChatAgency\BackendComponents\LaravelBackendComponentServiceProvider;
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
+use Orchestra\Testbench\TestCase as BaseTestCase;
+use ChatAgency\BackendComponents\BackendComponentsServiceProvider;
 
-class TestCase extends Orchestra
+abstract class TestCase extends BaseTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'ChatAgency\\LaravelBackendComponent\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
-    }
-
     protected function getPackageProviders($app)
     {
         return [
-            LaravelBackendComponentServiceProvider::class,
+            BackendComponentsServiceProvider::class,
         ];
-    }
-
-    public function getEnvironmentSetUp($app)
-    {
-        config()->set('database.default', 'testing');
-
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-backend-component_table.php.stub';
-        $migration->up();
-        */
     }
 }
