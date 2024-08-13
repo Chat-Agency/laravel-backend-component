@@ -298,12 +298,10 @@ class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
             'path' => $this->getComponentPath(),
             'attributes' => $this->getAttributes(),
             'sub_components' => $this->getSubComponents(),
-            'themes' => [
-                'theming' =>  $this->getThemes(),
-                'config' => [
-                    'manager' => $this->getThemeManager(),
-                ],
-            ],
+            'themes' => $this->getThemeManager()
+                ->bladeThemes(
+                    $this->getThemes()
+                ),
             'slots' => $this->getSlots(),
             'extra' => $this->getExtras(),
             'is_livewire' => $this->isLivewire(),

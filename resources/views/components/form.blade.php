@@ -10,7 +10,6 @@
     $hasAttrs = !empty($attrs);
     $localAttrs = [];
     $value = null;
-    $subComponents = [];
 
     $methodInput = null;
     $subComponents = [];
@@ -21,13 +20,13 @@
         $localAttrs = $attrs['attributes'] ?? $localAttrs;
 
         $value = $attrs['content'] ?? null;
-        $themes = $attrs['themes'] ?? $subComponents;
-        $subComponents = $attrs['sub_components'] ?? [];
+        $themes = $attrs['themes'] ?? null;
+        $subComponents = $attrs['sub_components'] ?? $subComponent;
         $extra = $attrs['extra'] ?? [];
         $localAttrs['class'] = $localAttrs['class'] ?? null;
 
         $value = $attrs['content'] ?? $value;
-        $localAttrs['class'] .= bladeThemes($themes);
+        $localAttrs['class'] .= $themes;
 
         $method = $localAttrs['method'] ?? null;
 
