@@ -18,15 +18,13 @@ class ButtonTest extends TestCase
         $button = ComponentBuilder::make(ComponentEnum::BUTTON)
             ->setContent('Nice button');
 
-        $this->blade(
-                htmlentities(
-                    $button->toHtml()
-                )
-            )
-            ->assertSee('<button ')
-            ->assertSee('class="')
-            ->assertSee('Nice button')
-            ->assertSee('</button>');
+        $this->blade('{{ $button }}', [
+            'button' => $button,
+        ])
+        ->assertSee('Nice button')
+        ->assertSee('button ')
+        ->assertSee('class=')
+        ->assertSee('/button');
     }
 
     /** @test */
@@ -36,12 +34,29 @@ class ButtonTest extends TestCase
             ->setContent('Nice button')
             ->setAttribute('type', 'submit');
 
-        $this->blade(
-                htmlentities(
-                    $button->toHtml()
-                )
-            )
-            ->assertSee('type=')
-            ->assertSee('submit');
+        $this->blade('{{ $button }}', [
+            'button' => $button,
+        ])
+        ->assertSee('type=')
+        ->assertSee('submit');
+    }
+
+    /** @test */
+    public function button_with_sub_components()
+    {
+        $button = ComponentBuilder::make(ComponentEnum::BUTTON)
+            ->setContent('Nice button')
+            ->setSubComponents([
+                ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent('Inside span')
+            ]);
+
+        $this->blade('{{ $button }}', [
+            'button' => $button,
+        ])
+        ->assertSee('Inside span')
+        ->assertSee('/span')
+        ->assertSee('/button');
+        
     }
 }
