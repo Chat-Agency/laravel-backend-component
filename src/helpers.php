@@ -36,7 +36,7 @@ if (! function_exists('isBackendComponent')) {
 if (! function_exists('bladeThemes')) {
     function bladeThemes(array $themes, ThemeManager $manager = new DefaultThemeManager)
     {
-        return $manager->bladeThemes($themes['theming'] ?? []);
+        return $manager->bladeThemes($themes);
     }
 }
 
@@ -48,9 +48,3 @@ if (! function_exists('resolveTheme')) {
     }
 }
 
-if (! function_exists('resolveThemeManager')) {
-    function resolveThemeManager(array $config) : ThemeManager
-    {
-        return $config['manager'] ?? DefaultThemeManager::make();
-    }
-}

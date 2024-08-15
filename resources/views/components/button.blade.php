@@ -5,39 +5,36 @@
 @php
     $hasAttrs = !empty($attrs);
     $localAttrs = [];
-    $value = null;
+    $content = null;
     $subComponents = [];
-
-    // Additional values
-    $loading = null;
-    $confirm = null;
 
      if($hasAttrs) {
 
         $localAttrs = $attrs['attributes'] ?? $localAttrs;
+        $localAttrs['class'] = $localAttrs['class'] ?? null;
 
-        $value = $attrs['content'] ?? null;
+        $content = $attrs['content'] ?? $content;
         $themes = $attrs['themes'] ?? null;
         $subComponents = $attrs['sub_components'] ?? $subComponents;
         $extra = $attrs['extra'] ?? [];
-        $localAttrs['class'] = $localAttrs['class'] ?? null;
-
-        $value = $attrs['content'] ?? $value;
+        
         $localAttrs['class'] .= $themes;
 
-        $confirm = $extra['confirm'] ?? null;
+        if(!$localAttrs['class'] ) {
+            unset($localAttrs['class']);
+        }
     }
+
 
 @endphp
 
 <button 
-    {{ $attributes->merge($localAttrs) }} 
-    @if($confirm) onClick="confirm('{{ $confirm }}') || event.preventDefault();" @endif>
+    {{ $attributes->merge($localAttrs) }} >
 
         @foreach($subComponents as $component)
             {{{ $component }}}
         @endforeach
     
-        {{ $value }} {{ $slot }}
+        {{ $content }} {{ $slot }}
 
 </button>

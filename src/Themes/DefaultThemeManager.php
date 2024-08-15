@@ -40,17 +40,17 @@ class DefaultThemeManager implements ThemeManager
         $classes = '';
 
         foreach ($themes as $type => $theme) {
-            $classes .= $this->bladeTheme($type, $theme);
+            $classes .= ' '.$this->bladeTheme($type, $theme);
         }
 
-        return $classes;
+        return trim($classes);
     }
 
     public function bladeTheme(string $type, string|ThemeBag|null $theme = null)
     {
         $themePath = $this->getThemePath();
 
-        return ' '.trim(
+        return trim(
             view($themePath.$type)
                 ->with(Str::camel($type), $theme)
                 ->render()
