@@ -1,8 +1,9 @@
 <?php
 
-namespace ChatAgency\BackendComponents;
+namespace ChatAgency\BackendComponents\Builders;
 
 use BackedEnum;
+use ChatAgency\BackendComponents\MainBackendComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use ChatAgency\BackendComponents\Contracts\StaticBuilder;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;

@@ -27,7 +27,6 @@ class LocalThemeBuilder implements StaticBuilder
 
         $component = (new MainBackendComponent($name, $themes));
         
-
         return  $component;
     }
 }

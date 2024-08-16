@@ -12,8 +12,8 @@
      * https://github.com/laravel/jetstream/blob/5.x/stubs/livewire/resources/views/components/modal.blade.php
      */
 
+    use ChatAgency\BackendComponents\Builders\ComponentBuilder;
     use ChatAgency\BackendComponents\Enums\ComponentEnum;
-    use ChatAgency\BackendComponents\ComponentBuilder;
     
     $hasAttrs = !empty($attrs);
     $localAttrs = [];

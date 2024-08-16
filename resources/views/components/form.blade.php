@@ -4,8 +4,8 @@
 
 @php
     
-    use ChatAgency\BackendComponents\Enums\InputEnum;
     use ChatAgency\BackendComponents\Enums\ComponentEnum;
+    use ChatAgency\BackendComponents\Enums\ComponentBuilder;
     
     $hasAttrs = !empty($attrs);
     $localAttrs = [];
@@ -33,8 +33,7 @@
         if($method) {
             $localAttrs['method'] = strtoupper($method) == 'GET' ? 'GET' : 'POST';
 
-            $methodInput = makeBackendComponent(InputEnum::HIDDEN)
-                ->setPath('inputs.')
+            $methodInput = makeBackendComponent(ComponentEnum::HIDDEN)
                 ->setAttribute('name', '_method' )
                 ->setAttribute('value', $method );
         }

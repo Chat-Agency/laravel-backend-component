@@ -3,7 +3,7 @@
 namespace Tests\Components;
 
 use Tests\TestCase;
-use ChatAgency\BackendComponents\ComponentBuilder;
+use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 
 class DivTest extends TestCase

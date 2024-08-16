@@ -6,7 +6,7 @@ use ChatAgency\BackendComponents\MainBackendComponent;
 
 interface BackendComponent {
     
-    public function useLocal($local = true) : self;
+    public function useLocal($local = true) : static;
 
     public function getName() : string;
 
@@ -16,11 +16,11 @@ interface BackendComponent {
 
     public function getComponentPath() : string;
 
-    public function setLivewire(bool $livewire = true) : self;
+    public function setLivewire(bool $livewire = true) : static;
 
     public function isLivewire() : bool;
 
-    public function setLivewireKey(string $livewireKey) : self;
+    public function setLivewireKey(string $livewireKey) : static;
 
     public function getLivewireKey() : string | null;
     
@@ -47,36 +47,36 @@ interface BackendComponent {
 
     public function getLivewireParams() : array;
 
-    public function setNamespace(string $namespace) : self;
+    public function setNamespace(string $namespace) : static;
 
-    public function setPath(string $path) : self;
+    public function setPath(string $path) : static;
 
-    public function setType(?string $name = null) : self;
+    public function setType(?string $name = null) : static;
 
-    public function setContent(string|MainBackendComponent $content) : self;
+    public function setContent(string|MainBackendComponent $content) : static;
 
-    public function setAttribute(string $name, $content) : self;
+    public function setAttribute(string $name, $content) : static;
 
-    public function setAttributes(array $attributes) : self;
+    public function setAttributes(array $attributes) : static;
 
-    public function setSubComponent(MainBackendComponent $subComponent, string $name = null) : self;
+    public function setSubComponent(MainBackendComponent $subComponent, string $name = null) : static;
 
-    public function setSubComponents(array $subComponents) : self;
+    public function setSubComponents(array $subComponents) : static;
 
-    public function setTheme(string $name, string|ThemeBag $theme) : self;
-    public function setSlot(string $name, BackendComponent $slot) : self;
+    public function setTheme(string $name, string|ThemeBag $theme) : static;
+    public function setSlot(string $name, BackendComponent $slot) : static;
 
-    public function setSlots(array $slots) : self;
+    public function setSlots(array $slots) : static;
     
-    public function setThemes(array $themes) : self;
+    public function setThemes(array $themes) : static;
 
-    public function setExtra(string $name, mixed $content) : self;
+    public function setExtra(string $name, mixed $content) : static;
 
-    public function setExtras(array $extras) : self;
+    public function setExtras(array $extras) : static;
 
-    public function setLivewireParams(array $livewireParams) : self;
+    public function setLivewireParams(array $livewireParams) : static;
 
-    public function setThemeManager(ThemeManager $themeManager) : self;
+    public function setThemeManager(ThemeManager $themeManager) : static;
     
     public function toArray() : array;
 
