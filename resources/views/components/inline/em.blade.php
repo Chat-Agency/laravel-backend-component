@@ -29,7 +29,7 @@
 @endphp
 
 <em 
-    {{ $attriemutes->merge($localAttrs) }} >
+    {{ $attributes->merge($localAttrs) }} >
 
         {{ $content }} {{ $slot }}
 

@@ -2,8 +2,6 @@
 
 namespace ChatAgency\BackendComponents\Contracts;
 
-use ChatAgency\BackendComponents\MainBackendComponent;
-
 interface BackendComponent {
     
     public function useLocal($local = true) : static;
@@ -24,7 +22,7 @@ interface BackendComponent {
 
     public function getLivewireKey() : string | null;
     
-    public function getContent() : string| MainBackendComponent |null;
+    public function getContent() : string| BackendComponent |null;
 
     public function getAttributes() : array;
 
@@ -53,13 +51,13 @@ interface BackendComponent {
 
     public function setType(?string $name = null) : static;
 
-    public function setContent(string|MainBackendComponent $content) : static;
+    public function setContent(string|BackendComponent $content) : static;
 
     public function setAttribute(string $name, $content) : static;
 
     public function setAttributes(array $attributes) : static;
 
-    public function setSubComponent(MainBackendComponent $subComponent, string $name = null) : static;
+    public function setSubComponent(BackendComponent $subComponent, string $name = null) : static;
 
     public function setSubComponents(array $subComponents) : static;
 

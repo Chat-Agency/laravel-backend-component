@@ -8,16 +8,17 @@
     $content = null;
     $subComponents = [];
 
-     if($hasAttrs) {
+    if($hasAttrs) {
 
         $localAttrs = $attrs['attributes'] ?? $localAttrs;
-        $localAttrs['class'] = $localAttrs['class'] ?? null;
 
-        $content = $attrs['content'] ?? $content;
+        $content = $attrs['content'] ?? null;
         $themes = $attrs['themes'] ?? null;
         //$subComponents = $attrs['sub_components'] ?? $subComponents;
         //$extra = $attrs['extra'] ?? [];
-        
+        $localAttrs['class'] = $localAttrs['class'] ?? null;
+
+        $content = $attrs['content'] ?? $content;
         $localAttrs['class'] .= $themes;
 
         if(!$localAttrs['class'] ) {
@@ -25,12 +26,6 @@
         }
     }
 
-
 @endphp
 
-<strong 
-    {{ $attributes->merge($localAttrs) }} >
-
-        {{ $content }} {{ $slot }}
-
-</strong>
+<img {{ $attributes->merge($localAttrs) }} />

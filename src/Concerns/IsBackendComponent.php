@@ -4,11 +4,8 @@ namespace ChatAgency\BackendComponents\Concerns;
 
 use BackedEnum;
 use ChatAgency\BackendComponents\Contracts\ThemeBag;
-use ChatAgency\BackendComponents\MainBackendComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
-
 
 trait IsBackendComponent
 {
@@ -21,7 +18,7 @@ trait IsBackendComponent
 
     protected bool $useLocal = false;
 
-    protected string | MainBackendComponent | null $content = null;
+    protected string | BackendComponent | null $content = null;
 
     protected array $attributes = [];
 
@@ -98,7 +95,7 @@ trait IsBackendComponent
         return $this->livewireKey;
     }
 
-    public function getContent() : string| MainBackendComponent |null
+    public function getContent() : string| BackendComponent |null
     {
         return $this->content;
     }
@@ -180,7 +177,7 @@ trait IsBackendComponent
         return $this;
     }
 
-    public function setContent(string|MainBackendComponent $content) : static
+    public function setContent(string|BackendComponent $content) : static
     {
         $this->content = $content;
 
@@ -203,7 +200,7 @@ trait IsBackendComponent
         return $this;
     }
 
-    public function setSubComponent(MainBackendComponent $subComponent, string $name = null) : static
+    public function setSubComponent(BackendComponent $subComponent, string $name = null) : static
     {
         if($name) {
             $this->subComponents[$name] = $subComponent;

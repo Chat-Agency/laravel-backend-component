@@ -14,7 +14,12 @@ enum  ComponentEnum : string
      */
     case BUTTON = 'inline.button';
     case LINK = 'inline.link';
+    case IMG = 'inline.img';
     case SPAN = 'inline.span';
+    case BOLD = 'inline.bold';
+    case EM = 'inline.em';
+    case ITALIC = 'inline.italic';
+    case STRONG = 'inline.strong';
 
     /**
      * Headers
