@@ -33,6 +33,7 @@ interface BackendComponent {
     public function getThemes() : array;
 
     public function getTheme(string $name) : string| ThemeBag | null;
+    
     public function getSlots() : array;
 
     public function getSlot(string $name) : BackendComponent;
@@ -62,6 +63,7 @@ interface BackendComponent {
     public function setSubComponents(array $subComponents) : static;
 
     public function setTheme(string $name, string|ThemeBag $theme) : static;
+    
     public function setSlot(string $name, BackendComponent $slot) : static;
 
     public function setSlots(array $slots) : static;
