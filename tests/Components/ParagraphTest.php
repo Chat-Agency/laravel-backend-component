@@ -11,19 +11,17 @@ class ParagraphTest extends TestCase
     /** @test */
     public function simple_paragraph()
     {
-        $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
-            ->setContent('Nice paragraph');
+        $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH);
 
         $this->blade('{{ $paragraph }}', [
             'paragraph' => $paragraph,
         ])
         ->assertSee('<p', false)
-        ->assertSee('Nice paragraph')
         ->assertSee('</p>', false);
     }
 
     /** @test */
-    public function paragraph_with_component_content()
+    public function paragraph_with_content()
     {
         $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
             ->setContent(
@@ -42,7 +40,7 @@ class ParagraphTest extends TestCase
     }
 
     /** @test */
-    public function paragraph_with_arguments()
+    public function paragraph_with_attributes()
     {
         $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
             ->setContent('Nice paragraph')

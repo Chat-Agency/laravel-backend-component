@@ -11,19 +11,17 @@ class DivTest extends TestCase
     /** @test */
     public function simple_div()
     {
-        $div = ComponentBuilder::make(ComponentEnum::DIV)
-            ->setContent('Nice div');
+        $div = ComponentBuilder::make(ComponentEnum::DIV);
 
         $this->blade('{{ $div }}', [
             'div' => $div,
         ])
         ->assertSee('<div', false)
-        ->assertSee('Nice div')
         ->assertSee('</div>', false);
     }
 
     /** @test */
-    public function div_with_component_content()
+    public function div_with_content()
     {
         $div = ComponentBuilder::make(ComponentEnum::DIV)
             ->setContent(
@@ -42,7 +40,7 @@ class DivTest extends TestCase
     }
 
     /** @test */
-    public function div_with_arguments()
+    public function div_with_attributes()
     {
         $div = ComponentBuilder::make(ComponentEnum::DIV)
             ->setContent('Nice div')

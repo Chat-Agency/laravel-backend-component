@@ -1,11 +1,10 @@
 <?php
 
-namespace Tests\Components;
+namespace Tests\Components\Inline;
 
 use Tests\TestCase;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
-use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 
 
 class LinkTest extends TestCase
@@ -13,19 +12,17 @@ class LinkTest extends TestCase
     /** @test */
     public function simple_link()
     {
-        $link = ComponentBuilder::make(ComponentEnum::LINK)
-            ->setContent('Nice link');
+        $link = ComponentBuilder::make(ComponentEnum::LINK);
 
         $this->blade('{{ $link }}', [
             'link' => $link,
         ])
         ->assertSee('<a ', false)
-        ->assertSee('Nice link')
         ->assertSee('</a>', false);
     }
 
     /** @test */
-    public function link_with_component_content()
+    public function link_with_content()
     {
         $link = ComponentBuilder::make(ComponentEnum::LINK)
             ->setContent(
@@ -44,7 +41,7 @@ class LinkTest extends TestCase
     }
 
     /** @test */
-    public function link_with_arguments()
+    public function link_with_attributes()
     {
         $link = ComponentBuilder::make(ComponentEnum::LINK)
             ->setContent('Nice link')

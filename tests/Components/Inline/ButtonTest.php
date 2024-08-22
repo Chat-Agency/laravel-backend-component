@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Components;
+namespace Tests\Components\Inline;
 
 use Tests\TestCase;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
@@ -12,19 +12,17 @@ class ButtonTest extends TestCase
     /** @test */
     public function simple_button()
     {
-        $button = ComponentBuilder::make(ComponentEnum::BUTTON)
-            ->setContent('Nice button');
+        $button = ComponentBuilder::make(ComponentEnum::BUTTON);
 
         $this->blade('{{ $button }}', [
             'button' => $button,
         ])
         ->assertSee('<button', false)
-        ->assertSee('Nice button')
         ->assertSee('</button>', false);
     }
 
     /** @test */
-    public function button_with_component_content()
+    public function button_with_content()
     {
         $button = ComponentBuilder::make(ComponentEnum::BUTTON)
             ->setContent(
@@ -43,7 +41,7 @@ class ButtonTest extends TestCase
     }
 
     /** @test */
-    public function button_with_arguments()
+    public function button_with_attributes()
     {
         $button = ComponentBuilder::make(ComponentEnum::BUTTON)
             ->setContent('Nice button')
