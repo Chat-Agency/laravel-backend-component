@@ -21,7 +21,7 @@ class ParagraphTest extends TestCase
     }
 
     /** @test */
-    public function paragraph_with_content()
+    public function paragraph_accepts_content()
     {
         $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
             ->setContent(
@@ -40,7 +40,7 @@ class ParagraphTest extends TestCase
     }
 
     /** @test */
-    public function paragraph_with_attributes()
+    public function paragraph_accepts_attributes()
     {
         $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
             ->setContent('Nice paragraph')
@@ -55,7 +55,7 @@ class ParagraphTest extends TestCase
     }
 
     /** @test */
-    public function paragraph_with_sub_components()
+    public function paragraph_accepts_sub_components()
     {
         $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
             ->setContent('Nice paragraph')
@@ -81,7 +81,7 @@ class ParagraphTest extends TestCase
     }
 
     /** @test */
-    public function paragraph_with_theme()
+    public function paragraph_accepts_theme()
     {
         $theme = [
             'color' =>  'success',

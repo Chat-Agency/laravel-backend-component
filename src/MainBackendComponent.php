@@ -10,7 +10,7 @@ use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
 
-class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
+final class MainBackendComponent implements Arrayable, Htmlable, BackendComponent
 {
     use IsBackendComponent;
     

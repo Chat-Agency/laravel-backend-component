@@ -21,7 +21,7 @@ class EmTest extends TestCase
     }
 
     /** @test */
-    public function em_with_content()
+    public function em_accepts_content()
     {
         $em = ComponentBuilder::make(ComponentEnum::EM)
             ->setContent('Nice em tag');
@@ -33,7 +33,7 @@ class EmTest extends TestCase
     }
 
     /** @test */
-    public function em_with_attributes()
+    public function em_accepts_attributes()
     {
         $em = ComponentBuilder::make(ComponentEnum::EM)
             ->setAttribute('id', 'nice_em');
@@ -45,7 +45,7 @@ class EmTest extends TestCase
     }
 
     /** @test */
-    public function em_has_no_sub_components()
+    public function em_does_not_accept_sub_components()
     {
         $em = ComponentBuilder::make(ComponentEnum::EM)
             ->setSubComponent(
@@ -60,7 +60,7 @@ class EmTest extends TestCase
     }
 
     /** @test */
-    public function em_with_theme()
+    public function em_accepts_theme()
     {
         $theme = [
             'display' =>  'inline-block',

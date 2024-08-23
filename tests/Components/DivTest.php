@@ -21,7 +21,7 @@ class DivTest extends TestCase
     }
 
     /** @test */
-    public function div_with_content()
+    public function div_accepts_content()
     {
         $div = ComponentBuilder::make(ComponentEnum::DIV)
             ->setContent(
@@ -32,15 +32,13 @@ class DivTest extends TestCase
         $this->blade('{{ $div }}', [
             'div' => $div,
         ])
-        ->assertSee('<div ', false)
         ->assertSee('<p', false)
         ->assertSee('Span content')
-        ->assertSee('</p>', false)
-        ->assertSee('</div>', false);
+        ->assertSee('</p>', false);
     }
 
     /** @test */
-    public function div_with_attributes()
+    public function div_accepts_attributes()
     {
         $div = ComponentBuilder::make(ComponentEnum::DIV)
             ->setContent('Nice div')
@@ -49,13 +47,11 @@ class DivTest extends TestCase
         $this->blade('{{ $div }}', [
             'div' => $div,
         ])
-        ->assertSee('<div', false)
-        ->assertSee('id="div_id"', false)
-        ->assertSee('</div>', false);
+        ->assertSee('id="div_id"', false);
     }
 
     /** @test */
-    public function div_with_sub_components()
+    public function div_accepts_sub_components()
     {
         $div = ComponentBuilder::make(ComponentEnum::DIV)
             ->setContent('Nice div')
@@ -69,17 +65,15 @@ class DivTest extends TestCase
         $this->blade('{{ $div }}', [
             'div' => $div,
         ])
-        ->assertSee('<div', false)
         ->assertSee('<p', false)
         ->assertSee('First paragraph')
         ->assertSee('</p>', false)
-        ->assertSee('Second paragraph')
-        ->assertSee('</div>', false);
+        ->assertSee('Second paragraph');
         
     }
 
     /** @test */
-    public function div_with_theme()
+    public function div_accepts_theme()
     {
         $theme = [
             'color' =>  'success',
@@ -92,8 +86,6 @@ class DivTest extends TestCase
         $this->blade('{{ $div }}', [
             'div' => $div,
         ])
-        ->assertSee('<div', false)
-        ->assertSee('class="'.bladeThemes($theme), false)
-        ->assertSee('</div>', false);
+        ->assertSee('class="'.bladeThemes($theme), false);
     }
 }

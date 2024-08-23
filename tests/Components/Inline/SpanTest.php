@@ -21,7 +21,7 @@ class SpanTest extends TestCase
     }
 
     /** @test */
-    public function span_with_content()
+    public function span_accepts_content()
     {
         $span = ComponentBuilder::make(ComponentEnum::SPAN)
             ->setContent('Nice span');
@@ -33,7 +33,7 @@ class SpanTest extends TestCase
     }
 
     /** @test */
-    public function span_with_attributes()
+    public function span_accepts_attributes()
     {
         $span = ComponentBuilder::make(ComponentEnum::SPAN)
             ->setAttribute('id', 'nice_span');
@@ -45,7 +45,7 @@ class SpanTest extends TestCase
     }
 
     /** @test */
-    public function span_with_sub_components()
+    public function span_accepts_sub_components()
     {
         $span = ComponentBuilder::make(ComponentEnum::SPAN)
             ->setSubComponent(
@@ -62,7 +62,7 @@ class SpanTest extends TestCase
     }
 
     /** @test */
-    public function button_with_theme()
+    public function button_accepts_theme()
     {
         $theme = [
             'font' =>  'bold',

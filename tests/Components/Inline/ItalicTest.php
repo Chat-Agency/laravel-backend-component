@@ -21,10 +21,10 @@ class ItalicTest extends TestCase
     }
 
     /** @test */
-    public function italic_with_content()
+    public function italic_accepts_content()
     {
         $italic = ComponentBuilder::make(ComponentEnum::ITALIC)
-         ->setContent('Nice i tag');
+            ->setContent('Nice i tag');
 
         $this->blade('{{ $italic }}', [
             'italic' => $italic,
@@ -33,7 +33,7 @@ class ItalicTest extends TestCase
     }
 
     /** @test */
-    public function italic_with_attributes()
+    public function italic_accepts_attributes()
     {
         $italic = ComponentBuilder::make(ComponentEnum::ITALIC)
             ->setAttribute('id', 'nice_italic');
@@ -45,7 +45,7 @@ class ItalicTest extends TestCase
     }
 
     /** @test */
-    public function italic_has_no_sub_components()
+    public function italic_does_not_accept_sub_components()
     {
         $italic = ComponentBuilder::make(ComponentEnum::ITALIC)
             ->setSubComponent(
@@ -59,7 +59,7 @@ class ItalicTest extends TestCase
     }
 
     /** @test */
-    public function italic_with_theme()
+    public function italic_accepts_theme()
     {
         $theme = [
             'display' =>  'inline-block',

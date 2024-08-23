@@ -22,7 +22,7 @@ class ButtonTest extends TestCase
     }
 
     /** @test */
-    public function button_with_content()
+    public function button_accepts_content()
     {
         $button = ComponentBuilder::make(ComponentEnum::BUTTON)
             ->setContent(
@@ -41,7 +41,7 @@ class ButtonTest extends TestCase
     }
 
     /** @test */
-    public function button_with_attributes()
+    public function button_accepts_attributes()
     {
         $button = ComponentBuilder::make(ComponentEnum::BUTTON)
             ->setContent('Nice button')
@@ -56,7 +56,7 @@ class ButtonTest extends TestCase
     }
 
     /** @test */
-    public function button_with_sub_components()
+    public function button_accepts_sub_components()
     {
         $button = ComponentBuilder::make(ComponentEnum::BUTTON)
             ->setContent('Nice button')
@@ -77,7 +77,7 @@ class ButtonTest extends TestCase
     }
 
     /** @test */
-    public function button_with_theme()
+    public function button_accepts_theme()
     {
         $theme = [
             'action' =>  'default',

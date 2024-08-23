@@ -22,7 +22,7 @@ class LinkTest extends TestCase
     }
 
     /** @test */
-    public function link_with_content()
+    public function link_accepts_content()
     {
         $link = ComponentBuilder::make(ComponentEnum::LINK)
             ->setContent(
@@ -41,7 +41,7 @@ class LinkTest extends TestCase
     }
 
     /** @test */
-    public function link_with_attributes()
+    public function link_accepts_attributes()
     {
         $link = ComponentBuilder::make(ComponentEnum::LINK)
             ->setContent('Nice link')
@@ -56,7 +56,7 @@ class LinkTest extends TestCase
     }
 
     /** @test */
-    public function link_with_sub_components()
+    public function link_accepts_sub_components()
     {
         $link = ComponentBuilder::make(ComponentEnum::LINK)
             ->setContent('Nice link')
@@ -77,7 +77,7 @@ class LinkTest extends TestCase
     }
     
     /** @test */
-    public function link_with_theme()
+    public function link_accepts_theme()
     {
         $theme = [
             'action' =>  'default',

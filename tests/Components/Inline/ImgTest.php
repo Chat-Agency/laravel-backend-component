@@ -33,7 +33,7 @@ class ImgTest extends TestCase
     }
 
     /** @test */
-    public function image_with_attributes()
+    public function image_accepts_attributes()
     {
         $img = ComponentBuilder::make(ComponentEnum::IMG)
             ->setAttribute('src', asset('path/to/image.jpg'))
@@ -49,7 +49,7 @@ class ImgTest extends TestCase
     }
 
     /** @test */
-    public function image_with_theme()
+    public function image_accepts_theme()
     {
         $theme = [
             'display' =>  'block',

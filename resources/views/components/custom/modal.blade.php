@@ -1,11 +1,10 @@
 @props([
     'attrs' => [],
-    'size' => null,
+    'size' => '2xl',
 ])
 
 @php
 
-    
     /** 
      * Based on Jetstream
      * Dialog component
@@ -24,24 +23,12 @@
     $footer = $footer ?? null;
     $button = $button ?? null;
     $overlay = $overlay ?? ComponentBuilder::make(ComponentEnum::DIV)
-        ->setAttribute('class', 'absolute inset-0 bg-gray-500 dark:bg-gray-700 opacity-75');
-
-    $sizes = [
-        'sm' => 'sm:max-w-sm',
-        'md' => 'sm:max-w-md',
-        'lg' => 'sm:max-w-lg',
-        'xl' => 'sm:max-w-xl',
-        '2xl' => 'sm:max-w-2xl',
-        '3xl' => 'sm:max-w-3xl',
-        '4xl' => 'sm:max-w-4xl',
-        'full' => 'flex flex-col w-full top-5 bottom-5',
-    ];
-
-    $maxWidth = $sizes[$size ?? '2xl'];
+        ->setTheme('modal', 'overlay');
 
     if($hasAttrs) {
 
         $localAttrs = $attrs['attributes'] ?? $localAttrs;
+        $localAttrs['class'] = $localAttrs['class'] ?? null;
 
         $value = $attrs['content'] ?? null;
         $themes = $attrs['themes'] ?? null;
@@ -49,25 +36,27 @@
         $extra = $attrs['extra'] ?? [];
         $slots = $attrs['slots'] ?? [];
 
-        $localAttrs['class'] = $localAttrs['class'] ?? null;
-
         $value = $attrs['content'] ?? $value;
         $localAttrs['class'] .= $themes;
         
+        $title = $slots['title'] ?? $title;
+        $footer = $slots['footer'] ?? $footer;
         $button = $slots['button'] ?? $button;
         $overlay = $slots['overlay'] ?? $overlay;
 
-        $maxWidth = $extra['size'] ?? null ? $sizes[$extra['size'] ?? '2xl'] : $maxWidth;
+        $size = $extra['size'] ?? $size;
+
+        if(!$localAttrs['class'] ) {
+            unset($localAttrs['class']);
+        }
     }
     
     
 @endphp
 
 <div x-data="{ 'showModal': false }">
-   
-    <!-- Trigger for Modal -->
     
-    {{ $button }}
+    {{ $button }}<!-- Trigger for Modal -->
     
     <div
         x-show="showModal"
@@ -75,7 +64,6 @@
         @keydown.escape="showModal = false"
         class="fixed {{ $size == 'full' ? 'flex' : null }} inset-0 overflow-y-auto px-4 py-6 z-50">
         
-
         <div x-show="showModal" 
             class="fixed inset-0 transform transition-all" 
             x-on:click="showModal = false" 
@@ -86,11 +74,10 @@
             x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0"
         >
-            {{-- <div class="absolute inset-0 bg-gray-500 dark:bg-gray-700 opacity-75"></div> --}}
             {{ $overlay }}
         </div>
 
-        <div x-show="showModal" class="{{ $maxWidth }} {{ $size == 'full' ? null : 'mb-6' }} overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto"
+        <div x-show="showModal" class="{{ bladeThemes(['modal' => $size]) }}"
             x-trap.inert.noscroll="showModal"
             x-transition:enter="ease-out duration-300"
             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -103,6 +90,10 @@
 
             <div {{ $attributes->merge($localAttrs) }}>
                 
+                @foreach($subComponents as $subComponent)
+                    {{ $subComponent }}
+                @endforeach
+                
                 {{ $slot }} {{ $value }} 
 
             </div>
@@ -111,6 +102,6 @@
 
         </div>
 
-        
     </div>
+
 </div>
