@@ -10,4 +10,3 @@
     $value = resolveTheme($styles, $margin);
 
 @endphp {{ $value }}
-{{-- <span class=""></span> --}}

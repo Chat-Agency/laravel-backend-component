@@ -10,6 +10,9 @@
         '4xl' => 'text-4xl',
         '5xl' => 'text-5xl',
         '6xl' => 'text-6xl',
+        'center' => 'text-center',
+        'left' => 'text-left',
+        'right' => 'text-right',
     ];
     
     $value = resolveTheme($styles, $text);
