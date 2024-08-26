@@ -33,8 +33,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ChatAgency\\BackendComponents\\": "src/",
-            "ChatAgency\\BackendComponents\\Database\\Factories\\": "database/factories/"
+            "ChatAgency\\BackendComponents\\": "src/"
         }
     },
     "autoload-dev": {

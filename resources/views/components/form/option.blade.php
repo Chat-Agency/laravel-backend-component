@@ -24,7 +24,7 @@
 
 @endphp
 
-<option {{ $attributes->merge($localAttrs) }} > 
+<option {{ $attributes->merge($localAttrs) }}> 
     
     @foreach($subComponents as $subComponent)
         {{ $subComponent }}

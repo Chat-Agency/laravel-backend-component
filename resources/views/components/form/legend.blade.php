@@ -24,7 +24,7 @@
 
 @endphp
 
-<legend {{ $attributes->merge($localAttrs) }} > 
+<legend {{ $attributes->merge($localAttrs) }}> 
     
     @foreach($subComponents as $subComponent)
         {{ $subComponent }}

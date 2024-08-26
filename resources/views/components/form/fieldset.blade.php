@@ -24,7 +24,7 @@
 
 @endphp
 
-<fieldset {{ $attributes->merge($localAttrs) }} > 
+<fieldset {{ $attributes->merge($localAttrs) }}> 
     
     @foreach($subComponents as $subComponent)
         {{ $subComponent }}

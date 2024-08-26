@@ -53,8 +53,7 @@
 
 @endphp
 
-<form {{ $attributes->merge($localAttrs) }} 
->   
+<form {{ $attributes->merge($localAttrs) }}>   
     @foreach($subComponents as $component)
         {{{ $component }}}
     @endforeach

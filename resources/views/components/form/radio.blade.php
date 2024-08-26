@@ -2,6 +2,4 @@
     'attrs' => [],
 ])
 
-<x-laravel-backend-component::form.text 
-    {{ $attributes->merge(['type' => 'radio']) }}
-    :attrs="$attrs" />
+<x-laravel-backend-component::form.text {{ $attributes->merge(['type' => 'radio']) }} :attrs="$attrs" />

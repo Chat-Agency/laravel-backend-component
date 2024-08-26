@@ -28,13 +28,12 @@
 
 @endphp
 
-<button 
-    {{ $attributes->merge($localAttrs) }} >
+<button {{ $attributes->merge($localAttrs) }}>
 
-        @foreach($subComponents as $component)
-            {{{ $component }}}
-        @endforeach
-    
-        {{ $content }} {{ $slot }}
+    @foreach($subComponents as $component)
+        {{{ $component }}}
+    @endforeach
+
+    {{ $content }} {{ $slot }}
 
 </button>

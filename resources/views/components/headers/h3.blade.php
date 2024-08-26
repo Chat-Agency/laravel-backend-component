@@ -24,7 +24,7 @@
 
 @endphp
 
-<h3 {{ $attributes->merge($localAttrs) }} > 
+<h3 {{ $attributes->merge($localAttrs) }}> 
     
     @foreach($subComponents as $subComponent)
         {{ $subComponent }}

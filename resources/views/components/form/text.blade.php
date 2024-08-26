@@ -26,4 +26,4 @@
 
 @endphp
 
-<input {{ $attributes->merge($localAttrs) }} />
+<input {{ $attributes->merge($localAttrs) }}/>
