@@ -72,5 +72,7 @@ class ItalicTest extends TestCase
             'italic' => $italic,
         ])
         ->assertSee('class="'.bladeThemes($theme), false);
+
+        $this->assertNotEmpty(bladeThemes($theme));
     }
 }

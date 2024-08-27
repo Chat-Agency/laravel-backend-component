@@ -6,36 +6,36 @@ use Tests\TestCase;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 
-class H1Test extends TestCase
+class H2Test extends TestCase
 {
     /** @test */
     public function simple_empty_header()
     {
-        $header = ComponentBuilder::make(ComponentEnum::H1);
+        $header = ComponentBuilder::make(ComponentEnum::H2);
 
         $this->blade('{{ $header }}', [
             'header' => $header,
         ])
-        ->assertSee('<h1', false)
-        ->assertSee('</h1>', false);
+        ->assertSee('<h2', false)
+        ->assertSee('</h2>', false);
     }
 
     /** @test */
     public function header_accepts_content()
     {
-        $header = ComponentBuilder::make(ComponentEnum::H1)
-            ->setContent('Nice h1 tag');
+        $header = ComponentBuilder::make(ComponentEnum::H2)
+            ->setContent('Nice h2 tag');
 
         $this->blade('{{ $header }}', [
             'header' => $header,
         ])
-        ->assertSee('Nice h1 tag');
+        ->assertSee('Nice h2 tag');
     }
 
     /** @test */
     public function header_accepts_attributes()
     {
-        $header = ComponentBuilder::make(ComponentEnum::H1)
+        $header = ComponentBuilder::make(ComponentEnum::H2)
             ->setAttribute('id', 'nice_header');
 
         $this->blade('{{ $header }}', [
@@ -47,7 +47,7 @@ class H1Test extends TestCase
     /** @test */
     public function header_accepts_sub_components()
     {
-        $div = ComponentBuilder::make(ComponentEnum::H1)
+        $div = ComponentBuilder::make(ComponentEnum::H2)
             ->setSubComponents([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('First span'),
@@ -71,7 +71,7 @@ class H1Test extends TestCase
             'color' =>  'error',
         ];
 
-        $header = ComponentBuilder::make(ComponentEnum::H1)
+        $header = ComponentBuilder::make(ComponentEnum::H2)
             ->setThemes($theme);
 
         $this->blade('{{ $header }}', [

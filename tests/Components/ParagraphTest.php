@@ -97,6 +97,8 @@ class ParagraphTest extends TestCase
         ->assertSee('<p', false)
         ->assertSee('class="'.bladeThemes($theme), false)
         ->assertSee('</p>', false);
+
+        $this->assertNotEmpty(bladeThemes($theme));
     }
 
 }

@@ -93,5 +93,7 @@ class LinkTest extends TestCase
         ->assertSee('<a', false)
         ->assertSee('class="'.bladeThemes($theme), false)
         ->assertSee('</a>', false);
+
+        $this->assertNotEmpty(bladeThemes($theme));
     }
 }

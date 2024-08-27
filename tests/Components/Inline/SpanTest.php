@@ -75,5 +75,7 @@ class SpanTest extends TestCase
             'span' => $span,
         ])
         ->assertSee('class="'.bladeThemes($theme), false);
+
+        $this->assertNotEmpty(bladeThemes($theme));
     }
 }

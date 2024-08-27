@@ -72,5 +72,7 @@ class BoldTest extends TestCase
             'bold' => $bold,
         ])
         ->assertSee('class="'.bladeThemes($theme), false);
+
+        $this->assertNotEmpty(bladeThemes($theme));
     }
 }

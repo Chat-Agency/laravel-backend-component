@@ -73,5 +73,7 @@ class EmTest extends TestCase
             'em' => $em,
         ])
         ->assertSee('class="'.bladeThemes($theme), false);
+
+        $this->assertNotEmpty(bladeThemes($theme));
     }
 }

@@ -66,5 +66,7 @@ class ImgTest extends TestCase
         ->assertSee('<img', false)
         ->assertSee('class="'.bladeThemes($theme), false)
         ->assertSee('/>', false);
+
+        $this->assertNotEmpty(bladeThemes($theme));
     }
 }

@@ -93,5 +93,7 @@ class ButtonTest extends TestCase
         ->assertSee('<button', false)
         ->assertSee('class="'.bladeThemes($theme), false)
         ->assertSee('</button>', false);
+
+        $this->assertNotEmpty(bladeThemes($theme));
     }
 }

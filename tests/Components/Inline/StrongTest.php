@@ -71,5 +71,7 @@ class StrongTest extends TestCase
             'strong' => $strong,
         ])
         ->assertSee('class="'.bladeThemes($theme), false);
+
+        $this->assertNotEmpty(bladeThemes($theme));
     }
 }

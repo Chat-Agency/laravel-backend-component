@@ -87,5 +87,7 @@ class DivTest extends TestCase
             'div' => $div,
         ])
         ->assertSee('class="'.bladeThemes($theme), false);
+
+        $this->assertNotEmpty(bladeThemes($theme));
     }
 }
