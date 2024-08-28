@@ -174,7 +174,7 @@ class ModalTest extends TestCase
     /** @test */
     public function modal_accepts_container_extra_params()
     {
-        $containerClasses = [
+        $containerTheme = [
             'flex' => DefaultThemeBag::make([
                 'flex',
                 'items-center',
@@ -183,13 +183,13 @@ class ModalTest extends TestCase
         
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
             ->setExtra('container',  [
-                'class' => $containerClasses,
+                'theme' => $containerTheme,
             ]);
 
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
         ])
-        ->assertSee('class="'.bladeThemes($containerClasses), false);
+        ->assertSee('class="'.bladeThemes($containerTheme), false);
         
     }
 }

@@ -5,6 +5,7 @@ use ChatAgency\BackendComponents\MainBackendComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
+use ChatAgency\BackendComponents\BackendComponentsServiceProvider;
 
 /**
  * Utility classes
@@ -12,7 +13,7 @@ use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 if (! function_exists('BackendComponentNamespace')) {
     function BackendComponentNamespace(): string
     {
-        return 'laravel-backend-component::';
+        return BackendComponentsServiceProvider::namespace().'::';
     }
 }
 

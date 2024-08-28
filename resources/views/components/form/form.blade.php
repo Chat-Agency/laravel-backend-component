@@ -1,5 +1,6 @@
 @props([
     'attrs' => [],
+    'disableCToken' => false,
 ])
 
 @php
@@ -30,6 +31,8 @@
 
         $method = $localAttrs['method'] ?? null;
 
+        $disableCToken = $extra['disable_token'] ?? $disableCToken;
+
         if($method) {
             $localAttrs['method'] = strtoupper($method) == 'GET' ? 'GET' : 'POST';
 
@@ -59,13 +62,15 @@
 
 <form {{ $attributes->merge($localAttrs) }}>   
     
+    {{ $methodInput }}
+
+    @if(!$disableCToken) @csrf @endif
+    
     @foreach($subComponents as $component)
         {{{ $component }}}
     @endforeach
 
     {{ $buttonDefault }}
-
-    {{ $methodInput }}
 
     {{ $content }} {{ $slot }}
 

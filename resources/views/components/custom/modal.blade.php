@@ -1,5 +1,6 @@
 @props([
     'attrs' => [],
+    'container' => [],
 ])
 @php
 
@@ -24,7 +25,7 @@
     $footer = $footer ?? null;
     $button = $button ?? null;
 
-    $containerClasses = [];
+    $containerTheme = $container['theme'] ?? [];
 
     $overlay = $overlay ?? ComponentBuilder::make(ComponentEnum::DIV)
         ->setTheme('modal', 'overlay');
@@ -48,8 +49,8 @@
         $button = $slots['button'] ?? $button;
         $overlay = $slots['overlay'] ?? $overlay;
 
-        $container = $extra['container'] ?? [];
-        $containerClasses = $container['class'] ?? $containerClasses;
+        $container = $extra['container'] ?? $container;
+        $containerTheme = $container['theme'] ?? $containerTheme;
 
         if(!$localAttrs['class'] ) {
             unset($localAttrs['class']);
@@ -66,7 +67,7 @@
         x-show="showModal"
         x-cloak
         @keydown.escape="showModal = false"
-        class="{{ bladeThemes($containerClasses) }} fixed inset-0 overflow-y-auto px-4 py-6 z-50">
+        class="{{ bladeThemes($containerTheme) }} fixed inset-0 overflow-y-auto px-4 py-6 z-50">
         
         <div x-show="showModal" 
             class="fixed inset-0 transform transition-all" 
