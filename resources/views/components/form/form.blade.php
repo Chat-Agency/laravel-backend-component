@@ -9,7 +9,7 @@
     
     $hasAttrs = !empty($attrs);
     $localAttrs = [];
-    $value = null;
+    $content = null;
 
     $methodInput = null;
     $subComponents = [];
@@ -19,13 +19,13 @@
 
         $localAttrs = $attrs['attributes'] ?? $localAttrs;
 
-        $value = $attrs['content'] ?? null;
+        $content = $attrs['content'] ?? null;
         $themes = $attrs['themes'] ?? null;
         $subComponents = $attrs['sub_components'] ?? $subComponent;
         $extra = $attrs['extra'] ?? [];
         $localAttrs['class'] = $localAttrs['class'] ?? null;
 
-        $value = $attrs['content'] ?? $value;
+        $content = $attrs['content'] ?? $content;
         $localAttrs['class'] .= $themes;
 
         $method = $localAttrs['method'] ?? null;
@@ -39,7 +39,7 @@
         }
 
         /**
-         * Button
+         * Default button
          */
         $hasButton = $extra['has_button'] ?? null;
 
@@ -49,11 +49,16 @@
                 ->setTheme('padding', 'button')
                 ->setContent(__('Send'));
         }
+
+        if(!$localAttrs['class'] ) {
+            unset($localAttrs['class']);
+        }
     }
 
 @endphp
 
 <form {{ $attributes->merge($localAttrs) }}>   
+    
     @foreach($subComponents as $component)
         {{{ $component }}}
     @endforeach
@@ -62,6 +67,6 @@
 
     {{ $methodInput }}
 
-    {{ $value }} {{ $slot }}
+    {{ $content }} {{ $slot }}
 
 </form>

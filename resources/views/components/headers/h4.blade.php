@@ -5,21 +5,25 @@
 @php
     $hasAttrs = !empty($attrs);
     $localAttrs = [];
-    $value = null;
+    $content = null;
     $subComponents = [];
 
     if($hasAttrs) {
 
         $localAttrs = $attrs['attributes'] ?? $localAttrs;
 
-        $value = $attrs['content'] ?? null;
+        $content = $attrs['content'] ?? null;
         $themes = $attrs['themes'] ?? null;
         $subComponents = $attrs['sub_components'] ?? $subComponents;
         $extra = $attrs['extra'] ?? [];
         $localAttrs['class'] = $localAttrs['class'] ?? null;
 
-        $value = $attrs['content'] ?? $value;
+        $content = $attrs['content'] ?? $content;
         $localAttrs['class'] .= $themes;
+
+        if(!$localAttrs['class'] ) {
+            unset($localAttrs['class']);
+        }
     }
 
 @endphp
@@ -30,6 +34,6 @@
         {{ $subComponent }}
     @endforeach
 
-    {{ $value }} {{ $slot }}
+    {{ $content }} {{ $slot }}
 
 </h4>

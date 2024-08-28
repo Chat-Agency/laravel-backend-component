@@ -42,6 +42,7 @@ enum  ComponentEnum : string
     case LEGEND = 'form.legend';
     case FIELDSET = 'form.fieldset';
     case TEXT = 'form.text';
+    case FILE = 'form.file';
     case EMAIL = 'form.email';
     case SEARCH = 'form.search';
     case SELECT = 'form.select';

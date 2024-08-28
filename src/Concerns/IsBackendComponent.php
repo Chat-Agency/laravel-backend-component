@@ -22,6 +22,7 @@ trait IsBackendComponent
 
     protected array $attributes = [];
 
+    /** @var BackendComponent[] $subComponents */
     protected array $subComponents = [];
 
     protected array $themes = [];
