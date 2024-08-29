@@ -7,7 +7,7 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Arrayable;
 use ChatAgency\BackendComponents\Concerns\HasSlots;
 use ChatAgency\BackendComponents\Concerns\HasContent;
-use ChatAgency\BackendComponents\Concerns\IsThemable;
+use ChatAgency\BackendComponents\Concerns\IsThemeable ;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use ChatAgency\BackendComponents\Concerns\HasExtraParams;
 use ChatAgency\BackendComponents\Contracts\SlotsComponent;
@@ -27,7 +27,7 @@ final class MainBackendComponent implements Arrayable, Htmlable, BackendComponen
     use IsBackendComponent,
         HasContent,
         HasSubComponents,
-        IsThemable,
+        IsThemeable ,
         HasSlots,
         IsLivewireComponent,
         HasExtraParams;

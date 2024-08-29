@@ -5,7 +5,7 @@ namespace ChatAgency\BackendComponents\Concerns;
 use ChatAgency\BackendComponents\Contracts\ThemeBag;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
 
-trait IsThemable
+trait IsThemeable
 {
     protected array $themes = [];
 
