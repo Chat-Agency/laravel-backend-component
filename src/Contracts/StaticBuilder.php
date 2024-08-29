@@ -6,5 +6,5 @@ use ChatAgency\BackendComponents\Enums\ComponentEnum;
 
 interface StaticBuilder
 {
-    public static function make(string | ComponentEnum $name, ThemeManager | null $themeManager = null) : BackendComponent;
+    public static function make(string | ComponentEnum $name, ThemeManager | null $themeManager = null) : BackendComponent | ContentComponent | SubComponentsComponent | ThemeComponent | SlotsComponent | LivewireComponent | ExtraParamsComponent;
 }
