@@ -1,7 +1,5 @@
 @php
     $styles = [
-        'flex' => 'flex',
-        
         'gap-sm' => 'gap-1',
         'gap-md' => 'gap-3',
         'gap-lg' => 'gap-6',

@@ -41,7 +41,6 @@ class DivTest extends TestCase
     public function div_accepts_attributes()
     {
         $div = ComponentBuilder::make(ComponentEnum::DIV)
-            ->setContent('Nice div')
             ->setAttribute('id', 'div_id');
 
         $this->blade('{{ $div }}', [
@@ -54,7 +53,6 @@ class DivTest extends TestCase
     public function div_accepts_sub_components()
     {
         $div = ComponentBuilder::make(ComponentEnum::DIV)
-            ->setContent('Nice div')
             ->setSubComponents([
                 ComponentBuilder::make(ComponentEnum::PARAGRAPH)
                     ->setContent('First paragraph'),
@@ -80,7 +78,6 @@ class DivTest extends TestCase
         ];
         
         $div = ComponentBuilder::make(ComponentEnum::DIV)
-            ->setContent('Nice div')
             ->setThemes($theme);
         
         $this->blade('{{ $div }}', [

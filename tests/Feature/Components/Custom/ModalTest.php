@@ -1,6 +1,6 @@
 <?php
 
-namespace Components\Custom;
+namespace Tests\Feature\Components\Custom;
 
 use Tests\TestCase;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
@@ -65,7 +65,7 @@ class ModalTest extends TestCase
     }
 
     /** @test */
-    public function the_modal_body_accepts_theme()
+    public function modal_accepts_theme()
     {
         $theme = ['modal' => 'default'];
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
@@ -175,10 +175,8 @@ class ModalTest extends TestCase
     public function modal_accepts_container_extra_params()
     {
         $containerTheme = [
-            'flex' => DefaultThemeBag::make([
-                'flex',
-                'items-center',
-            ]),
+            'display' => 'flex',
+            'flex' => 'items-center',
         ];
         
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)

@@ -1,6 +1,7 @@
 @props([
     'attrs' => [],
     'disableCToken' => false,
+    'hasButton' => false,
 ])
 
 @php
@@ -44,18 +45,18 @@
         /**
          * Default button
          */
-        $hasButton = $extra['has_button'] ?? null;
-
-        if($hasButton ) {
-            $buttonDefault = makeBackendComponent(ComponentEnum::BUTTON)
-                ->setTheme('action', 'default')
-                ->setTheme('padding', 'button')
-                ->setContent(__('Send'));
-        }
+        $hasButton = $extra['has_button'] ?? $hasButton;
 
         if(!$localAttrs['class'] ) {
             unset($localAttrs['class']);
         }
+    }
+
+    if($hasButton) {
+        $buttonDefault = makeBackendComponent(ComponentEnum::BUTTON)
+            ->setTheme('action', 'default')
+            ->setTheme('padding', 'button')
+            ->setContent(__('Send'));
     }
 
 @endphp

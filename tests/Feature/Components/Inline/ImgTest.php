@@ -49,6 +49,21 @@ class ImgTest extends TestCase
     }
 
     /** @test */
+    public function image_does_not_accept_sub_components()
+    {
+        $image = ComponentBuilder::make(ComponentEnum::IMG)
+            ->setSubComponent(
+                ComponentBuilder::make(ComponentEnum::SPAN)
+            );
+
+        $this->blade('{{ $image }}', [
+            'image' => $image,
+        ])
+        ->assertDontSee('<span', false)
+        ->assertDontSee('</span>', false);
+    }
+
+    /** @test */
     public function image_accepts_theme()
     {
         $theme = [
