@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Components;
+namespace Tests\Feature\Components;
 
 use Tests\TestCase;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;

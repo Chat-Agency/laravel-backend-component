@@ -1,41 +1,41 @@
 <?php
 
-namespace Tests\Components\Headers;
+namespace Tests\Feature\Components\Headers;
 
 use Tests\TestCase;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 
-class H5Test extends TestCase
+class H3Test extends TestCase
 {
     /** @test */
     public function simple_empty_header()
     {
-        $header = ComponentBuilder::make(ComponentEnum::H5);
+        $header = ComponentBuilder::make(ComponentEnum::H3);
 
         $this->blade('{{ $header }}', [
             'header' => $header,
         ])
-        ->assertSee('<h5', false)
-        ->assertSee('</h5>', false);
+        ->assertSee('<h3', false)
+        ->assertSee('</h3>', false);
     }
 
     /** @test */
     public function header_accepts_content()
     {
-        $header = ComponentBuilder::make(ComponentEnum::H5)
-            ->setContent('Nice h5 tag');
+        $header = ComponentBuilder::make(ComponentEnum::H3)
+            ->setContent('Nice h3 tag');
 
         $this->blade('{{ $header }}', [
             'header' => $header,
         ])
-        ->assertSee('Nice h5 tag');
+        ->assertSee('Nice h3 tag');
     }
 
     /** @test */
     public function header_accepts_attributes()
     {
-        $header = ComponentBuilder::make(ComponentEnum::H5)
+        $header = ComponentBuilder::make(ComponentEnum::H3)
             ->setAttribute('id', 'nice_header');
 
         $this->blade('{{ $header }}', [
@@ -47,7 +47,7 @@ class H5Test extends TestCase
     /** @test */
     public function header_accepts_sub_components()
     {
-        $div = ComponentBuilder::make(ComponentEnum::H5)
+        $div = ComponentBuilder::make(ComponentEnum::H3)
             ->setSubComponents([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('First span'),
@@ -71,7 +71,7 @@ class H5Test extends TestCase
             'color' =>  'error',
         ];
 
-        $header = ComponentBuilder::make(ComponentEnum::H5)
+        $header = ComponentBuilder::make(ComponentEnum::H3)
             ->setThemes($theme);
 
         $this->blade('{{ $header }}', [

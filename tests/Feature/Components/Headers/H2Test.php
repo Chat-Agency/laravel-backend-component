@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Components\Headers;
+namespace Tests\Feature\Components\Headers;
 
 use Tests\TestCase;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;

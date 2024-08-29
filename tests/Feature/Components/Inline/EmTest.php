@@ -1,6 +1,6 @@
 <?php
 
-namespace Components\Inline;
+namespace Tests\Feature\Components\Inline;
 
 use Tests\TestCase;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
