@@ -28,8 +28,4 @@
 
 @endphp
 
-<i {{ $attributes->merge($localAttrs) }}>
-
-    {{ $content }} {{ $slot }}
-
-</i>
+<i {{ $attributes->merge($localAttrs) }}>{{ $content }}{{ $slot }}</i>
