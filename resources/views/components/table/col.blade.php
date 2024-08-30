@@ -11,7 +11,6 @@
 
         $localAttrs = array_merge($localAttrs, $attrs['attributes'] ) ?? $localAttrs;
 
-        //$content = $attrs['content'] ?? null;
         $themes = $attrs['themes'] ?? null;
         //$subComponents = $attrs['sub_components'] ?? [];
         $extra = $attrs['extra'] ?? [];

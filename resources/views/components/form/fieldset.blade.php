@@ -11,11 +11,9 @@
     if($hasAttrs) {
 
         $localAttrs = $attrs['attributes'] ?? $localAttrs;
-
-        $content = $attrs['content'] ?? null;
         $themes = $attrs['themes'] ?? null;
         $subComponents = $attrs['sub_components'] ?? $subComponents;
-        $extra = $attrs['extra'] ?? [];
+        //$extra = $attrs['extra'] ?? [];
         $localAttrs['class'] = $localAttrs['class'] ?? null;
 
         $content = $attrs['content'] ?? $content;

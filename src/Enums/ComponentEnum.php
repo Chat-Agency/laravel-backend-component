@@ -41,16 +41,17 @@ enum  ComponentEnum : string
     case LABEL = 'form.label';
     case LEGEND = 'form.legend';
     case FIELDSET = 'form.fieldset';
-    case TEXT = 'form.text';
-    case FILE = 'form.file';
-    case EMAIL = 'form.email';
-    case SEARCH = 'form.search';
-    case SELECT = 'form.select';
-    case CHECKBOX = 'form.checkbox';
-    case RADIO = 'form.radio';
+    case TEXT_INPUT = 'form.text';
+    case FILE_INPUT = 'form.file';
+    case EMAIL_INPUT = 'form.email';
+    case SEARCH_INPUT = 'form.search';
+    case SELECT_INPUT = 'form.select';
+    case CHECKBOX_INPUT = 'form.checkbox';
+    case RADIO_INPUT = 'form.radio';
+    case TEXTAREA = 'form.textarea';
     case OPTGROUP = 'form.optgroup';
     case OPTION = 'form.option';
-    case HIDDEN = 'form.hidden';
+    case HIDDEN_INPUT = 'form.hidden';
 
     /**
      * Table

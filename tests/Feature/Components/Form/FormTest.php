@@ -41,7 +41,6 @@ class FormTest extends TestCase
     public function form_accepts_attributes()
     {
         $form = ComponentBuilder::make(ComponentEnum::FORM)
-            ->setContent('Nice form')
             ->setAttribute('method', 'post')
             ->setAttribute('action', '/')
             ->setAttribute('enctype', 'multipart/form-data');
@@ -62,7 +61,7 @@ class FormTest extends TestCase
                 ComponentBuilder::make(ComponentEnum::LABEL)
                     ->setContent('First Name')
                     ->setAttribute('for', 'first_name'),
-                ComponentBuilder::make(ComponentEnum::TEXT)
+                ComponentBuilder::make(ComponentEnum::TEXT_INPUT)
                     ->setAttribute('id',  'first_name'),
             ]);
 

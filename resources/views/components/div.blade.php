@@ -13,7 +13,6 @@
         $localAttrs = $attrs['attributes'] ?? $localAttrs;
         $localAttrs['class'] = $localAttrs['class'] ?? null;
 
-        $content = $attrs['content'] ?? null;
         $themes = $attrs['themes'] ?? null;
         $subComponents = $attrs['sub_components'] ?? $subComponents;
         $extra = $attrs['extra'] ?? [];

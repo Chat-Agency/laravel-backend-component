@@ -21,7 +21,6 @@
 
         $localAttrs = $attrs['attributes'] ?? $localAttrs;
 
-        $content = $attrs['content'] ?? null;
         $themes = $attrs['themes'] ?? null;
         $subComponents = $attrs['sub_components'] ?? $subComponent;
         $extra = $attrs['extra'] ?? [];
@@ -37,7 +36,7 @@
         if($method) {
             $localAttrs['method'] = strtoupper($method) == 'GET' ? 'GET' : 'POST';
 
-            $methodInput = makeBackendComponent(ComponentEnum::HIDDEN)
+            $methodInput = makeBackendComponent(ComponentEnum::HIDDEN_INPUT)
                 ->setAttribute('name', '_method' )
                 ->setAttribute('value', $method );
         }

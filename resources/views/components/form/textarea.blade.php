@@ -6,16 +6,16 @@
     $hasAttrs = !empty($attrs);
     $localAttrs = [];
     $content = null;
-    $subComponents = [];
+    //$subComponents = [];
 
-     if($hasAttrs) {
+    if($hasAttrs) {
 
         $localAttrs = $attrs['attributes'] ?? $localAttrs;
         $localAttrs['class'] = $localAttrs['class'] ?? null;
 
         $themes = $attrs['themes'] ?? null;
-        $subComponents = $attrs['sub_components'] ?? $subComponents;
-        $extra = $attrs['extra'] ?? [];
+        // $subComponents = $attrs['sub_components'] ?? $subComponents;
+        // $extra = $attrs['extra'] ?? [];
 
         $content = $attrs['content'] ?? $content;
         $localAttrs['class'] .= $themes;
@@ -27,12 +27,4 @@
 
 @endphp
 
-<a {{ $attributes->merge($localAttrs) }}>
-   
-    @foreach($subComponents as $component)
-        {{{ $component }}}
-    @endforeach
-    
-    {{ $content }} {{ $slot }}
-
-</a>
+<textarea {{ $attributes->merge($localAttrs) }} >{{ $content }}{{ $slot }}</textarea>
