@@ -5,6 +5,7 @@ namespace  ChatAgency\BackendComponents\Enums;
 enum  ComponentEnum : string
 {
     case TEMPLATE = 'template';
+    case COLLECTION = 'collection';
 
     /**
      * Block
@@ -23,6 +24,7 @@ enum  ComponentEnum : string
     case EM = 'inline.em';
     case ITALIC = 'inline.italic';
     case STRONG = 'inline.strong';
+    case SMALL = 'inline.small';
 
     /**
      * Headers
@@ -45,13 +47,13 @@ enum  ComponentEnum : string
     case FILE_INPUT = 'form.file';
     case EMAIL_INPUT = 'form.email';
     case SEARCH_INPUT = 'form.search';
-    case SELECT_INPUT = 'form.select';
     case CHECKBOX_INPUT = 'form.checkbox';
+    case HIDDEN_INPUT = 'form.hidden';
     case RADIO_INPUT = 'form.radio';
     case TEXTAREA = 'form.textarea';
+    case SELECT = 'form.select';
     case OPTGROUP = 'form.optgroup';
     case OPTION = 'form.option';
-    case HIDDEN_INPUT = 'form.hidden';
 
     /**
      * Table
