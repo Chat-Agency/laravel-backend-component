@@ -14,7 +14,7 @@
 
         $themes = $attrs['themes'] ?? null;
         $subComponents = $attrs['sub_components'] ?? $subComponents;
-        $extra = $attrs['extra'] ?? [];
+        // $extra = $attrs['extra'] ?? [];
         $localAttrs['class'] = $localAttrs['class'] ?? null;
 
         $content = $attrs['content'] ?? $content;
@@ -29,6 +29,6 @@
         {{ $subComponent }}
     @endforeach
 
-    {{ $content }} {{ $slot }}
+    {{ $content }}{{ $slot }}
 
 </tr>

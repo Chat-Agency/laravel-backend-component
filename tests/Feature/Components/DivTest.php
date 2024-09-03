@@ -67,7 +67,6 @@ class DivTest extends TestCase
         ->assertSee('First paragraph')
         ->assertSee('</p>', false)
         ->assertSee('Second paragraph');
-        
     }
 
     /** @test */

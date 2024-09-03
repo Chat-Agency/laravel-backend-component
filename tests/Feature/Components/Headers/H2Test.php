@@ -9,7 +9,7 @@ use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 class H2Test extends TestCase
 {
     /** @test */
-    public function empty_empty_header()
+    public function empty_h2_header()
     {
         $header = ComponentBuilder::make(ComponentEnum::H2);
 
@@ -21,7 +21,7 @@ class H2Test extends TestCase
     }
 
     /** @test */
-    public function header_accepts_content()
+    public function h2_header_accepts_content()
     {
         $header = ComponentBuilder::make(ComponentEnum::H2)
             ->setContent('Nice h2 tag');
@@ -33,7 +33,7 @@ class H2Test extends TestCase
     }
 
     /** @test */
-    public function header_accepts_attributes()
+    public function h2_header_accepts_attributes()
     {
         $header = ComponentBuilder::make(ComponentEnum::H2)
             ->setAttribute('id', 'nice_header');
@@ -45,7 +45,7 @@ class H2Test extends TestCase
     }
 
     /** @test */
-    public function header_accepts_sub_components()
+    public function h2_header_accepts_sub_components()
     {
         $div = ComponentBuilder::make(ComponentEnum::H2)
             ->setSubComponents([
@@ -65,7 +65,7 @@ class H2Test extends TestCase
     }
 
     /** @test */
-    public function header_accepts_theme()
+    public function h2_header_accepts_theme()
     {
         $theme = [
             'color' =>  'error',

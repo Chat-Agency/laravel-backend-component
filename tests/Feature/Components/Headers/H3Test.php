@@ -9,7 +9,7 @@ use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 class H3Test extends TestCase
 {
     /** @test */
-    public function empty_empty_header()
+    public function empty_h3_header()
     {
         $header = ComponentBuilder::make(ComponentEnum::H3);
 
@@ -21,7 +21,7 @@ class H3Test extends TestCase
     }
 
     /** @test */
-    public function header_accepts_content()
+    public function h3_header_accepts_content()
     {
         $header = ComponentBuilder::make(ComponentEnum::H3)
             ->setContent('Nice h3 tag');
@@ -33,7 +33,7 @@ class H3Test extends TestCase
     }
 
     /** @test */
-    public function header_accepts_attributes()
+    public function h3_header_accepts_attributes()
     {
         $header = ComponentBuilder::make(ComponentEnum::H3)
             ->setAttribute('id', 'nice_header');
@@ -45,7 +45,7 @@ class H3Test extends TestCase
     }
 
     /** @test */
-    public function header_accepts_sub_components()
+    public function h3_header_accepts_sub_components()
     {
         $div = ComponentBuilder::make(ComponentEnum::H3)
             ->setSubComponents([
@@ -65,7 +65,7 @@ class H3Test extends TestCase
     }
 
     /** @test */
-    public function header_accepts_theme()
+    public function h3_header_accepts_theme()
     {
         $theme = [
             'color' =>  'error',

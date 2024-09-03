@@ -10,6 +10,11 @@
         'bottom-md' => 'mb-6',
         'left-md' => 'ml-6',
         'right-md' => 'mr-6',
+
+        'top-lg' => 'mt-12',
+        'bottom-lg' => 'mb-12',
+        'left-lg' => 'ml-12',
+        'right-lg' => 'mr-12',
     ];
     
     $value = resolveTheme($styles, $margin);

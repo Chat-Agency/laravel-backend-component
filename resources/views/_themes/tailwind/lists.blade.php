@@ -3,7 +3,6 @@
     $styles = [
         'ordered' => 'list-decimal',
         'unordered' => 'list-disc',
-        'item' => 'mt-4',
         'inside' => 'list-inside',
     ];
     

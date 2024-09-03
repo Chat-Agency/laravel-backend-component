@@ -14,11 +14,15 @@
 
         $themes = $attrs['themes'] ?? null;
         $subComponents = $attrs['sub_components'] ?? $subComponents;
-        $extra = $attrs['extra'] ?? [];
+        // $extra = $attrs['extra'] ?? [];
         $content = $attrs['content'] ?? $content;
 
         $localAttrs['class'] = $localAttrs['class'] ?? null;
         $localAttrs['class'] .= $themes;
+
+        if(!$localAttrs['class'] ) {
+            unset($localAttrs['class']);
+        }
 
     }
 
@@ -30,6 +34,6 @@
         {{ $subComponent }}
     @endforeach
 
-    {{ $content }} {{ $slot }}
+    {{ $content }}{{ $slot }}
 
 </table>
