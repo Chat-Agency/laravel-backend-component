@@ -9,7 +9,6 @@
      * Dialog component
      * https://github.com/laravel/jetstream/blob/5.x/stubs/livewire/resources/views/components/modal.blade.php
      */
-
     use ChatAgency\BackendComponents\Builders\ComponentBuilder;
     use ChatAgency\BackendComponents\Enums\ComponentEnum;
     
@@ -92,13 +91,14 @@
             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         >
             <div {{ $attributes->merge($localAttrs) }}>
-                {{ $title  }}
+                
+                {{ $title }}
 
                 @foreach($subComponents as $subComponent)
                     {{ $subComponent }}
                 @endforeach
                 
-                {{ $slot }} {{ $body }} {{ $content }} 
+                {{ $slot }}{{ $content }}{{ $body }}
 
                 {{ $footer }}
 

@@ -34,6 +34,6 @@
         {{{ $component }}}
     @endforeach
 
-    {{ $content }} {{ $slot }}
+    {{ $content }}{{ $slot }}
 
 </button>

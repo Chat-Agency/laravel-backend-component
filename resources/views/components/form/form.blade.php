@@ -72,6 +72,6 @@
 
     {{ $buttonDefault }}
 
-    {{ $content }} {{ $slot }}
+    {{ $content }}{{ $slot }}
 
 </form>

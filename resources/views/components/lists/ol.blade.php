@@ -14,21 +14,25 @@
 
         $themes = $attrs['themes'] ?? null;
         $subComponents = $attrs['sub_components'] ?? $subComponents;
-        $extra = $attrs['extra'] ?? [];
+        // $extra = $attrs['extra'] ?? [];
         $localAttrs['class'] = $localAttrs['class'] ?? null;
 
         $content = $attrs['content'] ?? $content;
         $localAttrs['class'] .= $themes;
+
+        if(!$localAttrs['class'] ) {
+            unset($localAttrs['class']);
+        }
     }
 
 @endphp
 
-<ol {{ $attributes->merge($localAttrs) }} > 
+<ol {{ $attributes->merge($localAttrs) }}> 
     
     @foreach($subComponents as $subComponent)
         {{ $subComponent }}
     @endforeach
 
-    {{ $content }} {{ $slot }}
+    {{ $content }}{{ $slot }}
 
 </ol>

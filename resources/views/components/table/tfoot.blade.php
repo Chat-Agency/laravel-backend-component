@@ -23,12 +23,12 @@
 
 @endphp
 
-<tfoot {{ $attributes->merge($localAttrs) }} > 
+<tfoot {{ $attributes->merge($localAttrs) }}> 
     
     @foreach($subComponents as $subComponent)
         {{ $subComponent }}
     @endforeach
 
-    {{ $content }} {{ $slot }}
+    {{ $content }}{{ $slot }}
 
 </tfoot>

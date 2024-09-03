@@ -33,6 +33,6 @@
         {{{ $component }}}
     @endforeach
     
-    {{ $content }} {{ $slot }}
+    {{ $content }}{{ $slot }}
 
 </a>

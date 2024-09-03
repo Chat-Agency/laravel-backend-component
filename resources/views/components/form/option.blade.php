@@ -27,4 +27,4 @@
 
 @endphp
 
-<option {{ $attributes->merge($localAttrs) }}>{{ $content }} {{ $slot }}</option>
+<option {{ $attributes->merge($localAttrs) }}>{{ $content }}{{ $slot }}</option>

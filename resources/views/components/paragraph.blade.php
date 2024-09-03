@@ -27,12 +27,12 @@
 
 @endphp
 
-<p {{ $attributes->merge($localAttrs) }} > 
+<p {{ $attributes->merge($localAttrs) }}> 
     
     @foreach($subComponents as $subComponent)
         {{ $subComponent }}
     @endforeach
 
-    {{ $content }} {{ $slot }}
+    {{ $content }}{{ $slot }}
 
 </p>

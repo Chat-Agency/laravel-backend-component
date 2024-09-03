@@ -20,6 +20,10 @@
 
         $content = $attrs['content'] ?? $content;
         //$localAttrs['class'] .= $themes;
+
+        //if(!$localAttrs['class'] ) {
+        //    unset($localAttrs['class']);
+        //}
     }
 
 @endphp

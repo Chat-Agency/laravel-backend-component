@@ -23,7 +23,7 @@
 
 @endphp
 
-<tr {{ $attributes->merge($localAttrs) }} > 
+<tr {{ $attributes->merge($localAttrs) }}> 
     
     @foreach($subComponents as $subComponent)
         {{ $subComponent }}

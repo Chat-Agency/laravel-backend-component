@@ -32,5 +32,5 @@
         {{{ $component }}}
     @endforeach
     
-    {{ $content }} {{ $slot }}
+    {{ $content }}{{ $slot }}
 </label>
