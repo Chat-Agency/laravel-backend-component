@@ -9,7 +9,7 @@ use ChatAgency\BackendComponents\Enums\ComponentEnum;
 class DivTest extends TestCase
 {
     /** @test */
-    public function simple_div()
+    public function empty_div()
     {
         $div = ComponentBuilder::make(ComponentEnum::DIV);
 

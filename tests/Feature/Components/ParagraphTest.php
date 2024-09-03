@@ -9,7 +9,7 @@ use ChatAgency\BackendComponents\Enums\ComponentEnum;
 class ParagraphTest extends TestCase
 {
     /** @test */
-    public function simple_paragraph()
+    public function empty_paragraph()
     {
         $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH);
 

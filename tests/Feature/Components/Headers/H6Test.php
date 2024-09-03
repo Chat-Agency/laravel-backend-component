@@ -9,7 +9,7 @@ use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 class H6Test extends TestCase
 {
     /** @test */
-    public function simple_empty_header()
+    public function empty_empty_header()
     {
         $header = ComponentBuilder::make(ComponentEnum::H6);
 

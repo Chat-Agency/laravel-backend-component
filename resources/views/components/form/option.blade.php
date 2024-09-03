@@ -13,8 +13,8 @@
         $localAttrs = $attrs['attributes'] ?? $localAttrs;
 
         $themes = $attrs['themes'] ?? null;
-        $subComponents = $attrs['sub_components'] ?? $subComponents;
-        $extra = $attrs['extra'] ?? [];
+        // $subComponents = $attrs['sub_components'] ?? $subComponents;
+        // $extra = $attrs['extra'] ?? [];
         $localAttrs['class'] = $localAttrs['class'] ?? null;
 
         $content = $attrs['content'] ?? $content;
@@ -27,12 +27,4 @@
 
 @endphp
 
-<option {{ $attributes->merge($localAttrs) }}> 
-    
-    @foreach($subComponents as $subComponent)
-        {{ $subComponent }}
-    @endforeach
-
-    {{ $content }} {{ $slot }}
-
-</option>
+<option {{ $attributes->merge($localAttrs) }}>{{ $content }} {{ $slot }}</option>
