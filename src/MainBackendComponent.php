@@ -41,7 +41,9 @@ final class MainBackendComponent implements Arrayable, Htmlable, BackendComponen
 
     public function getAttributeBag() : AttributeBag
     {
-        return new DefaultAttributeBag(...$this->toArray()); 
+        $attrs = $this->toArray();
+        unset($attrs['name']);
+        return new DefaultAttributeBag(...$attrs); 
     }
 
     public function toArray() : array

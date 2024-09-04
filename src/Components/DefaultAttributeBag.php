@@ -8,7 +8,6 @@ use ChatAgency\BackendComponents\Contracts\BackendComponent;
 readonly class DefaultAttributeBag implements AttributeBag
 {
     public function __construct(
-        public string $name,
         public string | BackendComponent | null $content,
         public string $path,
         public array $attributes,
