@@ -1,66 +1,52 @@
 @props([
-    'attrs' => [],
+    'attrs' => null,
     'disableCToken' => false,
     'hasButton' => false,
 ])
 
-@php
-    
+<?php
+    use ChatAgency\BackendComponents\Builders\ComponentBuilder;
     use ChatAgency\BackendComponents\Enums\ComponentEnum;
-    use ChatAgency\BackendComponents\Enums\ComponentBuilder;
     
-    $hasAttrs = !empty($attrs);
-    $localAttrs = [];
+    /** @var \ChatAgency\BackendComponents\Components\DefaultAttributeBag $attrs */
+?>
+
+@php
+    $serverAttrs = [];
     $content = null;
-
-    $methodInput = null;
     $subComponents = [];
-    $buttonDefault = null;
+    $method = 'POST';
+    $methodInput = makeBackendComponent(ComponentEnum::HIDDEN_INPUT)
+        ->setAttribute('name', '_method' )
+        ->setAttribute('value', $method );
 
-    if($hasAttrs) {
+    if($attrs) {    
 
-        $localAttrs = $attrs['attributes'] ?? $localAttrs;
+        $serverAttrs = $attrs->getAttributes();
+        
+        $content = $attrs->content;
+        $subComponents = $attrs->subComponents;
+        $extra = $attrs->extra;
+        $slots = $attrs->slots;
 
-        $themes = $attrs['themes'] ?? null;
-        $subComponents = $attrs['sub_components'] ?? $subComponent;
-        $extra = $attrs['extra'] ?? [];
-        $localAttrs['class'] = $localAttrs['class'] ?? null;
-
-        $content = $attrs['content'] ?? $content;
-        $localAttrs['class'] .= $themes;
-
-        $method = $localAttrs['method'] ?? null;
-
-        $disableCToken = $extra['disable_token'] ?? $disableCToken;
-
+        $method = $serverAttrs['method'] ?? null ? strtoupper($serverAttrs['method']) : $method;
+        
         if($method) {
-            $localAttrs['method'] = strtoupper($method) == 'GET' ? 'GET' : 'POST';
+            $serverAttrs['method'] = strtoupper($method) == 'GET' ? 'GET' : $method;
 
             $methodInput = makeBackendComponent(ComponentEnum::HIDDEN_INPUT)
                 ->setAttribute('name', '_method' )
                 ->setAttribute('value', $method );
         }
 
-        /**
-         * Default button
-         */
-        $hasButton = $extra['has_button'] ?? $hasButton;
+        $disableCToken = $extra['disable_token'] ?? $disableCToken;
 
-        if(!$localAttrs['class'] ) {
-            unset($localAttrs['class']);
-        }
     }
 
-    if($hasButton) {
-        $buttonDefault = makeBackendComponent(ComponentEnum::BUTTON)
-            ->setTheme('action', 'default')
-            ->setTheme('padding', 'button')
-            ->setContent(__('Send'));
-    }
 
 @endphp
 
-<form {{ $attributes->merge($localAttrs) }}>   
+<form {{ $attributes->merge($serverAttrs) }}>   
     
     {{ $methodInput }}
 
@@ -69,8 +55,6 @@
     @foreach($subComponents as $component)
         {{{ $component }}}
     @endforeach
-
-    {{ $buttonDefault }}
 
     {{ $content }}{{ $slot }}
 

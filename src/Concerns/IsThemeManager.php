@@ -21,7 +21,7 @@ trait IsThemeManager
 
     public function getThemePath(): string
     {
-        return ($this->useLocal ? null : BackendComponentNamespace())
+        return ($this->useLocal ? null : backendComponentNamespace())
                 .$this->defaultPath
                 .'.';
     }

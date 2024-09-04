@@ -1,29 +1,28 @@
 @props([
-    'attrs' => [],
+    'attrs' => null,
 ])
 
+<?php
+    /** @var \ChatAgency\BackendComponents\Components\DefaultAttributeBag $attrs */
+?>
+
 @php
-    $hasAttrs = !empty($attrs);
-    $localAttrs = [];
+    $serverAttrs = [];
     $content = null;
     $subComponents = [];
 
-    if($hasAttrs) {
+    if($attrs) {
 
-        $localAttrs = $attrs['attributes'] ?? $localAttrs;
+        $serverAttrs = $attrs->getAttributes();
 
-        $themes = $attrs['themes'] ?? null;
-        $subComponents = $attrs['sub_components'] ?? $subComponents;
-        // $extra = $attrs['extra'] ?? [];
-        $localAttrs['class'] = $localAttrs['class'] ?? null;
-
-        $content = $attrs['content'] ?? $content;
-        $localAttrs['class'] .= $themes;
+        $content = $attrs->content;
+        $subComponents = $attrs->subComponents;
+        
     }
 
 @endphp
 
-<thead {{ $attributes->merge($localAttrs) }}> 
+<thead {{ $attributes->merge($serverAttrs) }}> 
     
     @foreach($subComponents as $subComponent)
         {{ $subComponent }}

@@ -39,7 +39,7 @@ trait IsBackendComponent
     {
         return $this->useLocal 
             ? null : 
-            ($this->namespace ?? \BackendComponentNamespace());
+            ($this->namespace ?? \backendComponentNamespace());
     }
 
     public function getPath() : string
@@ -106,7 +106,7 @@ trait IsBackendComponent
 
     public function toHtml()
     {
-        return view(\BackendComponentNamespace().'_utilities.resolve-component')
+        return view(\backendComponentNamespace().'_utilities.resolve-component')
             ->with('component', $this);
 
     }

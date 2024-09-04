@@ -97,14 +97,12 @@ class FormTest extends TestCase
     public function form_accepts_container_extra_params()
     {
         $form = ComponentBuilder::make(ComponentEnum::FORM)
-            ->setExtra('has_button', true);
+            ->setExtra('disable_token', true);
 
         $this->blade('{{ $form }}', [
             'form' => $form,
         ])
-        ->assertSee('<button', false)
-        ->assertSee('</button>', false)
-        ;
+        ->assertDontSee('<input type="hidden" name="_token"', false);
         
     }
 }

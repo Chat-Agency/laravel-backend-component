@@ -17,7 +17,7 @@
 @else
     @php
         $path = $component->getComponentPath();
-        $componentArray =  $component->toArray();
+        $componentArray =  $component->getAttributeBag();
     @endphp
     <x-dynamic-component :component="$path" :attrs="$componentArray" />
 @endif 

@@ -8,7 +8,7 @@ trait HasContent
 {
     protected string | BackendComponent | null $content = null;
         
-    public function getContent() : string| BackendComponent |null
+    public function getContent() : string| BackendComponent | null
     {
         return $this->content;
     }

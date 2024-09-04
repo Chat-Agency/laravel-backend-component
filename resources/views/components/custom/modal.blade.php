@@ -1,7 +1,12 @@
 @props([
-    'attrs' => [],
+    'attrs' => null,
     'container' => [],
 ])
+
+<?php
+    /** @var \ChatAgency\BackendComponents\Components\DefaultAttributeBag $attrs */
+?>
+
 @php
 
     /** 
@@ -12,8 +17,7 @@
     use ChatAgency\BackendComponents\Builders\ComponentBuilder;
     use ChatAgency\BackendComponents\Enums\ComponentEnum;
     
-    $hasAttrs = !empty($attrs);
-    $localAttrs = [
+    $serverAttrs = [
         'x-show' => 'showModal',
     ];
     $content = null;
@@ -29,19 +33,15 @@
     $overlay = $overlay ?? ComponentBuilder::make(ComponentEnum::DIV)
         ->setTheme('modal', 'overlay');
 
-    if($hasAttrs) {
+    if($attrs) {
 
-        $localAttrs = $attrs['attributes'] ?? $localAttrs;
-        $localAttrs['class'] = $localAttrs['class'] ?? null;
+        $serverAttrs = array_merge($serverAttrs, $attrs->getAttributes());
 
-        $themes = $attrs['themes'] ?? null;
-        $subComponents = $attrs['sub_components'] ?? $subComponents;
-        $extra = $attrs['extra'] ?? [];
-        $slots = $attrs['slots'] ?? [];
+        $content = $attrs->content;
+        $subComponents = $attrs->subComponents;
+        $extra = $attrs->extra;
+        $slots = $attrs->slots;
 
-        $content = $attrs['content'] ?? $content;
-        $localAttrs['class'] .= $themes;
-        
         $title = $slots['title'] ?? $title;
         $body = $slots['body'] ?? $body;
         $footer = $slots['footer'] ?? $footer;
@@ -51,9 +51,6 @@
         $container = $extra['container'] ?? $container;
         $containerTheme = $container['theme'] ?? $containerTheme;
 
-        if(!$localAttrs['class'] ) {
-            unset($localAttrs['class']);
-        }
     }
     
     
@@ -90,7 +87,7 @@
             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         >
-            <div {{ $attributes->merge($localAttrs) }}>
+            <div {{ $attributes->merge($serverAttrs) }}>
                 
                 {{ $title }}
 

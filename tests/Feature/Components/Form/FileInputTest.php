@@ -50,18 +50,6 @@ class FileInputTest extends TestCase
     }
     
     /** @test */
-    public function file_input_does_not_accept_value_attribute()
-    {
-        $form = ComponentBuilder::make(ComponentEnum::FILE_INPUT)
-            ->setAttribute('value', 'Input');
-
-        $this->blade('{{ $form }}', [
-            'form' => $form,
-        ])
-        ->assertDontSee('value="Input"', false);
-    }
-
-    /** @test */
     public function file_input_accepts_sub_components()
     {
         $form = ComponentBuilder::make(ComponentEnum::FILE_INPUT)

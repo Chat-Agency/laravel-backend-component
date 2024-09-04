@@ -2,6 +2,8 @@
 
 namespace ChatAgency\BackendComponents\Contracts;
 
+use ChatAgency\BackendComponents\Contracts\AttributeBag;
+
 interface BackendComponent {
     
     public function useLocal($local = true) : static;
@@ -18,6 +20,8 @@ interface BackendComponent {
 
     public function getAttribute(string $name) : string | null;
 
+    public function getAttributeBag() : AttributeBag;
+
     public function setNamespace(string $namespace) : static;
 
     public function setPath(string $path) : static;
@@ -27,7 +31,7 @@ interface BackendComponent {
     public function setAttribute(string $name, $content) : static;
 
     public function setAttributes(array $attributes) : static;
-
+    
     public function toArray() : array;
 
     public function __toString() : string;
