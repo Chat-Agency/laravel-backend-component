@@ -4,7 +4,7 @@ namespace ChatAgency\BackendComponents\Themes;
 
 use ChatAgency\BackendComponents\Contracts\ThemeBag;
 
-class DefaultThemeBag implements ThemeBag
+final class DefaultThemeBag implements ThemeBag
 {
     public function __construct(
         protected array $styles
