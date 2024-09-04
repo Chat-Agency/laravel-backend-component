@@ -3,6 +3,8 @@
 namespace ChatAgency\BackendComponents\Concerns;
 
 use BackedEnum;
+use ChatAgency\BackendComponents\Contracts\AttributeBag;
+use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
 
 trait IsBackendComponent
 {
@@ -60,6 +62,13 @@ trait IsBackendComponent
     public function getAttribute(string $name) : string | null
     {
         return $this->getAttributes()[$name] ?? null;
+    }
+
+    public function getAttributeBag() : AttributeBag
+    {
+        $attrs = $this->toArray();
+        unset($attrs['name']);
+        return new DefaultAttributeBag(...$attrs); 
     }
 
     public function setNamespace(string $namespace) : static
