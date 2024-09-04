@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Components\Inline;
 
-use Tests\TestCase;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class EmTest extends TestCase
 {
@@ -16,8 +16,8 @@ class EmTest extends TestCase
         $this->blade('{{ $em }}', [
             'em' => $em,
         ])
-        ->assertSee('<em', false)
-        ->assertSee('</em>', false);
+            ->assertSee('<em', false)
+            ->assertSee('</em>', false);
     }
 
     /** @test */
@@ -29,7 +29,7 @@ class EmTest extends TestCase
         $this->blade('{{ $em }}', [
             'em' => $em,
         ])
-        ->assertSee('Nice em tag');
+            ->assertSee('Nice em tag');
     }
 
     /** @test */
@@ -41,7 +41,7 @@ class EmTest extends TestCase
         $this->blade('{{ $em }}', [
             'em' => $em,
         ])
-        ->assertSee('id="nice_em"', false);
+            ->assertSee('id="nice_em"', false);
     }
 
     /** @test */
@@ -55,15 +55,15 @@ class EmTest extends TestCase
         $this->blade('{{ $em }}', [
             'em' => $em,
         ])
-        ->assertDontSee('<span', false)
-        ->assertDontSee('</span>', false);
+            ->assertDontSee('<span', false)
+            ->assertDontSee('</span>', false);
     }
 
     /** @test */
     public function em_accepts_theme()
     {
         $theme = [
-            'display' =>  'inline-block',
+            'display' => 'inline-block',
         ];
 
         $em = ComponentBuilder::make(ComponentEnum::EM)
@@ -72,7 +72,7 @@ class EmTest extends TestCase
         $this->blade('{{ $em }}', [
             'em' => $em,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }

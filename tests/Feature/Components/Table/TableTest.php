@@ -2,9 +2,9 @@
 
 namespace Test\Feature\Components\Table;
 
-use Tests\TestCase;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class TableTest extends TestCase
 {
@@ -16,8 +16,8 @@ class TableTest extends TestCase
         $this->blade('{{ $table }}', [
             'table' => $table,
         ])
-        ->assertSee('<table', false)
-        ->assertSee('</table>', false);
+            ->assertSee('<table', false)
+            ->assertSee('</table>', false);
     }
 
     /** @test */
@@ -31,8 +31,8 @@ class TableTest extends TestCase
         $this->blade('{{ $table }}', [
             'table' => $table,
         ])
-        ->assertSee('<tbody', false)
-        ->assertSee('</tbody>', false);
+            ->assertSee('<tbody', false)
+            ->assertSee('</tbody>', false);
     }
 
     /** @test */
@@ -44,7 +44,7 @@ class TableTest extends TestCase
         $this->blade('{{ $table }}', [
             'table' => $table,
         ])
-        ->assertSee('id="table_id"', false);
+            ->assertSee('id="table_id"', false);
     }
 
     /** @test */
@@ -54,7 +54,7 @@ class TableTest extends TestCase
             ->setSubComponents([
                 ComponentBuilder::make(ComponentEnum::CAPTION)
                     ->setContent('Beautiful Table'),
-                
+
                 // head
                 ComponentBuilder::make(ComponentEnum::THEAD)
                     ->setSubComponents([
@@ -82,39 +82,39 @@ class TableTest extends TestCase
         $this->blade('{{ $table }}', [
             'table' => $table,
         ])
-        ->assertSee('<table', false)
-        ->assertSee('<caption', false)
-        ->assertSee('Beautiful Table')
-        ->assertSee('</caption>', false)
-        ->assertSee('<thead', false)
-        ->assertSee('<tr', false)
-        ->assertSee('<th', false)
-        ->assertSee('First head')
-        ->assertSee('</th>', false)
-        ->assertSee('</tr>', false)
-        ->assertSee('</thead>', false)
-        ->assertSee('<tbody', false)
-        ->assertSee('<td', false)
-        ->assertSee('First head')
-        ->assertSee('</td>', false)
-        ->assertSee('</tbody>', false)
-        ->assertSee('</table>', false);
+            ->assertSee('<table', false)
+            ->assertSee('<caption', false)
+            ->assertSee('Beautiful Table')
+            ->assertSee('</caption>', false)
+            ->assertSee('<thead', false)
+            ->assertSee('<tr', false)
+            ->assertSee('<th', false)
+            ->assertSee('First head')
+            ->assertSee('</th>', false)
+            ->assertSee('</tr>', false)
+            ->assertSee('</thead>', false)
+            ->assertSee('<tbody', false)
+            ->assertSee('<td', false)
+            ->assertSee('First head')
+            ->assertSee('</td>', false)
+            ->assertSee('</tbody>', false)
+            ->assertSee('</table>', false);
     }
 
     /** @test */
     public function table_accepts_theme()
     {
         $theme = [
-            'size' =>  'w-full',
+            'size' => 'w-full',
         ];
-        
+
         $table = ComponentBuilder::make(ComponentEnum::TABLE)
             ->setThemes($theme);
-        
+
         $this->blade('{{ $table }}', [
             'table' => $table,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }

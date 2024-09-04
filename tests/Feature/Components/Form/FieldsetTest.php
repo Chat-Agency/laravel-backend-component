@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Components\Form;
 
-use Tests\TestCase;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class FieldsetTest extends TestCase
 {
@@ -16,7 +16,7 @@ class FieldsetTest extends TestCase
         $this->blade('{{ $fieldset }}', [
             'fieldset' => $fieldset,
         ])
-        ->assertSee('<fieldset', false);
+            ->assertSee('<fieldset', false);
     }
 
     /** @test */
@@ -31,12 +31,11 @@ class FieldsetTest extends TestCase
         $this->blade('{{ $fieldset }}', [
             'fieldset' => $fieldset,
         ])
-        ->assertSee('<fieldset', false)
-        ->assertSee('Span content')
-        ->assertSee('</fieldset>', false);
+            ->assertSee('<fieldset', false)
+            ->assertSee('Span content')
+            ->assertSee('</fieldset>', false);
     }
 
-    
     /** @test */
     public function fieldset_accepts_attributes()
     {
@@ -46,7 +45,7 @@ class FieldsetTest extends TestCase
         $this->blade('{{ $fieldset }}', [
             'fieldset' => $fieldset,
         ])
-        ->assertSee('for="fieldset_for"', false);
+            ->assertSee('for="fieldset_for"', false);
     }
 
     /** @test */
@@ -63,29 +62,28 @@ class FieldsetTest extends TestCase
         $this->blade('{{ $fieldset }}', [
             'fieldset' => $fieldset,
         ])
-        ->assertSee('<span', false)
-        ->assertSee('First span')
-        ->assertSee('</span>', false)
-        ->assertSee('Second span');
-        
+            ->assertSee('<span', false)
+            ->assertSee('First span')
+            ->assertSee('</span>', false)
+            ->assertSee('Second span');
+
     }
 
     /** @test */
     public function fieldset_accepts_theme()
     {
         $theme = [
-            'color' =>  'default',
+            'color' => 'default',
         ];
-        
+
         $fieldset = ComponentBuilder::make(ComponentEnum::FIELDSET)
             ->setThemes($theme);
-        
+
         $this->blade('{{ $fieldset }}', [
             'fieldset' => $fieldset,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }
-
 }

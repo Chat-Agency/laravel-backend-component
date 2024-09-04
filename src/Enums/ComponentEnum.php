@@ -1,8 +1,8 @@
 <?php
 
-namespace  ChatAgency\BackendComponents\Enums;
+namespace ChatAgency\BackendComponents\Enums;
 
-enum  ComponentEnum : string
+enum ComponentEnum: string
 {
     case TEMPLATE = 'template';
     case COLLECTION = 'collection';
@@ -12,7 +12,7 @@ enum  ComponentEnum : string
      */
     case DIV = 'div';
     case PARAGRAPH = 'paragraph';
-    
+
     /**
      * inline
      */

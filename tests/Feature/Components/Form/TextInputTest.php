@@ -2,9 +2,9 @@
 
 namespace Test\Feature\Components\Form;
 
-use Tests\TestCase;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class TextInputTest extends TestCase
 {
@@ -16,8 +16,8 @@ class TextInputTest extends TestCase
         $this->blade('{{ $input }}', [
             'input' => $input,
         ])
-        ->assertSee('<input type="text"', false)
-        ->assertSee('/>', false);
+            ->assertSee('<input type="text"', false)
+            ->assertSee('/>', false);
     }
 
     /** @test */
@@ -32,12 +32,11 @@ class TextInputTest extends TestCase
         $this->blade('{{ $input }}', [
             'input' => $input,
         ])
-        ->assertDontSee('<span', false)
-        ->assertDontSee('This is a span')
-        ->assertDontSee('</span>', false);
+            ->assertDontSee('<span', false)
+            ->assertDontSee('This is a span')
+            ->assertDontSee('</span>', false);
     }
 
-    
     /** @test */
     public function text_input_accepts_attributes()
     {
@@ -48,8 +47,8 @@ class TextInputTest extends TestCase
         $this->blade('{{ $form }}', [
             'form' => $form,
         ])
-        ->assertSee('id="input_id"', false)
-        ->assertSee('value="Input"', false);
+            ->assertSee('id="input_id"', false)
+            ->assertSee('value="Input"', false);
     }
 
     /** @test */
@@ -64,28 +63,27 @@ class TextInputTest extends TestCase
         $this->blade('{{ $form }}', [
             'form' => $form,
         ])
-        ->assertDontSee('<span', false)
-        ->assertDontSee('Nice Span')
-        ->assertDontSee('</span>', false);
-        
+            ->assertDontSee('<span', false)
+            ->assertDontSee('Nice Span')
+            ->assertDontSee('</span>', false);
+
     }
 
     /** @test */
     public function text_input_accepts_theme()
     {
         $theme = [
-            'display' =>  'inline-block',
+            'display' => 'inline-block',
         ];
-        
+
         $input = ComponentBuilder::make(ComponentEnum::TEXT_INPUT)
             ->setThemes($theme);
-        
+
         $this->blade('{{ $input }}', [
             'input' => $input,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }
-
 }

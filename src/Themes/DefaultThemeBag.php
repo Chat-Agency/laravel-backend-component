@@ -12,7 +12,7 @@ final class DefaultThemeBag implements ThemeBag
 
     public static function make(array $styles): self
     {
-        return new static($styles);
+        return new self($styles);
     }
 
     public function getStyles(): array

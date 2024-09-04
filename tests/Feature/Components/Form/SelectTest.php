@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Components\Form;
 
-use Tests\TestCase;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class SelectTest extends TestCase
 {
@@ -16,8 +16,8 @@ class SelectTest extends TestCase
         $this->blade('{{ $select }}', [
             'select' => $select,
         ])
-        ->assertSee('<select', false)
-        ->assertSee('</select>', false);
+            ->assertSee('<select', false)
+            ->assertSee('</select>', false);
     }
 
     /** @test */
@@ -32,9 +32,9 @@ class SelectTest extends TestCase
         $this->blade('{{ $select }}', [
             'select' => $select,
         ])
-        ->assertSee('<option', false)
-        ->assertSee('Option content')
-        ->assertSee('</option>', false);
+            ->assertSee('<option', false)
+            ->assertSee('Option content')
+            ->assertSee('</option>', false);
     }
 
     /** @test */
@@ -46,7 +46,7 @@ class SelectTest extends TestCase
         $this->blade('{{ $select }}', [
             'select' => $select,
         ])
-        ->assertSee('id="select_id"', false);
+            ->assertSee('id="select_id"', false);
     }
 
     /** @test */
@@ -66,29 +66,29 @@ class SelectTest extends TestCase
         $this->blade('{{ $select }}', [
             'select' => $select,
         ])
-        ->assertSee('<optgrou', false)
-        ->assertSee('<option', false)
-        ->assertSee('First option')
-        ->assertSee('</option>', false)
-        ->assertSee('</optgroup>', false)
-        ->assertSee('Second option');
-        
+            ->assertSee('<optgrou', false)
+            ->assertSee('<option', false)
+            ->assertSee('First option')
+            ->assertSee('</option>', false)
+            ->assertSee('</optgroup>', false)
+            ->assertSee('Second option');
+
     }
 
     /** @test */
     public function select_accepts_theme()
     {
         $theme = [
-            'display' =>  'inline-block',
+            'display' => 'inline-block',
         ];
-        
+
         $select = ComponentBuilder::make(ComponentEnum::SELECT)
             ->setThemes($theme);
-        
+
         $this->blade('{{ $select }}', [
             'select' => $select,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }

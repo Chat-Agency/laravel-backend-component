@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Components\Inline;
 
-use Tests\TestCase;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class ImgTest extends TestCase
 {
@@ -16,8 +16,8 @@ class ImgTest extends TestCase
         $this->blade('{{ $img }}', [
             'img' => $img,
         ])
-        ->assertSee('<img', false)
-        ->assertSee('/>', false);
+            ->assertSee('<img', false)
+            ->assertSee('/>', false);
     }
 
     /** @test */
@@ -29,7 +29,7 @@ class ImgTest extends TestCase
         $this->blade('{{ $img }}', [
             'img' => $img,
         ])
-        ->assertDontSee('Nice image');
+            ->assertDontSee('Nice image');
     }
 
     /** @test */
@@ -42,10 +42,10 @@ class ImgTest extends TestCase
         $this->blade('{{ $img }}', [
             'img' => $img,
         ])
-        ->assertSee('<img', false)
-        ->assertSee('src="'.asset('path/to/image.jpg').'"', false)
-        ->assertSee('alt="Nice image"', false)
-        ->assertSee('/>', false);
+            ->assertSee('<img', false)
+            ->assertSee('src="'.asset('path/to/image.jpg').'"', false)
+            ->assertSee('alt="Nice image"', false)
+            ->assertSee('/>', false);
     }
 
     /** @test */
@@ -59,17 +59,17 @@ class ImgTest extends TestCase
         $this->blade('{{ $image }}', [
             'image' => $image,
         ])
-        ->assertDontSee('<span', false)
-        ->assertDontSee('</span>', false);
+            ->assertDontSee('<span', false)
+            ->assertDontSee('</span>', false);
     }
 
     /** @test */
     public function image_accepts_theme()
     {
         $theme = [
-            'display' =>  'block',
+            'display' => 'block',
         ];
-        
+
         $img = ComponentBuilder::make(ComponentEnum::IMG)
             ->setAttribute('src', asset('path/to/image.jpg'))
             ->setAttribute('alt', 'Nice image')
@@ -78,9 +78,9 @@ class ImgTest extends TestCase
         $this->blade('{{ $img }}', [
             'img' => $img,
         ])
-        ->assertSee('<img', false)
-        ->assertSee('class="'.bladeThemes($theme), false)
-        ->assertSee('/>', false);
+            ->assertSee('<img', false)
+            ->assertSee('class="'.bladeThemes($theme), false)
+            ->assertSee('/>', false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }

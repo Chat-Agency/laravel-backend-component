@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Components\Inline;
 
-use Tests\TestCase;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class ItalicTest extends TestCase
 {
@@ -16,8 +16,8 @@ class ItalicTest extends TestCase
         $this->blade('{{ $italic }}', [
             'italic' => $italic,
         ])
-        ->assertSee('<i', false)
-        ->assertSee('</i>', false);
+            ->assertSee('<i', false)
+            ->assertSee('</i>', false);
     }
 
     /** @test */
@@ -29,7 +29,7 @@ class ItalicTest extends TestCase
         $this->blade('{{ $italic }}', [
             'italic' => $italic,
         ])
-        ->assertSee('Nice i tag');
+            ->assertSee('Nice i tag');
     }
 
     /** @test */
@@ -41,7 +41,7 @@ class ItalicTest extends TestCase
         $this->blade('{{ $italic }}', [
             'italic' => $italic,
         ])
-        ->assertSee('id="nice_italic"', false);
+            ->assertSee('id="nice_italic"', false);
     }
 
     /** @test */
@@ -55,14 +55,14 @@ class ItalicTest extends TestCase
         $this->blade('{{ $italic }}', [
             'italic' => $italic,
         ])
-        ->assertDontSee('<span', false);
+            ->assertDontSee('<span', false);
     }
 
     /** @test */
     public function italic_accepts_theme()
     {
         $theme = [
-            'display' =>  'inline-block',
+            'display' => 'inline-block',
         ];
 
         $italic = ComponentBuilder::make(ComponentEnum::ITALIC)
@@ -71,7 +71,7 @@ class ItalicTest extends TestCase
         $this->blade('{{ $italic }}', [
             'italic' => $italic,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }

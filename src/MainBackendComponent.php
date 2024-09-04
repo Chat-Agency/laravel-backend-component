@@ -3,41 +3,41 @@
 namespace ChatAgency\BackendComponents;
 
 use BackedEnum;
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Contracts\Support\Arrayable;
-use ChatAgency\BackendComponents\Concerns\HasSlots;
 use ChatAgency\BackendComponents\Concerns\HasContent;
-use ChatAgency\BackendComponents\Concerns\IsThemeable ;
-use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use ChatAgency\BackendComponents\Concerns\HasExtraParams;
-use ChatAgency\BackendComponents\Contracts\SlotsComponent;
-use ChatAgency\BackendComponents\Contracts\ThemeComponent;
+use ChatAgency\BackendComponents\Concerns\HasSlots;
 use ChatAgency\BackendComponents\Concerns\HasSubComponents;
+use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
+use ChatAgency\BackendComponents\Concerns\IsLivewireComponent;
+use ChatAgency\BackendComponents\Concerns\IsThemeable;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\ContentComponent;
-use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
-use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
-use ChatAgency\BackendComponents\Contracts\LivewireComponent;
-use ChatAgency\BackendComponents\Concerns\IsLivewireComponent;
 use ChatAgency\BackendComponents\Contracts\ExtraParamsComponent;
+use ChatAgency\BackendComponents\Contracts\LivewireComponent;
+use ChatAgency\BackendComponents\Contracts\SlotsComponent;
 use ChatAgency\BackendComponents\Contracts\SubComponentsComponent;
+use ChatAgency\BackendComponents\Contracts\ThemeComponent;
+use ChatAgency\BackendComponents\Contracts\ThemeManager;
+use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Htmlable;
 
-final class MainBackendComponent implements Arrayable, Htmlable, BackendComponent, ContentComponent, SubComponentsComponent, ThemeComponent, SlotsComponent, LivewireComponent, ExtraParamsComponent
+final class MainBackendComponent implements Arrayable, BackendComponent, ContentComponent, ExtraParamsComponent, Htmlable, LivewireComponent, SlotsComponent, SubComponentsComponent, ThemeComponent
 {
-    use IsBackendComponent,
-        HasContent,
-        HasSubComponents,
-        IsThemeable ,
+    use HasContent,
+        HasExtraParams,
         HasSlots,
+        HasSubComponents ,
+        IsBackendComponent,
         IsLivewireComponent,
-        HasExtraParams;
-    
+        IsThemeable;
+
     public function __construct(
-        protected string | BackedEnum $name,
+        protected string|BackedEnum $name,
         protected ThemeManager $themeManager = new DefaultThemeManager
     ) {}
 
-    public function toArray() : array
+    public function toArray(): array
     {
         return [
             'name' => $this->getName(),
@@ -53,5 +53,4 @@ final class MainBackendComponent implements Arrayable, Htmlable, BackendComponen
             'livewireParams' => $this->getLivewireParams(),
         ];
     }
-
 }

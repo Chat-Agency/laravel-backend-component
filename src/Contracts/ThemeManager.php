@@ -2,10 +2,11 @@
 
 namespace ChatAgency\BackendComponents\Contracts;
 
-interface ThemeManager {
+interface ThemeManager
+{
     public static function make(): self;
 
-    public function useLocal($local = true) : self;
+    public function useLocal($local = true): self;
 
     public function getThemePath(): string;
 

@@ -10,7 +10,7 @@ class BackendComponentsServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $namespace = self::namespace();
-        
+
         /*
          * This class is a Package Service Provider
          *
@@ -23,7 +23,7 @@ class BackendComponentsServiceProvider extends PackageServiceProvider
         include_once 'helpers.php';
     }
 
-    public  static function namespace() : string
+    public static function namespace(): string
     {
         return 'backend-component';
     }

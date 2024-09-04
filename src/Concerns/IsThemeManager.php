@@ -2,17 +2,17 @@
 
 namespace ChatAgency\BackendComponents\Concerns;
 
-use Illuminate\Support\Str;
 use ChatAgency\BackendComponents\Contracts\ThemeBag;
+use Illuminate\Support\Str;
 
 trait IsThemeManager
 {
-    public static function make() : static
+    public static function make(): static
     {
-        return new static();
+        return new static;
     }
 
-    public function useLocal($local = true) : static
+    public function useLocal($local = true): static
     {
         $this->useLocal = $local;
 

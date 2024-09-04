@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Components;
 
-use Tests\TestCase;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class DivTest extends TestCase
 {
@@ -16,8 +16,8 @@ class DivTest extends TestCase
         $this->blade('{{ $div }}', [
             'div' => $div,
         ])
-        ->assertSee('<div', false)
-        ->assertSee('</div>', false);
+            ->assertSee('<div', false)
+            ->assertSee('</div>', false);
     }
 
     /** @test */
@@ -32,9 +32,9 @@ class DivTest extends TestCase
         $this->blade('{{ $div }}', [
             'div' => $div,
         ])
-        ->assertSee('<p', false)
-        ->assertSee('Span content')
-        ->assertSee('</p>', false);
+            ->assertSee('<p', false)
+            ->assertSee('Span content')
+            ->assertSee('</p>', false);
     }
 
     /** @test */
@@ -46,7 +46,7 @@ class DivTest extends TestCase
         $this->blade('{{ $div }}', [
             'div' => $div,
         ])
-        ->assertSee('id="div_id"', false);
+            ->assertSee('id="div_id"', false);
     }
 
     /** @test */
@@ -63,26 +63,26 @@ class DivTest extends TestCase
         $this->blade('{{ $div }}', [
             'div' => $div,
         ])
-        ->assertSee('<p', false)
-        ->assertSee('First paragraph')
-        ->assertSee('</p>', false)
-        ->assertSee('Second paragraph');
+            ->assertSee('<p', false)
+            ->assertSee('First paragraph')
+            ->assertSee('</p>', false)
+            ->assertSee('Second paragraph');
     }
 
     /** @test */
     public function div_accepts_theme()
     {
         $theme = [
-            'color' =>  'success',
+            'color' => 'success',
         ];
-        
+
         $div = ComponentBuilder::make(ComponentEnum::DIV)
             ->setThemes($theme);
-        
+
         $this->blade('{{ $div }}', [
             'div' => $div,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }
