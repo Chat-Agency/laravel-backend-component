@@ -7,7 +7,7 @@ use ChatAgency\BackendComponents\Contracts\ThemeBag;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use Illuminate\Support\Str;
 
-class DefaultThemeManager implements ThemeManager
+final class DefaultThemeManager implements ThemeManager
 {
     use IsThemeManager;
 
