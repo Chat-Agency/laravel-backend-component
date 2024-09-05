@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
@@ -30,5 +30,17 @@ class SimpleComponentTest extends TestCase
         $component = ComponentBuilder::make(ComponentEnum::DIV);
 
         $this->assertEquals('div', $component->getName());
+    }
+
+    /** @test */
+    public function a_local_component_component_can_be_created()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::DIV);
+
+        $this->assertStringStartsWith(backendComponentNamespace(), $component->getComponentPath());
+
+        $component->useLocal();
+
+        $this->assertStringStartsNotWith(backendComponentNamespace(), $component->getComponentPath());
     }
 }
