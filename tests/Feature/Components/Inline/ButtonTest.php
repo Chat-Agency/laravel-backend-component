@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Inline;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class ButtonTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_button()
     {
         $button = ComponentBuilder::make(ComponentEnum::BUTTON);
@@ -20,7 +21,7 @@ class ButtonTest extends TestCase
             ->assertSee('</button>', false);
     }
 
-    /** @test */
+    #[Test]
     public function button_accepts_content()
     {
         $button = ComponentBuilder::make(ComponentEnum::BUTTON)
@@ -39,7 +40,7 @@ class ButtonTest extends TestCase
             ->assertSee('</button>', false);
     }
 
-    /** @test */
+    #[Test]
     public function button_accepts_attributes()
     {
         $button = ComponentBuilder::make(ComponentEnum::BUTTON)
@@ -54,7 +55,7 @@ class ButtonTest extends TestCase
             ->assertSee('</button>', false);
     }
 
-    /** @test */
+    #[Test]
     public function button_accepts_sub_components()
     {
         $button = ComponentBuilder::make(ComponentEnum::BUTTON)
@@ -75,7 +76,7 @@ class ButtonTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function button_accepts_theme()
     {
         $theme = [

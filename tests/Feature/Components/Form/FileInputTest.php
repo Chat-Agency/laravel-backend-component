@@ -5,10 +5,11 @@ namespace Test\Feature\Components\Form;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class FileInputTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_file_input()
     {
         $input = ComponentBuilder::make(ComponentEnum::FILE_INPUT);
@@ -20,7 +21,7 @@ class FileInputTest extends TestCase
             ->assertSee('/>', false);
     }
 
-    /** @test */
+    #[Test]
     public function file_input_does_not_accepts_content()
     {
         $input = ComponentBuilder::make(ComponentEnum::FILE_INPUT)
@@ -37,7 +38,7 @@ class FileInputTest extends TestCase
             ->assertDontSee('</span>', false);
     }
 
-    /** @test */
+    #[Test]
     public function file_input_accepts_attributes()
     {
         $form = ComponentBuilder::make(ComponentEnum::FILE_INPUT)
@@ -49,7 +50,7 @@ class FileInputTest extends TestCase
             ->assertSee('id="input_id"', false);
     }
 
-    /** @test */
+    #[Test]
     public function file_input_accepts_sub_components()
     {
         $form = ComponentBuilder::make(ComponentEnum::FILE_INPUT)
@@ -67,7 +68,7 @@ class FileInputTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function file_input_accepts_theme()
     {
         $theme = [

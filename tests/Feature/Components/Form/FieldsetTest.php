@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Form;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class FieldsetTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_fieldset()
     {
         $fieldset = ComponentBuilder::make(ComponentEnum::FIELDSET);
@@ -19,7 +20,7 @@ class FieldsetTest extends TestCase
             ->assertSee('<fieldset', false);
     }
 
-    /** @test */
+    #[Test]
     public function fieldset_accepts_content()
     {
         $fieldset = ComponentBuilder::make(ComponentEnum::FIELDSET)
@@ -36,7 +37,7 @@ class FieldsetTest extends TestCase
             ->assertSee('</fieldset>', false);
     }
 
-    /** @test */
+    #[Test]
     public function fieldset_accepts_attributes()
     {
         $fieldset = ComponentBuilder::make(ComponentEnum::FIELDSET)
@@ -48,7 +49,7 @@ class FieldsetTest extends TestCase
             ->assertSee('for="fieldset_for"', false);
     }
 
-    /** @test */
+    #[Test]
     public function fieldset_accepts_sub_components()
     {
         $fieldset = ComponentBuilder::make(ComponentEnum::FIELDSET)
@@ -69,7 +70,7 @@ class FieldsetTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function fieldset_accepts_theme()
     {
         $theme = [

@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Lists;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class OrderedListTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function empty_ordered_list()
     {
         $orderedList = ComponentBuilder::make(ComponentEnum::OL);
@@ -20,7 +21,7 @@ class OrderedListTest extends TestCase
             ->assertSee('</ol>', false);
     }
 
-    /** @test */
+    #[Test]
     public function ordered_list_accepts_content()
     {
         $orderedList = ComponentBuilder::make(ComponentEnum::OL)
@@ -37,7 +38,7 @@ class OrderedListTest extends TestCase
             ->assertSee('</li>', false);
     }
 
-    /** @test */
+    #[Test]
     public function ordered_list_accepts_attributes()
     {
         $orderedList = ComponentBuilder::make(ComponentEnum::OL)
@@ -49,7 +50,7 @@ class OrderedListTest extends TestCase
             ->assertSee('id="list_id"', false);
     }
 
-    /** @test */
+    #[Test]
     public function ordered_list_accepts_sub_components()
     {
         $orderedList = ComponentBuilder::make(ComponentEnum::OL)
@@ -80,7 +81,7 @@ class OrderedListTest extends TestCase
             ->assertSee('First nested list item');
     }
 
-    /** @test */
+    #[Test]
     public function ordered_list_accepts_theme()
     {
         $theme = [

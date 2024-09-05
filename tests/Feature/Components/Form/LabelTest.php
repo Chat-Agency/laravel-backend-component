@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Form;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class LabelTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_label()
     {
         $label = ComponentBuilder::make(ComponentEnum::LABEL);
@@ -19,7 +20,7 @@ class LabelTest extends TestCase
             ->assertSee('<label', false);
     }
 
-    /** @test */
+    #[Test]
     public function label_accepts_content()
     {
         $label = ComponentBuilder::make(ComponentEnum::LABEL)
@@ -36,7 +37,7 @@ class LabelTest extends TestCase
             ->assertSee('</label>', false);
     }
 
-    /** @test */
+    #[Test]
     public function label_accepts_attributes()
     {
         $label = ComponentBuilder::make(ComponentEnum::LABEL)
@@ -48,7 +49,7 @@ class LabelTest extends TestCase
             ->assertSee('for="label_for"', false);
     }
 
-    /** @test */
+    #[Test]
     public function label_accepts_sub_components()
     {
         $label = ComponentBuilder::make(ComponentEnum::LABEL)
@@ -69,7 +70,7 @@ class LabelTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function label_accepts_theme()
     {
         $theme = [

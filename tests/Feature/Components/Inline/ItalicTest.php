@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Inline;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class ItalicTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_italic()
     {
         $italic = ComponentBuilder::make(ComponentEnum::ITALIC);
@@ -20,7 +21,7 @@ class ItalicTest extends TestCase
             ->assertSee('</i>', false);
     }
 
-    /** @test */
+    #[Test]
     public function italic_accepts_content()
     {
         $italic = ComponentBuilder::make(ComponentEnum::ITALIC)
@@ -32,7 +33,7 @@ class ItalicTest extends TestCase
             ->assertSee('Nice i tag');
     }
 
-    /** @test */
+    #[Test]
     public function italic_accepts_attributes()
     {
         $italic = ComponentBuilder::make(ComponentEnum::ITALIC)
@@ -44,7 +45,7 @@ class ItalicTest extends TestCase
             ->assertSee('id="nice_italic"', false);
     }
 
-    /** @test */
+    #[Test]
     public function italic_does_not_accept_sub_components()
     {
         $italic = ComponentBuilder::make(ComponentEnum::ITALIC)
@@ -58,7 +59,7 @@ class ItalicTest extends TestCase
             ->assertDontSee('<span', false);
     }
 
-    /** @test */
+    #[Test]
     public function italic_accepts_theme()
     {
         $theme = [

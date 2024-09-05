@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Inline;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SmallTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_empty_small()
     {
         $small = ComponentBuilder::make(ComponentEnum::SMALL);
@@ -20,7 +21,7 @@ class SmallTest extends TestCase
             ->assertSee('</small>', false);
     }
 
-    /** @test */
+    #[Test]
     public function small_accepts_content()
     {
         $small = ComponentBuilder::make(ComponentEnum::SMALL)
@@ -32,7 +33,7 @@ class SmallTest extends TestCase
             ->assertSee('Nice b tag');
     }
 
-    /** @test */
+    #[Test]
     public function small_accepts_attributes()
     {
         $small = ComponentBuilder::make(ComponentEnum::SMALL)
@@ -44,7 +45,7 @@ class SmallTest extends TestCase
             ->assertSee('id="nice_small"', false);
     }
 
-    /** @test */
+    #[Test]
     public function small_does_not_accept_sub_components()
     {
         $small = ComponentBuilder::make(ComponentEnum::SMALL)
@@ -59,7 +60,7 @@ class SmallTest extends TestCase
             ->assertDontSee('</span>', false);
     }
 
-    /** @test */
+    #[Test]
     public function small_accepts_theme()
     {
         $theme = [

@@ -5,10 +5,11 @@ namespace Test\Feature\Components\Table;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class TableTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function empty_table()
     {
         $table = ComponentBuilder::make(ComponentEnum::TABLE);
@@ -20,7 +21,7 @@ class TableTest extends TestCase
             ->assertSee('</table>', false);
     }
 
-    /** @test */
+    #[Test]
     public function table_accepts_content()
     {
         $table = ComponentBuilder::make(ComponentEnum::TABLE)
@@ -35,7 +36,7 @@ class TableTest extends TestCase
             ->assertSee('</tbody>', false);
     }
 
-    /** @test */
+    #[Test]
     public function table_accepts_attributes()
     {
         $table = ComponentBuilder::make(ComponentEnum::TABLE)
@@ -47,7 +48,7 @@ class TableTest extends TestCase
             ->assertSee('id="table_id"', false);
     }
 
-    /** @test */
+    #[Test]
     public function table_accepts_sub_components()
     {
         $table = ComponentBuilder::make(ComponentEnum::TABLE)
@@ -101,7 +102,7 @@ class TableTest extends TestCase
             ->assertSee('</table>', false);
     }
 
-    /** @test */
+    #[Test]
     public function table_accepts_theme()
     {
         $theme = [

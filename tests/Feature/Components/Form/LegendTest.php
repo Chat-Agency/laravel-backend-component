@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Form;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class LegendTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_legend()
     {
         $legend = ComponentBuilder::make(ComponentEnum::LEGEND);
@@ -19,7 +20,7 @@ class LegendTest extends TestCase
             ->assertSee('<legend', false);
     }
 
-    /** @test */
+    #[Test]
     public function legend_accepts_content()
     {
         $legend = ComponentBuilder::make(ComponentEnum::LEGEND)
@@ -36,7 +37,7 @@ class LegendTest extends TestCase
             ->assertSee('</legend>', false);
     }
 
-    /** @test */
+    #[Test]
     public function legend_accepts_attributes()
     {
         $legend = ComponentBuilder::make(ComponentEnum::LEGEND)
@@ -48,7 +49,7 @@ class LegendTest extends TestCase
             ->assertSee('for="legend_for"', false);
     }
 
-    /** @test */
+    #[Test]
     public function legend_accepts_sub_components()
     {
         $legend = ComponentBuilder::make(ComponentEnum::LEGEND)
@@ -69,7 +70,7 @@ class LegendTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function legend_accepts_theme()
     {
         $theme = [

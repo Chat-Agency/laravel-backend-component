@@ -5,10 +5,11 @@ namespace Test\Feature\Components\Form;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SearchInputTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_text_input()
     {
         $input = ComponentBuilder::make(ComponentEnum::SEARCH_INPUT);
@@ -20,7 +21,7 @@ class SearchInputTest extends TestCase
             ->assertSee('/>', false);
     }
 
-    /** @test */
+    #[Test]
     public function text_input_does_not_accepts_content()
     {
         $input = ComponentBuilder::make(ComponentEnum::SEARCH_INPUT)
@@ -37,7 +38,7 @@ class SearchInputTest extends TestCase
             ->assertDontSee('</span>', false);
     }
 
-    /** @test */
+    #[Test]
     public function text_input_accepts_attributes()
     {
         $form = ComponentBuilder::make(ComponentEnum::SEARCH_INPUT)
@@ -51,7 +52,7 @@ class SearchInputTest extends TestCase
             ->assertSee('value="Input"', false);
     }
 
-    /** @test */
+    #[Test]
     public function text_input_accepts_sub_components()
     {
         $form = ComponentBuilder::make(ComponentEnum::SEARCH_INPUT)
@@ -69,7 +70,7 @@ class SearchInputTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function text_input_accepts_theme()
     {
         $theme = [

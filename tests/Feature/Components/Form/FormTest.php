@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Form;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class FormTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_form()
     {
         $form = ComponentBuilder::make(ComponentEnum::FORM);
@@ -20,7 +21,7 @@ class FormTest extends TestCase
             ->assertSee('</form>', false);
     }
 
-    /** @test */
+    #[Test]
     public function form_accepts_content()
     {
         $form = ComponentBuilder::make(ComponentEnum::FORM)
@@ -37,7 +38,7 @@ class FormTest extends TestCase
             ->assertSee('</button>', false);
     }
 
-    /** @test */
+    #[Test]
     public function form_accepts_attributes()
     {
         $form = ComponentBuilder::make(ComponentEnum::FORM)
@@ -53,7 +54,7 @@ class FormTest extends TestCase
             ->assertSee('enctype="multipart/form-data"', false);
     }
 
-    /** @test */
+    #[Test]
     public function form_accepts_sub_components()
     {
         $form = ComponentBuilder::make(ComponentEnum::FORM)
@@ -75,7 +76,7 @@ class FormTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function form_accepts_theme()
     {
         $theme = [
@@ -93,7 +94,7 @@ class FormTest extends TestCase
         $this->assertNotEmpty(bladeThemes($theme));
     }
 
-    /** @test */
+    #[Test]
     public function form_accepts_container_extra_params()
     {
         $form = ComponentBuilder::make(ComponentEnum::FORM)

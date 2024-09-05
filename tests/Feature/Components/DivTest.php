@@ -5,10 +5,11 @@ namespace Tests\Feature\Components;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class DivTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function empty_div()
     {
         $div = ComponentBuilder::make(ComponentEnum::DIV);
@@ -20,7 +21,7 @@ class DivTest extends TestCase
             ->assertSee('</div>', false);
     }
 
-    /** @test */
+    #[Test]
     public function div_accepts_content()
     {
         $div = ComponentBuilder::make(ComponentEnum::DIV)
@@ -37,7 +38,7 @@ class DivTest extends TestCase
             ->assertSee('</p>', false);
     }
 
-    /** @test */
+    #[Test]
     public function div_accepts_attributes()
     {
         $div = ComponentBuilder::make(ComponentEnum::DIV)
@@ -49,7 +50,7 @@ class DivTest extends TestCase
             ->assertSee('id="div_id"', false);
     }
 
-    /** @test */
+    #[Test]
     public function div_accepts_sub_components()
     {
         $div = ComponentBuilder::make(ComponentEnum::DIV)
@@ -69,7 +70,7 @@ class DivTest extends TestCase
             ->assertSee('Second paragraph');
     }
 
-    /** @test */
+    #[Test]
     public function div_accepts_theme()
     {
         $theme = [

@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Headers;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class H2Test extends TestCase
 {
-    /** @test */
+    #[Test]
     public function empty_h2_header()
     {
         $header = ComponentBuilder::make(ComponentEnum::H2);
@@ -20,7 +21,7 @@ class H2Test extends TestCase
             ->assertSee('</h2>', false);
     }
 
-    /** @test */
+    #[Test]
     public function h2_header_accepts_content()
     {
         $header = ComponentBuilder::make(ComponentEnum::H2)
@@ -32,7 +33,7 @@ class H2Test extends TestCase
             ->assertSee('Nice h2 tag');
     }
 
-    /** @test */
+    #[Test]
     public function h2_header_accepts_attributes()
     {
         $header = ComponentBuilder::make(ComponentEnum::H2)
@@ -44,7 +45,7 @@ class H2Test extends TestCase
             ->assertSee('id="nice_header"', false);
     }
 
-    /** @test */
+    #[Test]
     public function h2_header_accepts_sub_components()
     {
         $div = ComponentBuilder::make(ComponentEnum::H2)
@@ -64,7 +65,7 @@ class H2Test extends TestCase
             ->assertSee('Second span');
     }
 
-    /** @test */
+    #[Test]
     public function h2_header_accepts_theme()
     {
         $theme = [

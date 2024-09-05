@@ -6,10 +6,11 @@ use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\MainBackendComponent;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SimpleComponentTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function a_component_can_be_created_using_main_class()
     {
         $component = new MainBackendComponent('div');
@@ -17,7 +18,7 @@ class SimpleComponentTest extends TestCase
         $this->assertEquals('div', $component->getName());
     }
 
-    /** @test */
+    #[Test]
     public function a_component_can_be_created_using_a_builder()
     {
         $component = ComponentBuilder::make('div');
@@ -25,7 +26,7 @@ class SimpleComponentTest extends TestCase
         $this->assertEquals('div', $component->getName());
     }
 
-    /** @test */
+    #[Test]
     public function a_component_can_be_created_using_a_builder_and_enum()
     {
         $component = ComponentBuilder::make(ComponentEnum::DIV);
@@ -33,7 +34,7 @@ class SimpleComponentTest extends TestCase
         $this->assertEquals('div', $component->getName());
     }
 
-    /** @test */
+    #[Test]
     public function a_local_component_component_can_be_created()
     {
         $component = ComponentBuilder::make(ComponentEnum::DIV);

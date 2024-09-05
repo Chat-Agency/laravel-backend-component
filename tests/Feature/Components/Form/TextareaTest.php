@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Form;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class TextareaTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_textarea()
     {
         $textarea = ComponentBuilder::make(ComponentEnum::TEXTAREA);
@@ -19,7 +20,7 @@ class TextareaTest extends TestCase
             ->assertSee('<textarea', false);
     }
 
-    /** @test */
+    #[Test]
     public function textarea_accepts_content()
     {
         $textarea = ComponentBuilder::make(ComponentEnum::TEXTAREA)
@@ -33,7 +34,7 @@ class TextareaTest extends TestCase
             ->assertSee('</textarea>', false);
     }
 
-    /** @test */
+    #[Test]
     public function textarea_accepts_attributes()
     {
         $textarea = ComponentBuilder::make(ComponentEnum::TEXTAREA)
@@ -45,7 +46,7 @@ class TextareaTest extends TestCase
             ->assertSee('for="textarea_for"', false);
     }
 
-    /** @test */
+    #[Test]
     public function textarea_does_not_accept_sub_components()
     {
         $textarea = ComponentBuilder::make(ComponentEnum::TEXTAREA)
@@ -66,7 +67,7 @@ class TextareaTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function textarea_accepts_theme()
     {
         $theme = [

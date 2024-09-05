@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Form;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SelectTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function empty_select()
     {
         $select = ComponentBuilder::make(ComponentEnum::SELECT);
@@ -20,7 +21,7 @@ class SelectTest extends TestCase
             ->assertSee('</select>', false);
     }
 
-    /** @test */
+    #[Test]
     public function select_accepts_content()
     {
         $select = ComponentBuilder::make(ComponentEnum::SELECT)
@@ -37,7 +38,7 @@ class SelectTest extends TestCase
             ->assertSee('</option>', false);
     }
 
-    /** @test */
+    #[Test]
     public function select_accepts_attributes()
     {
         $select = ComponentBuilder::make(ComponentEnum::SELECT)
@@ -49,7 +50,7 @@ class SelectTest extends TestCase
             ->assertSee('id="select_id"', false);
     }
 
-    /** @test */
+    #[Test]
     public function select_accepts_sub_components()
     {
         $select = ComponentBuilder::make(ComponentEnum::SELECT)
@@ -75,7 +76,7 @@ class SelectTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function select_accepts_theme()
     {
         $theme = [

@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Inline;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class BoldTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_empty_bold()
     {
         $bold = ComponentBuilder::make(ComponentEnum::BOLD);
@@ -20,7 +21,7 @@ class BoldTest extends TestCase
             ->assertSee('</b>', false);
     }
 
-    /** @test */
+    #[Test]
     public function bold_accepts_content()
     {
         $bold = ComponentBuilder::make(ComponentEnum::BOLD)
@@ -32,7 +33,7 @@ class BoldTest extends TestCase
             ->assertSee('Nice b tag');
     }
 
-    /** @test */
+    #[Test]
     public function bold_accepts_attributes()
     {
         $bold = ComponentBuilder::make(ComponentEnum::BOLD)
@@ -44,7 +45,7 @@ class BoldTest extends TestCase
             ->assertSee('id="nice_bold"', false);
     }
 
-    /** @test */
+    #[Test]
     public function bold_does_not_accept_sub_components()
     {
         $bold = ComponentBuilder::make(ComponentEnum::BOLD)
@@ -59,7 +60,7 @@ class BoldTest extends TestCase
             ->assertDontSee('</span>', false);
     }
 
-    /** @test */
+    #[Test]
     public function bold_accepts_theme()
     {
         $theme = [

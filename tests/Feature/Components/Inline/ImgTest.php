@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Inline;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class ImgTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_image()
     {
         $img = ComponentBuilder::make(ComponentEnum::IMG);
@@ -20,7 +21,7 @@ class ImgTest extends TestCase
             ->assertSee('/>', false);
     }
 
-    /** @test */
+    #[Test]
     public function image_has_no_content()
     {
         $img = ComponentBuilder::make(ComponentEnum::IMG)
@@ -32,7 +33,7 @@ class ImgTest extends TestCase
             ->assertDontSee('Nice image');
     }
 
-    /** @test */
+    #[Test]
     public function image_accepts_attributes()
     {
         $img = ComponentBuilder::make(ComponentEnum::IMG)
@@ -48,7 +49,7 @@ class ImgTest extends TestCase
             ->assertSee('/>', false);
     }
 
-    /** @test */
+    #[Test]
     public function image_does_not_accept_sub_components()
     {
         $image = ComponentBuilder::make(ComponentEnum::IMG)
@@ -63,7 +64,7 @@ class ImgTest extends TestCase
             ->assertDontSee('</span>', false);
     }
 
-    /** @test */
+    #[Test]
     public function image_accepts_theme()
     {
         $theme = [

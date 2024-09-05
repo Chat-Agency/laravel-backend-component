@@ -5,10 +5,11 @@ namespace Tests\Feature\Components;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class ParagraphTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function empty_paragraph()
     {
         $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH);
@@ -20,7 +21,7 @@ class ParagraphTest extends TestCase
             ->assertSee('</p>', false);
     }
 
-    /** @test */
+    #[Test]
     public function paragraph_accepts_content()
     {
         $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
@@ -39,7 +40,7 @@ class ParagraphTest extends TestCase
             ->assertSee('</p>', false);
     }
 
-    /** @test */
+    #[Test]
     public function paragraph_accepts_attributes()
     {
         $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
@@ -54,7 +55,7 @@ class ParagraphTest extends TestCase
             ->assertSee('</p>', false);
     }
 
-    /** @test */
+    #[Test]
     public function paragraph_accepts_sub_components()
     {
         $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
@@ -80,7 +81,7 @@ class ParagraphTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function paragraph_accepts_theme()
     {
         $theme = [

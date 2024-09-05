@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Lists;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class UnorderedListTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function empty_unordered_list()
     {
         $unorderedList = ComponentBuilder::make(ComponentEnum::UL);
@@ -20,7 +21,7 @@ class UnorderedListTest extends TestCase
             ->assertSee('</ul>', false);
     }
 
-    /** @test */
+    #[Test]
     public function unordered_list_accepts_content()
     {
         $unorderedList = ComponentBuilder::make(ComponentEnum::UL)
@@ -37,7 +38,7 @@ class UnorderedListTest extends TestCase
             ->assertSee('</li>', false);
     }
 
-    /** @test */
+    #[Test]
     public function unordered_list_accepts_attributes()
     {
         $unorderedList = ComponentBuilder::make(ComponentEnum::UL)
@@ -49,7 +50,7 @@ class UnorderedListTest extends TestCase
             ->assertSee('id="list_id"', false);
     }
 
-    /** @test */
+    #[Test]
     public function unordered_list_accepts_sub_components()
     {
         $unorderedList = ComponentBuilder::make(ComponentEnum::UL)
@@ -80,7 +81,7 @@ class UnorderedListTest extends TestCase
             ->assertSee('First nested list item');
     }
 
-    /** @test */
+    #[Test]
     public function unordered_list_accepts_theme()
     {
         $theme = [

@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Inline;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SpanTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_span()
     {
         $span = ComponentBuilder::make(ComponentEnum::SPAN);
@@ -20,7 +21,7 @@ class SpanTest extends TestCase
             ->assertSee('</span>', false);
     }
 
-    /** @test */
+    #[Test]
     public function span_accepts_content()
     {
         $span = ComponentBuilder::make(ComponentEnum::SPAN)
@@ -32,7 +33,7 @@ class SpanTest extends TestCase
             ->assertSee('Nice span');
     }
 
-    /** @test */
+    #[Test]
     public function span_accepts_attributes()
     {
         $span = ComponentBuilder::make(ComponentEnum::SPAN)
@@ -44,7 +45,7 @@ class SpanTest extends TestCase
             ->assertSee('id="nice_span"', false);
     }
 
-    /** @test */
+    #[Test]
     public function span_accepts_sub_components()
     {
         $span = ComponentBuilder::make(ComponentEnum::SPAN)
@@ -61,7 +62,7 @@ class SpanTest extends TestCase
             ->assertSee('</b>', false);
     }
 
-    /** @test */
+    #[Test]
     public function button_accepts_theme()
     {
         $theme = [

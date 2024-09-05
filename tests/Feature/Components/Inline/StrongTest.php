@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Inline;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class StrongTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_strong()
     {
         $strong = ComponentBuilder::make(ComponentEnum::STRONG);
@@ -20,7 +21,7 @@ class StrongTest extends TestCase
             ->assertSee('</strong>', false);
     }
 
-    /** @test */
+    #[Test]
     public function strong_accepts_content()
     {
         $strong = ComponentBuilder::make(ComponentEnum::STRONG)
@@ -32,7 +33,7 @@ class StrongTest extends TestCase
             ->assertSee('Nice strong tag');
     }
 
-    /** @test */
+    #[Test]
     public function strong_accepts_attributes()
     {
         $strong = ComponentBuilder::make(ComponentEnum::STRONG)
@@ -44,7 +45,7 @@ class StrongTest extends TestCase
             ->assertSee('id="nice_strong"', false);
     }
 
-    /** @test */
+    #[Test]
     public function strong_does_not_accept_sub_components()
     {
         $strong = ComponentBuilder::make(ComponentEnum::STRONG)
@@ -58,7 +59,7 @@ class StrongTest extends TestCase
             ->assertDontSee('<span', false);
     }
 
-    /** @test */
+    #[Test]
     public function strong_accepts_theme()
     {
         $theme = [

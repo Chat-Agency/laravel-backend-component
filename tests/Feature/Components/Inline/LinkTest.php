@@ -5,10 +5,11 @@ namespace Tests\Feature\Components\Inline;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class LinkTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_link()
     {
         $link = ComponentBuilder::make(ComponentEnum::LINK);
@@ -20,7 +21,7 @@ class LinkTest extends TestCase
             ->assertSee('</a>', false);
     }
 
-    /** @test */
+    #[Test]
     public function link_accepts_content()
     {
         $link = ComponentBuilder::make(ComponentEnum::LINK)
@@ -39,7 +40,7 @@ class LinkTest extends TestCase
             ->assertSee('</a>', false);
     }
 
-    /** @test */
+    #[Test]
     public function link_accepts_attributes()
     {
         $link = ComponentBuilder::make(ComponentEnum::LINK)
@@ -54,7 +55,7 @@ class LinkTest extends TestCase
             ->assertSee('</a>', false);
     }
 
-    /** @test */
+    #[Test]
     public function link_accepts_sub_components()
     {
         $link = ComponentBuilder::make(ComponentEnum::LINK)
@@ -75,7 +76,7 @@ class LinkTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function link_accepts_theme()
     {
         $theme = [

@@ -5,10 +5,11 @@ namespace Test\Feature\Components\Form;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class RadioInputTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_radio_input()
     {
         $input = ComponentBuilder::make(ComponentEnum::RADIO_INPUT);
@@ -20,7 +21,7 @@ class RadioInputTest extends TestCase
             ->assertSee('/>', false);
     }
 
-    /** @test */
+    #[Test]
     public function radio_input_does_not_accepts_content()
     {
         $input = ComponentBuilder::make(ComponentEnum::RADIO_INPUT)
@@ -37,7 +38,7 @@ class RadioInputTest extends TestCase
             ->assertDontSee('</span>', false);
     }
 
-    /** @test */
+    #[Test]
     public function radio_input_accepts_attributes()
     {
         $form = ComponentBuilder::make(ComponentEnum::RADIO_INPUT)
@@ -51,7 +52,7 @@ class RadioInputTest extends TestCase
             ->assertSee('value="Input"', false);
     }
 
-    /** @test */
+    #[Test]
     public function radio_input_accepts_sub_components()
     {
         $form = ComponentBuilder::make(ComponentEnum::RADIO_INPUT)
@@ -69,7 +70,7 @@ class RadioInputTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function radio_input_accepts_theme()
     {
         $theme = [

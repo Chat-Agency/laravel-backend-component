@@ -2,13 +2,14 @@
 
 namespace Tests\Feature\Components\Custom;
 
-use ChatAgency\BackendComponents\Builders\ComponentBuilder;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 
 class ModalTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function simple_modal()
     {
         $modal = ComponentBuilder::make(ComponentEnum::MODAL);
@@ -22,7 +23,7 @@ class ModalTest extends TestCase
             ->assertSee('class="'.bladeThemes(['modal' => 'overlay']), false);
     }
 
-    /** @test */
+    #[Test]
     public function modal_accepts_content()
     {
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
@@ -34,7 +35,7 @@ class ModalTest extends TestCase
             ->assertSee("This is the modal's content");
     }
 
-    /** @test */
+    #[Test]
     public function modal_accepts_attributes()
     {
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
@@ -46,7 +47,7 @@ class ModalTest extends TestCase
             ->assertSee('id="my_modal"', false);
     }
 
-    /** @test */
+    #[Test]
     public function modal_accepts_sub_components()
     {
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
@@ -63,7 +64,7 @@ class ModalTest extends TestCase
             ->assertSee('<div id="modal_body"', false);
     }
 
-    /** @test */
+    #[Test]
     public function modal_accepts_theme()
     {
         $theme = ['modal' => 'default'];
@@ -76,7 +77,7 @@ class ModalTest extends TestCase
             ->assertSee('class="'.bladeThemes($theme), false);
     }
 
-    /** @test */
+    #[Test]
     public function modal_accepts_button_slot()
     {
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
@@ -98,7 +99,7 @@ class ModalTest extends TestCase
             ->assertSee('</button>', false);
     }
 
-    /** @test */
+    #[Test]
     public function modal_accepts_title_slot()
     {
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
@@ -116,7 +117,7 @@ class ModalTest extends TestCase
             ->assertSee('This is the title');
     }
 
-    /** @test */
+    #[Test]
     public function modal_accepts_body_slot()
     {
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
@@ -134,7 +135,7 @@ class ModalTest extends TestCase
             ->assertSee('This is the body');
     }
 
-    /** @test */
+    #[Test]
     public function modal_accepts_footer_slot()
     {
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
@@ -152,7 +153,7 @@ class ModalTest extends TestCase
             ->assertSee('This is the footer');
     }
 
-    /** @test */
+    #[Test]
     public function modal_does_not_accept_arbitrary_slots()
     {
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
@@ -170,7 +171,7 @@ class ModalTest extends TestCase
             ->assertDontSee('This is the arbitrary slot');
     }
 
-    /** @test */
+    #[Test]
     public function modal_accepts_container_extra_params()
     {
         $containerTheme = [
