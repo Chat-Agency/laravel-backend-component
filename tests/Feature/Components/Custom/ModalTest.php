@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Components\Custom;
 
-use Tests\TestCase;
-use PHPUnit\Framework\Attributes\Test;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class ModalTest extends TestCase
 {
