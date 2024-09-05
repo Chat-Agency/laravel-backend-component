@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Components\Inline;
 
-use Tests\TestCase;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class StrongTest extends TestCase
 {
@@ -16,8 +16,8 @@ class StrongTest extends TestCase
         $this->blade('{{ $strong }}', [
             'strong' => $strong,
         ])
-        ->assertSee('<strong', false)
-        ->assertSee('</strong>', false);
+            ->assertSee('<strong', false)
+            ->assertSee('</strong>', false);
     }
 
     /** @test */
@@ -29,7 +29,7 @@ class StrongTest extends TestCase
         $this->blade('{{ $strong }}', [
             'strong' => $strong,
         ])
-        ->assertSee('Nice strong tag');
+            ->assertSee('Nice strong tag');
     }
 
     /** @test */
@@ -41,7 +41,7 @@ class StrongTest extends TestCase
         $this->blade('{{ $strong }}', [
             'strong' => $strong,
         ])
-        ->assertSee('id="nice_strong"', false);
+            ->assertSee('id="nice_strong"', false);
     }
 
     /** @test */
@@ -55,14 +55,14 @@ class StrongTest extends TestCase
         $this->blade('{{ $strong }}', [
             'strong' => $strong,
         ])
-        ->assertDontSee('<span', false);
+            ->assertDontSee('<span', false);
     }
 
     /** @test */
     public function strong_accepts_theme()
     {
         $theme = [
-            'display' =>  'inline-block',
+            'display' => 'inline-block',
         ];
 
         $strong = ComponentBuilder::make(ComponentEnum::STRONG)
@@ -71,7 +71,7 @@ class StrongTest extends TestCase
         $this->blade('{{ $strong }}', [
             'strong' => $strong,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }

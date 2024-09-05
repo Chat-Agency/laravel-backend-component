@@ -2,10 +2,9 @@
 
 namespace Tests\Feature\Components\Custom;
 
-use Tests\TestCase;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
-use ChatAgency\BackendComponents\Themes\DefaultThemeBag;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class ModalTest extends TestCase
 {
@@ -18,9 +17,9 @@ class ModalTest extends TestCase
             'modal' => $modal,
         ])
         // inertia's code
-        ->assertSee('x-data="{ \'showModal\': false }"', false)
+            ->assertSee('x-data="{ \'showModal\': false }"', false)
         // overlay classes
-        ->assertSee('class="'.bladeThemes(['modal' => 'overlay']), false);
+            ->assertSee('class="'.bladeThemes(['modal' => 'overlay']), false);
     }
 
     /** @test */
@@ -32,7 +31,7 @@ class ModalTest extends TestCase
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
         ])
-        ->assertSee("This is the modal's content");
+            ->assertSee("This is the modal's content");
     }
 
     /** @test */
@@ -44,7 +43,7 @@ class ModalTest extends TestCase
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
         ])
-        ->assertSee('id="my_modal"', false);
+            ->assertSee('id="my_modal"', false);
     }
 
     /** @test */
@@ -54,14 +53,14 @@ class ModalTest extends TestCase
             ->setSubComponents([
                 ComponentBuilder::make(ComponentEnum::DIV)
                     ->setContent('Sub Component inside modal')
-                    ->setAttribute('id', 'modal_body')
+                    ->setAttribute('id', 'modal_body'),
             ]);
 
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
         ])
-        ->assertSee('Sub Component inside modal')
-        ->assertSee('<div id="modal_body"', false);
+            ->assertSee('Sub Component inside modal')
+            ->assertSee('<div id="modal_body"', false);
     }
 
     /** @test */
@@ -74,29 +73,29 @@ class ModalTest extends TestCase
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
     }
 
     /** @test */
     public function modal_accepts_button_slot()
     {
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
-        ->setSlot(
-            'button', 
-            ComponentBuilder::make(ComponentEnum::BUTTON)
-                ->setContent('Open Modal')
-                ->setAttribute('type', 'button')
-                ->setAttribute('@click', 'showModal = true')
-        );
+            ->setSlot(
+                'button',
+                ComponentBuilder::make(ComponentEnum::BUTTON)
+                    ->setContent('Open Modal')
+                    ->setAttribute('type', 'button')
+                    ->setAttribute('@click', 'showModal = true')
+            );
 
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
         ])
-        ->assertSee('<button', false)
-        ->assertSee('@click="showModal = true"', false)
-        ->assertSee('type="button"', false)
-        ->assertSee('Open Modal')
-        ->assertSee('</button>', false);
+            ->assertSee('<button', false)
+            ->assertSee('@click="showModal = true"', false)
+            ->assertSee('type="button"', false)
+            ->assertSee('Open Modal')
+            ->assertSee('</button>', false);
     }
 
     /** @test */
@@ -104,7 +103,7 @@ class ModalTest extends TestCase
     {
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
             ->setSlot(
-                'title', 
+                'title',
                 ComponentBuilder::make(ComponentEnum::DIV)
                     ->setContent('This is the title')
                     ->setAttribute('id', 'modal_title')
@@ -113,8 +112,8 @@ class ModalTest extends TestCase
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
         ])
-        ->assertSee('<div id="modal_title"', false)
-        ->assertSee('This is the title');
+            ->assertSee('<div id="modal_title"', false)
+            ->assertSee('This is the title');
     }
 
     /** @test */
@@ -122,7 +121,7 @@ class ModalTest extends TestCase
     {
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
             ->setSlot(
-                'body', 
+                'body',
                 ComponentBuilder::make(ComponentEnum::DIV)
                     ->setContent('This is the body')
                     ->setAttribute('id', 'modal_body')
@@ -131,8 +130,8 @@ class ModalTest extends TestCase
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
         ])
-        ->assertSee('<div id="modal_body"', false)
-        ->assertSee('This is the body');
+            ->assertSee('<div id="modal_body"', false)
+            ->assertSee('This is the body');
     }
 
     /** @test */
@@ -140,7 +139,7 @@ class ModalTest extends TestCase
     {
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
             ->setSlot(
-                'footer', 
+                'footer',
                 ComponentBuilder::make(ComponentEnum::DIV)
                     ->setContent('This is the footer')
                     ->setAttribute('id', 'modal_footer')
@@ -149,8 +148,8 @@ class ModalTest extends TestCase
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
         ])
-        ->assertSee('<div id="modal_footer"', false)
-        ->assertSee('This is the footer');
+            ->assertSee('<div id="modal_footer"', false)
+            ->assertSee('This is the footer');
     }
 
     /** @test */
@@ -158,7 +157,7 @@ class ModalTest extends TestCase
     {
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
             ->setSlot(
-                'arbitrary_slo', 
+                'arbitrary_slo',
                 ComponentBuilder::make(ComponentEnum::DIV)
                     ->setContent('This is the arbitrary slot')
                     ->setAttribute('id', 'modal_arbitrary_slot')
@@ -167,8 +166,8 @@ class ModalTest extends TestCase
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
         ])
-        ->assertDontSee('<div id="modal_arbitrary_slot"', false)
-        ->assertDontSee('This is the arbitrary slot');
+            ->assertDontSee('<div id="modal_arbitrary_slot"', false)
+            ->assertDontSee('This is the arbitrary slot');
     }
 
     /** @test */
@@ -178,16 +177,16 @@ class ModalTest extends TestCase
             'display' => 'flex',
             'flex' => 'items-center',
         ];
-        
+
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setExtra('container',  [
+            ->setExtra('container', [
                 'theme' => $containerTheme,
             ]);
 
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
         ])
-        ->assertSee('class="'.bladeThemes($containerTheme), false);
-        
+            ->assertSee('class="'.bladeThemes($containerTheme), false);
+
     }
 }

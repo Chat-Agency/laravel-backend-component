@@ -9,41 +9,40 @@ trait IsLivewireComponent
     protected ?string $livewireKey = null;
 
     protected array $livewireParams = [];
-    
-    public function setLivewire(bool $livewire = true) : static
+
+    public function setLivewire(bool $livewire = true): static
     {
         $this->isLiveWire = $livewire;
 
         return $this;
     }
 
-    public function setLivewireParams(array $livewireParams) : static
+    public function setLivewireParams(array $livewireParams): static
     {
         $this->livewireParams = $livewireParams;
 
         return $this;
     }
 
-    public function setLivewireKey(string $livewireKey) : static
+    public function setLivewireKey(string $livewireKey): static
     {
         $this->livewireKey = $livewireKey;
 
         return $this;
     }
 
-    public function isLivewire() : bool
+    public function isLivewire(): bool
     {
         return $this->isLiveWire;
     }
 
-    public function getLivewireParams() : array
+    public function getLivewireParams(): array
     {
         return $this->livewireParams;
     }
-    
-    public function getLivewireKey() : string | null
+
+    public function getLivewireKey(): ?string
     {
         return $this->livewireKey;
     }
-
 }

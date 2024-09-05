@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Components\Inline;
 
-use Tests\TestCase;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class BoldTest extends TestCase
 {
@@ -16,8 +16,8 @@ class BoldTest extends TestCase
         $this->blade('{{ $bold }}', [
             'bold' => $bold,
         ])
-        ->assertSee('<b', false)
-        ->assertSee('</b>', false);
+            ->assertSee('<b', false)
+            ->assertSee('</b>', false);
     }
 
     /** @test */
@@ -29,7 +29,7 @@ class BoldTest extends TestCase
         $this->blade('{{ $bold }}', [
             'bold' => $bold,
         ])
-        ->assertSee('Nice b tag');
+            ->assertSee('Nice b tag');
     }
 
     /** @test */
@@ -41,7 +41,7 @@ class BoldTest extends TestCase
         $this->blade('{{ $bold }}', [
             'bold' => $bold,
         ])
-        ->assertSee('id="nice_bold"', false);
+            ->assertSee('id="nice_bold"', false);
     }
 
     /** @test */
@@ -55,15 +55,15 @@ class BoldTest extends TestCase
         $this->blade('{{ $bold }}', [
             'bold' => $bold,
         ])
-        ->assertDontSee('<span', false)
-        ->assertDontSee('</span>', false);
+            ->assertDontSee('<span', false)
+            ->assertDontSee('</span>', false);
     }
 
     /** @test */
     public function bold_accepts_theme()
     {
         $theme = [
-            'display' =>  'inline-block',
+            'display' => 'inline-block',
         ];
 
         $bold = ComponentBuilder::make(ComponentEnum::BOLD)
@@ -72,7 +72,7 @@ class BoldTest extends TestCase
         $this->blade('{{ $bold }}', [
             'bold' => $bold,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }

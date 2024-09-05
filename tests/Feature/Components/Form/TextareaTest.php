@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Components\Form;
 
-use Tests\TestCase;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class TextareaTest extends TestCase
 {
@@ -16,7 +16,7 @@ class TextareaTest extends TestCase
         $this->blade('{{ $textarea }}', [
             'textarea' => $textarea,
         ])
-        ->assertSee('<textarea', false);
+            ->assertSee('<textarea', false);
     }
 
     /** @test */
@@ -28,12 +28,11 @@ class TextareaTest extends TestCase
         $this->blade('{{ $textarea }}', [
             'textarea' => $textarea,
         ])
-        ->assertSee('<textarea', false)
-        ->assertSee('Textarea content')
-        ->assertSee('</textarea>', false);
+            ->assertSee('<textarea', false)
+            ->assertSee('Textarea content')
+            ->assertSee('</textarea>', false);
     }
 
-    
     /** @test */
     public function textarea_accepts_attributes()
     {
@@ -43,7 +42,7 @@ class TextareaTest extends TestCase
         $this->blade('{{ $textarea }}', [
             'textarea' => $textarea,
         ])
-        ->assertSee('for="textarea_for"', false);
+            ->assertSee('for="textarea_for"', false);
     }
 
     /** @test */
@@ -60,29 +59,28 @@ class TextareaTest extends TestCase
         $this->blade('{{ $textarea }}', [
             'textarea' => $textarea,
         ])
-        ->assertDontSee('<span', false)
-        ->assertDontSee('First span')
-        ->assertDontSee('</span>', false)
-        ->assertDontSee('Second span');
-        
+            ->assertDontSee('<span', false)
+            ->assertDontSee('First span')
+            ->assertDontSee('</span>', false)
+            ->assertDontSee('Second span');
+
     }
 
     /** @test */
     public function textarea_accepts_theme()
     {
         $theme = [
-            'display' =>  'block',
+            'display' => 'block',
         ];
-        
+
         $textarea = ComponentBuilder::make(ComponentEnum::TEXTAREA)
             ->setThemes($theme);
-        
+
         $this->blade('{{ $textarea }}', [
             'textarea' => $textarea,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }
-
 }

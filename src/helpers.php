@@ -1,13 +1,13 @@
 <?php
 
-use ChatAgency\BackendComponents\Contracts\ThemeBag;
-use ChatAgency\BackendComponents\MainBackendComponent;
-use ChatAgency\BackendComponents\Contracts\AttributeBag;
-use ChatAgency\BackendComponents\Contracts\ThemeManager;
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
-use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
 use ChatAgency\BackendComponents\BackendComponentsServiceProvider;
+use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
+use ChatAgency\BackendComponents\Contracts\AttributeBag;
+use ChatAgency\BackendComponents\Contracts\BackendComponent;
+use ChatAgency\BackendComponents\Contracts\ThemeBag;
+use ChatAgency\BackendComponents\Contracts\ThemeManager;
+use ChatAgency\BackendComponents\MainBackendComponent;
+use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 
 /**
  * Utility classes
@@ -20,7 +20,7 @@ if (! function_exists('backendComponentNamespace')) {
 }
 
 if (! function_exists('makeBackendComponent')) {
-    function makeBackendComponent( string | \BackedEnum $name): MainBackendComponent
+    function makeBackendComponent(string|\BackedEnum $name): MainBackendComponent
     {
         return new MainBackendComponent($name);
     }
@@ -54,9 +54,6 @@ if (! function_exists('resolveTheme')) {
 if (! function_exists('makeAttributeBag')) {
     function makeAttributeBag(...$args): AttributeBag
     {
-       return new DefaultAttributeBag(...$args);
+        return new DefaultAttributeBag(...$args);
     }
 }
-
-
-

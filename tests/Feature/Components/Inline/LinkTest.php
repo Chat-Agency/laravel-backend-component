@@ -2,10 +2,9 @@
 
 namespace Tests\Feature\Components\Inline;
 
-use Tests\TestCase;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
-
+use Tests\TestCase;
 
 class LinkTest extends TestCase
 {
@@ -17,8 +16,8 @@ class LinkTest extends TestCase
         $this->blade('{{ $link }}', [
             'link' => $link,
         ])
-        ->assertSee('<a ', false)
-        ->assertSee('</a>', false);
+            ->assertSee('<a ', false)
+            ->assertSee('</a>', false);
     }
 
     /** @test */
@@ -33,11 +32,11 @@ class LinkTest extends TestCase
         $this->blade('{{ $link }}', [
             'link' => $link,
         ])
-        ->assertSee('<a ', false)
-        ->assertSee('<span', false)
-        ->assertSee('Span content')
-        ->assertSee('</span>', false)
-        ->assertSee('</a>', false);
+            ->assertSee('<a ', false)
+            ->assertSee('<span', false)
+            ->assertSee('Span content')
+            ->assertSee('</span>', false)
+            ->assertSee('</a>', false);
     }
 
     /** @test */
@@ -50,9 +49,9 @@ class LinkTest extends TestCase
         $this->blade('{{ $link }}', [
             'link' => $link,
         ])
-        ->assertSee('<a', false)
-        ->assertSee('target="_blank"', false)
-        ->assertSee('</a>', false);
+            ->assertSee('<a', false)
+            ->assertSee('target="_blank"', false)
+            ->assertSee('</a>', false);
     }
 
     /** @test */
@@ -62,37 +61,37 @@ class LinkTest extends TestCase
             ->setContent('Nice link')
             ->setSubComponents([
                 ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('Inside span')
+                    ->setContent('Inside span'),
             ]);
 
         $this->blade('{{ $link }}', [
             'link' => $link,
         ])
-        ->assertSee('<a', false)
-        ->assertSee('<span', false)
-        ->assertSee('Inside span')
-        ->assertSee('</span>', false)
-        ->assertSee('</a>', false);
-        
+            ->assertSee('<a', false)
+            ->assertSee('<span', false)
+            ->assertSee('Inside span')
+            ->assertSee('</span>', false)
+            ->assertSee('</a>', false);
+
     }
-    
+
     /** @test */
     public function link_accepts_theme()
     {
         $theme = [
-            'action' =>  'default',
+            'action' => 'default',
         ];
-        
+
         $link = ComponentBuilder::make(ComponentEnum::LINK)
             ->setContent('Nice link')
             ->setThemes($theme);
-        
+
         $this->blade('{{ $link }}', [
             'link' => $link,
         ])
-        ->assertSee('<a', false)
-        ->assertSee('class="'.bladeThemes($theme), false)
-        ->assertSee('</a>', false);
+            ->assertSee('<a', false)
+            ->assertSee('class="'.bladeThemes($theme), false)
+            ->assertSee('</a>', false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }

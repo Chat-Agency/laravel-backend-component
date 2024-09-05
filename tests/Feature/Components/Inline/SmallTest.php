@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Components\Inline;
 
-use Tests\TestCase;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class SmallTest extends TestCase
 {
@@ -16,8 +16,8 @@ class SmallTest extends TestCase
         $this->blade('{{ $small }}', [
             'small' => $small,
         ])
-        ->assertSee('<small', false)
-        ->assertSee('</small>', false);
+            ->assertSee('<small', false)
+            ->assertSee('</small>', false);
     }
 
     /** @test */
@@ -29,7 +29,7 @@ class SmallTest extends TestCase
         $this->blade('{{ $small }}', [
             'small' => $small,
         ])
-        ->assertSee('Nice b tag');
+            ->assertSee('Nice b tag');
     }
 
     /** @test */
@@ -41,7 +41,7 @@ class SmallTest extends TestCase
         $this->blade('{{ $small }}', [
             'small' => $small,
         ])
-        ->assertSee('id="nice_small"', false);
+            ->assertSee('id="nice_small"', false);
     }
 
     /** @test */
@@ -55,15 +55,15 @@ class SmallTest extends TestCase
         $this->blade('{{ $small }}', [
             'small' => $small,
         ])
-        ->assertDontSee('<span', false)
-        ->assertDontSee('</span>', false);
+            ->assertDontSee('<span', false)
+            ->assertDontSee('</span>', false);
     }
 
     /** @test */
     public function small_accepts_theme()
     {
         $theme = [
-            'display' =>  'inline-block',
+            'display' => 'inline-block',
         ];
 
         $small = ComponentBuilder::make(ComponentEnum::SMALL)
@@ -72,7 +72,7 @@ class SmallTest extends TestCase
         $this->blade('{{ $small }}', [
             'small' => $small,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }

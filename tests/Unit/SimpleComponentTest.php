@@ -16,6 +16,7 @@ class SimpleComponentTest extends TestCase
 
         $this->assertEquals('div', $component->getName());
     }
+
     /** @test */
     public function a_component_can_be_created_using_a_builder()
     {

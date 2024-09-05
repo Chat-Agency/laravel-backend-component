@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Components\Inline;
 
-use Tests\TestCase;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class SpanTest extends TestCase
 {
@@ -16,8 +16,8 @@ class SpanTest extends TestCase
         $this->blade('{{ $span }}', [
             'span' => $span,
         ])
-        ->assertSee('<span', false)
-        ->assertSee('</span>', false);
+            ->assertSee('<span', false)
+            ->assertSee('</span>', false);
     }
 
     /** @test */
@@ -29,7 +29,7 @@ class SpanTest extends TestCase
         $this->blade('{{ $span }}', [
             'span' => $span,
         ])
-        ->assertSee('Nice span');
+            ->assertSee('Nice span');
     }
 
     /** @test */
@@ -41,7 +41,7 @@ class SpanTest extends TestCase
         $this->blade('{{ $span }}', [
             'span' => $span,
         ])
-        ->assertSee('id="nice_span"', false);
+            ->assertSee('id="nice_span"', false);
     }
 
     /** @test */
@@ -56,25 +56,25 @@ class SpanTest extends TestCase
         $this->blade('{{ $span }}', [
             'span' => $span,
         ])
-        ->assertSee('<b', false)
-        ->assertSee('Nice bold span', )
-        ->assertSee('</b>', false);
+            ->assertSee('<b', false)
+            ->assertSee('Nice bold span')
+            ->assertSee('</b>', false);
     }
 
     /** @test */
     public function button_accepts_theme()
     {
         $theme = [
-            'font' =>  'bold',
+            'font' => 'bold',
         ];
-        
+
         $span = ComponentBuilder::make(ComponentEnum::SPAN)
             ->setThemes($theme);
 
         $this->blade('{{ $span }}', [
             'span' => $span,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }

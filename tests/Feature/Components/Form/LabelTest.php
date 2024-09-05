@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Components\Form;
 
-use Tests\TestCase;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class LabelTest extends TestCase
 {
@@ -16,7 +16,7 @@ class LabelTest extends TestCase
         $this->blade('{{ $label }}', [
             'label' => $label,
         ])
-        ->assertSee('<label', false);
+            ->assertSee('<label', false);
     }
 
     /** @test */
@@ -31,12 +31,11 @@ class LabelTest extends TestCase
         $this->blade('{{ $label }}', [
             'label' => $label,
         ])
-        ->assertSee('<label', false)
-        ->assertSee('Span content')
-        ->assertSee('</label>', false);
+            ->assertSee('<label', false)
+            ->assertSee('Span content')
+            ->assertSee('</label>', false);
     }
 
-    
     /** @test */
     public function label_accepts_attributes()
     {
@@ -46,7 +45,7 @@ class LabelTest extends TestCase
         $this->blade('{{ $label }}', [
             'label' => $label,
         ])
-        ->assertSee('for="label_for"', false);
+            ->assertSee('for="label_for"', false);
     }
 
     /** @test */
@@ -63,29 +62,28 @@ class LabelTest extends TestCase
         $this->blade('{{ $label }}', [
             'label' => $label,
         ])
-        ->assertSee('<span', false)
-        ->assertSee('First span')
-        ->assertSee('</span>', false)
-        ->assertSee('Second span');
-        
+            ->assertSee('<span', false)
+            ->assertSee('First span')
+            ->assertSee('</span>', false)
+            ->assertSee('Second span');
+
     }
 
     /** @test */
     public function label_accepts_theme()
     {
         $theme = [
-            'color' =>  'default',
+            'color' => 'default',
         ];
-        
+
         $label = ComponentBuilder::make(ComponentEnum::LABEL)
             ->setThemes($theme);
-        
+
         $this->blade('{{ $label }}', [
             'label' => $label,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }
-
 }

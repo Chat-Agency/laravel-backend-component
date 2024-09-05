@@ -4,6 +4,5 @@ namespace ChatAgency\BackendComponents\Contracts;
 
 interface AttributeBag
 {
-    public function getAttributes() : array;
-
+    public function getAttributes(): array;
 }

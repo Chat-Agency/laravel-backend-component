@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Components\Form;
 
-use Tests\TestCase;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class LegendTest extends TestCase
 {
@@ -16,7 +16,7 @@ class LegendTest extends TestCase
         $this->blade('{{ $legend }}', [
             'legend' => $legend,
         ])
-        ->assertSee('<legend', false);
+            ->assertSee('<legend', false);
     }
 
     /** @test */
@@ -31,12 +31,11 @@ class LegendTest extends TestCase
         $this->blade('{{ $legend }}', [
             'legend' => $legend,
         ])
-        ->assertSee('<legend', false)
-        ->assertSee('Span content')
-        ->assertSee('</legend>', false);
+            ->assertSee('<legend', false)
+            ->assertSee('Span content')
+            ->assertSee('</legend>', false);
     }
 
-    
     /** @test */
     public function legend_accepts_attributes()
     {
@@ -46,7 +45,7 @@ class LegendTest extends TestCase
         $this->blade('{{ $legend }}', [
             'legend' => $legend,
         ])
-        ->assertSee('for="legend_for"', false);
+            ->assertSee('for="legend_for"', false);
     }
 
     /** @test */
@@ -63,29 +62,28 @@ class LegendTest extends TestCase
         $this->blade('{{ $legend }}', [
             'legend' => $legend,
         ])
-        ->assertSee('<span', false)
-        ->assertSee('First span')
-        ->assertSee('</span>', false)
-        ->assertSee('Second span');
-        
+            ->assertSee('<span', false)
+            ->assertSee('First span')
+            ->assertSee('</span>', false)
+            ->assertSee('Second span');
+
     }
 
     /** @test */
     public function legend_accepts_theme()
     {
         $theme = [
-            'color' =>  'default',
+            'color' => 'default',
         ];
-        
+
         $legend = ComponentBuilder::make(ComponentEnum::LEGEND)
             ->setThemes($theme);
-        
+
         $this->blade('{{ $legend }}', [
             'legend' => $legend,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }
-
 }

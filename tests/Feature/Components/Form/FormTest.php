@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Components\Form;
 
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use Tests\TestCase;
 
 class FormTest extends TestCase
@@ -16,8 +16,8 @@ class FormTest extends TestCase
         $this->blade('{{ $form }}', [
             'form' => $form,
         ])
-        ->assertSee('<form', false)
-        ->assertSee('</form>', false);
+            ->assertSee('<form', false)
+            ->assertSee('</form>', false);
     }
 
     /** @test */
@@ -32,9 +32,9 @@ class FormTest extends TestCase
         $this->blade('{{ $form }}', [
             'form' => $form,
         ])
-        ->assertSee('<button', false)
-        ->assertSee('Send Form')
-        ->assertSee('</button>', false);
+            ->assertSee('<button', false)
+            ->assertSee('Send Form')
+            ->assertSee('</button>', false);
     }
 
     /** @test */
@@ -48,9 +48,9 @@ class FormTest extends TestCase
         $this->blade('{{ $form }}', [
             'form' => $form,
         ])
-        ->assertSee('method="POST"', false)
-        ->assertSee('action="/"', false)
-        ->assertSee('enctype="multipart/form-data"', false);
+            ->assertSee('method="POST"', false)
+            ->assertSee('action="/"', false)
+            ->assertSee('enctype="multipart/form-data"', false);
     }
 
     /** @test */
@@ -62,33 +62,33 @@ class FormTest extends TestCase
                     ->setContent('First Name')
                     ->setAttribute('for', 'first_name'),
                 ComponentBuilder::make(ComponentEnum::TEXT_INPUT)
-                    ->setAttribute('id',  'first_name'),
+                    ->setAttribute('id', 'first_name'),
             ]);
 
         $this->blade('{{ $form }}', [
             'form' => $form,
         ])
-        ->assertSee('<label for="first_name"', false)
-        ->assertSee('First Name')
-        ->assertSee('</label>', false)
-        ->assertSee('<input type="text"', false);
-        
+            ->assertSee('<label for="first_name"', false)
+            ->assertSee('First Name')
+            ->assertSee('</label>', false)
+            ->assertSee('<input type="text"', false);
+
     }
 
     /** @test */
     public function form_accepts_theme()
     {
         $theme = [
-            'display' =>  'flex',
+            'display' => 'flex',
         ];
-        
+
         $form = ComponentBuilder::make(ComponentEnum::FORM)
             ->setThemes($theme);
-        
+
         $this->blade('{{ $form }}', [
             'form' => $form,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }
@@ -102,7 +102,7 @@ class FormTest extends TestCase
         $this->blade('{{ $form }}', [
             'form' => $form,
         ])
-        ->assertDontSee('<input type="hidden" name="_token"', false);
-        
+            ->assertDontSee('<input type="hidden" name="_token"', false);
+
     }
 }

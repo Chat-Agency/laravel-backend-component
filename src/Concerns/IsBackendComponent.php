@@ -3,103 +3,104 @@
 namespace ChatAgency\BackendComponents\Concerns;
 
 use BackedEnum;
-use ChatAgency\BackendComponents\Contracts\AttributeBag;
 use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
+use ChatAgency\BackendComponents\Contracts\AttributeBag;
 
 trait IsBackendComponent
 {
     /**
      * Package namespace
      */
-    protected string | null $namespace = null;
+    protected ?string $namespace = null;
 
-    protected string | null $path = null;
+    protected ?string $path = null;
 
     protected bool $useLocal = false;
 
     protected array $attributes = [];
 
-    public function useLocal($local = true) : static
+    public function useLocal($local = true): static
     {
         $this->useLocal = $local;
 
         return $this;
     }
 
-    public function getName() : string
+    public function getName(): string
     {
         $name = $this->name;
-        
+
         if ($name instanceof BackedEnum) {
             return $name->value;
         }
-        
+
         return $name;
     }
 
-    public function getNamespace() : string | null
+    public function getNamespace(): ?string
     {
-        return $this->useLocal 
-            ? null : 
+        return $this->useLocal
+            ? null :
             ($this->namespace ?? \backendComponentNamespace());
     }
 
-    public function getPath() : string
+    public function getPath(): string
     {
         return $this->getNamespace().$this->path;
     }
 
-    public function getComponentPath() : string
+    public function getComponentPath(): string
     {
         return $this->getPath().$this->getName();
     }
 
-    public function getAttributes() : array
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
 
-    public function getAttribute(string $name) : string | null
+    public function getAttribute(string $name): ?string
     {
         return $this->getAttributes()[$name] ?? null;
     }
 
-    public function getAttributeBag() : AttributeBag
+    public function getAttributeBag(): AttributeBag
     {
         $attrs = $this->toArray();
         unset($attrs['name']);
-        return new DefaultAttributeBag(...$attrs); 
+
+        return new DefaultAttributeBag(...$attrs);
     }
 
-    public function setNamespace(string $namespace) : static
+    public function setNamespace(string $namespace): static
     {
         $this->namespace = $namespace;
 
         return $this;
     }
-    
-    public function setPath(string $path) : static
+
+    public function setPath(string $path): static
     {
         $this->path = $path;
 
         return $this;
     }
-    
-    public function setType(?string $name = null) : static
+
+    public function setType(?string $name = null): static
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function setAttribute(string $name, $content) : static
+    public function setAttribute(string $name, $content): static
     {
         $this->attributes[$name] = $content;
 
         return $this;
     }
 
-    public function setAttributes(array $attributes) : static
+    public function setAttributes(array $attributes): static
     {
         foreach ($attributes as $name => $content) {
             $this->setAttribute($name, $content);
@@ -108,7 +109,7 @@ trait IsBackendComponent
         return $this;
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         return json_encode($this->toArray());
     }

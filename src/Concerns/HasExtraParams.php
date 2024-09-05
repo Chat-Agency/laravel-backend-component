@@ -6,24 +6,24 @@ trait HasExtraParams
 {
     protected array $extras = [];
 
-    public function getExtras() : array
+    public function getExtras(): array
     {
         return $this->extras;
     }
 
-    public function getExtra(string $name) : mixed
+    public function getExtra(string $name): mixed
     {
         return $this->getExtras()[$name] ?? null;
     }
 
-    public function setExtra(string $name, mixed $content) : static
+    public function setExtra(string $name, mixed $content): static
     {
         $this->extras[$name] = $content;
 
         return $this;
     }
 
-    public function setExtras(array $extras) : static
+    public function setExtras(array $extras): static
     {
         foreach ($extras as $name => $content) {
             $this->setExtra($name, $content);
@@ -31,6 +31,4 @@ trait HasExtraParams
 
         return $this;
     }
-
-
 }

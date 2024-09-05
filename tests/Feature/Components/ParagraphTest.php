@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Components;
 
-use Tests\TestCase;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class ParagraphTest extends TestCase
 {
@@ -16,8 +16,8 @@ class ParagraphTest extends TestCase
         $this->blade('{{ $paragraph }}', [
             'paragraph' => $paragraph,
         ])
-        ->assertSee('<p', false)
-        ->assertSee('</p>', false);
+            ->assertSee('<p', false)
+            ->assertSee('</p>', false);
     }
 
     /** @test */
@@ -32,11 +32,11 @@ class ParagraphTest extends TestCase
         $this->blade('{{ $paragraph }}', [
             'paragraph' => $paragraph,
         ])
-        ->assertSee('<p ', false)
-        ->assertSee('<a', false)
-        ->assertSee('Link content')
-        ->assertSee('</a>', false)
-        ->assertSee('</p>', false);
+            ->assertSee('<p ', false)
+            ->assertSee('<a', false)
+            ->assertSee('Link content')
+            ->assertSee('</a>', false)
+            ->assertSee('</p>', false);
     }
 
     /** @test */
@@ -49,9 +49,9 @@ class ParagraphTest extends TestCase
         $this->blade('{{ $paragraph }}', [
             'paragraph' => $paragraph,
         ])
-        ->assertSee('<p', false)
-        ->assertSee('id="paragraph_id"', false)
-        ->assertSee('</p>', false);
+            ->assertSee('<p', false)
+            ->assertSee('id="paragraph_id"', false)
+            ->assertSee('</p>', false);
     }
 
     /** @test */
@@ -62,7 +62,7 @@ class ParagraphTest extends TestCase
             ->setSubComponents([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('Inside span'),
-                    ComponentBuilder::make(ComponentEnum::LINK)
+                ComponentBuilder::make(ComponentEnum::LINK)
                     ->setContent('Inside link')
                     ->setAttribute('href', 'https://google.com'),
             ]);
@@ -70,35 +70,34 @@ class ParagraphTest extends TestCase
         $this->blade('{{ $paragraph }}', [
             'paragraph' => $paragraph,
         ])
-        ->assertSee('<p', false)
-        ->assertSee('<span', false)
-        ->assertSee('Inside span')
-        ->assertSee('</span>', false)
-        ->assertSee('href="https://google.com"', false)
-        ->assertSee('Inside link')
-        ->assertSee('</p>', false);
-        
+            ->assertSee('<p', false)
+            ->assertSee('<span', false)
+            ->assertSee('Inside span')
+            ->assertSee('</span>', false)
+            ->assertSee('href="https://google.com"', false)
+            ->assertSee('Inside link')
+            ->assertSee('</p>', false);
+
     }
 
     /** @test */
     public function paragraph_accepts_theme()
     {
         $theme = [
-            'color' =>  'success',
+            'color' => 'success',
         ];
-        
+
         $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
             ->setContent('Nice paragraph')
             ->setThemes($theme);
-        
+
         $this->blade('{{ $paragraph }}', [
             'paragraph' => $paragraph,
         ])
-        ->assertSee('<p', false)
-        ->assertSee('class="'.bladeThemes($theme), false)
-        ->assertSee('</p>', false);
+            ->assertSee('<p', false)
+            ->assertSee('class="'.bladeThemes($theme), false)
+            ->assertSee('</p>', false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }
-
 }

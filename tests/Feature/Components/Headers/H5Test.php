@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Components\Headers;
 
-use Tests\TestCase;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use Tests\TestCase;
 
 class H5Test extends TestCase
 {
@@ -16,8 +16,8 @@ class H5Test extends TestCase
         $this->blade('{{ $header }}', [
             'header' => $header,
         ])
-        ->assertSee('<h5', false)
-        ->assertSee('</h5>', false);
+            ->assertSee('<h5', false)
+            ->assertSee('</h5>', false);
     }
 
     /** @test */
@@ -29,7 +29,7 @@ class H5Test extends TestCase
         $this->blade('{{ $header }}', [
             'header' => $header,
         ])
-        ->assertSee('Nice h5 tag');
+            ->assertSee('Nice h5 tag');
     }
 
     /** @test */
@@ -41,7 +41,7 @@ class H5Test extends TestCase
         $this->blade('{{ $header }}', [
             'header' => $header,
         ])
-        ->assertSee('id="nice_header"', false);;
+            ->assertSee('id="nice_header"', false);
     }
 
     /** @test */
@@ -58,17 +58,17 @@ class H5Test extends TestCase
         $this->blade('{{ $div }}', [
             'div' => $div,
         ])
-        ->assertSee('<span >', false)
-        ->assertSee('First span')
-        ->assertSee('</span>', false)
-        ->assertSee('Second span');
+            ->assertSee('<span >', false)
+            ->assertSee('First span')
+            ->assertSee('</span>', false)
+            ->assertSee('Second span');
     }
 
     /** @test */
     public function h5_header_accepts_theme()
     {
         $theme = [
-            'color' =>  'error',
+            'color' => 'error',
         ];
 
         $header = ComponentBuilder::make(ComponentEnum::H5)
@@ -77,9 +77,8 @@ class H5Test extends TestCase
         $this->blade('{{ $header }}', [
             'header' => $header,
         ])
-        ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.bladeThemes($theme), false);
 
         $this->assertNotEmpty(bladeThemes($theme));
     }
-
 }
