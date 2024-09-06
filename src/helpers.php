@@ -44,7 +44,7 @@ if (! function_exists('bladeThemes')) {
 }
 
 if (! function_exists('resolveTheme')) {
-    function resolveTheme(array $styleGroup, string|ThemeBag $style): string
+    function resolveTheme(array $styleGroup, string|array|ThemeBag $style): string
     {
         return DefaultThemeManager::make()
             ->resolveTheme($styleGroup, $style);

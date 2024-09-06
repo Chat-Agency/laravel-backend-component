@@ -12,7 +12,7 @@ interface ThemeComponent
 
     public function getThemes(): array;
 
-    public function getTheme(string $name): string|ThemeBag|null;
+    public function getTheme(string $name): string|array|ThemeBag|null;
 
     public function getThemeManager(): ThemeManager;
 

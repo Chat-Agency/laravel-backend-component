@@ -41,7 +41,7 @@ trait IsThemeManager
         return trim($classes);
     }
 
-    public function bladeTheme(string $type, string|ThemeBag|null $theme = null)
+    public function bladeTheme(string $type, string|array|ThemeBag|null $theme = null) : string
     {
         $themePath = $this->getThemePath();
 
@@ -52,24 +52,20 @@ trait IsThemeManager
         );
     }
 
-    public function resolveTheme(array $styleGroup, string|ThemeBag $style): string
+    public function resolveTheme(array $styleGroup, string|array|ThemeBag $style) : string
     {
         $value = '';
 
         if ($this->isBag($style)) {
 
             foreach ($style->getStyles() as $styleValue) {
-
-                if (is_array($styleValue)) {
-                    foreach ($styleValue as $key => $styleArrayValue) {
-                        $value .= $styleGroup[$styleArrayValue].' ';
-                    }
-
-                    continue;
-                }
-
                 $value .= $styleGroup[$styleValue].' ';
+            }
 
+        } elseif(is_array($style)) {
+            
+            foreach ($style as $styleArrayValue) {
+                $value .= $styleGroup[$styleArrayValue].' ';
             }
 
         } elseif (is_string($style)) {
@@ -79,7 +75,7 @@ trait IsThemeManager
         return $value;
     }
 
-    public function isBag(string|ThemeBag $value): bool
+    public function isBag(string|array|ThemeBag $value): bool
     {
         return is_a($value, ThemeBag::class);
     }

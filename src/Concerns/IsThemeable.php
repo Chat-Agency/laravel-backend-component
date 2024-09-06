@@ -14,7 +14,7 @@ trait IsThemeable
         return $this->themes;
     }
 
-    public function getTheme(string $name): string|ThemeBag|null
+    public function getTheme(string $name): string|array|ThemeBag|null
     {
         return $this->getThemes()[$name] ?? null;
     }
@@ -24,7 +24,7 @@ trait IsThemeable
         return $this->themeManager;
     }
 
-    public function setTheme(string $name, string|ThemeBag $theme): static
+    public function setTheme(string $name, string|array|ThemeBag $theme): static
     {
         $this->themes[$name] = $theme;
 
