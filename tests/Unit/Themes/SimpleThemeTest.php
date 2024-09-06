@@ -15,8 +15,8 @@ class SimpleThemeTest extends TestCase
         $theme = [
             'display' => 'flex',
         ];
-        
-        $manager = new DefaultThemeManager();
+
+        $manager = new DefaultThemeManager;
 
         $this->assertEquals($manager->bladeThemes($theme), 'flex');
     }
@@ -29,15 +29,15 @@ class SimpleThemeTest extends TestCase
             'flex' => new DefaultThemeBag([
                 'gap-sm',
                 'items-center',
-            ])
+            ]),
         ];
-        
-        $manager = new DefaultThemeManager();
+
+        $manager = new DefaultThemeManager;
 
         $this->assertEquals($manager->bladeThemes($theme), 'flex gap-1 items-center');
-        
+
     }
-    
+
     #[Test]
     public function if_multiple_multiple_values_are_needed_in_a_same_theme_an_array_can_be_used()
     {
@@ -48,11 +48,11 @@ class SimpleThemeTest extends TestCase
                 'items-center',
             ],
         ];
-        
-        $manager = new DefaultThemeManager();
+
+        $manager = new DefaultThemeManager;
 
         $this->assertEquals($manager->bladeThemes($theme), 'flex gap-1 items-center');
-        
+
     }
 
     #[Test]
@@ -63,12 +63,12 @@ class SimpleThemeTest extends TestCase
             'flex' => DefaultThemeBag::make([
                 'gap-sm',
                 'items-center',
-            ])
+            ]),
         ];
-        
-        $manager = new DefaultThemeManager();
+
+        $manager = new DefaultThemeManager;
 
         $this->assertEquals($manager->bladeThemes($theme), 'flex gap-1 items-center');
-        
+
     }
 }
