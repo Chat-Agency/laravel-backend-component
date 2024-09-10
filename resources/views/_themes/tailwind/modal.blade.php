@@ -1,5 +1,7 @@
 @php
 
+    use function ChatAgency\BackendComponents\resolveTheme;
+
     $styles = [
         'default' => 'bg-white dark:bg-slate-800 rounded-lg overflow-hidden transform transition-all shadow-xl',
         'overlay' => 'absolute inset-0 bg-gray-500 dark:bg-gray-700 opacity-75',

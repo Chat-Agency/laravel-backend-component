@@ -1,4 +1,7 @@
 @php
+
+    use function ChatAgency\BackendComponents\resolveTheme;
+    
     $styles = [
         'gap-sm' => 'gap-1',
         'gap-md' => 'gap-3',

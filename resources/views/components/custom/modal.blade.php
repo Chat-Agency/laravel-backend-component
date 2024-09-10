@@ -16,6 +16,8 @@
      */
     use ChatAgency\BackendComponents\Builders\ComponentBuilder;
     use ChatAgency\BackendComponents\Enums\ComponentEnum;
+
+    use function ChatAgency\BackendComponents\bladeThemes;
     
     $serverAttrs = [
         'x-show' => 'showModal',

@@ -1,5 +1,7 @@
 @php
 
+    use function ChatAgency\BackendComponents\resolveTheme;
+    
     $allButtons = 'rounded ';
     $allDarkButtons = 'text-white ';
     $allActions = 'disabled:opacity-30 transition duration-150 ease-in-out ';

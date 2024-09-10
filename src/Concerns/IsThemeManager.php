@@ -5,6 +5,8 @@ namespace ChatAgency\BackendComponents\Concerns;
 use ChatAgency\BackendComponents\Contracts\ThemeBag;
 use Illuminate\Support\Str;
 
+use function ChatAgency\BackendComponents\backendComponentNamespace;
+
 trait IsThemeManager
 {
     public static function make(): static

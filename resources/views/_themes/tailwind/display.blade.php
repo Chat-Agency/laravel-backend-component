@@ -1,5 +1,7 @@
 @php
 
+    use function ChatAgency\BackendComponents\resolveTheme;
+    
     $styles = [
         'flex' => 'flex',
         'inline' => 'inline',

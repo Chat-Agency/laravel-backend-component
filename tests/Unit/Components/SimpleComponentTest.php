@@ -8,6 +8,8 @@ use ChatAgency\BackendComponents\MainBackendComponent;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
+use function ChatAgency\BackendComponents\backendComponentNamespace;
+
 class SimpleComponentTest extends TestCase
 {
     #[Test]

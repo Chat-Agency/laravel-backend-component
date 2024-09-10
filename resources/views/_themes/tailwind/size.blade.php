@@ -1,4 +1,6 @@
 @php
+
+    use function ChatAgency\BackendComponents\resolveTheme;
     
     $styles = [
         'w-full' => 'w-full',

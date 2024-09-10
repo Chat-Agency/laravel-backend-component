@@ -1,5 +1,7 @@
 @php
 
+    use function ChatAgency\BackendComponents\resolveTheme;
+    
     $styles = [
         'ordered' => 'list-decimal',
         'unordered' => 'list-disc',

@@ -1,5 +1,7 @@
 @php
 
+    use function ChatAgency\BackendComponents\resolveTheme;
+    
     $styles = [
         'top-sm' => 'mt-3',
         'bottom-sm' => 'mb-3',

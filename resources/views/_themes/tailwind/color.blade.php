@@ -1,5 +1,7 @@
 @php
 
+    use function ChatAgency\BackendComponents\resolveTheme;
+
     $styles = [
         'default' => 'text-black',
         'default-dark' => 'dark:text-white',

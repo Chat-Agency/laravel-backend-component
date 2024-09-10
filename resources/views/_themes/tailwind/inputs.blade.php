@@ -1,4 +1,7 @@
 @php
+    
+    use function ChatAgency\BackendComponents\resolveTheme;
+    
     /**
      * Styles from:
      * https://preline.co/

@@ -1,5 +1,7 @@
 @php
 
+    use function ChatAgency\BackendComponents\resolveTheme;
+    
     $styles = [
         'sm' => 'text-sm',
         'md' => 'text-base',

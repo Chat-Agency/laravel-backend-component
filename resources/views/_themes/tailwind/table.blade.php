@@ -1,5 +1,7 @@
 @php
 
+    use function ChatAgency\BackendComponents\resolveTheme;
+    
     $styles = [
         'container' => 'inline-block min-w-full shadow rounded-lg overflow-hidden',
         'table' => 'min-w-full',

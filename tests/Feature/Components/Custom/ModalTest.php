@@ -7,6 +7,8 @@ use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
+use function ChatAgency\BackendComponents\bladeThemes;
+
 class ModalTest extends TestCase
 {
     #[Test]

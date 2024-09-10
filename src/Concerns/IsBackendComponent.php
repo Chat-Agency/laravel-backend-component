@@ -6,6 +6,8 @@ use BackedEnum;
 use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
 use ChatAgency\BackendComponents\Contracts\AttributeBag;
 
+use function ChatAgency\BackendComponents\backendComponentNamespace;
+
 trait IsBackendComponent
 {
     /**
@@ -41,7 +43,7 @@ trait IsBackendComponent
     {
         return $this->useLocal
             ? null :
-            ($this->namespace ?? \backendComponentNamespace());
+            ($this->namespace ?? backendComponentNamespace());
     }
 
     public function getPath(): string
@@ -116,7 +118,7 @@ trait IsBackendComponent
 
     public function toHtml()
     {
-        return view(\backendComponentNamespace().'_utilities.resolve-component')
+        return view(backendComponentNamespace().'_utilities.resolve-component')
             ->with('component', $this);
 
     }

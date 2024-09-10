@@ -6,6 +6,7 @@ use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
+use function ChatAgency\BackendComponents\bladeThemes;
 
 class FormTest extends TestCase
 {
