@@ -2,14 +2,12 @@
 
 namespace ChatAgency\BackendComponents {
 
-    use ChatAgency\BackendComponents\BackendComponentsServiceProvider;
     use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
-    use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
-    use ChatAgency\BackendComponents\Contracts\BackendComponent;
     use ChatAgency\BackendComponents\Contracts\AttributeBag;
-    use ChatAgency\BackendComponents\Contracts\ThemeManager;
-    use ChatAgency\BackendComponents\MainBackendComponent;
+    use ChatAgency\BackendComponents\Contracts\BackendComponent;
     use ChatAgency\BackendComponents\Contracts\ThemeBag;
+    use ChatAgency\BackendComponents\Contracts\ThemeManager;
+    use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 
     function backendComponentNamespace(): string
     {
@@ -40,7 +38,7 @@ namespace ChatAgency\BackendComponents {
     function makeAttributeBag(...$args): AttributeBag
     {
         return new DefaultAttributeBag(...$args);
-    
+
     }
 
 }
