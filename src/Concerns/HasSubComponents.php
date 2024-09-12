@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ChatAgency\BackendComponents\Concerns;
 
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
@@ -14,7 +16,7 @@ trait HasSubComponents
         return $this->subComponents;
     }
 
-    public function setSubComponent(BackendComponent $subComponent, ?string $name = null): static
+    public function setSubComponent(BackendComponent $subComponent, string|int|null $name = null): static
     {
         if ($name) {
             $this->subComponents[$name] = $subComponent;

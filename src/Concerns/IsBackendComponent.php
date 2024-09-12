@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ChatAgency\BackendComponents\Concerns;
 
 use BackedEnum;
@@ -119,7 +121,8 @@ trait IsBackendComponent
     public function toHtml()
     {
         return view(backendComponentNamespace().'_utilities.resolve-component')
-            ->with('component', $this);
+            ->with('component', $this)
+            ->render();
 
     }
 }

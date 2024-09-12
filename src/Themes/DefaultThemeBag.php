@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ChatAgency\BackendComponents\Themes;
 
 use ChatAgency\BackendComponents\Contracts\ThemeBag;
