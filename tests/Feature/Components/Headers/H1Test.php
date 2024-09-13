@@ -7,7 +7,7 @@ use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\bladeThemes;
+use function ChatAgency\BackendComponents\getThemes;
 
 class H1Test extends TestCase
 {
@@ -80,8 +80,8 @@ class H1Test extends TestCase
         $this->blade('{{ $header }}', [
             'header' => $header,
         ])
-            ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.getThemes($theme), false);
 
-        $this->assertNotEmpty(bladeThemes($theme));
+        $this->assertNotEmpty(getThemes($theme));
     }
 }

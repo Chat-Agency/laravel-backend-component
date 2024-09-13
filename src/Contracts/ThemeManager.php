@@ -12,9 +12,9 @@ interface ThemeManager
 
     public function getThemePath(): string;
 
-    public function bladeThemes(array $themes);
+    public function getThemes(array $themes);
 
-    public function bladeTheme(string $type, string|array|ThemeBag|null $theme = null): string;
+    public function getTheme(string $type, string|array|ThemeBag|null $theme = null): string;
 
     public function resolveTheme(array $styleGroup, string|ThemeBag $style): string;
 

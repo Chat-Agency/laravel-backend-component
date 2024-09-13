@@ -26,9 +26,9 @@ namespace ChatAgency\BackendComponents {
         return is_a($value, BackendComponent::class);
     }
 
-    function bladeThemes(array $themes, ThemeManager $manager = new DefaultThemeManager)
+    function getThemes(array $themes, ThemeManager $manager = new DefaultThemeManager)
     {
-        return $manager->bladeThemes($themes);
+        return $manager->getThemes($themes);
     }
 
     function resolveTheme(array $styleGroup, string|array|ThemeBag $style): string

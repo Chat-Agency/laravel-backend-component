@@ -30,7 +30,7 @@ trait IsThemeManager
                 .'.';
     }
 
-    public function bladeThemes(array $themes)
+    public function getThemes(array $themes)
     {
         if (! count($themes)) {
             return null;
@@ -39,13 +39,13 @@ trait IsThemeManager
         $classes = '';
 
         foreach ($themes as $type => $theme) {
-            $classes .= $this->bladeTheme($type, $theme).' ';
+            $classes .= $this->getTheme($type, $theme).' ';
         }
 
         return trim($classes);
     }
 
-    public function bladeTheme(string $type, string|array|ThemeBag|null $theme = null): string
+    public function getTheme(string $type, string|array|ThemeBag|null $theme = null): string
     {
         $themePath = $this->getThemePath();
 

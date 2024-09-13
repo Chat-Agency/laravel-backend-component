@@ -17,7 +17,7 @@
     use ChatAgency\BackendComponents\Builders\ComponentBuilder;
     use ChatAgency\BackendComponents\Enums\ComponentEnum;
 
-    use function ChatAgency\BackendComponents\bladeThemes;
+    use function ChatAgency\BackendComponents\getThemes;
     
     $serverAttrs = [
         'x-show' => 'showModal',
@@ -65,7 +65,7 @@
         x-show="showModal"
         x-cloak
         @keydown.escape="showModal = false"
-        class="{{ bladeThemes($containerTheme) }} fixed inset-0 overflow-y-auto px-4 py-6 z-50">
+        class="{{ getThemes($containerTheme) }} fixed inset-0 overflow-y-auto px-4 py-6 z-50">
         
         <div x-show="showModal" 
             class="fixed inset-0 transform transition-all" 

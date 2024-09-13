@@ -90,13 +90,6 @@ trait IsBackendComponent
         return $this;
     }
 
-    public function setType(?string $name = null): static
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function setAttribute(string $name, $content): static
     {
         $this->attributes[$name] = $content;

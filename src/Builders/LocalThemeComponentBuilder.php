@@ -23,7 +23,7 @@ use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
  *
  * themes - resource/views/_themes
  */
-class LocalThemeBuilder implements StaticBuilder
+class LocalThemeComponentBuilder implements StaticBuilder
 {
     public static function make(
         string|BackedEnum $name,

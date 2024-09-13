@@ -7,7 +7,7 @@ use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\bladeThemes;
+use function ChatAgency\BackendComponents\getThemes;
 
 class SpanTest extends TestCase
 {
@@ -77,8 +77,8 @@ class SpanTest extends TestCase
         $this->blade('{{ $span }}', [
             'span' => $span,
         ])
-            ->assertSee('class="'.bladeThemes($theme), false);
+            ->assertSee('class="'.getThemes($theme), false);
 
-        $this->assertNotEmpty(bladeThemes($theme));
+        $this->assertNotEmpty(getThemes($theme));
     }
 }

@@ -24,7 +24,7 @@ use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
  * component - resource/views/components
  * themes - resource/views/_themes
  */
-class LocalBuilder implements StaticBuilder
+class LocalComponentBuilder implements StaticBuilder
 {
     public static function make(
         string|BackedEnum $name,

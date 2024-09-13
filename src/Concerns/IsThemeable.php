@@ -52,7 +52,7 @@ trait IsThemeable
     public function compileTheme(): ?string
     {
         return $this->getThemeManager()
-            ->bladeThemes(
+            ->getThemes(
                 $this->getThemes()
             );
     }

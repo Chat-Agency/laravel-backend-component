@@ -18,7 +18,7 @@ class SimpleThemeTest extends TestCase
 
         $manager = new DefaultThemeManager;
 
-        $this->assertEquals($manager->bladeThemes($theme), 'flex');
+        $this->assertEquals($manager->getThemes($theme), 'flex');
     }
 
     #[Test]
@@ -34,7 +34,7 @@ class SimpleThemeTest extends TestCase
 
         $manager = new DefaultThemeManager;
 
-        $this->assertEquals($manager->bladeThemes($theme), 'flex gap-1 items-center');
+        $this->assertEquals($manager->getThemes($theme), 'flex gap-1 items-center');
 
     }
 
@@ -51,7 +51,7 @@ class SimpleThemeTest extends TestCase
 
         $manager = new DefaultThemeManager;
 
-        $this->assertEquals($manager->bladeThemes($theme), 'flex gap-1 items-center');
+        $this->assertEquals($manager->getThemes($theme), 'flex gap-1 items-center');
 
     }
 
@@ -68,7 +68,7 @@ class SimpleThemeTest extends TestCase
 
         $manager = new DefaultThemeManager;
 
-        $this->assertEquals($manager->bladeThemes($theme), 'flex gap-1 items-center');
+        $this->assertEquals($manager->getThemes($theme), 'flex gap-1 items-center');
 
     }
 }

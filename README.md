@@ -12,7 +12,7 @@ composer require chat-agency/laravel-backend-component
 
 ## Basic use
 
-Use the MainBackendComponent to construct the compoennt, passing the name of the component as a first parameter.
+Use the MainBackendComponent to construct the component, passing the name of the component as a first parameter.
 
 ```php
 use ChatAgency\LaravelBackendComponents\MainBackendComponent;
@@ -20,7 +20,7 @@ use ChatAgency\LaravelBackendComponents\MainBackendComponent;
 $button = new MainBackendComponent("inline.button");
 ```
 
-Alternative, there are multiple builders and enums to make creating an instance easier.
+Alternative, there's a builder and an enum that make creating instances easier.
 
 ```php
 use ChatAgency\LaravelBackendComponents\Enums\ComponentEnum;

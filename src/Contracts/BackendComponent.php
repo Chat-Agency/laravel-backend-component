@@ -26,8 +26,6 @@ interface BackendComponent
 
     public function setPath(string $path): static;
 
-    public function setType(?string $name = null): static;
-
     public function setAttribute(string $name, $content): static;
 
     public function setAttributes(array $attributes): static;
