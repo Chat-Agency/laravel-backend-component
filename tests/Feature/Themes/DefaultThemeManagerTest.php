@@ -2,9 +2,9 @@
 
 namespace Feature\Themes;
 
-use Tests\TestCase;
-use PHPUnit\Framework\Attributes\Test;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 use function ChatAgency\BackendComponents\getThemes;
 
@@ -16,8 +16,8 @@ class DefaultThemeManagerTest extends TestCase
         $theme = [
             'display' => 'flex',
         ];
-        
-        $manager = new DefaultThemeManager();
+
+        $manager = new DefaultThemeManager;
 
         $this->assertEquals($manager->getThemes($theme), getThemes($theme));
 

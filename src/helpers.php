@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents {
 
-    use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
-    use ChatAgency\BackendComponents\Contracts\AttributeBag;
-    use ChatAgency\BackendComponents\Contracts\BackendComponent;
     use ChatAgency\BackendComponents\Contracts\ThemeBag;
     use ChatAgency\BackendComponents\Contracts\ThemeManager;
     use ChatAgency\BackendComponents\Themes\DefaultThemeManager;

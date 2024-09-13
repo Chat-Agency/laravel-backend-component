@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Components;
 
-use Tests\TestCase;
-use PHPUnit\Framework\Attributes\Test;
 use ChatAgency\BackendComponents\Builders\LocalThemeComponentBuilder;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 use function ChatAgency\BackendComponents\backendComponentNamespace;
 
@@ -21,5 +21,4 @@ class LocalThemeComponentBuilderTest extends TestCase
 
         $this->assertStringStartsNotWith(backendComponentNamespace(), $themeManager->getThemePath());
     }
-
 }

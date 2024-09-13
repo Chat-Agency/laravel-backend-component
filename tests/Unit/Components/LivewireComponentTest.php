@@ -2,9 +2,9 @@
 
 namespace Unit\Components;
 
-use Tests\TestCase;
-use PHPUnit\Framework\Attributes\Test;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class LivewireComponentTest extends TestCase
 {
@@ -14,9 +14,9 @@ class LivewireComponentTest extends TestCase
         $component = ComponentBuilder::make(LivewireComponent::class);
 
         $this->assertFalse($component->isLivewire());
-        $this->assertNotEquals('livewire-key' ,$component->getLivewireKey());
+        $this->assertNotEquals('livewire-key', $component->getLivewireKey());
         $this->assertArrayNotHasKey('first_param', $component->getLivewireParams());
-        
+
         /**
          * The package does ot require livewire
          * It needs to be installed in order
@@ -26,15 +26,13 @@ class LivewireComponentTest extends TestCase
             ->setLivewire()
             ->setLivewireKey('livewire-key')
             ->setLivewireParams([
-                'first_param' => 'First'
+                'first_param' => 'First',
             ]);
 
         $this->assertTrue($component->isLivewire());
-        $this->assertEquals('livewire-key' ,$component->getLivewireKey());
+        $this->assertEquals('livewire-key', $component->getLivewireKey());
         $this->assertArrayHasKey('first_param', $component->getLivewireParams());
     }
 }
 
-
-final class LivewireComponent 
-{}
+final class LivewireComponent {}

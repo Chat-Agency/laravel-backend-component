@@ -3,7 +3,6 @@
 namespace Tests\Unit\Components;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
-use ChatAgency\BackendComponents\Builders\LocalThemeBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\MainBackendComponent;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
@@ -89,11 +88,10 @@ class SimpleComponentTest extends TestCase
 
     #[Test]
     public function a_component_accepts_content()
-    
     {
         $component = ComponentBuilder::make(ComponentEnum::DIV)
             ->setContent('Nice content');
-        
+
         $this->assertEquals('Nice content', $component->getContent());
     }
 
@@ -102,7 +100,7 @@ class SimpleComponentTest extends TestCase
     {
         $component = ComponentBuilder::make(ComponentEnum::DIV)
             ->setAttribute('id', 'div_id');
-        
+
         $this->assertEquals('div_id', $component->getAttribute('id'));
 
         $component2 = ComponentBuilder::make(ComponentEnum::DIV)
@@ -121,15 +119,15 @@ class SimpleComponentTest extends TestCase
                 ComponentBuilder::make(ComponentEnum::SPAN),
                 'span'
             );
-        
+
         $this->assertInstanceOf(MainBackendComponent::class, $component->getSubComponents()['span']);
-        
+
         $this->assertEquals(ComponentEnum::SPAN->value, ($component->getSubComponents()['span'])->getName());
 
         $component2 = ComponentBuilder::make(ComponentEnum::DIV)
             ->setSubComponents([
                 'bold' => ComponentBuilder::make(ComponentEnum::BOLD)
-                    ->setContent('Bold')
+                    ->setContent('Bold'),
             ]);
 
         $this->assertInstanceOf(MainBackendComponent::class, $component2->getSubComponents()['bold']);
@@ -140,7 +138,7 @@ class SimpleComponentTest extends TestCase
     {
         $component = ComponentBuilder::make(ComponentEnum::DIV)
             ->setTheme('display', 'inline');
-        
+
         $this->assertEquals('inline', $component->getTheme('display'));
 
         $component2 = ComponentBuilder::make(ComponentEnum::DIV)
@@ -156,15 +154,15 @@ class SimpleComponentTest extends TestCase
     {
         $component = ComponentBuilder::make(ComponentEnum::MODAL)
             ->setSlot('button', ComponentBuilder::make(ComponentEnum::BUTTON));
-        
+
         $this->assertInstanceOf(MainBackendComponent::class, $component->getSlot('button'));
 
         $component2 = ComponentBuilder::make(ComponentEnum::MODAL)
             ->setSlots([
                 'title' => ComponentBuilder::make(ComponentEnum::H2)
-                    ->setContent('Nice Title')
+                    ->setContent('Nice Title'),
             ]);
-        
+
         $this->assertInstanceOf(MainBackendComponent::class, $component2->getSlot('title'));
         $this->assertEquals('Nice Title', ($component2->getSlots()['title'])->getContent());
 
@@ -175,7 +173,7 @@ class SimpleComponentTest extends TestCase
     {
         $component = ComponentBuilder::make(ComponentEnum::MODAL)
             ->setExtra('container', []);
-        
+
         $this->assertEquals([], $component->getExtra('container'));
 
         $component2 = ComponentBuilder::make(ComponentEnum::DIV)

@@ -26,11 +26,11 @@ use Illuminate\Contracts\Support\Htmlable;
 
 final class MainBackendComponent implements Arrayable, BackendComponent, ContentComponent, ExtraParamsComponent, Htmlable, LivewireComponent, SlotsComponent, SubComponentsComponent, ThemeComponent
 {
-    use IsBackendComponent,
-        HasContent,
+    use HasContent,
         HasExtraParams,
         HasSlots,
-        HasSubComponents ,
+        HasSubComponents,
+        IsBackendComponent ,
         IsLivewireComponent,
         IsThemeable;
 
