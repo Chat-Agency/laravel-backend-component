@@ -21,11 +21,6 @@ namespace ChatAgency\BackendComponents {
         return new MainBackendComponent($name);
     }
 
-    function isBackendComponent($value)
-    {
-        return is_a($value, BackendComponent::class);
-    }
-
     function getThemes(array $themes, ThemeManager $manager = new DefaultThemeManager)
     {
         return $manager->getThemes($themes);
@@ -37,10 +32,5 @@ namespace ChatAgency\BackendComponents {
             ->resolveTheme($styleGroup, $style);
     }
 
-    function makeAttributeBag(...$args): AttributeBag
-    {
-        return new DefaultAttributeBag(...$args);
-
-    }
 
 }
