@@ -31,6 +31,4 @@ namespace ChatAgency\BackendComponents {
         return DefaultThemeManager::make()
             ->resolveTheme($styleGroup, $style);
     }
-
-
 }
