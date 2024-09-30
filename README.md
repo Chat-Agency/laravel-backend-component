@@ -15,7 +15,7 @@ composer require chat-agency/laravel-backend-component
 Use the MainBackendComponent class to construct your component. Pass the name of the component as the first parameter:
 
 ```php
-use ChatAgency\LaravelBackendComponents\MainBackendComponent;
+use ChatAgency\BackendComponents\MainBackendComponent;
 
 $button = new MainBackendComponent("inline.button");
 ```
@@ -23,8 +23,8 @@ $button = new MainBackendComponent("inline.button");
 Alternatively, there’s a builder and an enum that make creating instances easier:
 
 ```php
-use ChatAgency\LaravelBackendComponents\Enums\ComponentEnum;
-use ChatAgency\LaravelBackendComponents\MainBackendComponent;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use ChatAgency\BackendComponents\MainBackendComponent;
 
 $button = ComponentBuilder::make(ComponentEnum::BUTTON);
 ```
