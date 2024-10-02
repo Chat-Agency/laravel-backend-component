@@ -18,16 +18,32 @@ trait IsThemeManager
 
     public function useLocal($local = true): static
     {
-        $this->useLocal = $local;
+        $this->setPath(resource_path('_themes/tailwind/'));
 
         return $this;
     }
 
+    public  function setPath(string $path) : static
+    {
+        $this->defaultPath = $path;
+
+        return $this;
+    }
+
+    public function getRawPath() : string
+    {
+        return $this->defaultPath;
+    }
+
     public function getThemePath(): string
     {
-        return ($this->useLocal ? null : backendComponentNamespace())
-                .$this->defaultPath
-                .'.';
+        $path = realpath($this->defaultPath);
+
+        if(!$path) {
+            throw new \Exception('The theme path is incorrect', 500);
+        }
+
+        return $path;
     }
 
     public function getThemes(array $themes)
@@ -49,11 +65,18 @@ trait IsThemeManager
     {
         $themePath = $this->getThemePath();
 
-        return trim(
-            view($themePath.$type)
-                ->with(Str::camel($type), $theme)
-                ->render()
-        );
+        $filePath = $themePath.'/'.$type.'.blade.php';
+
+        $realPath = realpath($filePath );
+
+        if(!$realPath) {
+            throw new \Exception('The theme file '.$filePath.' does not exist',500);
+        }
+
+        $themesArray = require($realPath);
+
+        return $this->resolveTheme($themesArray, $theme);
+
     }
 
     public function resolveTheme(array $styleGroup, string|array|ThemeBag $style): string

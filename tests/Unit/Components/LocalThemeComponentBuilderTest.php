@@ -17,8 +17,5 @@ class LocalThemeComponentBuilderTest extends TestCase
 
         $this->assertStringStartsWith(backendComponentNamespace(), $component->getComponentPath());
 
-        $themeManager = $component->getThemeManager();
-
-        $this->assertStringStartsNotWith(backendComponentNamespace(), $themeManager->getThemePath());
     }
 }

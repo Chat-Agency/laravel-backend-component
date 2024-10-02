@@ -11,7 +11,7 @@ final class DefaultThemeManager implements ThemeManager
 {
     use IsThemeManager;
 
-    protected string $defaultPath = '_themes.tailwind';
+    protected string $defaultPath = __DIR__.'/../../resources/views/_themes/tailwind';
 
     protected bool $useLocal = false;
 }

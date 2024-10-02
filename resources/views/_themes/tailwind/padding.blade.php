@@ -1,29 +1,23 @@
-@php
+<?php
 
-    use function ChatAgency\BackendComponents\resolveTheme;
+return [
+    'sm' => 'p-4',
+    'md' => 'p-8',
+    'lg' => 'p-16',
 
-    $styles = [
-        'sm' => 'p-4',
-        'md' => 'p-8',
-        'lg' => 'p-16',
-
-        'top-sm' => 'pt-4',
-        'bottom-sm' => 'pb-4',
-        'left-sm' => 'pl-4',
-        'right-sm' => 'pr-4',
-        
-        'top-md' => 'pt-8',
-        'bottom-md' => 'pb-8',
-        'left-md' => 'pl-8',
-        'right-md' => 'pr-8',
-        
-        'button' => 'py-2 px-4',
-        'button-compact' => 'py-1 px-2',
-        'button-medium' => 'py-1 px-3',
-        'button-big' => 'py-4 px-5',
-        'link' => 'px-1',
-    ];
+    'top-sm' => 'pt-4',
+    'bottom-sm' => 'pb-4',
+    'left-sm' => 'pl-4',
+    'right-sm' => 'pr-4',
     
-    $value = resolveTheme($styles, $padding);
+    'top-md' => 'pt-8',
+    'bottom-md' => 'pb-8',
+    'left-md' => 'pl-8',
+    'right-md' => 'pr-8',
     
-@endphp {{ $value }}
+    'button' => 'py-2 px-4',
+    'button-compact' => 'py-1 px-2',
+    'button-medium' => 'py-1 px-3',
+    'button-big' => 'py-4 px-5',
+    'link' => 'px-1',
+];
