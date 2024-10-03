@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace ChatAgency\BackendComponents\Concerns;
 
 use ChatAgency\BackendComponents\Contracts\ThemeBag;
-use Illuminate\Support\Str;
-
-use function ChatAgency\BackendComponents\backendComponentNamespace;
 
 trait IsThemeManager
 {
@@ -23,14 +20,14 @@ trait IsThemeManager
         return $this;
     }
 
-    public  function setPath(string $path) : static
+    public function setPath(string $path): static
     {
         $this->defaultPath = $path;
 
         return $this;
     }
 
-    public function getRawPath() : string
+    public function getRawPath(): string
     {
         return $this->defaultPath;
     }
@@ -39,7 +36,7 @@ trait IsThemeManager
     {
         $path = realpath($this->defaultPath);
 
-        if(!$path) {
+        if (! $path) {
             throw new \Exception('The theme path is incorrect', 500);
         }
 
@@ -67,13 +64,13 @@ trait IsThemeManager
 
         $filePath = $themePath.'/'.$type.'.blade.php';
 
-        $realPath = realpath($filePath );
+        $realPath = realpath($filePath);
 
-        if(!$realPath) {
-            throw new \Exception('The theme file '.$filePath.' does not exist',500);
+        if (! $realPath) {
+            throw new \Exception('The theme file '.$filePath.' does not exist', 500);
         }
 
-        $themesArray = require($realPath);
+        $themesArray = require $realPath;
 
         return $this->resolveTheme($themesArray, $theme);
 

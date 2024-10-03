@@ -10,7 +10,7 @@ interface ThemeManager
 
     public function useLocal($local = true): self;
 
-    public function getRawPath() : string;
+    public function getRawPath(): string;
 
     public function getThemePath(): string;
 
