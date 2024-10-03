@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents {
 
-    use ChatAgency\BackendComponents\Contracts\ThemeBag;
     use ChatAgency\BackendComponents\Contracts\ThemeManager;
     use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 
@@ -23,9 +22,4 @@ namespace ChatAgency\BackendComponents {
         return $manager->getThemes($themes);
     }
 
-    function resolveTheme(array $styleGroup, string|array|ThemeBag $style): string
-    {
-        return DefaultThemeManager::make()
-            ->resolveTheme($styleGroup, $style);
-    }
 }
