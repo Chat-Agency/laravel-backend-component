@@ -66,7 +66,7 @@ trait IsThemeManager
         $cache = cache();
         $cacheKey = $this->resolveCacheKey($type, $theme);
 
-        if($cache->has($cacheKey)) {
+        if ($cache->has($cacheKey)) {
             return $cache->get($cacheKey);
         }
 
@@ -81,7 +81,7 @@ trait IsThemeManager
         $themesArray = require $realPath;
 
         $theme = $this->resolveTheme($themesArray, $theme);
-        
+
         $cache->set($cacheKey, $theme);
 
         return $theme;

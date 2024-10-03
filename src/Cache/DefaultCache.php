@@ -2,17 +2,16 @@
 
 namespace ChatAgency\BackendComponents\Cache;
 
-
 class DefaultCache
 {
     protected $values = [];
 
-    public function get(string $key): mixed 
+    public function get(string $key): mixed
     {
         return $this->values[$key] ?? null;
     }
 
-    public function set($key, $value): void 
+    public function set($key, $value): void
     {
         $this->values[$key] = $value;
     }
@@ -21,5 +20,4 @@ class DefaultCache
     {
         return isset($this->values[$key]);
     }
-
 }

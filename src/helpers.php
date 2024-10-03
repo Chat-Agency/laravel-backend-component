@@ -23,13 +23,13 @@ namespace ChatAgency\BackendComponents {
         return $manager->getThemes($themes);
     }
 
-    function cache() : DefaultCache 
+    function cache(): DefaultCache
     {
-        
+
         static $cache;
 
         if ($cache === null) {
-            $cache = new DefaultCache();
+            $cache = new DefaultCache;
         }
 
         return $cache;
