@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents {
 
+    use ChatAgency\BackendComponents\Cache\DefaultCache;
     use ChatAgency\BackendComponents\Contracts\ThemeManager;
     use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 
@@ -22,4 +23,16 @@ namespace ChatAgency\BackendComponents {
         return $manager->getThemes($themes);
     }
 
+    function cache() : DefaultCache 
+    {
+        
+        static $cache;
+
+        if ($cache === null) {
+            $cache = new DefaultCache();
+        }
+
+        return $cache;
+
+    }
 }

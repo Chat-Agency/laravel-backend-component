@@ -6,6 +6,8 @@ namespace ChatAgency\BackendComponents\Concerns;
 
 use ChatAgency\BackendComponents\Contracts\ThemeBag;
 
+use function ChatAgency\BackendComponents\cache;
+
 trait IsThemeManager
 {
     public static function make(): static
@@ -61,6 +63,12 @@ trait IsThemeManager
     public function getTheme(string $type, string|array|ThemeBag|null $theme = null): string
     {
         $themePath = $this->getThemePath();
+        $cache = cache();
+        $cacheKey = $this->resolveCacheKey($type, $theme);
+
+        if($cache->has($cacheKey)) {
+            return $cache->get($cacheKey);
+        }
 
         $filePath = $themePath.'/'.$type.'.blade.php';
 
@@ -72,7 +80,11 @@ trait IsThemeManager
 
         $themesArray = require $realPath;
 
-        return $this->resolveTheme($themesArray, $theme);
+        $theme = $this->resolveTheme($themesArray, $theme);
+        
+        $cache->set($cacheKey, $theme);
+
+        return $theme;
 
     }
 
@@ -102,5 +114,18 @@ trait IsThemeManager
     public function isBag(string|array|ThemeBag $value): bool
     {
         return is_a($value, ThemeBag::class);
+    }
+
+    private function resolveCacheKey(string $type, string|array|ThemeBag|null $theme): string
+    {
+        if (is_string($theme)) {
+            return $type.$theme;
+        }
+
+        if (is_array($theme)) {
+            return $type.implode('.', $theme);
+        }
+
+        return $type.implode('.', $theme->getStyles());
     }
 }
