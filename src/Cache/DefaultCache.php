@@ -13,7 +13,7 @@ class DefaultCache
         return $this->values[$key] ?? null;
     }
 
-    public function set($key, $value): void
+    public function set(string $key, $value): void
     {
         $this->values[$key] = $value;
     }
@@ -21,5 +21,12 @@ class DefaultCache
     public function has($key): bool
     {
         return isset($this->values[$key]);
+    }
+
+    public function delete(string $key): void
+    {
+        if ($this->has($key)) {
+            unset($this->values[$key]);
+        }
     }
 }
