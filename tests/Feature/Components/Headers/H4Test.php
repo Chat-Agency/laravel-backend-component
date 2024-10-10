@@ -51,7 +51,7 @@ class H4Test extends TestCase
     public function h4_header_accepts_sub_components()
     {
         $div = ComponentBuilder::make(ComponentEnum::H4)
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('First span'),
                 ComponentBuilder::make(ComponentEnum::SPAN)

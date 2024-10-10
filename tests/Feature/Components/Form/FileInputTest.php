@@ -56,7 +56,7 @@ class FileInputTest extends TestCase
     public function file_input_accepts_sub_components()
     {
         $form = ComponentBuilder::make(ComponentEnum::FILE_INPUT)
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('Nice Span'),
             ]);

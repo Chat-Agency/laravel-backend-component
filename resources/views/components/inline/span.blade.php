@@ -9,22 +9,22 @@
 @php
     $serverAttrs = [];
     $content = null;
-    $subComponents = [];
+    $child = [];
 
     if($attrs) {
 
         $serverAttrs = $attrs->getAttributes();
 
         $content = $attrs->content;
-        $subComponents = $attrs->subComponents;
+        $child = $attrs->children;
     }
     
 @endphp
 
 <span {{ $attributes->merge($serverAttrs) }}> 
     
-    @foreach($subComponents as $subComponent)
-        {{ $subComponent }}
+    @foreach($child as $child)
+        {{ $child }}
     @endforeach
 
     {{ $content }}{{ $slot }}

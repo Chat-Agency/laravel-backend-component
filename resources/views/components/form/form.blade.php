@@ -16,7 +16,7 @@
 @php
     $serverAttrs = [];
     $content = null;
-    $subComponents = [];
+    $child = [];
     $method = 'POST';
 
     if($attrs) {    
@@ -24,7 +24,7 @@
         $serverAttrs = $attrs->getAttributes();
         
         $content = $attrs->content;
-        $subComponents = $attrs->subComponents;
+        $child = $attrs->children;
         $extra = $attrs->extra;
         $slots = $attrs->slots;
 
@@ -47,7 +47,7 @@
 
     @if(!$disableCToken) @csrf @endif
     
-    @foreach($subComponents as $component)
+    @foreach($child as $component)
         {{{ $component }}}
     @endforeach
 

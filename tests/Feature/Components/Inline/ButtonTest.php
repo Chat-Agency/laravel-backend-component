@@ -62,7 +62,7 @@ class ButtonTest extends TestCase
     {
         $button = ComponentBuilder::make(ComponentEnum::BUTTON)
             ->setContent('Nice button')
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('Inside span'),
             ]);

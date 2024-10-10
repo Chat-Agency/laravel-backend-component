@@ -51,7 +51,7 @@ class ItalicTest extends TestCase
     public function italic_does_not_accept_sub_components()
     {
         $italic = ComponentBuilder::make(ComponentEnum::ITALIC)
-            ->setSubComponent(
+            ->setChild(
                 ComponentBuilder::make(ComponentEnum::SPAN)
             );
 

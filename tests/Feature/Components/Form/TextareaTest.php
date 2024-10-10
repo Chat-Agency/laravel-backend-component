@@ -52,7 +52,7 @@ class TextareaTest extends TestCase
     public function textarea_does_not_accept_sub_components()
     {
         $textarea = ComponentBuilder::make(ComponentEnum::TEXTAREA)
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('First span'),
                 ComponentBuilder::make(ComponentEnum::SPAN)

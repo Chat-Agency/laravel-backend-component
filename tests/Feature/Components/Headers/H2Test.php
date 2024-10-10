@@ -51,7 +51,7 @@ class H2Test extends TestCase
     public function h2_header_accepts_sub_components()
     {
         $div = ComponentBuilder::make(ComponentEnum::H2)
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('First span'),
                 ComponentBuilder::make(ComponentEnum::SPAN)

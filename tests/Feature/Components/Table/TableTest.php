@@ -54,13 +54,13 @@ class TableTest extends TestCase
     public function table_accepts_sub_components()
     {
         $table = ComponentBuilder::make(ComponentEnum::TABLE)
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::CAPTION)
                     ->setContent('Beautiful Table'),
 
                 // head
                 ComponentBuilder::make(ComponentEnum::THEAD)
-                    ->setSubComponents([
+                    ->setChildren([
                         // row
                         ComponentBuilder::make(ComponentEnum::TR)
                             ->setContent(
@@ -71,7 +71,7 @@ class TableTest extends TestCase
                     ]),
                 // body
                 ComponentBuilder::make(ComponentEnum::TBODY)
-                    ->setSubComponents([
+                    ->setChildren([
                         // row
                         ComponentBuilder::make(ComponentEnum::TR)
                             ->setContent(

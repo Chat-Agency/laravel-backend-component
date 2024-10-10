@@ -55,7 +55,7 @@ class LegendTest extends TestCase
     public function legend_accepts_sub_components()
     {
         $legend = ComponentBuilder::make(ComponentEnum::LEGEND)
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('First span'),
                 ComponentBuilder::make(ComponentEnum::SPAN)

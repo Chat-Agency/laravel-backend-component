@@ -58,7 +58,7 @@ class CheckboxInputTest extends TestCase
     public function checkbox_input_accepts_sub_components()
     {
         $form = ComponentBuilder::make(ComponentEnum::CHECKBOX_INPUT)
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('Nice Span'),
             ]);

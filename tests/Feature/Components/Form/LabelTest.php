@@ -55,7 +55,7 @@ class LabelTest extends TestCase
     public function label_accepts_sub_components()
     {
         $label = ComponentBuilder::make(ComponentEnum::LABEL)
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('First span'),
                 ComponentBuilder::make(ComponentEnum::SPAN)

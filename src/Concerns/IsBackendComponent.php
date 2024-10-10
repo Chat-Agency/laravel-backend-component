@@ -71,7 +71,6 @@ trait IsBackendComponent
     public function getAttributeBag(): AttributeBag
     {
         $attrs = $this->toArray();
-        unset($attrs['name']);
 
         return new DefaultAttributeBag(...$attrs);
     }

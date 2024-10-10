@@ -58,7 +58,7 @@ class TextInputTest extends TestCase
     public function text_input_accepts_sub_components()
     {
         $form = ComponentBuilder::make(ComponentEnum::TEXT_INPUT)
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('Nice Span'),
             ]);

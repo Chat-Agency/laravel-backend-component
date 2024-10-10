@@ -60,7 +60,7 @@ class FormTest extends TestCase
     public function form_accepts_sub_components()
     {
         $form = ComponentBuilder::make(ComponentEnum::FORM)
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::LABEL)
                     ->setContent('First Name')
                     ->setAttribute('for', 'first_name'),

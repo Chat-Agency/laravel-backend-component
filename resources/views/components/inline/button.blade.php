@@ -9,21 +9,21 @@
 @php
     $serverAttrs = [];
     $content = null;
-    $subComponents = [];
+    $child = [];
 
     if($attrs) {
 
         $serverAttrs = $attrs->getAttributes();
 
         $content = $attrs->content;
-        $subComponents = $attrs->subComponents;
+        $child = $attrs->children;
     }
     
 @endphp
 
 <button {{ $attributes->merge($serverAttrs) }}>
 
-    @foreach($subComponents as $component)
+    @foreach($child as $component)
         {{{ $component }}}
     @endforeach
 

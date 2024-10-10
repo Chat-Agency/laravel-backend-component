@@ -51,7 +51,7 @@ class BoldTest extends TestCase
     public function bold_does_not_accept_sub_components()
     {
         $bold = ComponentBuilder::make(ComponentEnum::BOLD)
-            ->setSubComponent(
+            ->setChild(
                 ComponentBuilder::make(ComponentEnum::SPAN)
             );
 

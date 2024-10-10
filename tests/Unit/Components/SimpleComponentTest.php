@@ -115,22 +115,22 @@ class SimpleComponentTest extends TestCase
     public function a_component_accepts_sub_components()
     {
         $component = ComponentBuilder::make(ComponentEnum::DIV)
-            ->setSubComponent(
+            ->setChild(
                 ComponentBuilder::make(ComponentEnum::SPAN),
                 'span'
             );
 
-        $this->assertInstanceOf(MainBackendComponent::class, $component->getSubComponents()['span']);
+        $this->assertInstanceOf(MainBackendComponent::class, $component->getChildren()['span']);
 
-        $this->assertEquals(ComponentEnum::SPAN->value, ($component->getSubComponents()['span'])->getName());
+        $this->assertEquals(ComponentEnum::SPAN->value, ($component->getChildren()['span'])->getName());
 
         $component2 = ComponentBuilder::make(ComponentEnum::DIV)
-            ->setSubComponents([
+            ->setChildren([
                 'bold' => ComponentBuilder::make(ComponentEnum::BOLD)
                     ->setContent('Bold'),
             ]);
 
-        $this->assertInstanceOf(MainBackendComponent::class, $component2->getSubComponents()['bold']);
+        $this->assertInstanceOf(MainBackendComponent::class, $component2->getChildren()['bold']);
     }
 
     #[Test]

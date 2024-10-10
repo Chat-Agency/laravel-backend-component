@@ -56,9 +56,9 @@ class SelectTest extends TestCase
     public function select_accepts_sub_components()
     {
         $select = ComponentBuilder::make(ComponentEnum::SELECT)
-            ->setSubComponent(
+            ->setChild(
                 ComponentBuilder::make(ComponentEnum::OPTGROUP)
-                    ->setSubComponents([
+                    ->setChildren([
                         ComponentBuilder::make(ComponentEnum::OPTION)
                             ->setContent('First option'),
                         ComponentBuilder::make(ComponentEnum::OPTION)

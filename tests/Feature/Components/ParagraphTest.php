@@ -62,7 +62,7 @@ class ParagraphTest extends TestCase
     {
         $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
             ->setContent('Nice paragraph')
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('Inside span'),
                 ComponentBuilder::make(ComponentEnum::LINK)

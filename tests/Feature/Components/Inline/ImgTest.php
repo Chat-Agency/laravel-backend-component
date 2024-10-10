@@ -55,7 +55,7 @@ class ImgTest extends TestCase
     public function image_does_not_accept_sub_components()
     {
         $image = ComponentBuilder::make(ComponentEnum::IMG)
-            ->setSubComponent(
+            ->setChild(
                 ComponentBuilder::make(ComponentEnum::SPAN)
             );
 

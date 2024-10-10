@@ -10,10 +10,11 @@ use ChatAgency\BackendComponents\Contracts\BackendComponent;
 readonly class DefaultAttributeBag implements AttributeBag
 {
     public function __construct(
+        public string $name,
         public string|BackendComponent|null $content,
         public string $path,
         public array $attributes,
-        public array $subComponents = [],
+        public array $children = [],
         public ?string $themes = null,
         public array $slots = [],
         public array $extra = [],

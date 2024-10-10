@@ -57,7 +57,7 @@ class UnorderedListTest extends TestCase
     {
         $unorderedList = ComponentBuilder::make(ComponentEnum::UL)
             ->setAttribute('id', 'main_list')
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::LI)
                     ->setContent('First list item'),
                 ComponentBuilder::make(ComponentEnum::LI)

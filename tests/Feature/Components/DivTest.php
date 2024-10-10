@@ -56,7 +56,7 @@ class DivTest extends TestCase
     public function div_accepts_sub_components()
     {
         $div = ComponentBuilder::make(ComponentEnum::DIV)
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::PARAGRAPH)
                     ->setContent('First paragraph'),
                 ComponentBuilder::make(ComponentEnum::PARAGRAPH)

@@ -51,7 +51,7 @@ class EmTest extends TestCase
     public function em_does_not_accept_sub_components()
     {
         $em = ComponentBuilder::make(ComponentEnum::EM)
-            ->setSubComponent(
+            ->setChild(
                 ComponentBuilder::make(ComponentEnum::SPAN)
             );
 

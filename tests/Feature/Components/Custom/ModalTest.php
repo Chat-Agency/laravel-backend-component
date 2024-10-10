@@ -53,7 +53,7 @@ class ModalTest extends TestCase
     public function modal_accepts_sub_components()
     {
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::DIV)
                     ->setContent('Sub Component inside modal')
                     ->setAttribute('id', 'modal_body'),

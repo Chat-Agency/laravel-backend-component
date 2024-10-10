@@ -51,7 +51,7 @@ class SmallTest extends TestCase
     public function small_does_not_accept_sub_components()
     {
         $small = ComponentBuilder::make(ComponentEnum::SMALL)
-            ->setSubComponent(
+            ->setChild(
                 ComponentBuilder::make(ComponentEnum::SPAN)
             );
 

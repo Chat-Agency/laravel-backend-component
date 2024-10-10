@@ -55,7 +55,7 @@ class FieldsetTest extends TestCase
     public function fieldset_accepts_sub_components()
     {
         $fieldset = ComponentBuilder::make(ComponentEnum::FIELDSET)
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('First span'),
                 ComponentBuilder::make(ComponentEnum::SPAN)

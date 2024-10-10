@@ -51,7 +51,7 @@ class SpanTest extends TestCase
     public function span_accepts_sub_components()
     {
         $span = ComponentBuilder::make(ComponentEnum::SPAN)
-            ->setSubComponent(
+            ->setChild(
                 ComponentBuilder::make(ComponentEnum::BOLD)
                     ->setContent('Nice bold span')
             );

@@ -58,7 +58,7 @@ class HiddenInputTest extends TestCase
     public function hidden_input_accepts_sub_components()
     {
         $form = ComponentBuilder::make(ComponentEnum::HIDDEN_INPUT)
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('Nice Span'),
             ]);

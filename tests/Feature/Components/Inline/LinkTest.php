@@ -62,7 +62,7 @@ class LinkTest extends TestCase
     {
         $link = ComponentBuilder::make(ComponentEnum::LINK)
             ->setContent('Nice link')
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('Inside span'),
             ]);

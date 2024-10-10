@@ -51,7 +51,7 @@ class H3Test extends TestCase
     public function h3_header_accepts_sub_components()
     {
         $div = ComponentBuilder::make(ComponentEnum::H3)
-            ->setSubComponents([
+            ->setChildren([
                 ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('First span'),
                 ComponentBuilder::make(ComponentEnum::SPAN)

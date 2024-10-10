@@ -51,7 +51,7 @@ class StrongTest extends TestCase
     public function strong_does_not_accept_sub_components()
     {
         $strong = ComponentBuilder::make(ComponentEnum::STRONG)
-            ->setSubComponent(
+            ->setChild(
                 ComponentBuilder::make(ComponentEnum::SPAN)
             );
 
