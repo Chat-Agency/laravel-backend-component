@@ -16,6 +16,11 @@ trait HasChildren
         return $this->children;
     }
 
+    public function getChild(string $name): ?BackendComponent
+    {
+        return $this->getChildren()[$name] ?? null;
+    }
+
     public function setChild(BackendComponent $child, string|int|null $name = null): static
     {
         if ($name) {
