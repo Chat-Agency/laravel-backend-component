@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Cache;
 
-class DefaultCache
+use ChatAgency\BackendComponents\Contracts\Cache;
+
+class DefaultCache implements Cache
 {
     protected $values = [];
 
