@@ -34,6 +34,24 @@ class SpanTest extends TestCase
         ])
             ->assertSee('Nice span');
     }
+   
+    #[Test]
+    public function span_accepts_contents_array()
+    {
+        $span = ComponentBuilder::make(ComponentEnum::SPAN)
+            ->setContents([
+                'content 1 ',
+                'content 2',
+            ]);
+
+        $this->blade('{{ $span }}', [
+            'span' => $span,
+        ])
+            ->assertSee('<span', false)
+            ->assertSee('content 1 ')
+            ->assertSee('content 2')
+            ->assertSee('</span>', false);
+    }
 
     #[Test]
     public function span_accepts_attributes()
@@ -45,23 +63,6 @@ class SpanTest extends TestCase
             'span' => $span,
         ])
             ->assertSee('id="nice_span"', false);
-    }
-
-    #[Test]
-    public function span_accepts_sub_components()
-    {
-        $span = ComponentBuilder::make(ComponentEnum::SPAN)
-            ->setChild(
-                ComponentBuilder::make(ComponentEnum::BOLD)
-                    ->setContent('Nice bold span')
-            );
-
-        $this->blade('{{ $span }}', [
-            'span' => $span,
-        ])
-            ->assertSee('<b', false)
-            ->assertSee('Nice bold span')
-            ->assertSee('</b>', false);
     }
 
     #[Test]

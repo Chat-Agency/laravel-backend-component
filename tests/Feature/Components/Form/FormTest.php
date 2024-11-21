@@ -41,6 +41,29 @@ class FormTest extends TestCase
     }
 
     #[Test]
+    public function form_accepts_contents_array()
+    {
+        $header = ComponentBuilder::make(ComponentEnum::FORM)
+            ->setContents([
+                ComponentBuilder::make(ComponentEnum::TEXT_INPUT),
+                ComponentBuilder::make(ComponentEnum::EMAIL_INPUT),
+                ComponentBuilder::make(ComponentEnum::BUTTON)
+                    ->setContent('Send Form'),
+            ]);
+
+        $this->blade('{{ $header }}', [
+            'header' => $header,
+        ])
+            ->assertSee('<form', false)
+            ->assertSee('<input type="text"', false)
+            ->assertSee('<input type="email"', false)
+            ->assertSee('<button', false)
+            ->assertSee('Send Form')
+            ->assertSee('</button>', false)
+            ->assertSee('</form>', false);
+    }
+
+    #[Test]
     public function form_accepts_attributes()
     {
         $form = ComponentBuilder::make(ComponentEnum::FORM)
@@ -54,28 +77,6 @@ class FormTest extends TestCase
             ->assertSee('method="POST"', false)
             ->assertSee('action="/"', false)
             ->assertSee('enctype="multipart/form-data"', false);
-    }
-
-    #[Test]
-    public function form_accepts_sub_components()
-    {
-        $form = ComponentBuilder::make(ComponentEnum::FORM)
-            ->setChildren([
-                ComponentBuilder::make(ComponentEnum::LABEL)
-                    ->setContent('First Name')
-                    ->setAttribute('for', 'first_name'),
-                ComponentBuilder::make(ComponentEnum::TEXT_INPUT)
-                    ->setAttribute('id', 'first_name'),
-            ]);
-
-        $this->blade('{{ $form }}', [
-            'form' => $form,
-        ])
-            ->assertSee('<label for="first_name"', false)
-            ->assertSee('First Name')
-            ->assertSee('</label>', false)
-            ->assertSee('<input type="text"', false);
-
     }
 
     #[Test]

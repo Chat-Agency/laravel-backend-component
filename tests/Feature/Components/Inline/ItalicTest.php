@@ -36,6 +36,24 @@ class ItalicTest extends TestCase
     }
 
     #[Test]
+    public function italic_accepts_contents_array()
+    {
+        $italic = ComponentBuilder::make(ComponentEnum::ITALIC)
+            ->setContents([
+                'content 1 ',
+                'content 2',
+            ]);
+
+        $this->blade('{{ $italic }}', [
+            'italic' => $italic,
+        ])
+            ->assertSee('<i', false)
+            ->assertSee('content 1 ')
+            ->assertSee('content 2')
+            ->assertSee('</i>', false);
+    }
+
+    #[Test]
     public function italic_accepts_attributes()
     {
         $italic = ComponentBuilder::make(ComponentEnum::ITALIC)
@@ -45,20 +63,6 @@ class ItalicTest extends TestCase
             'italic' => $italic,
         ])
             ->assertSee('id="nice_italic"', false);
-    }
-
-    #[Test]
-    public function italic_does_not_accept_sub_components()
-    {
-        $italic = ComponentBuilder::make(ComponentEnum::ITALIC)
-            ->setChild(
-                ComponentBuilder::make(ComponentEnum::SPAN)
-            );
-
-        $this->blade('{{ $italic }}', [
-            'italic' => $italic,
-        ])
-            ->assertDontSee('<span', false);
     }
 
     #[Test]

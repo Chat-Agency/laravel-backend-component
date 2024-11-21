@@ -36,6 +36,30 @@ class H1Test extends TestCase
     }
 
     #[Test]
+    public function h1_accepts_contents_array()
+    {
+        $header = ComponentBuilder::make(ComponentEnum::H1)
+            ->setContents([
+                ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent('Span'),
+                ComponentBuilder::make(ComponentEnum::BOLD)
+                    ->setContent('Bold'),
+            ]);
+
+        $this->blade('{{ $header }}', [
+            'header' => $header,
+        ])
+            ->assertSee('<h1', false)
+            ->assertSee('<span', false)
+            ->assertSee('Span')
+            ->assertSee('</span>', false)
+            ->assertSee('<b', false)
+            ->assertSee('Bold')
+            ->assertSee('</b>', false)
+            ->assertSee('</h1>', false);
+    }
+
+    #[Test]
     public function h1_header_accepts_attributes()
     {
         $header = ComponentBuilder::make(ComponentEnum::H1)
@@ -45,26 +69,6 @@ class H1Test extends TestCase
             'header' => $header,
         ])
             ->assertSee('id="nice_header"', false);
-    }
-
-    #[Test]
-    public function h1_header_accepts_sub_components()
-    {
-        $div = ComponentBuilder::make(ComponentEnum::H1)
-            ->setChildren([
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('First span'),
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('Second span'),
-            ]);
-
-        $this->blade('{{ $div }}', [
-            'div' => $div,
-        ])
-            ->assertSee('<span >', false)
-            ->assertSee('First span')
-            ->assertSee('</span>', false)
-            ->assertSee('Second span');
     }
 
     #[Test]

@@ -38,6 +38,24 @@ class LabelTest extends TestCase
             ->assertSee('Span content')
             ->assertSee('</label>', false);
     }
+   
+    #[Test]
+    public function label_accepts_contents_array()
+    {
+        $header = ComponentBuilder::make(ComponentEnum::LABEL)
+            ->setContents([
+                'content 1 ',
+                'content 2',
+            ]);
+
+        $this->blade('{{ $header }}', [
+            'header' => $header,
+        ])
+            ->assertSee('<label', false)
+            ->assertSee('content 1 ')
+            ->assertSee('content 2')
+            ->assertSee('</label>', false);
+    }
 
     #[Test]
     public function label_accepts_attributes()
@@ -49,27 +67,6 @@ class LabelTest extends TestCase
             'label' => $label,
         ])
             ->assertSee('for="label_for"', false);
-    }
-
-    #[Test]
-    public function label_accepts_sub_components()
-    {
-        $label = ComponentBuilder::make(ComponentEnum::LABEL)
-            ->setChildren([
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('First span'),
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('Second span'),
-            ]);
-
-        $this->blade('{{ $label }}', [
-            'label' => $label,
-        ])
-            ->assertSee('<span', false)
-            ->assertSee('First span')
-            ->assertSee('</span>', false)
-            ->assertSee('Second span');
-
     }
 
     #[Test]

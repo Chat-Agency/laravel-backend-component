@@ -9,24 +9,15 @@
 @php
     $serverAttrs = [];
     $content = null;
-    $child = [];
+    
 
     if($attrs) {
 
         $serverAttrs = $attrs->getAttributes();
-
         $content = $attrs->content;
-        $child = $attrs->children;
+        
     }
     
 @endphp
 
-<button {{ $attributes->merge($serverAttrs) }}>
-
-    @foreach($child as $component)
-        {{{ $component }}}
-    @endforeach
-
-    {{ $content }}{{ $slot }}
-
-</button>
+<button {{ $attributes->merge($serverAttrs) }}>{{ $content }}{{ $slot }}</button>

@@ -8,7 +8,7 @@ use ChatAgency\BackendComponents\Contracts\BackendComponent;
 
 trait HasSlots
 {
-    protected array $slots = [];
+    private array $slots = [];
 
     public function getSlots(): array
     {

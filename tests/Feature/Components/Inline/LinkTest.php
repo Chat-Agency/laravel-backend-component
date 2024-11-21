@@ -43,6 +43,30 @@ class LinkTest extends TestCase
     }
 
     #[Test]
+    public function link_accepts_contents_array()
+    {
+        $link = ComponentBuilder::make(ComponentEnum::LINK)
+            ->setContents([
+                ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent('Span'),
+                ComponentBuilder::make(ComponentEnum::BOLD)
+                    ->setContent('Bold'),
+            ]);
+
+        $this->blade('{{ $link }}', [
+            'link' => $link,
+        ])
+            ->assertSee('<a', false)
+            ->assertSee('<span', false)
+            ->assertSee('Span')
+            ->assertSee('</span>', false)
+            ->assertSee('<b', false)
+            ->assertSee('Bold')
+            ->assertSee('</b>', false)
+            ->assertSee('</a>', false);
+    }
+
+    #[Test]
     public function link_accepts_attributes()
     {
         $link = ComponentBuilder::make(ComponentEnum::LINK)
@@ -55,27 +79,6 @@ class LinkTest extends TestCase
             ->assertSee('<a', false)
             ->assertSee('target="_blank"', false)
             ->assertSee('</a>', false);
-    }
-
-    #[Test]
-    public function link_accepts_sub_components()
-    {
-        $link = ComponentBuilder::make(ComponentEnum::LINK)
-            ->setContent('Nice link')
-            ->setChildren([
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('Inside span'),
-            ]);
-
-        $this->blade('{{ $link }}', [
-            'link' => $link,
-        ])
-            ->assertSee('<a', false)
-            ->assertSee('<span', false)
-            ->assertSee('Inside span')
-            ->assertSee('</span>', false)
-            ->assertSee('</a>', false);
-
     }
 
     #[Test]

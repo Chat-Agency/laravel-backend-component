@@ -50,23 +50,6 @@ class ModalTest extends TestCase
     }
 
     #[Test]
-    public function modal_accepts_sub_components()
-    {
-        $modal = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setChildren([
-                ComponentBuilder::make(ComponentEnum::DIV)
-                    ->setContent('Sub Component inside modal')
-                    ->setAttribute('id', 'modal_body'),
-            ]);
-
-        $this->blade('{{ $modal }}', [
-            'modal' => $modal,
-        ])
-            ->assertSee('Sub Component inside modal')
-            ->assertSee('<div id="modal_body"', false);
-    }
-
-    #[Test]
     public function modal_accepts_theme()
     {
         $theme = ['modal' => 'default'];

@@ -39,6 +39,24 @@ class TableTest extends TestCase
     }
 
     #[Test]
+    public function table_accepts_contents_array()
+    {
+        $table = ComponentBuilder::make(ComponentEnum::TABLE)
+            ->setContents([
+                ComponentBuilder::make(ComponentEnum::THEAD),
+                ComponentBuilder::make(ComponentEnum::TBODY),
+            ]);
+
+        $this->blade('{{ $table }}', [
+            'table' => $table,
+        ])
+            ->assertSee('<thead', false)
+            ->assertSee('</thead>', false)
+            ->assertSee('<tbody', false)
+            ->assertSee('</tbody>', false);
+    }
+
+    #[Test]
     public function table_accepts_attributes()
     {
         $table = ComponentBuilder::make(ComponentEnum::TABLE)
@@ -48,60 +66,6 @@ class TableTest extends TestCase
             'table' => $table,
         ])
             ->assertSee('id="table_id"', false);
-    }
-
-    #[Test]
-    public function table_accepts_sub_components()
-    {
-        $table = ComponentBuilder::make(ComponentEnum::TABLE)
-            ->setChildren([
-                ComponentBuilder::make(ComponentEnum::CAPTION)
-                    ->setContent('Beautiful Table'),
-
-                // head
-                ComponentBuilder::make(ComponentEnum::THEAD)
-                    ->setChildren([
-                        // row
-                        ComponentBuilder::make(ComponentEnum::TR)
-                            ->setContent(
-                                // cell
-                                ComponentBuilder::make(ComponentEnum::TH)
-                                    ->setContent('First head')
-                            ),
-                    ]),
-                // body
-                ComponentBuilder::make(ComponentEnum::TBODY)
-                    ->setChildren([
-                        // row
-                        ComponentBuilder::make(ComponentEnum::TR)
-                            ->setContent(
-                                // cell
-                                ComponentBuilder::make(ComponentEnum::TD)
-                                    ->setContent('First cell')
-                            ),
-                    ]),
-            ]);
-
-        $this->blade('{{ $table }}', [
-            'table' => $table,
-        ])
-            ->assertSee('<table', false)
-            ->assertSee('<caption', false)
-            ->assertSee('Beautiful Table')
-            ->assertSee('</caption>', false)
-            ->assertSee('<thead', false)
-            ->assertSee('<tr', false)
-            ->assertSee('<th', false)
-            ->assertSee('First head')
-            ->assertSee('</th>', false)
-            ->assertSee('</tr>', false)
-            ->assertSee('</thead>', false)
-            ->assertSee('<tbody', false)
-            ->assertSee('<td', false)
-            ->assertSee('First head')
-            ->assertSee('</td>', false)
-            ->assertSee('</tbody>', false)
-            ->assertSee('</table>', false);
     }
 
     #[Test]

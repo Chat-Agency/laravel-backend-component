@@ -16,7 +16,7 @@
 @php
     $serverAttrs = [];
     $content = null;
-    $child = [];
+    
     $method = 'POST';
 
     if($attrs) {    
@@ -24,7 +24,7 @@
         $serverAttrs = $attrs->getAttributes();
         
         $content = $attrs->content;
-        $child = $attrs->children;
+        
         $extra = $attrs->extra;
         $slots = $attrs->slots;
 
@@ -47,10 +47,6 @@
 
     @if(!$disableCToken) @csrf @endif
     
-    @foreach($child as $component)
-        {{{ $component }}}
-    @endforeach
-
     {{ $content }}{{ $slot }}
 
 </form>

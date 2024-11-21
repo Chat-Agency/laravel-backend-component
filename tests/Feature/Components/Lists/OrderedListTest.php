@@ -41,6 +41,28 @@ class OrderedListTest extends TestCase
     }
 
     #[Test]
+    public function ordered_list_accepts_contents_array()
+    {
+        $ordered_list = ComponentBuilder::make(ComponentEnum::OL)
+            ->setContents([
+                ComponentBuilder::make(ComponentEnum::LI)
+                    ->setContent('First item'),
+                ComponentBuilder::make(ComponentEnum::LI)
+                    ->setContent('Second item'),
+            ]);
+
+        $this->blade('{{ $ordered_list }}', [
+            'ordered_list' => $ordered_list,
+        ])
+            ->assertSee('<ol', false)
+            ->assertSee('<li', false)
+            ->assertSee('First item')
+            ->assertSee('</li>', false)
+            ->assertSee('Second item')
+            ->assertSee('</ol>', false);
+    }
+
+    #[Test]
     public function ordered_list_accepts_attributes()
     {
         $orderedList = ComponentBuilder::make(ComponentEnum::OL)
@@ -50,37 +72,6 @@ class OrderedListTest extends TestCase
             'orderedList' => $orderedList,
         ])
             ->assertSee('id="list_id"', false);
-    }
-
-    #[Test]
-    public function ordered_list_accepts_sub_components()
-    {
-        $orderedList = ComponentBuilder::make(ComponentEnum::OL)
-            ->setAttribute('id', 'main_list')
-            ->setChildren([
-                ComponentBuilder::make(ComponentEnum::LI)
-                    ->setContent('First list item'),
-                ComponentBuilder::make(ComponentEnum::LI)
-                    ->setContent('Second list item'),
-                // nested list
-                ComponentBuilder::make(ComponentEnum::OL)
-                    ->setAttribute('id', 'nested_list')
-                    ->setContent(
-                        ComponentBuilder::make(ComponentEnum::LI)
-                            ->setContent('First nested list item'),
-                    ),
-            ]);
-
-        $this->blade('{{ $orderedList }}', [
-            'orderedList' => $orderedList,
-        ])
-            ->assertSee('<ol id="main_list"', false)
-            ->assertSee('<li', false)
-            ->assertSee('First list item')
-            ->assertSee('</li>', false)
-            ->assertSee('Second list item')
-            ->assertSee('<ol id="nested_list"', false)
-            ->assertSee('First nested list item');
     }
 
     #[Test]

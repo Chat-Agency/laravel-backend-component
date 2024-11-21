@@ -40,7 +40,7 @@ use ChatAgency\BackendComponents\MainBackendComponent;
 
 $button = ComponentBuilder::make(ComponentEnum::BUTTON);
 ```
-Since the main component class implements the Laravel [Htmlable](https://laravel.com/api/8.x/Illuminate/Contracts/Support/Htmlable.html) interface, you can output the component using simple Blade syntax without the need for unescaped data syntax:
+Since the main component class implements the Laravel [Htmlable](https://laravel.com/api/8.x/Illuminate/Contracts/Support/Htmlable.html) interface, you can output the component using simple Blade syntax. No escaping needed:
 
 ```blade
 {{ $button }}

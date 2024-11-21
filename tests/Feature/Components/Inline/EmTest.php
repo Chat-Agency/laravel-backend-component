@@ -34,6 +34,24 @@ class EmTest extends TestCase
         ])
             ->assertSee('Nice em tag');
     }
+   
+    #[Test]
+    public function em_accepts_contents_array()
+    {
+        $em = ComponentBuilder::make(ComponentEnum::EM)
+            ->setContents([
+                'content 1 ',
+                'content 2',
+            ]);
+
+        $this->blade('{{ $em }}', [
+            'em' => $em,
+        ])
+            ->assertSee('<em', false)
+            ->assertSee('content 1 ')
+            ->assertSee('content 2')
+            ->assertSee('</em>', false);
+    }
 
     #[Test]
     public function em_accepts_attributes()
@@ -45,21 +63,6 @@ class EmTest extends TestCase
             'em' => $em,
         ])
             ->assertSee('id="nice_em"', false);
-    }
-
-    #[Test]
-    public function em_does_not_accept_sub_components()
-    {
-        $em = ComponentBuilder::make(ComponentEnum::EM)
-            ->setChild(
-                ComponentBuilder::make(ComponentEnum::SPAN)
-            );
-
-        $this->blade('{{ $em }}', [
-            'em' => $em,
-        ])
-            ->assertDontSee('<span', false)
-            ->assertDontSee('</span>', false);
     }
 
     #[Test]

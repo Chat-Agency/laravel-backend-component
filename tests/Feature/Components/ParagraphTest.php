@@ -43,6 +43,30 @@ class ParagraphTest extends TestCase
     }
 
     #[Test]
+    public function paragraph_accepts_contents_array()
+    {
+        $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
+            ->setContents([
+                ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent('Span'),
+                ComponentBuilder::make(ComponentEnum::BOLD)
+                    ->setContent('Bold'),
+            ]);
+
+        $this->blade('{{ $paragraph }}', [
+            'paragraph' => $paragraph,
+        ])
+            ->assertSee('<p', false)
+            ->assertSee('<span', false)
+            ->assertSee('Span')
+            ->assertSee('</span>', false)
+            ->assertSee('<b', false)
+            ->assertSee('Bold')
+            ->assertSee('</b>', false)
+            ->assertSee('</p>', false);
+    }
+
+    #[Test]
     public function paragraph_accepts_attributes()
     {
         $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
@@ -55,32 +79,6 @@ class ParagraphTest extends TestCase
             ->assertSee('<p', false)
             ->assertSee('id="paragraph_id"', false)
             ->assertSee('</p>', false);
-    }
-
-    #[Test]
-    public function paragraph_accepts_sub_components()
-    {
-        $paragraph = ComponentBuilder::make(ComponentEnum::PARAGRAPH)
-            ->setContent('Nice paragraph')
-            ->setChildren([
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('Inside span'),
-                ComponentBuilder::make(ComponentEnum::LINK)
-                    ->setContent('Inside link')
-                    ->setAttribute('href', 'https://google.com'),
-            ]);
-
-        $this->blade('{{ $paragraph }}', [
-            'paragraph' => $paragraph,
-        ])
-            ->assertSee('<p', false)
-            ->assertSee('<span', false)
-            ->assertSee('Inside span')
-            ->assertSee('</span>', false)
-            ->assertSee('href="https://google.com"', false)
-            ->assertSee('Inside link')
-            ->assertSee('</p>', false);
-
     }
 
     #[Test]

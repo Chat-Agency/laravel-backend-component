@@ -34,6 +34,24 @@ class BoldTest extends TestCase
         ])
             ->assertSee('Nice b tag');
     }
+    
+    #[Test]
+    public function bold_accepts_contents_array()
+    {
+        $bold = ComponentBuilder::make(ComponentEnum::BOLD)
+            ->setContents([
+                'content 1 ',
+                'content 2',
+            ]);
+
+        $this->blade('{{ $bold }}', [
+            'bold' => $bold,
+        ])
+            ->assertSee('<b', false)
+            ->assertSee('content 1 ')
+            ->assertSee('content 2')
+            ->assertSee('</b>', false);
+    }
 
     #[Test]
     public function bold_accepts_attributes()
@@ -45,21 +63,6 @@ class BoldTest extends TestCase
             'bold' => $bold,
         ])
             ->assertSee('id="nice_bold"', false);
-    }
-
-    #[Test]
-    public function bold_does_not_accept_sub_components()
-    {
-        $bold = ComponentBuilder::make(ComponentEnum::BOLD)
-            ->setChild(
-                ComponentBuilder::make(ComponentEnum::SPAN)
-            );
-
-        $this->blade('{{ $bold }}', [
-            'bold' => $bold,
-        ])
-            ->assertDontSee('<span', false)
-            ->assertDontSee('</span>', false);
     }
 
     #[Test]

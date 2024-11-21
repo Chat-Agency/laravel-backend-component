@@ -55,24 +55,6 @@ class EmailInputTest extends TestCase
     }
 
     #[Test]
-    public function email_input_accepts_sub_components()
-    {
-        $form = ComponentBuilder::make(ComponentEnum::EMAIL_INPUT)
-            ->setChildren([
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('Nice Span'),
-            ]);
-
-        $this->blade('{{ $form }}', [
-            'form' => $form,
-        ])
-            ->assertDontSee('<span', false)
-            ->assertDontSee('Nice Span')
-            ->assertDontSee('</span>', false);
-
-    }
-
-    #[Test]
     public function email_input_accepts_theme()
     {
         $theme = [

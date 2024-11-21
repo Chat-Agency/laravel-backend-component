@@ -43,6 +43,30 @@ class ButtonTest extends TestCase
     }
 
     #[Test]
+    public function button_accepts_contents_array()
+    {
+        $button = ComponentBuilder::make(ComponentEnum::BUTTON)
+            ->setContents([
+                ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent('Span'),
+                ComponentBuilder::make(ComponentEnum::BOLD)
+                    ->setContent('Bold'),
+            ]);
+
+        $this->blade('{{ $button }}', [
+            'button' => $button,
+        ])
+            ->assertSee('<button', false)
+            ->assertSee('<span', false)
+            ->assertSee('Span')
+            ->assertSee('</span>', false)
+            ->assertSee('<b', false)
+            ->assertSee('Bold')
+            ->assertSee('</b>', false)
+            ->assertSee('</button>', false);
+    }
+
+    #[Test]
     public function button_accepts_attributes()
     {
         $button = ComponentBuilder::make(ComponentEnum::BUTTON)
@@ -55,27 +79,6 @@ class ButtonTest extends TestCase
             ->assertSee('<button', false)
             ->assertSee('type="submit"', false)
             ->assertSee('</button>', false);
-    }
-
-    #[Test]
-    public function button_accepts_sub_components()
-    {
-        $button = ComponentBuilder::make(ComponentEnum::BUTTON)
-            ->setContent('Nice button')
-            ->setChildren([
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('Inside span'),
-            ]);
-
-        $this->blade('{{ $button }}', [
-            'button' => $button,
-        ])
-            ->assertSee('<button', false)
-            ->assertSee('<span', false)
-            ->assertSee('</span>', false)
-            ->assertSee('Inside span')
-            ->assertSee('</button>', false);
-
     }
 
     #[Test]

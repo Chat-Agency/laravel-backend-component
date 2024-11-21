@@ -41,6 +41,28 @@ class SelectTest extends TestCase
     }
 
     #[Test]
+    public function select_accepts_contents_array()
+    {
+        $header = ComponentBuilder::make(ComponentEnum::SELECT)
+            ->setContents([
+                ComponentBuilder::make(ComponentEnum::OPTION)
+                    ->setContent('Option 1'),
+                ComponentBuilder::make(ComponentEnum::OPTION)
+                    ->setContent('Option 2'),
+            ]);
+
+        $this->blade('{{ $header }}', [
+            'header' => $header,
+        ])
+            ->assertSee('<select', false)
+            ->assertSee('<option', false)
+            ->assertSee('Option 1')
+            ->assertSee('</option>', false)
+            ->assertSee('Option 2')
+            ->assertSee('</select>', false);
+    }
+
+    #[Test]
     public function select_accepts_attributes()
     {
         $select = ComponentBuilder::make(ComponentEnum::SELECT)
@@ -50,32 +72,6 @@ class SelectTest extends TestCase
             'select' => $select,
         ])
             ->assertSee('id="select_id"', false);
-    }
-
-    #[Test]
-    public function select_accepts_sub_components()
-    {
-        $select = ComponentBuilder::make(ComponentEnum::SELECT)
-            ->setChild(
-                ComponentBuilder::make(ComponentEnum::OPTGROUP)
-                    ->setChildren([
-                        ComponentBuilder::make(ComponentEnum::OPTION)
-                            ->setContent('First option'),
-                        ComponentBuilder::make(ComponentEnum::OPTION)
-                            ->setContent('Second option'),
-                    ])
-            );
-
-        $this->blade('{{ $select }}', [
-            'select' => $select,
-        ])
-            ->assertSee('<optgrou', false)
-            ->assertSee('<option', false)
-            ->assertSee('First option')
-            ->assertSee('</option>', false)
-            ->assertSee('</optgroup>', false)
-            ->assertSee('Second option');
-
     }
 
     #[Test]

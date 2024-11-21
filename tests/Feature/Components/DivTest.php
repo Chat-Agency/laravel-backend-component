@@ -29,15 +29,39 @@ class DivTest extends TestCase
         $div = ComponentBuilder::make(ComponentEnum::DIV)
             ->setContent(
                 ComponentBuilder::make(ComponentEnum::PARAGRAPH)
-                    ->setContent('Span content')
+                    ->setContent('This is the content content')
             );
 
         $this->blade('{{ $div }}', [
             'div' => $div,
         ])
-            ->assertSee('<p', false)
-            ->assertSee('Span content')
-            ->assertSee('</p>', false);
+            ->assertSee('<div', false)
+            ->assertSee('This is the content content')
+            ->assertSee('</div>', false);
+    }
+
+    #[Test]
+    public function div_accepts_contents_array()
+    {
+        $div = ComponentBuilder::make(ComponentEnum::DIV)
+            ->setContents([
+                ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent('Span'),
+                ComponentBuilder::make(ComponentEnum::BOLD)
+                    ->setContent('Bold'),
+            ]);
+
+        $this->blade('{{ $div }}', [
+            'div' => $div,
+        ])
+            ->assertSee('<div', false)
+            ->assertSee('<span', false)
+            ->assertSee('Span')
+            ->assertSee('</span>', false)
+            ->assertSee('<b', false)
+            ->assertSee('Bold')
+            ->assertSee('</b>', false)
+            ->assertSee('</div>', false);
     }
 
     #[Test]
@@ -50,26 +74,6 @@ class DivTest extends TestCase
             'div' => $div,
         ])
             ->assertSee('id="div_id"', false);
-    }
-
-    #[Test]
-    public function div_accepts_sub_components()
-    {
-        $div = ComponentBuilder::make(ComponentEnum::DIV)
-            ->setChildren([
-                ComponentBuilder::make(ComponentEnum::PARAGRAPH)
-                    ->setContent('First paragraph'),
-                ComponentBuilder::make(ComponentEnum::PARAGRAPH)
-                    ->setContent('Second paragraph'),
-            ]);
-
-        $this->blade('{{ $div }}', [
-            'div' => $div,
-        ])
-            ->assertSee('<p', false)
-            ->assertSee('First paragraph')
-            ->assertSee('</p>', false)
-            ->assertSee('Second paragraph');
     }
 
     #[Test]

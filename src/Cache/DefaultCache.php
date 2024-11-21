@@ -8,7 +8,7 @@ use ChatAgency\BackendComponents\Contracts\Cache;
 
 class DefaultCache implements Cache
 {
-    protected $values = [];
+    private $values = [];
 
     public function get(string $key): mixed
     {

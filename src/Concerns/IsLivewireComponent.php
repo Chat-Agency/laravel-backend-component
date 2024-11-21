@@ -6,11 +6,11 @@ namespace ChatAgency\BackendComponents\Concerns;
 
 trait IsLivewireComponent
 {
-    protected bool $isLiveWire = false;
+    private bool $isLiveWire = false;
 
-    protected ?string $livewireKey = null;
+    private ?string $livewireKey = null;
 
-    protected array $livewireParams = [];
+    private array $livewireParams = [];
 
     public function setLivewire(bool $livewire = true): static
     {
