@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Components;
 
+use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
 
 use function ChatAgency\BackendComponents\backendComponentNamespace;
 
-final class ContentsComponent implements Arrayable, Htmlable
+final class DefaultContentsComponent implements Arrayable, ContentsComponent, Htmlable
 {
     public function __construct(private array $contents) {}
 
