@@ -26,6 +26,7 @@ trait HasContent
     {
         if ($key) {
             $this->content[$key] = $content;
+            return $this;
         }
 
         $this->content[] = $content;
