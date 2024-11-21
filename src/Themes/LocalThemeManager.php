@@ -12,6 +12,4 @@ final class LocalThemeManager implements ThemeManager
     use IsThemeManager;
 
     private string $defaultPath = '_themes';
-
-    private bool $useLocal = true;
 }

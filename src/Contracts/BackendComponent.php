@@ -19,6 +19,4 @@ interface BackendComponent
     public function toArray(): array;
 
     public function __toString(): string;
-    
-
 }

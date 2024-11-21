@@ -34,7 +34,7 @@ class SmallTest extends TestCase
         ])
             ->assertSee('Nice b tag');
     }
-    
+
     #[Test]
     public function small_accepts_contents_array()
     {

@@ -34,7 +34,7 @@ class StrongTest extends TestCase
         ])
             ->assertSee('Nice strong tag');
     }
-   
+
     #[Test]
     public function strong_accepts_contents_array()
     {

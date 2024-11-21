@@ -10,7 +10,7 @@ use ChatAgency\BackendComponents\Contracts\ThemeManager;
 trait IsThemeable
 {
     private array $themes = [];
-    
+
     private ThemeManager $themeManager;
 
     public function getThemes(): array

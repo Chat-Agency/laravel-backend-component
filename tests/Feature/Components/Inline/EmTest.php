@@ -34,7 +34,7 @@ class EmTest extends TestCase
         ])
             ->assertSee('Nice em tag');
     }
-   
+
     #[Test]
     public function em_accepts_contents_array()
     {

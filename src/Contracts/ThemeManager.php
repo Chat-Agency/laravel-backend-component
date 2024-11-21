@@ -10,9 +10,9 @@ interface ThemeManager
 
     public function useLocal($local = true): self;
 
-    public function getRawPath(): string;
+    public function setDefaultPath(string $path): static;
 
-    public function getThemePath(): string;
+    public function getDefaultPath(): string;
 
     public function getThemes(array $themes);
 

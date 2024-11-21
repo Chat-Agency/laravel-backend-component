@@ -17,19 +17,19 @@ trait IsThemeManager
 
     public function useLocal($local = true): static
     {
-        $this->setPath(resource_path('_themes/tailwind/'));
+        $this->setDefaultPath(resource_path('_themes/tailwind/'));
 
         return $this;
     }
 
-    public function setPath(string $path): static
+    public function setDefaultPath(string $path): static
     {
         $this->defaultPath = $path;
 
         return $this;
     }
 
-    public function getRawPath(): string
+    public function getDefaultPath(): string
     {
         return $this->defaultPath;
     }

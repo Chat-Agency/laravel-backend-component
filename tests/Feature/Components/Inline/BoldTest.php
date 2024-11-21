@@ -34,7 +34,7 @@ class BoldTest extends TestCase
         ])
             ->assertSee('Nice b tag');
     }
-    
+
     #[Test]
     public function bold_accepts_contents_array()
     {

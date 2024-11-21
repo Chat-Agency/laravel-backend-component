@@ -35,7 +35,7 @@ class TextareaTest extends TestCase
             ->assertSee('Textarea content')
             ->assertSee('</textarea>', false);
     }
-    
+
     #[Test]
     public function textarea_accepts_contents_array()
     {

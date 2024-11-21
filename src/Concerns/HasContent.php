@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Concerns;
 
-use ChatAgency\BackendComponents\Components\ContentComponent;
+use ChatAgency\BackendComponents\Components\ContentsComponent;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use Illuminate\Contracts\Support\Htmlable;
 
@@ -44,6 +44,6 @@ trait HasContent
 
     public function processContent(): Htmlable
     {
-        return new ContentComponent($this->getContents());
+        return new ContentsComponent($this->getContents());
     }
 }

@@ -34,7 +34,7 @@ class SpanTest extends TestCase
         ])
             ->assertSee('Nice span');
     }
-   
+
     #[Test]
     public function span_accepts_contents_array()
     {

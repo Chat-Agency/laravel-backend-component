@@ -38,7 +38,7 @@ class LabelTest extends TestCase
             ->assertSee('Span content')
             ->assertSee('</label>', false);
     }
-   
+
     #[Test]
     public function label_accepts_contents_array()
     {

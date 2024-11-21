@@ -16,20 +16,20 @@ use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\ContentComponent;
 use ChatAgency\BackendComponents\Contracts\ExtraParamsComponent;
 use ChatAgency\BackendComponents\Contracts\LivewireComponent;
+use ChatAgency\BackendComponents\Contracts\PathComponent;
 use ChatAgency\BackendComponents\Contracts\SlotsComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
-use ChatAgency\BackendComponents\Contracts\PathComponent;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
 
-final class MainBackendComponent implements Arrayable, BackendComponent, ContentComponent, ExtraParamsComponent, Htmlable, LivewireComponent, SlotsComponent, ThemeComponent, PathComponent
+final class MainBackendComponent implements Arrayable, BackendComponent, ContentComponent, ExtraParamsComponent, Htmlable, LivewireComponent, PathComponent, SlotsComponent, ThemeComponent
 {
     use HasContent,
         HasExtraParams,
-        HasSlots,
         HasPath,
+        HasSlots,
         IsBackendComponent ,
         IsLivewireComponent,
         IsThemeable;

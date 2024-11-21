@@ -54,7 +54,6 @@ trait HasPath
         return $this->getPath().$this->getName();
     }
 
-    
     public function setNamespace(string $namespace): static
     {
         $this->namespace = $namespace;
@@ -76,5 +75,4 @@ trait HasPath
             ->render();
 
     }
-
 }

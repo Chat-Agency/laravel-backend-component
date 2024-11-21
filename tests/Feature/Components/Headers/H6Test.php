@@ -59,7 +59,6 @@ class H6Test extends TestCase
             ->assertSee('</h6>', false);
     }
 
-
     #[Test]
     public function h6_header_accepts_attributes()
     {

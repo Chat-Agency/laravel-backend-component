@@ -7,11 +7,8 @@ namespace ChatAgency\BackendComponents\Concerns;
 use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
 use ChatAgency\BackendComponents\Contracts\AttributeBag;
 
-use function ChatAgency\BackendComponents\backendComponentNamespace;
-
 trait IsBackendComponent
 {
-    
     private array $attributes = [];
 
     public function getAttributes(): array
@@ -51,5 +48,4 @@ trait IsBackendComponent
     {
         return json_encode($this->toArray());
     }
-
 }

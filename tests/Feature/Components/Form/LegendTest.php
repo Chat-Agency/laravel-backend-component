@@ -38,7 +38,7 @@ class LegendTest extends TestCase
             ->assertSee('Span content')
             ->assertSee('</legend>', false);
     }
-  
+
     #[Test]
     public function legend_accepts_contents_array()
     {

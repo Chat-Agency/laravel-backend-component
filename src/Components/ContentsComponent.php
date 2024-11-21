@@ -9,7 +9,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 use function ChatAgency\BackendComponents\backendComponentNamespace;
 
-final class ContentComponent implements Arrayable, Htmlable
+final class ContentsComponent implements Arrayable, Htmlable
 {
     public function __construct(private array $contents) {}
 

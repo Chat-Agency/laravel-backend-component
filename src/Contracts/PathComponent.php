@@ -15,11 +15,10 @@ interface PathComponent
     public function getPath(): string;
 
     public function getComponentPath(): string;
-    
+
     public function setNamespace(string $namespace): static;
 
     public function setPath(string $path): static;
 
     public function toHtml();
-
 }
