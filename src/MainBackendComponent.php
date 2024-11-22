@@ -42,7 +42,6 @@ final class MainBackendComponent implements Arrayable, BackendComponent, Content
     public function toArray(): array
     {
         return [
-            'name' => $this->getName(),
             'attributes' => $this->getAttributes(),
             'content' => $this->processContent(),
             'path' => $this->getComponentPath(),
@@ -53,5 +52,13 @@ final class MainBackendComponent implements Arrayable, BackendComponent, Content
             'livewireKey' => $this->getLivewireKey(),
             'livewireParams' => $this->getLivewireParams(),
         ];
+    }
+
+    public function toHtml()
+    {
+        return view(backendComponentNamespace().'_utilities.resolve-component')
+            ->with('component', $this)
+            ->render();
+
     }
 }

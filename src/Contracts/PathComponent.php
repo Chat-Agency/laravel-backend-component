@@ -19,6 +19,4 @@ interface PathComponent
     public function setNamespace(string $namespace): static;
 
     public function setPath(string $path): static;
-
-    public function toHtml();
 }
