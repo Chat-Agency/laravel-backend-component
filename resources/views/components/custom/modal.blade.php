@@ -23,6 +23,7 @@
         'x-show' => 'showModal',
     ];
     $content = null;
+    $slot = $slot ?? null;
     
 
     $title = $title ?? null;

@@ -44,8 +44,8 @@ final class MainBackendComponent implements Arrayable, BackendComponent, Content
         return [
             'attributes' => $this->getAttributes(),
             'content' => $this->processContent(),
-            'path' => $this->getComponentPath(),
             'themes' => $this->compileTheme(),
+            'path' => $this->getComponentPath(),
             'slots' => $this->getSlots(),
             'extra' => $this->getExtras(),
             'isLivewire' => $this->isLivewire(),

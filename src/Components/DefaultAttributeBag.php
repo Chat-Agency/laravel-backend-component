@@ -11,8 +11,8 @@ readonly class DefaultAttributeBag implements AttributeBag
     public function __construct(
         private array $attributes,
         public readonly ?DefaultContentsComponent $content = null,
-        public readonly ?string $path = null,
         public readonly ?string $themes = null,
+        public readonly ?string $path = null,
         public readonly array $slots = [],
         public readonly array $extra = [],
         public readonly bool $isLivewire = false,

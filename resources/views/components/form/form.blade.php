@@ -16,6 +16,7 @@
 @php
     $serverAttrs = [];
     $content = null;
+    $slot = $slot ?? null;
     
     $method = 'POST';
 

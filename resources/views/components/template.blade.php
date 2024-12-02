@@ -5,6 +5,7 @@
 @php
     $serverAttrs = [];
     $content = null;
+    $slot = $slot ?? null;
     
     if($attrs) {
 

@@ -9,8 +9,8 @@
 @php
     $serverAttrs = [];
     $content = null;
+    $slot = $slot ?? null;
     
-
     if($attrs) {
 
         $serverAttrs = $attrs->getAttributes();
@@ -24,4 +24,4 @@
     
     {{ $content }}{{ $slot }}
 
-</div>
+</div> 
