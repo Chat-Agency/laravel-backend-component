@@ -6,7 +6,7 @@ namespace ChatAgency\BackendComponents\Concerns;
 
 use ChatAgency\BackendComponents\Components\DefaultContentsComponent;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use Illuminate\Contracts\Support\Htmlable;
+use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 
 trait HasContent
 {
@@ -44,7 +44,7 @@ trait HasContent
         return $this;
     }
 
-    public function processContent(): Htmlable
+    public function processContent(): ContentsComponent
     {
         return new DefaultContentsComponent($this->getContents());
     }

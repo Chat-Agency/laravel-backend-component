@@ -23,9 +23,17 @@ trait IsBackendComponent
 
     public function getAttributeBag(): AttributeBag
     {
-        $attrs = $this->toArray();
-
-        return new DefaultAttributeBag(...$attrs);
+        return new DefaultAttributeBag(
+            $this->getAttributes(),
+            $this->processContent(),
+            $this->compileTheme(),
+            $this->getComponentPath(),
+            $this->getSlots(),
+            $this->getExtras(),
+            $this->isLivewire(),
+            $this->getLivewireKey(),
+            $this->getLivewireParams(),
+        );
     }
 
     public function setAttribute(string $name, $content): static

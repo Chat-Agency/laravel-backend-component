@@ -43,7 +43,7 @@ final class MainBackendComponent implements Arrayable, BackendComponent, Content
     {
         return [
             'attributes' => $this->getAttributes(),
-            'content' => $this->processContent(),
+            'content' => $this->processContent()->toArray(),
             'themes' => $this->compileTheme(),
             'path' => $this->getComponentPath(),
             'slots' => $this->getSlots(),

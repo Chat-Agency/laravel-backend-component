@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Contracts;
 
-use Illuminate\Contracts\Support\Htmlable;
-
 interface ContentComponent
 {
     public function getContent($key): string|BackendComponent|null;
@@ -16,5 +14,5 @@ interface ContentComponent
 
     public function setContents(array $contents): static;
 
-    public function processContent(): Htmlable;
+    public function processContent(): ContentsComponent;
 }

@@ -8,6 +8,7 @@ use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
 use ChatAgency\BackendComponents\Concerns\HasContent;
 use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
 use ChatAgency\BackendComponents\Concerns\IsThemeable;
+use ChatAgency\BackendComponents\Contracts\AttributeBag;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\ContentComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeComponent;
@@ -19,10 +20,10 @@ use Illuminate\Contracts\Support\Htmlable;
 
 use function ChatAgency\BackendComponents\backendComponentNamespace;
 
-class DivComponent implements Arrayable, BackendComponent, Htmlable, ThemeComponent, ContentComponent
+class DivComponent implements Arrayable, BackendComponent, ContentComponent, Htmlable, ThemeComponent
 {
-    use IsBackendComponent,
-        HasContent,
+    use HasContent,
+        IsBackendComponent,
         IsThemeable;
 
     public function __construct(
@@ -38,7 +39,16 @@ class DivComponent implements Arrayable, BackendComponent, Htmlable, ThemeCompon
         ];
     }
 
-    public function componentPath() 
+    public function getAttributeBag(): AttributeBag
+    {
+        return new DefaultAttributeBag(
+            $this->getAttributes(),
+            $this->processContent(),
+            $this->compileTheme(),
+        );
+    }
+
+    public function componentPath()
     {
         return backendComponentNamespace()
             .'components.'

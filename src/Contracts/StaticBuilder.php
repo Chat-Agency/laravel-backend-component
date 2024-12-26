@@ -8,5 +8,5 @@ use ChatAgency\BackendComponents\Enums\ComponentEnum;
 
 interface StaticBuilder
 {
-    public static function make(string|ComponentEnum $name): BackendComponent|ContentComponent|ThemeComponent|SlotsComponent|LivewireComponent|ExtraParamsComponent;
+    public static function make(string|ComponentEnum $name): BackendComponent|ContentComponent|ThemeComponent|SlotsComponent|LivewireComponent|ExtraParamsComponent|PathComponent;
 }

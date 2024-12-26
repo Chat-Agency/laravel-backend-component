@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ChatAgency\BackendComponents {
 
     use ChatAgency\BackendComponents\Cache\DefaultCache;
+    use ChatAgency\BackendComponents\Contracts\BackendComponent;
     use ChatAgency\BackendComponents\Contracts\ThemeManager;
     use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 
@@ -34,5 +35,10 @@ namespace ChatAgency\BackendComponents {
 
         return $cache;
 
+    }
+
+    function isComponent($component): bool
+    {
+        return $component instanceof BackendComponent ? true : false;
     }
 }
