@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Utils;
 
+use BackedEnum;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
@@ -33,27 +34,9 @@ final class TableUtil
         private ThemeManager $themeManager = new DefaultThemeManager
     ) {}
 
-    public static function make(array $head, array $body): static
+    public static function make(array $head, array $body, ThemeManager $themeManager = new DefaultThemeManager): static
     {
-        return new self($head, $body);
-    }
-
-    public function getComponent(): BackendComponent
-    {
-
-        $theme = $this->themes['table'] ?? null;
-
-        $component = (new MainBackendComponent(ComponentEnum::TABLE, $this->themeManager))
-            ->setContents([
-                $this->head(),
-                $this->body(),
-            ]);
-
-        if ($theme) {
-            $component->setTheme($theme['name'], $theme['style']);
-        }
-
-        return $component;
+        return new self($head, $body, $themeManager);
     }
 
     public function setTheme($name, $style): self
@@ -63,6 +46,24 @@ final class TableUtil
         return $this;
     }
 
+    public function unsetTheme($name): self
+    {
+        unset($this->themes[$name]);
+
+        return $this;
+    }
+
+    public function getComponent(): BackendComponent
+    {
+
+        $theme = $this->themes['table'] ?? null;
+
+        return $this->composeComponent(ComponentEnum::TABLE, [
+            $this->head(),
+            $this->body(),
+        ], $theme);
+    }
+
     private function head(): BackendComponent
     {
         $columns = [];
@@ -70,21 +71,12 @@ final class TableUtil
         $theme = $this->themes['th'] ?? null;
 
         foreach ($this->head as $value) {
-            $component = (new MainBackendComponent(ComponentEnum::TH, $this->themeManager))
-                ->setContent($value);
-
-            if ($theme) {
-                $component->setTheme($theme['name'], $theme['style']);
-            }
-
-            $columns[] = $component;
+            $columns[] = $this->composeComponent(ComponentEnum::TH, $value, $theme);
         }
 
-        return (new MainBackendComponent(ComponentEnum::THEAD, $this->themeManager))
-            ->setContents([
-                (new MainBackendComponent(ComponentEnum::TR, $this->themeManager))
-                    ->setContents($columns),
-            ]);
+        return $this->composeComponent(ComponentEnum::THEAD, [
+            $this->composeComponent(ComponentEnum::TR, $columns),
+        ]);
 
     }
 
@@ -95,20 +87,10 @@ final class TableUtil
         $theme = $this->themes['tr'] ?? null;
 
         foreach ($this->body as $row) {
-            $component = (new MainBackendComponent(ComponentEnum::TR, $this->themeManager))
-                ->setContents($this->rows($row));
-
-            if ($theme) {
-                $component->setTheme($theme['name'], $theme['style']);
-            }
-
-            $rows[] = $component;
+            $rows[] = $this->composeComponent(ComponentEnum::TR, $this->rows($row), $theme);
         }
 
-        // dd( $rows );
-
-        return (new MainBackendComponent(ComponentEnum::TBODY, $this->themeManager))
-            ->setContents($rows);
+        return $this->composeComponent(ComponentEnum::TBODY, $rows);
     }
 
     private function rows(array $rows): array
@@ -118,16 +100,23 @@ final class TableUtil
         $theme = $this->themes['td'] ?? null;
 
         foreach ($rows as $value) {
-            $component = (new MainBackendComponent(ComponentEnum::TD, $this->themeManager))
-                ->setContents($value);
-
-            if ($theme) {
-                $component->setTheme($theme['name'], $theme['style']);
-            }
-
-            $cells[] = $component;
+            $cells[] = $this->composeComponent(ComponentEnum::TD, $value, $theme);
         }
 
         return $cells;
+    }
+
+    public function composeComponent(BackedEnum $name, array|string $contents, $theme = null): BackendComponent
+    {
+        $contents = is_array($contents) ? $contents : [$contents];
+
+        $component = (new MainBackendComponent($name, $this->themeManager))
+            ->setContents($contents);
+
+        if ($theme) {
+            $component->setTheme($theme['name'], $theme['style']);
+        }
+
+        return $component;
     }
 }
