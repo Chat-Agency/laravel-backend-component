@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Components;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;

@@ -12,7 +12,7 @@ trait HasContent
 {
     private array $content = [];
 
-    public function getContent($key = null): string|BackendComponent|null
+    public function getContent($key = null): string|int|BackendComponent|null
     {
         return $this->content[$key] ?? null;
     }
@@ -22,7 +22,7 @@ trait HasContent
         return $this->content;
     }
 
-    public function setContent(string|BackendComponent $content, $key = null): static
+    public function setContent(string|int|BackendComponent $content, $key = null): static
     {
         if ($key) {
             $this->content[$key] = $content;

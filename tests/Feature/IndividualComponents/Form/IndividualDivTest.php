@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Feature\IndividualComponents\Form;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;

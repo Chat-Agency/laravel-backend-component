@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Feature\Utils;
 
 use ChatAgency\BackendComponents\Utils\TableUtil;
