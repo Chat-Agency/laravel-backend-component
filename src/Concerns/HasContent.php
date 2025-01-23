@@ -6,13 +6,21 @@ namespace ChatAgency\BackendComponents\Concerns;
 
 use ChatAgency\BackendComponents\Components\DefaultContentsComponent;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
+use ChatAgency\BackendComponents\Contracts\ContentComponent;
 use ChatAgency\BackendComponents\Contracts\ContentsComponent;
+use ChatAgency\BackendComponents\Contracts\ExtraParamsComponent;
+use ChatAgency\BackendComponents\Contracts\LivewireComponent;
+use ChatAgency\BackendComponents\Contracts\PathComponent;
+use ChatAgency\BackendComponents\Contracts\SlotsComponent;
+use ChatAgency\BackendComponents\Contracts\ThemeComponent;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Htmlable;
 
 trait HasContent
 {
     private array $content = [];
 
-    public function getContent($key = null): string|int|BackendComponent|null
+    public function getContent($key = null): string|Arrayable|BackendComponent|ContentComponent|ExtraParamsComponent|Htmlable|LivewireComponent|PathComponent|SlotsComponent|ThemeComponent|null
     {
         return $this->content[$key] ?? null;
     }
@@ -22,7 +30,7 @@ trait HasContent
         return $this->content;
     }
 
-    public function setContent(string|int|BackendComponent $content, $key = null): static
+    public function setContent(string|BackendComponent $content, $key = null): static
     {
         if ($key) {
             $this->content[$key] = $content;

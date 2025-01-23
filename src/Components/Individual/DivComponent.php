@@ -30,6 +30,11 @@ class DivComponent implements Arrayable, BackendComponent, ContentComponent, Htm
         private ThemeManager $themeManager = new DefaultThemeManager
     ) {}
 
+    public function getContent($key = null): string|Arrayable|BackendComponent|ContentComponent|Htmlable|ThemeComponent|null
+    {
+        return $this->content[$key] ?? null;
+    }
+
     public function toArray(): array
     {
         return [
