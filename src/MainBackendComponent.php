@@ -42,9 +42,14 @@ final class MainBackendComponent implements Arrayable, BackendComponent, Content
     public function toArray(): array
     {
         return [
+            'name' => $this->getName(),
             'attributes' => $this->getAttributes(),
             'content' => $this->processContent()->toArray(),
-            'themes' => $this->compileTheme(),
+            'theme' => [
+                'themes' => $this->getThemes(),
+                'path' => $this->themeManager->getDefaultPath(),
+                'realPath' => $this->themeManager->getThemePath(),
+            ],
             'path' => $this->getComponentPath(),
             'slots' => $this->getSlots(),
             'extra' => $this->getExtras(),

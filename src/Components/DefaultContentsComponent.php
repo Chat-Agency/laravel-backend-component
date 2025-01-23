@@ -26,8 +26,8 @@ final class DefaultContentsComponent implements ContentsComponent, Htmlable
     {
         $contents = [];
 
-        foreach ($this->contents as $content) {
-            $content[] = isComponent($content) ? $content->toArray() : $content;
+        foreach ($this->contents as $key => $content) {
+            $contents[$key] = isComponent($content) ? $content->toArray() : $content;
         }
 
         return $contents;

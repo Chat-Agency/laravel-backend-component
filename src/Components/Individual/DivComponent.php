@@ -33,10 +33,19 @@ class DivComponent implements Arrayable, BackendComponent, ContentComponent, Htm
     public function toArray(): array
     {
         return [
+            'name' => $this->getName(),
             'attributes' => $this->getAttributes(),
-            'content' => $this->processContent(),
+            'content' => $this->processContent()->toArray(),
             'themes' => $this->compileTheme(),
+            'path' => $this->getComponentPath(),
+            'themeManagerPath' => $this->themeManager->getDefaultPath(),
+            'themeManagerRealPath' => $this->themeManager->getThemePath(),
         ];
+    }
+
+    public function getName(): string
+    {
+        return ComponentEnum::DIV->value;
     }
 
     public function getAttributeBag(): AttributeBag
@@ -48,18 +57,20 @@ class DivComponent implements Arrayable, BackendComponent, ContentComponent, Htm
         );
     }
 
-    public function componentPath()
+    public function getComponentPath()
     {
         return backendComponentNamespace()
             .'components.'
-            .ComponentEnum::DIV->value;
+            .$this->getName();
     }
 
     public function toHtml()
     {
-        return view($this->componentPath())
+        return view($this->getComponentPath())
             ->with('attrs', new DefaultAttributeBag(
-                ...$this->toArray()
+                $this->getAttributes(),
+                $this->processContent(),
+                $this->compileTheme(),
             ))
             ->render();
     }

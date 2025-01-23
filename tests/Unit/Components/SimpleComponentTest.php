@@ -157,4 +157,33 @@ class SimpleComponentTest extends TestCase
 
         $this->assertJson($component->__toString());
     }
+
+    #[Test]
+    public function a_component_can_return_an_array_representation()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::DIV)
+            ->setContents([
+                'span_1' => ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent('inside a span'),
+                'span_2' => ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent(
+                        ComponentBuilder::make(ComponentEnum::LINK)
+                            ->setAttribute('href', 'https://google.com')
+                            ->setContent('this is a link')
+                            ->setTheme('action', 'success')
+                    ),
+            ]);
+
+        $componentArray = $component->toArray();
+
+        $this->assertIsArray($componentArray);
+        $this->assertIsArray($componentArray['content']);
+        $this->assertIsArray($componentArray['attributes']);
+
+        $this->assertIsArray($componentArray['content']['span_1']);
+        $this->assertIsArray($componentArray['content']['span_2']);
+
+        $this->assertIsArray($componentArray['content']['span_2']['content']);
+        $this->assertEquals('this is a link', $componentArray['content']['span_2']['content'][0]['content'][0]);
+    }
 }

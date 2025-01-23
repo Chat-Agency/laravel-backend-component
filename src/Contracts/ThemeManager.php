@@ -12,6 +12,8 @@ interface ThemeManager
 
     public function getDefaultPath(): string;
 
+    public function getThemePath(): string;
+
     public function getThemes(array $themes);
 
     public function getTheme(string $type, string|array|ThemeBag|null $theme = null): string;

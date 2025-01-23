@@ -45,3 +45,7 @@ Since the main component class implements the Laravel [Htmlable](https://laravel
 ```blade
 {{ $button }}
 ```
+
+## License
+
+This package is licensed with the [MIT License](https://choosealicense.com/licenses/mit/#).
