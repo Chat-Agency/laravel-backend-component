@@ -76,7 +76,7 @@ class DivComponent implements Arrayable, BackendComponent, Htmlable, ThemeCompon
             ->render();
     }
 
-    public function getContent($key = null): string|DivComponent|null
+    public function getContent($key = null): string|Arrayable|BackendComponent|Htmlable|ThemeComponent|null
     {
         return $this->content[$key] ?? null;
     }
