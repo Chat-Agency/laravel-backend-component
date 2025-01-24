@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Components\Inline;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
@@ -36,6 +38,24 @@ class StrongTest extends TestCase
     }
 
     #[Test]
+    public function strong_accepts_contents_array()
+    {
+        $strong = ComponentBuilder::make(ComponentEnum::STRONG)
+            ->setContents([
+                'content 1 ',
+                'content 2',
+            ]);
+
+        $this->blade('{{ $strong }}', [
+            'strong' => $strong,
+        ])
+            ->assertSee('<strong', false)
+            ->assertSee('content 1 ')
+            ->assertSee('content 2')
+            ->assertSee('</strong>', false);
+    }
+
+    #[Test]
     public function strong_accepts_attributes()
     {
         $strong = ComponentBuilder::make(ComponentEnum::STRONG)
@@ -45,20 +65,6 @@ class StrongTest extends TestCase
             'strong' => $strong,
         ])
             ->assertSee('id="nice_strong"', false);
-    }
-
-    #[Test]
-    public function strong_does_not_accept_sub_components()
-    {
-        $strong = ComponentBuilder::make(ComponentEnum::STRONG)
-            ->setSubComponent(
-                ComponentBuilder::make(ComponentEnum::SPAN)
-            );
-
-        $this->blade('{{ $strong }}', [
-            'strong' => $strong,
-        ])
-            ->assertDontSee('<span', false);
     }
 
     #[Test]

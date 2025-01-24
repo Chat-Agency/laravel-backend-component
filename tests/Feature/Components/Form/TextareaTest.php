@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Components\Form;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
@@ -37,6 +39,24 @@ class TextareaTest extends TestCase
     }
 
     #[Test]
+    public function textarea_accepts_contents_array()
+    {
+        $header = ComponentBuilder::make(ComponentEnum::TEXTAREA)
+            ->setContents([
+                'content 1 ',
+                'content 2',
+            ]);
+
+        $this->blade('{{ $header }}', [
+            'header' => $header,
+        ])
+            ->assertSee('<textarea', false)
+            ->assertSee('content 1 ')
+            ->assertSee('content 2')
+            ->assertSee('</textarea>', false);
+    }
+
+    #[Test]
     public function textarea_accepts_attributes()
     {
         $textarea = ComponentBuilder::make(ComponentEnum::TEXTAREA)
@@ -46,27 +66,6 @@ class TextareaTest extends TestCase
             'textarea' => $textarea,
         ])
             ->assertSee('for="textarea_for"', false);
-    }
-
-    #[Test]
-    public function textarea_does_not_accept_sub_components()
-    {
-        $textarea = ComponentBuilder::make(ComponentEnum::TEXTAREA)
-            ->setSubComponents([
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('First span'),
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('Second span'),
-            ]);
-
-        $this->blade('{{ $textarea }}', [
-            'textarea' => $textarea,
-        ])
-            ->assertDontSee('<span', false)
-            ->assertDontSee('First span')
-            ->assertDontSee('</span>', false)
-            ->assertDontSee('Second span');
-
     }
 
     #[Test]

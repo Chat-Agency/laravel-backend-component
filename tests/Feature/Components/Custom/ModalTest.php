@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Components\Custom;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
@@ -47,23 +49,6 @@ class ModalTest extends TestCase
             'modal' => $modal,
         ])
             ->assertSee('id="my_modal"', false);
-    }
-
-    #[Test]
-    public function modal_accepts_sub_components()
-    {
-        $modal = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setSubComponents([
-                ComponentBuilder::make(ComponentEnum::DIV)
-                    ->setContent('Sub Component inside modal')
-                    ->setAttribute('id', 'modal_body'),
-            ]);
-
-        $this->blade('{{ $modal }}', [
-            'modal' => $modal,
-        ])
-            ->assertSee('Sub Component inside modal')
-            ->assertSee('<div id="modal_body"', false);
     }
 
     #[Test]

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Components\Lists;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
@@ -41,6 +43,28 @@ class UnorderedListTest extends TestCase
     }
 
     #[Test]
+    public function unordered_list_accepts_contents_array()
+    {
+        $unordered_list = ComponentBuilder::make(ComponentEnum::UL)
+            ->setContents([
+                ComponentBuilder::make(ComponentEnum::LI)
+                    ->setContent('First item'),
+                ComponentBuilder::make(ComponentEnum::LI)
+                    ->setContent('Second item'),
+            ]);
+
+        $this->blade('{{ $unordered_list }}', [
+            'unordered_list' => $unordered_list,
+        ])
+            ->assertSee('<ul', false)
+            ->assertSee('<li', false)
+            ->assertSee('First item')
+            ->assertSee('</li>', false)
+            ->assertSee('Second item')
+            ->assertSee('</ul>', false);
+    }
+
+    #[Test]
     public function unordered_list_accepts_attributes()
     {
         $unorderedList = ComponentBuilder::make(ComponentEnum::UL)
@@ -50,37 +74,6 @@ class UnorderedListTest extends TestCase
             'unorderedList' => $unorderedList,
         ])
             ->assertSee('id="list_id"', false);
-    }
-
-    #[Test]
-    public function unordered_list_accepts_sub_components()
-    {
-        $unorderedList = ComponentBuilder::make(ComponentEnum::UL)
-            ->setAttribute('id', 'main_list')
-            ->setSubComponents([
-                ComponentBuilder::make(ComponentEnum::LI)
-                    ->setContent('First list item'),
-                ComponentBuilder::make(ComponentEnum::LI)
-                    ->setContent('Second list item'),
-                // nested list
-                ComponentBuilder::make(ComponentEnum::UL)
-                    ->setAttribute('id', 'nested_list')
-                    ->setContent(
-                        ComponentBuilder::make(ComponentEnum::LI)
-                            ->setContent('First nested list item'),
-                    ),
-            ]);
-
-        $this->blade('{{ $unorderedList }}', [
-            'unorderedList' => $unorderedList,
-        ])
-            ->assertSee('<ul id="main_list"', false)
-            ->assertSee('<li', false)
-            ->assertSee('First list item')
-            ->assertSee('</li>', false)
-            ->assertSee('Second list item')
-            ->assertSee('<ul id="nested_list"', false)
-            ->assertSee('First nested list item');
     }
 
     #[Test]

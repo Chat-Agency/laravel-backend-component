@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Components\Form;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
@@ -40,6 +42,24 @@ class LegendTest extends TestCase
     }
 
     #[Test]
+    public function legend_accepts_contents_array()
+    {
+        $header = ComponentBuilder::make(ComponentEnum::LEGEND)
+            ->setContents([
+                'content 1 ',
+                'content 2',
+            ]);
+
+        $this->blade('{{ $header }}', [
+            'header' => $header,
+        ])
+            ->assertSee('<legend', false)
+            ->assertSee('content 1 ')
+            ->assertSee('content 2')
+            ->assertSee('</legend>', false);
+    }
+
+    #[Test]
     public function legend_accepts_attributes()
     {
         $legend = ComponentBuilder::make(ComponentEnum::LEGEND)
@@ -49,27 +69,6 @@ class LegendTest extends TestCase
             'legend' => $legend,
         ])
             ->assertSee('for="legend_for"', false);
-    }
-
-    #[Test]
-    public function legend_accepts_sub_components()
-    {
-        $legend = ComponentBuilder::make(ComponentEnum::LEGEND)
-            ->setSubComponents([
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('First span'),
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('Second span'),
-            ]);
-
-        $this->blade('{{ $legend }}', [
-            'legend' => $legend,
-        ])
-            ->assertSee('<span', false)
-            ->assertSee('First span')
-            ->assertSee('</span>', false)
-            ->assertSee('Second span');
-
     }
 
     #[Test]

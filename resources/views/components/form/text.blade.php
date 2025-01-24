@@ -11,13 +11,8 @@
         'type' => 'text',
     ];
 
-    $content = null;
-
     if($attrs) {
-
         $serverAttrs = array_merge($serverAttrs, $attrs->getAttributes());
-        $content = $attrs->content;
-        
     }
 
 @endphp

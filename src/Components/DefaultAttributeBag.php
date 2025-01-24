@@ -5,21 +5,20 @@ declare(strict_types=1);
 namespace ChatAgency\BackendComponents\Components;
 
 use ChatAgency\BackendComponents\Contracts\AttributeBag;
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
+use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 
 readonly class DefaultAttributeBag implements AttributeBag
 {
     public function __construct(
-        public string|BackendComponent|null $content,
-        public string $path,
-        public array $attributes,
-        public array $subComponents = [],
-        public ?string $themes = null,
-        public array $slots = [],
-        public array $extra = [],
-        public bool $isLivewire = false,
-        public ?string $livewireKey = null,
-        public array $livewireParams = [],
+        private array $attributes,
+        public readonly ?ContentsComponent $content = null,
+        public readonly ?string $themes = null,
+        public readonly ?string $path = null,
+        public readonly array $slots = [],
+        public readonly array $extra = [],
+        public readonly bool $isLivewire = false,
+        public readonly ?string $livewireKey = null,
+        public readonly array $livewireParams = [],
     ) {}
 
     public function getAttributes(): array
@@ -35,7 +34,7 @@ readonly class DefaultAttributeBag implements AttributeBag
         return $attrs;
     }
 
-    protected function mergeClasses(): string
+    private function mergeClasses(): string
     {
         $class = $this->attributes['class'] ?? null ? $this->attributes['class'].'' : null;
 

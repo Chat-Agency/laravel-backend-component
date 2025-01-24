@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Components\Inline;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
@@ -36,6 +38,24 @@ class SmallTest extends TestCase
     }
 
     #[Test]
+    public function small_accepts_contents_array()
+    {
+        $small = ComponentBuilder::make(ComponentEnum::SMALL)
+            ->setContents([
+                'content 1 ',
+                'content 2',
+            ]);
+
+        $this->blade('{{ $small }}', [
+            'small' => $small,
+        ])
+            ->assertSee('<small', false)
+            ->assertSee('content 1 ')
+            ->assertSee('content 2')
+            ->assertSee('</small>', false);
+    }
+
+    #[Test]
     public function small_accepts_attributes()
     {
         $small = ComponentBuilder::make(ComponentEnum::SMALL)
@@ -45,21 +65,6 @@ class SmallTest extends TestCase
             'small' => $small,
         ])
             ->assertSee('id="nice_small"', false);
-    }
-
-    #[Test]
-    public function small_does_not_accept_sub_components()
-    {
-        $small = ComponentBuilder::make(ComponentEnum::SMALL)
-            ->setSubComponent(
-                ComponentBuilder::make(ComponentEnum::SPAN)
-            );
-
-        $this->blade('{{ $small }}', [
-            'small' => $small,
-        ])
-            ->assertDontSee('<span', false)
-            ->assertDontSee('</span>', false);
     }
 
     #[Test]

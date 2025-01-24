@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Components\Inline;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
@@ -36,6 +38,24 @@ class EmTest extends TestCase
     }
 
     #[Test]
+    public function em_accepts_contents_array()
+    {
+        $em = ComponentBuilder::make(ComponentEnum::EM)
+            ->setContents([
+                'content 1 ',
+                'content 2',
+            ]);
+
+        $this->blade('{{ $em }}', [
+            'em' => $em,
+        ])
+            ->assertSee('<em', false)
+            ->assertSee('content 1 ')
+            ->assertSee('content 2')
+            ->assertSee('</em>', false);
+    }
+
+    #[Test]
     public function em_accepts_attributes()
     {
         $em = ComponentBuilder::make(ComponentEnum::EM)
@@ -45,21 +65,6 @@ class EmTest extends TestCase
             'em' => $em,
         ])
             ->assertSee('id="nice_em"', false);
-    }
-
-    #[Test]
-    public function em_does_not_accept_sub_components()
-    {
-        $em = ComponentBuilder::make(ComponentEnum::EM)
-            ->setSubComponent(
-                ComponentBuilder::make(ComponentEnum::SPAN)
-            );
-
-        $this->blade('{{ $em }}', [
-            'em' => $em,
-        ])
-            ->assertDontSee('<span', false)
-            ->assertDontSee('</span>', false);
     }
 
     #[Test]

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents {
 
-    use ChatAgency\BackendComponents\Contracts\ThemeBag;
+    use ChatAgency\BackendComponents\Cache\DefaultCache;
+    use ChatAgency\BackendComponents\Contracts\BackendComponent;
     use ChatAgency\BackendComponents\Contracts\ThemeManager;
     use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 
@@ -18,14 +19,26 @@ namespace ChatAgency\BackendComponents {
         return new MainBackendComponent($name);
     }
 
-    function getThemes(array $themes, ThemeManager $manager = new DefaultThemeManager)
+    function getThemes(array $themes, ThemeManager $manager = new DefaultThemeManager): ?string
     {
         return $manager->getThemes($themes);
     }
 
-    function resolveTheme(array $styleGroup, string|array|ThemeBag $style): string
+    function cache(): DefaultCache
     {
-        return DefaultThemeManager::make()
-            ->resolveTheme($styleGroup, $style);
+
+        static $cache;
+
+        if ($cache === null) {
+            $cache = new DefaultCache;
+        }
+
+        return $cache;
+
+    }
+
+    function isComponent($component): bool
+    {
+        return $component instanceof BackendComponent ? true : false;
     }
 }

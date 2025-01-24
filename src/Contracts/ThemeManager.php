@@ -6,9 +6,11 @@ namespace ChatAgency\BackendComponents\Contracts;
 
 interface ThemeManager
 {
-    public static function make(): self;
-
     public function useLocal($local = true): self;
+
+    public function setDefaultPath(string $path): static;
+
+    public function getDefaultPath(): string;
 
     public function getThemePath(): string;
 

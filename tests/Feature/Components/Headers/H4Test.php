@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Components\Headers;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
@@ -36,6 +38,30 @@ class H4Test extends TestCase
     }
 
     #[Test]
+    public function h4_accepts_contents_array()
+    {
+        $header = ComponentBuilder::make(ComponentEnum::H4)
+            ->setContents([
+                ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent('Span'),
+                ComponentBuilder::make(ComponentEnum::BOLD)
+                    ->setContent('Bold'),
+            ]);
+
+        $this->blade('{{ $header }}', [
+            'header' => $header,
+        ])
+            ->assertSee('<h4', false)
+            ->assertSee('<span', false)
+            ->assertSee('Span')
+            ->assertSee('</span>', false)
+            ->assertSee('<b', false)
+            ->assertSee('Bold')
+            ->assertSee('</b>', false)
+            ->assertSee('</h4>', false);
+    }
+
+    #[Test]
     public function h4_header_accepts_attributes()
     {
         $header = ComponentBuilder::make(ComponentEnum::H4)
@@ -45,26 +71,6 @@ class H4Test extends TestCase
             'header' => $header,
         ])
             ->assertSee('id="nice_header"', false);
-    }
-
-    #[Test]
-    public function h4_header_accepts_sub_components()
-    {
-        $div = ComponentBuilder::make(ComponentEnum::H4)
-            ->setSubComponents([
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('First span'),
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('Second span'),
-            ]);
-
-        $this->blade('{{ $div }}', [
-            'div' => $div,
-        ])
-            ->assertSee('<span >', false)
-            ->assertSee('First span')
-            ->assertSee('</span>', false)
-            ->assertSee('Second span');
     }
 
     #[Test]

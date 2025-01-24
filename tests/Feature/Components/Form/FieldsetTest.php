@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Components\Form;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
@@ -40,6 +42,24 @@ class FieldsetTest extends TestCase
     }
 
     #[Test]
+    public function fieldset_accepts_contents_array()
+    {
+        $header = ComponentBuilder::make(ComponentEnum::FIELDSET)
+            ->setContents([
+                ComponentBuilder::make(ComponentEnum::TEXT_INPUT),
+                ComponentBuilder::make(ComponentEnum::EMAIL_INPUT),
+            ]);
+
+        $this->blade('{{ $header }}', [
+            'header' => $header,
+        ])
+            ->assertSee('<fieldset', false)
+            ->assertSee('<input type="text"', false)
+            ->assertSee('<input type="email"', false)
+            ->assertSee('</fieldset>', false);
+    }
+
+    #[Test]
     public function fieldset_accepts_attributes()
     {
         $fieldset = ComponentBuilder::make(ComponentEnum::FIELDSET)
@@ -49,27 +69,6 @@ class FieldsetTest extends TestCase
             'fieldset' => $fieldset,
         ])
             ->assertSee('for="fieldset_for"', false);
-    }
-
-    #[Test]
-    public function fieldset_accepts_sub_components()
-    {
-        $fieldset = ComponentBuilder::make(ComponentEnum::FIELDSET)
-            ->setSubComponents([
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('First span'),
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('Second span'),
-            ]);
-
-        $this->blade('{{ $fieldset }}', [
-            'fieldset' => $fieldset,
-        ])
-            ->assertSee('<span', false)
-            ->assertSee('First span')
-            ->assertSee('</span>', false)
-            ->assertSee('Second span');
-
     }
 
     #[Test]

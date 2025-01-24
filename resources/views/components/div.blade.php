@@ -9,14 +9,12 @@
 @php
     $serverAttrs = [];
     $content = null;
-    $subComponents = [];
-
+    $slot = $slot ?? null;
+    
     if($attrs) {
 
         $serverAttrs = $attrs->getAttributes();
-
         $content = $attrs->content;
-        $subComponents = $attrs->subComponents;
         
     }
 
@@ -24,10 +22,6 @@
 
 <div {{ $attributes->merge($serverAttrs) }}> 
     
-    @foreach($subComponents as $subComponent)
-        {{ $subComponent }}
-    @endforeach
-
     {{ $content }}{{ $slot }}
 
-</div>
+</div> 

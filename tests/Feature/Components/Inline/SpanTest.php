@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Components\Inline;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
@@ -36,6 +38,24 @@ class SpanTest extends TestCase
     }
 
     #[Test]
+    public function span_accepts_contents_array()
+    {
+        $span = ComponentBuilder::make(ComponentEnum::SPAN)
+            ->setContents([
+                'content 1 ',
+                'content 2',
+            ]);
+
+        $this->blade('{{ $span }}', [
+            'span' => $span,
+        ])
+            ->assertSee('<span', false)
+            ->assertSee('content 1 ')
+            ->assertSee('content 2')
+            ->assertSee('</span>', false);
+    }
+
+    #[Test]
     public function span_accepts_attributes()
     {
         $span = ComponentBuilder::make(ComponentEnum::SPAN)
@@ -45,23 +65,6 @@ class SpanTest extends TestCase
             'span' => $span,
         ])
             ->assertSee('id="nice_span"', false);
-    }
-
-    #[Test]
-    public function span_accepts_sub_components()
-    {
-        $span = ComponentBuilder::make(ComponentEnum::SPAN)
-            ->setSubComponent(
-                ComponentBuilder::make(ComponentEnum::BOLD)
-                    ->setContent('Nice bold span')
-            );
-
-        $this->blade('{{ $span }}', [
-            'span' => $span,
-        ])
-            ->assertSee('<b', false)
-            ->assertSee('Nice bold span')
-            ->assertSee('</b>', false);
     }
 
     #[Test]

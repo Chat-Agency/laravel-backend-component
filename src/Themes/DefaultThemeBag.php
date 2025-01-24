@@ -9,7 +9,7 @@ use ChatAgency\BackendComponents\Contracts\ThemeBag;
 final class DefaultThemeBag implements ThemeBag
 {
     public function __construct(
-        protected array $styles
+        private array $styles
     ) {}
 
     public static function make(array $styles): self

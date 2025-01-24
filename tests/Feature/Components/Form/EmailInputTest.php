@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Test\Feature\Components\Form;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
@@ -52,24 +54,6 @@ class EmailInputTest extends TestCase
         ])
             ->assertSee('id="input_id"', false)
             ->assertSee('value="Input"', false);
-    }
-
-    #[Test]
-    public function email_input_accepts_sub_components()
-    {
-        $form = ComponentBuilder::make(ComponentEnum::EMAIL_INPUT)
-            ->setSubComponents([
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('Nice Span'),
-            ]);
-
-        $this->blade('{{ $form }}', [
-            'form' => $form,
-        ])
-            ->assertDontSee('<span', false)
-            ->assertDontSee('Nice Span')
-            ->assertDontSee('</span>', false);
-
     }
 
     #[Test]

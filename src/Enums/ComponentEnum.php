@@ -7,7 +7,6 @@ namespace ChatAgency\BackendComponents\Enums;
 enum ComponentEnum: string
 {
     case TEMPLATE = 'template';
-    case COLLECTION = 'collection';
 
     /**
      * Block

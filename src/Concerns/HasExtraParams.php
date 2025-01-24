@@ -6,7 +6,7 @@ namespace ChatAgency\BackendComponents\Concerns;
 
 trait HasExtraParams
 {
-    protected array $extras = [];
+    private array $extras = [];
 
     public function getExtras(): array
     {

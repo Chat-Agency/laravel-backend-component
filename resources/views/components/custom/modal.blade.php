@@ -23,7 +23,8 @@
         'x-show' => 'showModal',
     ];
     $content = null;
-    $subComponents = [];
+    $slot = $slot ?? null;
+    
 
     $title = $title ?? null;
     $body = $body ?? null;
@@ -40,7 +41,7 @@
         $serverAttrs = array_merge($serverAttrs, $attrs->getAttributes());
 
         $content = $attrs->content;
-        $subComponents = $attrs->subComponents;
+        
         $extra = $attrs->extra;
         $slots = $attrs->slots;
 
@@ -93,10 +94,6 @@
                 
                 {{ $title }}
 
-                @foreach($subComponents as $subComponent)
-                    {{ $subComponent }}
-                @endforeach
-                
                 {{ $slot }}{{ $content }}{{ $body }}
 
                 {{ $footer }}

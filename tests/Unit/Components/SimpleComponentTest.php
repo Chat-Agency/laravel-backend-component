@@ -1,12 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Components;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\MainBackendComponent;
-use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
-use ChatAgency\BackendComponents\Themes\LocalThemeManager;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -75,24 +75,12 @@ class SimpleComponentTest extends TestCase
     }
 
     #[Test]
-    public function the_theme_manager_can_be_injected_to_the_construct_or_using_the_setter()
-    {
-        $component = ComponentBuilder::make(ComponentEnum::DIV, new LocalThemeManager);
-
-        $this->assertInstanceOf(LocalThemeManager::class, $component->getThemeManager());
-
-        $component->setThemeManager(new DefaultThemeManager);
-
-        $this->assertInstanceOf(DefaultThemeManager::class, $component->getThemeManager());
-    }
-
-    #[Test]
-    public function a_component_accepts_content()
+    public function a_component_accepts_content_and_can_be_accessed_using_a_key()
     {
         $component = ComponentBuilder::make(ComponentEnum::DIV)
-            ->setContent('Nice content');
+            ->setContent('Nice content', 1);
 
-        $this->assertEquals('Nice content', $component->getContent());
+        $this->assertEquals('Nice content', $component->getContent(1));
     }
 
     #[Test]
@@ -109,28 +97,6 @@ class SimpleComponentTest extends TestCase
             ]);
 
         $this->assertEquals('div_id', $component2->getAttributes()['id']);
-    }
-
-    #[Test]
-    public function a_component_accepts_sub_components()
-    {
-        $component = ComponentBuilder::make(ComponentEnum::DIV)
-            ->setSubComponent(
-                ComponentBuilder::make(ComponentEnum::SPAN),
-                'span'
-            );
-
-        $this->assertInstanceOf(MainBackendComponent::class, $component->getSubComponents()['span']);
-
-        $this->assertEquals(ComponentEnum::SPAN->value, ($component->getSubComponents()['span'])->getName());
-
-        $component2 = ComponentBuilder::make(ComponentEnum::DIV)
-            ->setSubComponents([
-                'bold' => ComponentBuilder::make(ComponentEnum::BOLD)
-                    ->setContent('Bold'),
-            ]);
-
-        $this->assertInstanceOf(MainBackendComponent::class, $component2->getSubComponents()['bold']);
     }
 
     #[Test]
@@ -160,11 +126,11 @@ class SimpleComponentTest extends TestCase
         $component2 = ComponentBuilder::make(ComponentEnum::MODAL)
             ->setSlots([
                 'title' => ComponentBuilder::make(ComponentEnum::H2)
-                    ->setContent('Nice Title'),
+                    ->setContent('Nice Title', 1),
             ]);
 
         $this->assertInstanceOf(MainBackendComponent::class, $component2->getSlot('title'));
-        $this->assertEquals('Nice Title', ($component2->getSlots()['title'])->getContent());
+        $this->assertEquals('Nice Title', ($component2->getSlots()['title'])->getContent(1));
 
     }
 
@@ -190,5 +156,34 @@ class SimpleComponentTest extends TestCase
         $component = ComponentBuilder::make(ComponentEnum::DIV);
 
         $this->assertJson($component->__toString());
+    }
+
+    #[Test]
+    public function a_component_can_return_an_array_representation()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::DIV)
+            ->setContents([
+                'span_1' => ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent('inside a span'),
+                'span_2' => ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent(
+                        ComponentBuilder::make(ComponentEnum::LINK)
+                            ->setAttribute('href', 'https://google.com')
+                            ->setContent('this is a link')
+                            ->setTheme('action', 'success')
+                    ),
+            ]);
+
+        $componentArray = $component->toArray();
+
+        $this->assertIsArray($componentArray);
+        $this->assertIsArray($componentArray['content']);
+        $this->assertIsArray($componentArray['attributes']);
+
+        $this->assertIsArray($componentArray['content']['span_1']);
+        $this->assertIsArray($componentArray['content']['span_2']);
+
+        $this->assertIsArray($componentArray['content']['span_2']['content']);
+        $this->assertEquals('this is a link', $componentArray['content']['span_2']['content'][0]['content'][0]);
     }
 }

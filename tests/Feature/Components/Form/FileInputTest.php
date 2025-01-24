@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Test\Feature\Components\Form;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
@@ -50,24 +52,6 @@ class FileInputTest extends TestCase
             'form' => $form,
         ])
             ->assertSee('id="input_id"', false);
-    }
-
-    #[Test]
-    public function file_input_accepts_sub_components()
-    {
-        $form = ComponentBuilder::make(ComponentEnum::FILE_INPUT)
-            ->setSubComponents([
-                ComponentBuilder::make(ComponentEnum::SPAN)
-                    ->setContent('Nice Span'),
-            ]);
-
-        $this->blade('{{ $form }}', [
-            'form' => $form,
-        ])
-            ->assertDontSee('<span', false)
-            ->assertDontSee('Nice Span')
-            ->assertDontSee('</span>', false);
-
     }
 
     #[Test]

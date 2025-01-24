@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Components;
 
 use ChatAgency\BackendComponents\Builders\LocalComponentBuilder;
@@ -17,8 +19,5 @@ class LocalComponentBuilderTest extends TestCase
 
         $this->assertStringStartsNotWith(backendComponentNamespace(), $component->getComponentPath());
 
-        $themeManager = $component->getThemeManager();
-
-        $this->assertStringStartsNotWith(backendComponentNamespace(), $themeManager->getThemePath());
     }
 }
