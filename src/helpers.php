@@ -19,7 +19,7 @@ namespace ChatAgency\BackendComponents {
         return new MainBackendComponent($name);
     }
 
-    function getThemes(array $themes, ThemeManager $manager = new DefaultThemeManager)
+    function getThemes(array $themes, ThemeManager $manager = new DefaultThemeManager): ?string
     {
         return $manager->getThemes($themes);
     }
