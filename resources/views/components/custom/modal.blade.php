@@ -27,7 +27,6 @@
     
 
     $title = $title ?? null;
-    $body = $body ?? null;
     $footer = $footer ?? null;
     $button = $button ?? null;
 
@@ -46,7 +45,6 @@
         $slots = $attrs->slots;
 
         $title = $slots['title'] ?? $title;
-        $body = $slots['body'] ?? $body;
         $footer = $slots['footer'] ?? $footer;
         $button = $slots['button'] ?? $button;
         $overlay = $slots['overlay'] ?? $overlay;
@@ -94,7 +92,7 @@
                 
                 {{ $title }}
 
-                {{ $slot }}{{ $content }}{{ $body }}
+                {{ $slot }}{{ $content }}
 
                 {{ $footer }}
 
