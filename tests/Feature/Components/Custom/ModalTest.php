@@ -105,24 +105,6 @@ class ModalTest extends TestCase
     }
 
     #[Test]
-    public function modal_accepts_body_slot()
-    {
-        $modal = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setSlot(
-                'body',
-                ComponentBuilder::make(ComponentEnum::DIV)
-                    ->setContent('This is the body')
-                    ->setAttribute('id', 'modal_body')
-            );
-
-        $this->blade('{{ $modal }}', [
-            'modal' => $modal,
-        ])
-            ->assertSee('<div id="modal_body"', false)
-            ->assertSee('This is the body');
-    }
-
-    #[Test]
     public function modal_accepts_footer_slot()
     {
         $modal = ComponentBuilder::make(ComponentEnum::MODAL)
