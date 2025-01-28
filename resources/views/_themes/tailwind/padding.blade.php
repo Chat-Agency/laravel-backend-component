@@ -1,9 +1,15 @@
 <?php
 
 return [
+    'xs' => 'p-2',
     'sm' => 'p-4',
     'md' => 'p-8',
     'lg' => 'p-16',
+
+    'top-xs' => 'pt-2',
+    'bottom-xs' => 'pb-2',
+    'left-xs' => 'pl-2',
+    'right-xs' => 'pr-2',
 
     'top-sm' => 'pt-4',
     'bottom-sm' => 'pb-4',

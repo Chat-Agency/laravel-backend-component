@@ -8,7 +8,7 @@ return [
     
     // buttons
 
-    'default' => $allButtons.$allDarkButtons.$allActions.'bg-blue-700 d-i hover:bg-blue-800 focus:ring-blue-300',
+    'default' => $allButtons.$allDarkButtons.$allActions.'bg-blue-700 hover:bg-blue-800 focus:ring-blue-300',
     'error' => $allButtons.$allDarkButtons.$allActions.'bg-red-700 hover:bg-red-800 focus:ring-red-300',
     'success' => $allButtons.$allDarkButtons.$allActions.'bg-green-700 hover:bg-green-800 focus:ring-green-300',
     'secondary' => $allButtons.$allDarkButtons.$allActions.'bg-gray-700 hover:bg-gray-800 focus:ring-gray-300',

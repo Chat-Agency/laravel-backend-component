@@ -15,7 +15,7 @@ To use the package’s `Tailwind` themes, you need to include the assets’ path
 ```javascript
 export default {
     content: [
-        './vendor/chat-agency/laravel-backend-component/resources/views/*.blade.php', // <- this line
+        './vendor/chat-agency/laravel-backend-component/resources/views/**/*.blade.php', // <- this line
         // other paths
     ],
     // ...

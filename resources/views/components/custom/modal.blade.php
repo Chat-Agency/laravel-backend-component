@@ -63,12 +63,13 @@
     <div
         x-show="showModal"
         x-cloak
-        @keydown.escape="showModal = false"
+        {{-- @keydown.escape="showModal = false" --}}
         class="{{ getThemes($containerTheme) }} fixed inset-0 overflow-y-auto px-4 py-6 z-50">
         
         <div x-show="showModal" 
             class="fixed inset-0 transform transition-all" 
             x-on:click="showModal = false" 
+            x-on:keydown.escape.window="show = false"
             x-transition:enter="ease-out duration-300"
             x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100"
