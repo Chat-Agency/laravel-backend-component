@@ -29,7 +29,6 @@ trait IsBackendComponent
             $this->compileTheme(),
             $this->getComponentPath(),
             $this->getSlots(),
-            $this->getExtras(),
             $this->isLivewire(),
             $this->getLivewireKey(),
             $this->getLivewireParams(),
