@@ -100,5 +100,21 @@ class FormTest extends TestCase
     }
 
     #[Test]
-    public function form_accepts_some_settings() {}
+    public function form_accepts_some_settings()
+    {
+
+        $form = ComponentBuilder::make(ComponentEnum::FORM);
+
+        $this->blade('{{ $form }}', [
+            'form' => $form,
+        ])
+            ->assertSee('<input type="hidden" name="_token"', false);
+
+        $form->setSetting('disable_csrf', true);
+
+        $this->blade('{{ $form }}', [
+            'form' => $form,
+        ])
+            ->assertDontSee('<input type="hidden" name="_token"', false);
+    }
 }

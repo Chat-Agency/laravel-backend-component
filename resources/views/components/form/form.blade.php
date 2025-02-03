@@ -31,7 +31,7 @@
 
         $serverAttrs['method'] = strtoupper($method) == 'GET' ? 'GET' : $method;
         $method = $serverAttrs['method'] ?? null ? strtoupper($serverAttrs['method']) : $method;
-        $disableCsrf = $settings['disable_token'] ?? $disableCsrf;
+        $disableCsrf = $settings['disable_csrf'] ?? $disableCsrf;
         
     }
 
