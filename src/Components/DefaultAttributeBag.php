@@ -15,6 +15,7 @@ readonly class DefaultAttributeBag implements AttributeBag
         public readonly ?string $themes = null,
         public readonly ?string $path = null,
         public readonly array $slots = [],
+        public readonly array $settings = [],
         public readonly bool $isLivewire = false,
         public readonly ?string $livewireKey = null,
         public readonly array $livewireParams = [],

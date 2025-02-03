@@ -1,6 +1,6 @@
 @props([
     'attrs' => null,
-    'disableCToken' => false,
+    'disableCsrf' => false,
     'hasButton' => false,
 ])
 
@@ -16,6 +16,7 @@
     $serverAttrs = [];
     $content = null;
     $slot = $slot ?? null;
+    $disableCsrf = false;
     
     $method = 'POST';
 
@@ -26,9 +27,11 @@
         $content = $attrs->content;
         
         $slots = $attrs->slots;
+        $settings = $attrs->settings;
 
         $serverAttrs['method'] = strtoupper($method) == 'GET' ? 'GET' : $method;
         $method = $serverAttrs['method'] ?? null ? strtoupper($serverAttrs['method']) : $method;
+        $disableCsrf = $settings['disable_token'] ?? $disableCsrf;
         
     }
 
@@ -42,8 +45,7 @@
 <form {{ $attributes->merge($serverAttrs) }}>   
     
     {{ $methodInput }}
-
-    @csrf
+    @if(!$disableCsrf) @csrf @endif
     
     {{ $content }}{{ $slot }}
 

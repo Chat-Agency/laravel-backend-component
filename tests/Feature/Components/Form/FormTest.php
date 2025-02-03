@@ -98,4 +98,7 @@ class FormTest extends TestCase
 
         $this->assertNotEmpty(getThemes($theme));
     }
+
+    #[Test]
+    public function form_accepts_some_settings() {}
 }
