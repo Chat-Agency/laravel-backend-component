@@ -98,17 +98,4 @@ class FormTest extends TestCase
 
         $this->assertNotEmpty(getThemes($theme));
     }
-
-    #[Test]
-    public function form_accepts_container_extra_params()
-    {
-        $form = ComponentBuilder::make(ComponentEnum::FORM)
-            ->setExtra('disable_token', true);
-
-        $this->blade('{{ $form }}', [
-            'form' => $form,
-        ])
-            ->assertDontSee('<input type="hidden" name="_token"', false);
-
-    }
 }

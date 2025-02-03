@@ -5,7 +5,6 @@
 ])
 
 <?php
-    use ChatAgency\BackendComponents\Builders\ComponentBuilder;
     use ChatAgency\BackendComponents\Enums\ComponentEnum;
 
     use function ChatAgency\BackendComponents\makeBackendComponent;
@@ -26,13 +25,11 @@
         
         $content = $attrs->content;
         
-        $extra = $attrs->extra;
         $slots = $attrs->slots;
 
         $serverAttrs['method'] = strtoupper($method) == 'GET' ? 'GET' : $method;
         $method = $serverAttrs['method'] ?? null ? strtoupper($serverAttrs['method']) : $method;
         
-        $disableCToken = $extra['disable_token'] ?? $disableCToken;
     }
 
     $methodInput = makeBackendComponent(ComponentEnum::HIDDEN_INPUT)
@@ -46,7 +43,7 @@
     
     {{ $methodInput }}
 
-    @if(!$disableCToken) @csrf @endif
+    @csrf
     
     {{ $content }}{{ $slot }}
 
