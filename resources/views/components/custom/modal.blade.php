@@ -41,7 +41,6 @@
 
         $content = $attrs->content;
         
-        $extra = $attrs->extra;
         $slots = $attrs->slots;
 
         $title = $slots['title'] ?? $title;
@@ -49,14 +48,13 @@
         $button = $slots['button'] ?? $button;
         $overlay = $slots['overlay'] ?? $overlay;
 
-        $container = $extra['container'] ?? $container;
         $containerTheme = $container['theme'] ?? $containerTheme;
 
     }
     
     
 @endphp
-<div x-data="{ 'showModal': false }">
+<div x-data="{ 'showModal': false }" x-on:keydown.escape="showModal=false">
     
    <!-- Modal Trigger --> {{ $button }}
     
@@ -64,7 +62,7 @@
         x-show="showModal"
         x-cloak
         {{-- @keydown.escape="showModal = false" --}}
-        class="{{ getThemes($containerTheme) }} fixed inset-0 overflow-y-auto px-4 py-6 z-50">
+        class="fixed inset-0 overflow-y-auto px-4 py-6 z-50">
         
         <div x-show="showModal" 
             class="fixed inset-0 transform transition-all" 
