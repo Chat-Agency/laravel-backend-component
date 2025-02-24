@@ -17,6 +17,7 @@
     $content = null;
     $slot = $slot ?? null;
     $disableCsrf = false;
+    $disableMethodInput = false;
     
     $method = 'POST';
 
@@ -29,16 +30,18 @@
         $slots = $attrs->slots;
         $settings = $attrs->settings;
 
-        $serverAttrs['method'] = strtoupper($method) == 'GET' ? 'GET' : $method;
-        $method = $serverAttrs['method'] ?? null ? strtoupper($serverAttrs['method']) : $method;
+        $method =  $serverAttrs['method'] ?? $method;
+
+        $serverAttrs['method'] = strtoupper($method) == 'GET' ? 'GET' : 'POST';
+
         $disableCsrf = $settings['disable_csrf'] ?? $disableCsrf;
+        $disableMethodInput = $settings['disable_method_input'] ?? $disableMethodInput;
         
     }
 
-    $methodInput = makeBackendComponent(ComponentEnum::HIDDEN_INPUT)
+    $methodInput = $disableMethodInput ? null : makeBackendComponent(ComponentEnum::HIDDEN_INPUT)
         ->setAttribute('name', '_method' )
-        ->setAttribute('value', $method );
-
+        ->setAttribute('value', strtoupper($method) );
 
 @endphp
 
@@ -46,7 +49,6 @@
     
     {{ $methodInput }}
     @if(!$disableCsrf) @csrf @endif
-    
     {{ $content }}{{ $slot }}
 
 </form>

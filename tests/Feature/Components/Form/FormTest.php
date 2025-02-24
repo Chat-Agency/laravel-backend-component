@@ -108,13 +108,17 @@ class FormTest extends TestCase
         $this->blade('{{ $form }}', [
             'form' => $form,
         ])
-            ->assertSee('<input type="hidden" name="_token"', false);
+            ->assertSee('<input type="hidden" name="_token"', false)
+            ->assertSee('<input type="hidden" name="_method" value="POST"', false);
 
-        $form->setSetting('disable_csrf', true);
+        $form->setSetting('disable_csrf', true)
+            ->setSetting('disable_method_input', true);
 
         $this->blade('{{ $form }}', [
             'form' => $form,
         ])
-            ->assertDontSee('<input type="hidden" name="_token"', false);
+            ->assertDontSee('<input type="hidden" name="_token"', false)
+            ->assertDontSee('<input type="hidden" name="_method" value="POST"', false);
+
     }
 }

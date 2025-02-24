@@ -27,6 +27,7 @@ return [
     'link' => $allActions.'text-blue-500 underline hover:no-underline',
     'link-error' => $allActions.'text-red-500 underline hover:no-underline',
     'link-success' => $allActions.'text-green-500 underline hover:no-underline',
-    'link-warning' => $allActions.'text-yellow-700 underline hover:no-underline',
     'link-secondary' => $allActions.'text-gray-500 underline hover:no-underline',
+    'link-info' => $allActions.'text-cyan-500 hover:underline',
+    'link-warning' => $allActions.'text-yellow-700 underline hover:no-underline',
 ];
