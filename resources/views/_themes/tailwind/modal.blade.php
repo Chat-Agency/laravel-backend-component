@@ -5,8 +5,8 @@ return [
     'overlay' => 'absolute inset-0 bg-gray-500 dark:bg-gray-700 opacity-75',
 
     /*
-        * Sizes
-        */
+     * Sizes
+     */
     'sm' => 'sm:w-full sm:mx-auto sm:max-w-sm',
     'md' => 'sm:w-full sm:mx-auto sm:max-w-md',
     'lg' => 'sm:w-full sm:mx-auto sm:max-w-lg',

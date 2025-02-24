@@ -12,7 +12,7 @@ trait IsThemeManager
 {
     public function useLocal($local = true): static
     {
-        $this->setDefaultPath(resource_path('_themes/tailwind/'));
+        $this->setDefaultPath(resource_path('views/_themes/tailwind/'));
 
         return $this;
     }

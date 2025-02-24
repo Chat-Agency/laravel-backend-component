@@ -6,17 +6,17 @@ namespace ChatAgency\BackendComponents;
 
 use BackedEnum;
 use ChatAgency\BackendComponents\Concerns\HasContent;
-use ChatAgency\BackendComponents\Concerns\HasExtraParams;
 use ChatAgency\BackendComponents\Concerns\HasPath;
+use ChatAgency\BackendComponents\Concerns\HasSettings;
 use ChatAgency\BackendComponents\Concerns\HasSlots;
 use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
 use ChatAgency\BackendComponents\Concerns\IsLivewireComponent;
 use ChatAgency\BackendComponents\Concerns\IsThemeable;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\ContentComponent;
-use ChatAgency\BackendComponents\Contracts\ExtraParamsComponent;
 use ChatAgency\BackendComponents\Contracts\LivewireComponent;
 use ChatAgency\BackendComponents\Contracts\PathComponent;
+use ChatAgency\BackendComponents\Contracts\SettingsComponent;
 use ChatAgency\BackendComponents\Contracts\SlotsComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
@@ -24,11 +24,11 @@ use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
 
-final class MainBackendComponent implements Arrayable, BackendComponent, ContentComponent, ExtraParamsComponent, Htmlable, LivewireComponent, PathComponent, SlotsComponent, ThemeComponent
+final class MainBackendComponent implements Arrayable, BackendComponent, ContentComponent, Htmlable, LivewireComponent, PathComponent, SettingsComponent, SlotsComponent, ThemeComponent
 {
     use HasContent,
-        HasExtraParams,
         HasPath,
+        HasSettings,
         HasSlots,
         IsBackendComponent ,
         IsLivewireComponent,
@@ -52,7 +52,7 @@ final class MainBackendComponent implements Arrayable, BackendComponent, Content
             ],
             'path' => $this->getComponentPath(),
             'slots' => $this->getSlots(),
-            'extra' => $this->getExtras(),
+            'settings' => $this->getSettings(),
             'isLivewire' => $this->isLivewire(),
             'livewireKey' => $this->getLivewireKey(),
             'livewireParams' => $this->getLivewireParams(),

@@ -100,15 +100,25 @@ class FormTest extends TestCase
     }
 
     #[Test]
-    public function form_accepts_container_extra_params()
+    public function form_accepts_some_settings()
     {
-        $form = ComponentBuilder::make(ComponentEnum::FORM)
-            ->setExtra('disable_token', true);
+
+        $form = ComponentBuilder::make(ComponentEnum::FORM);
 
         $this->blade('{{ $form }}', [
             'form' => $form,
         ])
-            ->assertDontSee('<input type="hidden" name="_token"', false);
+            ->assertSee('<input type="hidden" name="_token"', false)
+            ->assertSee('<input type="hidden" name="_method" value="POST"', false);
+
+        $form->setSetting('disable_csrf', true)
+            ->setSetting('disable_method_input', true);
+
+        $this->blade('{{ $form }}', [
+            'form' => $form,
+        ])
+            ->assertDontSee('<input type="hidden" name="_token"', false)
+            ->assertDontSee('<input type="hidden" name="_method" value="POST"', false);
 
     }
 }

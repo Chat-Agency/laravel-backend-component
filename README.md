@@ -10,12 +10,12 @@ Backend Components is a package that facilitates the creation of Laravel compone
 composer require chat-agency/laravel-backend-component
 ```
 
-To use the package’s `Tailwind` themes, you need to include the assets’ path in the configuration file:
+To use the package’s `Tailwind` themes, you need to include the assets’ path to the configuration file:
 
 ```javascript
 export default {
     content: [
-        './vendor/chat-agency/laravel-backend-component/resources/views/*.blade.php', // <- this line
+        './vendor/chat-agency/laravel-backend-component/resources/views/**/*.blade.php', // <- this line
         // other paths
     ],
     // ...

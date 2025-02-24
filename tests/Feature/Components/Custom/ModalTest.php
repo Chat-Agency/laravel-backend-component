@@ -139,24 +139,4 @@ class ModalTest extends TestCase
             ->assertDontSee('<div id="modal_arbitrary_slot"', false)
             ->assertDontSee('This is the arbitrary slot');
     }
-
-    #[Test]
-    public function modal_accepts_container_extra_params()
-    {
-        $containerTheme = [
-            'display' => 'flex',
-            'flex' => 'items-center',
-        ];
-
-        $modal = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setExtra('container', [
-                'theme' => $containerTheme,
-            ]);
-
-        $this->blade('{{ $modal }}', [
-            'modal' => $modal,
-        ])
-            ->assertSee('class="'.getThemes($containerTheme), false);
-
-    }
 }

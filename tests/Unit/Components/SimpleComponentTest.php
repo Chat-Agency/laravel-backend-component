@@ -135,22 +135,6 @@ class SimpleComponentTest extends TestCase
     }
 
     #[Test]
-    public function a_component_accepts_extra()
-    {
-        $component = ComponentBuilder::make(ComponentEnum::MODAL)
-            ->setExtra('container', []);
-
-        $this->assertEquals([], $component->getExtra('container'));
-
-        $component2 = ComponentBuilder::make(ComponentEnum::DIV)
-            ->setExtras([
-                'container' => [],
-            ]);
-
-        $this->assertEquals([], $component2->getExtras()['container']);
-    }
-
-    #[Test]
     public function a_component_string_representation_is_a_json_object()
     {
         $component = ComponentBuilder::make(ComponentEnum::DIV);

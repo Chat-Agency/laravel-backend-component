@@ -1,11 +1,10 @@
 @props([
     'attrs' => null,
-    'disableCToken' => false,
+    'disableCsrf' => false,
     'hasButton' => false,
 ])
 
 <?php
-    use ChatAgency\BackendComponents\Builders\ComponentBuilder;
     use ChatAgency\BackendComponents\Enums\ComponentEnum;
 
     use function ChatAgency\BackendComponents\makeBackendComponent;
@@ -17,6 +16,8 @@
     $serverAttrs = [];
     $content = null;
     $slot = $slot ?? null;
+    $disableCsrf = false;
+    $disableMethodInput = false;
     
     $method = 'POST';
 
@@ -26,28 +27,28 @@
         
         $content = $attrs->content;
         
-        $extra = $attrs->extra;
         $slots = $attrs->slots;
+        $settings = $attrs->settings;
 
-        $serverAttrs['method'] = strtoupper($method) == 'GET' ? 'GET' : $method;
-        $method = $serverAttrs['method'] ?? null ? strtoupper($serverAttrs['method']) : $method;
+        $method =  $serverAttrs['method'] ?? $method;
+
+        $serverAttrs['method'] = strtoupper($method) == 'GET' ? 'GET' : 'POST';
+
+        $disableCsrf = $settings['disable_csrf'] ?? $disableCsrf;
+        $disableMethodInput = $settings['disable_method_input'] ?? $disableMethodInput;
         
-        $disableCToken = $extra['disable_token'] ?? $disableCToken;
     }
 
-    $methodInput = makeBackendComponent(ComponentEnum::HIDDEN_INPUT)
+    $methodInput = $disableMethodInput ? null : makeBackendComponent(ComponentEnum::HIDDEN_INPUT)
         ->setAttribute('name', '_method' )
-        ->setAttribute('value', $method );
-
+        ->setAttribute('value', strtoupper($method) );
 
 @endphp
 
 <form {{ $attributes->merge($serverAttrs) }}>   
     
     {{ $methodInput }}
-
-    @if(!$disableCToken) @csrf @endif
-    
+    @if(!$disableCsrf) @csrf @endif
     {{ $content }}{{ $slot }}
 
 </form>
