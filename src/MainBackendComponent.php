@@ -61,7 +61,7 @@ final class MainBackendComponent implements Arrayable, BackendComponent, Content
 
     public function toHtml()
     {
-        return view(backendComponentNamespace().'_utilities.resolve-component')
+        return \view(backendComponentNamespace().'_utilities.resolve-component')
             ->with('component', $this)
             ->render();
 

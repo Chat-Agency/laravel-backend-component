@@ -26,6 +26,15 @@ final class TableUtil
             'name' => 'table',
             'style' => 'td',
         ],
+        /**
+         * head cell number
+         */
+        'hcell' => [],
+        /**
+         * body cell coordinate [row,cell]
+         * ej: '2,4'
+         */
+        'bcell' => [],
     ];
 
     public function __construct(
@@ -39,15 +48,28 @@ final class TableUtil
         return new self($head, $body, $themeManager);
     }
 
-    public function setTheme($name, $style): self
+    public function setTheme(string $name, array $style): self
     {
-        $this->themes[$name] = $style ?? null;
+        $this->themes[$name] = $style;
 
         return $this;
     }
 
-    public function unsetTheme($name): self
+    public function setCellTheme(string $name, $coord, array $style): self
     {
+        $this->themes[$name][$coord] = $style;
+
+        return $this;
+    }
+
+    public function unsetTheme($name, $coord = null): self
+    {
+        if ($coord) {
+            unset($this->themes[$name][$coord]);
+
+            return $this;
+        }
+
         unset($this->themes[$name]);
 
         return $this;
@@ -70,8 +92,13 @@ final class TableUtil
 
         $theme = $this->themes['th'] ?? null;
 
-        foreach ($this->head as $value) {
-            $columns[] = $this->composeComponent(ComponentEnum::TH, $value, $theme);
+        foreach ($this->head as $key => $value) {
+
+            $columns[] = $this->composeComponent(
+                ComponentEnum::TH,
+                $value,
+                $this->themes['hcell'][$key] ?? $theme
+            );
         }
 
         return $this->composeComponent(ComponentEnum::THEAD, [
@@ -86,27 +113,36 @@ final class TableUtil
 
         $theme = $this->themes['tr'] ?? null;
 
-        foreach ($this->body as $row) {
-            $rows[] = $this->composeComponent(ComponentEnum::TR, $this->rows($row), $theme);
+        foreach ($this->body as $key => $row) {
+            $rows[] = $this->composeComponent(
+                ComponentEnum::TR,
+                $this->rows($row, $key),
+                $theme
+            );
         }
 
         return $this->composeComponent(ComponentEnum::TBODY, $rows);
     }
 
-    private function rows(array $rows): array
+    private function rows(array $rows, int $rowKey): array
     {
         $cells = [];
 
         $theme = $this->themes['td'] ?? null;
 
-        foreach ($rows as $value) {
-            $cells[] = $this->composeComponent(ComponentEnum::TD, $value, $theme);
+        foreach ($rows as $key => $value) {
+
+            $cells[] = $this->composeComponent(
+                ComponentEnum::TD,
+                $value,
+                $this->themes['bcell']["{$rowKey},{key}"] ?? $theme
+            );
         }
 
         return $cells;
     }
 
-    public function composeComponent(BackedEnum $name, array|string $contents, $theme = null): BackendComponent
+    public function composeComponent(BackedEnum $name, array|string|BackendComponent $contents, $theme = null): BackendComponent
     {
         $contents = is_array($contents) ? $contents : [$contents];
 
