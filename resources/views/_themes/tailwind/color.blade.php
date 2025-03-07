@@ -3,6 +3,8 @@
 return [
     'default' => 'text-black',
     'default-dark' => 'dark:text-white',
+    'light' => 'text-white',
+    'light-dark' => 'dark:text-black',
     'secondary' => 'text-slate-500',
     'secondary-dark' => 'dark:text-slate-400',
     'error' => 'text-red-600',
