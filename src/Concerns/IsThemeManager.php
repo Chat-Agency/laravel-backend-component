@@ -31,10 +31,11 @@ trait IsThemeManager
 
     public function getThemePath(): string
     {
-        $path = realpath($this->defaultPath);
+        $defaultPath = $this->defaultPath;
+        $path = realpath($defaultPath);
 
         if (! $path) {
-            throw new \Exception('The theme path is incorrect', 500);
+            throw new \Exception("The theme path ({$defaultPath}) is incorrect", 500);
         }
 
         return $path;

@@ -13,4 +13,8 @@ return [
     'center' => 'text-center',
     'left' => 'text-left',
     'right' => 'text-right',
+    'wrap' => 'text-wrap',
+    'nowrap' => 'text-nowrap',
+    'balance' => 'text-balance',
+    'pretty' => 'text-pretty',
 ];
