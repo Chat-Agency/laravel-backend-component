@@ -8,7 +8,6 @@ use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
 use ChatAgency\BackendComponents\Components\DefaultContentsComponent;
 use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
 use ChatAgency\BackendComponents\Concerns\IsThemeable;
-use ChatAgency\BackendComponents\Contracts\AttributeBag;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeComponent;
@@ -67,7 +66,7 @@ class DivComponent implements Arrayable, BackendComponent, Htmlable, ThemeCompon
             ->render();
     }
 
-    public function getContent($key = null): string|Arrayable|BackendComponent|Htmlable|ThemeComponent|null
+    public function getContent($key = null): string|BackendComponent|ThemeComponent|null
     {
         return $this->content[$key] ?? null;
     }
