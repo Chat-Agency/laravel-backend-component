@@ -7,11 +7,11 @@ namespace ChatAgency\BackendComponents\Concerns;
 trait HasSettings
 {
     /**
-     * @var bool[]
+     * @var bool|string[]
      */
     private array $settings = [];
 
-    public function setSetting(string $name, bool $value): static
+    public function setSetting(string $name, bool|string $value): static
     {
         $this->settings[$name] = $value;
 
@@ -27,13 +27,13 @@ trait HasSettings
         return $this;
     }
 
-    public function getSetting(string $name): bool
+    public function getSetting(string $name): bool|string
     {
         return $this->settings[$name];
     }
 
     /**
-     * @return bool[]
+     * @return bool|string[]
      */
     public function getSettings(): array
     {

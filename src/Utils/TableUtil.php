@@ -26,15 +26,17 @@ final class TableUtil
             'name' => 'table',
             'style' => 'td',
         ],
-        /**
-         * head cell number
-         */
-        'hcell' => [],
-        /**
-         * body cell coordinate [row,cell]
-         * ej: '2,4'
-         */
-        'bcell' => [],
+        'cells' => [
+            /**
+             * head cell number
+             */
+            'hcell' => [],
+            /**
+             * body cell coordinate [row,cell]
+             * ej: '2,4'
+             */
+            'bcell' => [],
+        ],
     ];
 
     public function __construct(
@@ -57,20 +59,7 @@ final class TableUtil
 
     public function setCellTheme(string $name, $coord, array $style): self
     {
-        $this->themes[$name][$coord] = $style;
-
-        return $this;
-    }
-
-    public function unsetTheme($name, $coord = null): self
-    {
-        if ($coord) {
-            unset($this->themes[$name][$coord]);
-
-            return $this;
-        }
-
-        unset($this->themes[$name]);
+        $this->themes['cells'][$name][$coord] = $style;
 
         return $this;
     }
@@ -97,7 +86,7 @@ final class TableUtil
             $columns[] = $this->composeComponent(
                 ComponentEnum::TH,
                 $value,
-                $this->themes['hcell'][$key] ?? $theme
+                $this->themes['cells']['hcell'][$key] ?? $theme
             );
         }
 
@@ -135,7 +124,7 @@ final class TableUtil
             $cells[] = $this->composeComponent(
                 ComponentEnum::TD,
                 $value,
-                $this->themes['bcell']["{$rowKey},{key}"] ?? $theme
+                $this->themes['cells']['bcell']["{$rowKey},{key}"] ?? $theme
             );
         }
 

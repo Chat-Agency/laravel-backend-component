@@ -49,15 +49,6 @@ class DivComponent implements Arrayable, BackendComponent, Htmlable, ThemeCompon
         return ComponentEnum::DIV->value;
     }
 
-    public function getAttributeBag(): AttributeBag
-    {
-        return new DefaultAttributeBag(
-            $this->getAttributes(),
-            $this->processContent(),
-            $this->compileTheme(),
-        );
-    }
-
     public function getComponentPath()
     {
         return backendComponentNamespace()
