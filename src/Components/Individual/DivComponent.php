@@ -8,6 +8,7 @@ use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
 use ChatAgency\BackendComponents\Components\DefaultContentsComponent;
 use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
 use ChatAgency\BackendComponents\Concerns\IsThemeable;
+use ChatAgency\BackendComponents\Contracts\AttributeBag;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeComponent;
@@ -58,11 +59,7 @@ class DivComponent implements Arrayable, BackendComponent, Htmlable, ThemeCompon
     public function toHtml()
     {
         return view($this->getComponentPath())
-            ->with('attrs', new DefaultAttributeBag(
-                $this->getAttributes(),
-                $this->processContent(),
-                $this->compileTheme(),
-            ))
+            ->with('attrs', $this->getAttributeBag())
             ->render();
     }
 
@@ -101,5 +98,14 @@ class DivComponent implements Arrayable, BackendComponent, Htmlable, ThemeCompon
     public function processContent(): ContentsComponent
     {
         return new DefaultContentsComponent($this->getContents());
+    }
+
+    public function getAttributeBag(): AttributeBag
+    {
+        return new DefaultAttributeBag(
+            $this->getAttributes(),
+            $this->processContent(),
+            $this->compileTheme(),
+        );
     }
 }

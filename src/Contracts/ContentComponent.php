@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Contracts;
 
-
 interface ContentComponent
 {
     public function getContent($key = null): string|BackendComponent|ContentComponent|ExtraParamsComponent|LivewireComponent|PathComponent|SlotsComponent|ThemeComponent|null;

@@ -52,7 +52,7 @@ class TableUtilTest extends TestCase
             [[
                 [
                     ComponentBuilder::make(ComponentEnum::SPAN)
-                        ->setContent('Inside a span'), 
+                        ->setContent('Inside a span'),
                     'first row first column',
                 ],
                 [
@@ -60,7 +60,7 @@ class TableUtilTest extends TestCase
                 ],
             ]]
         )
-        ->getComponent();
+            ->getComponent();
 
         $this->blade('{{ $table }}', [
             'table' => $table,
@@ -83,18 +83,17 @@ class TableUtilTest extends TestCase
                     'second row first column', 'second row first column',
                 ],
             ]]
-        
+
         )
-        ->setCellTheme('hcell', 1, [
+            ->setCellTheme('hcell', 1, [
                 'name' => 'color',
                 'style' => 'default',
-        ])
-        ->getComponent();
+            ])
+            ->getComponent();
 
         $this->blade('{{ $table }}', [
             'table' => $table,
         ])
-        ->assertSee('text-black', false);
+            ->assertSee('text-black', false);
     }
-
 }
