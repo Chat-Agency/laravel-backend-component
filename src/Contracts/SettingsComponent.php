@@ -13,7 +13,7 @@ interface SettingsComponent
     public function getSetting(string $name): bool|string;
 
     /**
-     * @return bool,string[]
+     * @return (int|string)[]
      */
     public function getSettings(): array;
 }
