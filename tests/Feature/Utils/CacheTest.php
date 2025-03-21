@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Feature\Utils;
 
-use cache;
 use ChatAgency\BackendComponents\Contracts\Cache as ContractsCache;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 use function ChatAgency\BackendComponents\cache;
 
