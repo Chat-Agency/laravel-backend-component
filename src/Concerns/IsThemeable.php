@@ -44,13 +44,6 @@ trait IsThemeable
         return $this;
     }
 
-    public function setThemeManager(ThemeManager $themeManager): static
-    {
-        $this->themeManager = $themeManager;
-
-        return $this;
-    }
-
     public function compileTheme(): ?string
     {
         return $this->getThemeManager()

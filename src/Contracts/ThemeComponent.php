@@ -10,8 +10,6 @@ interface ThemeComponent
 
     public function setThemes(array $themes): static;
 
-    public function setThemeManager(ThemeManager $themeManager): static;
-
     public function getThemes(): array;
 
     public function getTheme(string $name): string|array|ThemeBag|null;
