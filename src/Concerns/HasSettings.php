@@ -39,4 +39,11 @@ trait HasSettings
     {
         return $this->settings;
     }
+
+    public function unsetSetting(string $name): static
+    {
+        unset($this->settings[$name]);
+
+        return $this;
+    }
 }

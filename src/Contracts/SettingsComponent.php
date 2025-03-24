@@ -16,4 +16,6 @@ interface SettingsComponent
      * @return (int|string)[]
      */
     public function getSettings(): array;
+
+    public function unsetSetting(string $name): static;
 }
