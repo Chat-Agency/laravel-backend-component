@@ -71,6 +71,42 @@ class TableUtilTest extends TestCase
     }
 
     #[Test]
+    public function a_different_theme_can_be_used_on_any_of_the_components()
+    {
+        $table = TableUtil::make(
+            ['first column', 'second column'],
+            [[
+                [
+                    'first row first column', 'first row first column',
+                ],
+                [
+                    'second row first column', 'second row first column',
+                ],
+            ]]
+
+        );
+
+        $table1 = $table->getComponent();
+
+        $this->blade('{{ $table }}', [
+            'table' => $table1,
+        ])
+            ->assertDontSee('text-black', false);
+
+        $table2 = $table->setTheme('td', [
+            'name' => 'color',
+            'style' => 'default',
+        ])
+            ->getComponent();
+
+        $this->blade('{{ $table }}', [
+            'table' => $table2,
+        ])
+            ->assertSee('text-black', false);
+
+    }
+
+    #[Test]
     public function a_different_theme_can_be_added_to_a_specific_head_cell()
     {
         $table = TableUtil::make(

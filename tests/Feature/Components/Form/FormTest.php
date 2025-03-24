@@ -114,6 +114,17 @@ class FormTest extends TestCase
         $form->setSetting('disable_csrf', true)
             ->setSetting('disable_method_input', true);
 
+        $this->assertEquals(true, $form->getSetting('disable_csrf'));
+        $this->assertEquals(true, $form->getSetting('disable_method_input'));
+
+        $form->unsetSetting('disable_csrf')
+            ->unsetSetting('disable_method_input');
+
+        $form->setSettings([
+            'disable_csrf' => true,
+            'disable_method_input' => true,
+        ]);
+
         $this->blade('{{ $form }}', [
             'form' => $form,
         ])
