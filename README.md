@@ -46,6 +46,19 @@ Since the main component class implements the Laravel [Htmlable](https://laravel
 {{ $button }}
 ```
 
+# Tests
+
+Tests can be run using composer:
+```
+composer test
+```
+
+If your're planning on doing a pull request you should use the `qa` command. It runs `phpstan`, `pint` and `tests`. These are the same commands used on the Github `actions`.
+
+```
+composer qa 
+```
+
 ## License
 
 This package is licensed with the [MIT License](https://choosealicense.com/licenses/mit/#).
