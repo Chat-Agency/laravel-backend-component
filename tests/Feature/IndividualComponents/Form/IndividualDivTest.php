@@ -10,7 +10,7 @@ use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\getThemes;
+use function ChatAgency\BackendComponents\processThemes;
 
 class IndividualDivTest extends TestCase
 {
@@ -97,7 +97,7 @@ class IndividualDivTest extends TestCase
         $this->blade('{{ $div }}', [
             'div' => $div,
         ])
-            ->assertSee('class="'.getThemes($theme), false);
+            ->assertSee('class="'.processThemes($theme), false);
 
     }
 

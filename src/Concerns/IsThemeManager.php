@@ -41,7 +41,7 @@ trait IsThemeManager
         return $path;
     }
 
-    public function getThemes(array $themes)
+    public function processThemes(array $themes): ?string
     {
         if (! count($themes)) {
             return null;
@@ -50,13 +50,13 @@ trait IsThemeManager
         $classes = '';
 
         foreach ($themes as $type => $theme) {
-            $classes .= $this->getTheme($type, $theme).' ';
+            $classes .= $this->processTheme($type, $theme).' ';
         }
 
         return trim($classes);
     }
 
-    public function getTheme(string $type, string|array|ThemeBag|null $theme = null): string
+    public function processTheme(string $type, string|array|ThemeBag|null $theme = null): ?string
     {
         $themePath = $this->getThemePath();
         $cache = cache();
