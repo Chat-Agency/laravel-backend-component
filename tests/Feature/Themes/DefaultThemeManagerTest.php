@@ -8,7 +8,7 @@ use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\getThemes;
+use function ChatAgency\BackendComponents\processThemes;
 
 class DefaultThemeManagerTest extends TestCase
 {
@@ -21,7 +21,7 @@ class DefaultThemeManagerTest extends TestCase
 
         $manager = new DefaultThemeManager;
 
-        $this->assertEquals($manager->getThemes($theme), getThemes($theme));
+        $this->assertEquals($manager->processThemes($theme), processThemes($theme));
 
     }
 }

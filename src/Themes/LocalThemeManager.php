@@ -15,6 +15,6 @@ final class LocalThemeManager implements ThemeManager
 
     public function __construct()
     {
-        $this->useLocal();
+        $this->setDefaultPath(resource_path('views/_themes/tailwind/'));
     }
 }

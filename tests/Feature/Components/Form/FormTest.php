@@ -9,7 +9,7 @@ use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\getThemes;
+use function ChatAgency\BackendComponents\processThemes;
 
 class FormTest extends TestCase
 {
@@ -94,9 +94,9 @@ class FormTest extends TestCase
         $this->blade('{{ $form }}', [
             'form' => $form,
         ])
-            ->assertSee('class="'.getThemes($theme), false);
+            ->assertSee('class="'.processThemes($theme), false);
 
-        $this->assertNotEmpty(getThemes($theme));
+        $this->assertNotEmpty(processThemes($theme));
     }
 
     #[Test]

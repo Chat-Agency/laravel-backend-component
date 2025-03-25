@@ -9,7 +9,7 @@ use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\getThemes;
+use function ChatAgency\BackendComponents\processThemes;
 
 class OrderedListTest extends TestCase
 {
@@ -89,8 +89,8 @@ class OrderedListTest extends TestCase
         $this->blade('{{ $orderedList }}', [
             'orderedList' => $orderedList,
         ])
-            ->assertSee('class="'.getThemes($theme), false);
+            ->assertSee('class="'.processThemes($theme), false);
 
-        $this->assertNotEmpty(getThemes($theme));
+        $this->assertNotEmpty(processThemes($theme));
     }
 }

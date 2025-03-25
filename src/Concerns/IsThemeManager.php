@@ -10,12 +10,7 @@ use function ChatAgency\BackendComponents\cache;
 
 trait IsThemeManager
 {
-    public function useLocal($local = true): static
-    {
-        $this->setDefaultPath(resource_path('views/_themes/tailwind/'));
-
-        return $this;
-    }
+    protected $disableCache = false;
 
     public function setDefaultPath(string $path): static
     {
@@ -41,7 +36,14 @@ trait IsThemeManager
         return $path;
     }
 
-    public function getThemes(array $themes)
+    public function disableCache(bool $disable = true): static
+    {
+        $this->disableCache = $disable;
+
+        return $this;
+    }
+
+    public function processThemes(array $themes): ?string
     {
         if (! count($themes)) {
             return null;
@@ -50,19 +52,19 @@ trait IsThemeManager
         $classes = '';
 
         foreach ($themes as $type => $theme) {
-            $classes .= $this->getTheme($type, $theme).' ';
+            $classes .= $this->processTheme($type, $theme).' ';
         }
 
         return trim($classes);
     }
 
-    public function getTheme(string $type, string|array|ThemeBag|null $theme = null): string
+    public function processTheme(string $type, string|array|ThemeBag|null $theme = null): ?string
     {
         $themePath = $this->getThemePath();
         $cache = cache();
         $cacheKey = $this->resolveCacheKey($type, $theme);
 
-        if ($cache->has($cacheKey)) {
+        if (! $this->disableCache && $cache->has($cacheKey)) {
             return $cache->get($cacheKey);
         }
 
@@ -78,7 +80,9 @@ trait IsThemeManager
 
         $theme = $this->resolveTheme($themesArray, $theme);
 
-        $cache->set($cacheKey, $theme);
+        if (! $this->disableCache) {
+            $cache->set($cacheKey, $theme);
+        }
 
         return $theme;
 
@@ -91,17 +95,22 @@ trait IsThemeManager
         if ($this->isBag($style)) {
 
             foreach ($style->getStyles() as $styleValue) {
+
+                if (is_array($styleValue)) {
+                    $value .= $this->resolveArrayThemes($styleGroup, $styleValue);
+
+                    continue;
+                }
+
                 $value .= $styleGroup[$styleValue].' ';
             }
 
         } elseif (is_array($style)) {
 
-            foreach ($style as $styleArrayValue) {
-                $value .= $styleGroup[$styleArrayValue].' ';
-            }
+            $value .= $this->resolveArrayThemes($styleGroup, $style);
 
         } elseif (is_string($style)) {
-            $value = $styleGroup[$style] ?? '';
+            $value = $styleGroup[$style];
         }
 
         return $value;
@@ -110,6 +119,17 @@ trait IsThemeManager
     public function isBag(string|array|ThemeBag $value): bool
     {
         return is_a($value, ThemeBag::class);
+    }
+
+    public function resolveArrayThemes(array $styleGroup, array $styles): string
+    {
+        $value = '';
+
+        foreach ($styles as $style) {
+            $value .= $styleGroup[$style].' ';
+        }
+
+        return $value;
     }
 
     private function resolveCacheKey(string $type, string|array|ThemeBag|null $theme): string

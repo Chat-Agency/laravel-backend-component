@@ -9,7 +9,7 @@ use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\getThemes;
+use function ChatAgency\BackendComponents\processThemes;
 
 class SmallTest extends TestCase
 {
@@ -80,8 +80,8 @@ class SmallTest extends TestCase
         $this->blade('{{ $small }}', [
             'small' => $small,
         ])
-            ->assertSee('class="'.getThemes($theme), false);
+            ->assertSee('class="'.processThemes($theme), false);
 
-        $this->assertNotEmpty(getThemes($theme));
+        $this->assertNotEmpty(processThemes($theme));
     }
 }

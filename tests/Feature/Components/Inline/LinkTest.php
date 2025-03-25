@@ -9,7 +9,7 @@ use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\getThemes;
+use function ChatAgency\BackendComponents\processThemes;
 
 class LinkTest extends TestCase
 {
@@ -98,9 +98,9 @@ class LinkTest extends TestCase
             'link' => $link,
         ])
             ->assertSee('<a', false)
-            ->assertSee('class="'.getThemes($theme), false)
+            ->assertSee('class="'.processThemes($theme), false)
             ->assertSee('</a>', false);
 
-        $this->assertNotEmpty(getThemes($theme));
+        $this->assertNotEmpty(processThemes($theme));
     }
 }
