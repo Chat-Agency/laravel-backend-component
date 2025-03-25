@@ -7,7 +7,7 @@ namespace ChatAgency\BackendComponents\Builders;
 use BackedEnum;
 use ChatAgency\BackendComponents\Contracts\StaticBuilder;
 use ChatAgency\BackendComponents\MainBackendComponent;
-use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
+use ChatAgency\BackendComponents\Themes\LocalThemeManager;
 
 /**
  * Sets component's and theme's path
@@ -22,7 +22,7 @@ class LocalComponentBuilder implements StaticBuilder
         string|BackedEnum $name
     ): MainBackendComponent {
 
-        $component = (new MainBackendComponent($name, (new DefaultThemeManager)->useLocal()))
+        $component = (new MainBackendComponent($name, new LocalThemeManager))
             ->useLocal();
 
         return $component;

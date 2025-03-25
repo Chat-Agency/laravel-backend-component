@@ -10,13 +10,6 @@ use function ChatAgency\BackendComponents\cache;
 
 trait IsThemeManager
 {
-    public function useLocal($local = true): static
-    {
-        $this->setDefaultPath(resource_path('views/_themes/tailwind/'));
-
-        return $this;
-    }
-
     public function setDefaultPath(string $path): static
     {
         $this->defaultPath = $path;
