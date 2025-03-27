@@ -69,10 +69,15 @@ final class TableUtil
 
         $theme = $this->themes['table'] ?? null;
 
-        return $this->composeComponent(ComponentEnum::TABLE, [
-            $this->head(),
-            $this->body(),
-        ], $theme);
+        $contents = [];
+
+        if(count($this->head)) {
+            $contents[] = $this->head();
+        }
+
+        $contents[] = $this->body();
+
+        return $this->composeComponent(ComponentEnum::TABLE, $contents, $theme);
     }
 
     private function head(): BackendComponent
