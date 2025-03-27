@@ -71,7 +71,7 @@ final class TableUtil
 
         $contents = [];
 
-        if(count($this->head)) {
+        if (count($this->head)) {
             $contents[] = $this->head();
         }
 
