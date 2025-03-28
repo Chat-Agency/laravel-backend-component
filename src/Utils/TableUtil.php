@@ -15,16 +15,13 @@ final class TableUtil
 {
     private $themes = [
         'table' => [
-            'name' => 'table',
-            'style' => 'table',
+            'table' => 'table',
         ],
         'th' => [
-            'name' => 'table',
-            'style' => 'th',
+            'table' => 'th',
         ],
         'td' => [
-            'name' => 'table',
-            'style' => 'td',
+            'table' => 'td',
         ],
         'cells' => [
             /**
@@ -52,14 +49,16 @@ final class TableUtil
 
     public function setTheme(string $name, array $style): self
     {
-        $this->themes[$name] = $style;
+        $theme = $this->themes[$name];
+        $this->themes[$name] = array_merge($theme, $style);
 
         return $this;
     }
 
     public function setCellTheme(string $name, $coord, array $style): self
     {
-        $this->themes['cells'][$name][$coord] = $style;
+        $theme = $this->themes['cells'][$name][$coord] ?? [];
+        $this->themes['cells'][$name][$coord] = array_merge($theme, $style);
 
         return $this;
     }
@@ -124,12 +123,15 @@ final class TableUtil
 
         $theme = $this->themes['td'] ?? null;
 
+        $rowKey = $rowKey + 1;
         foreach ($rows as $key => $value) {
+
+            $cellKey = $key + 1;
 
             $cells[] = $this->composeComponent(
                 ComponentEnum::TD,
                 $value,
-                $this->themes['cells']['bcell']["{$rowKey},{key}"] ?? $theme
+                $this->themes['cells']['bcell']["{$rowKey},{$cellKey}"] ?? $theme
             );
         }
 
@@ -144,7 +146,7 @@ final class TableUtil
             ->setContents($contents);
 
         if ($theme) {
-            $component->setTheme($theme['name'], $theme['style']);
+            $component->setThemes($theme);
         }
 
         return $component;
