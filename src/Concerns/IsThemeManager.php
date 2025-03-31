@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Concerns;
 
-use ChatAgency\BackendComponents\Contracts\ThemeBag;
+use ChatAgency\BackendComponents\Contracts\Cache;
 
 use function ChatAgency\BackendComponents\cache;
 
 trait IsThemeManager
 {
-    protected $disableCache = false;
+    private $disableCache = false;
+
+    private int $cacheHits = 0;
+
+    private ?Cache $cache = null;
 
     public function setDefaultPath(string $path): static
     {
@@ -24,6 +28,7 @@ trait IsThemeManager
         return $this->defaultPath;
     }
 
+    /** @throws \Exception */
     public function getThemePath(): string
     {
         $defaultPath = $this->defaultPath;
@@ -43,6 +48,18 @@ trait IsThemeManager
         return $this;
     }
 
+    public function getCacheHits(): int
+    {
+        return $this->cacheHits;
+    }
+
+    public function unsetCacheHits(): static
+    {
+        $this->cacheHits = 0;
+
+        return $this;
+    }
+
     public function processThemes(array $themes): ?string
     {
         if (! count($themes)) {
@@ -58,13 +75,22 @@ trait IsThemeManager
         return trim($classes);
     }
 
-    public function processTheme(string $type, string|array|ThemeBag|null $theme = null): ?string
+    /** @throws \Exception */
+    public function processTheme(string $type, string|array|null $theme = null): ?string
     {
         $themePath = $this->getThemePath();
-        $cache = cache();
+
+        if (! $this->cache) {
+            $this->cache = cache();
+        }
+
+        $cache = $this->cache;
         $cacheKey = $this->resolveCacheKey($type, $theme);
 
         if (! $this->disableCache && $cache->has($cacheKey)) {
+
+            $this->cacheHits++;
+
             return $cache->get($cacheKey);
         }
 
@@ -88,24 +114,11 @@ trait IsThemeManager
 
     }
 
-    public function resolveTheme(array $styleGroup, string|array|ThemeBag $style): string
+    public function resolveTheme(array $styleGroup, string|array $style): string
     {
         $value = '';
 
-        if ($this->isBag($style)) {
-
-            foreach ($style->getStyles() as $styleValue) {
-
-                if (is_array($styleValue)) {
-                    $value .= $this->resolveArrayThemes($styleGroup, $styleValue);
-
-                    continue;
-                }
-
-                $value .= $styleGroup[$styleValue].' ';
-            }
-
-        } elseif (is_array($style)) {
+        if (is_array($style)) {
 
             $value .= $this->resolveArrayThemes($styleGroup, $style);
 
@@ -114,11 +127,6 @@ trait IsThemeManager
         }
 
         return $value;
-    }
-
-    public function isBag(string|array|ThemeBag $value): bool
-    {
-        return is_a($value, ThemeBag::class);
     }
 
     public function resolveArrayThemes(array $styleGroup, array $styles): string
@@ -132,16 +140,12 @@ trait IsThemeManager
         return $value;
     }
 
-    private function resolveCacheKey(string $type, string|array|ThemeBag|null $theme): string
+    private function resolveCacheKey(string $type, string|array|null $theme): string
     {
-        if (is_string($theme)) {
-            return $type.$theme;
-        }
-
         if (is_array($theme)) {
-            return $type.implode('.', $theme);
+            return $type.'.'.implode('.', $theme);
         }
 
-        return $type.implode('.', $theme->getStyles());
+        return $type.'.'.$theme;
     }
 }

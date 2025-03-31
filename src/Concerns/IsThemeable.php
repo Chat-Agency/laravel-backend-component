@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Concerns;
 
-use ChatAgency\BackendComponents\Contracts\ThemeBag;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
 
 trait IsThemeable
@@ -18,7 +17,7 @@ trait IsThemeable
         return $this->themes;
     }
 
-    public function getTheme(string $name): string|array|ThemeBag|null
+    public function getTheme(string $name): string|array|null
     {
         return $this->getThemes()[$name] ?? null;
     }
@@ -28,7 +27,7 @@ trait IsThemeable
         return $this->themeManager;
     }
 
-    public function setTheme(string $name, string|array|ThemeBag $theme): static
+    public function setTheme(string $name, string|array $theme): static
     {
         $this->themes[$name] = $theme;
 

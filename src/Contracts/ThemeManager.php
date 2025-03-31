@@ -12,11 +12,15 @@ interface ThemeManager
 
     public function getThemePath(): string;
 
+    public function disableCache(bool $disable = true): static;
+
+    public function unsetCacheHits(): static;
+
+    public function getCacheHits(): int;
+
     public function processThemes(array $themes): ?string;
 
-    public function processTheme(string $type, string|array|ThemeBag|null $theme = null): ?string;
+    public function processTheme(string $type, string|array|null $theme = null): ?string;
 
-    public function resolveTheme(array $styleGroup, string|ThemeBag $style): string;
-
-    public function isBag(string|ThemeBag $value): bool;
+    public function resolveTheme(array $styleGroup, string $style): string;
 }
