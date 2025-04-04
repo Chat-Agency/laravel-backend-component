@@ -11,5 +11,10 @@ final class LocalThemeManager implements ThemeManager
 {
     use IsThemeManager;
 
-    private string $defaultPath = '_themes';
+    private ?string $defaultPath = null;
+
+    public function __construct()
+    {
+        $this->setDefaultPath(resource_path('views/_themes/tailwind/'));
+    }
 }

@@ -9,7 +9,7 @@ use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\getThemes;
+use function ChatAgency\BackendComponents\processThemes;
 
 class ModalTest extends TestCase
 {
@@ -24,7 +24,7 @@ class ModalTest extends TestCase
         // inertia's code
             ->assertSee('x-data="{ \'showModal\': false }"', false)
         // overlay classes
-            ->assertSee('class="'.getThemes(['modal' => 'overlay']), false);
+            ->assertSee('class="'.processThemes(['modal' => 'overlay']), false);
     }
 
     #[Test]
@@ -61,7 +61,7 @@ class ModalTest extends TestCase
         $this->blade('{{ $modal }}', [
             'modal' => $modal,
         ])
-            ->assertSee('class="'.getThemes($theme), false);
+            ->assertSee('class="'.processThemes($theme), false);
     }
 
     #[Test]

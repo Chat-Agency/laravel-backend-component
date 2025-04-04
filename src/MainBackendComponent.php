@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ChatAgency\BackendComponents;
 
 use BackedEnum;
+use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
 use ChatAgency\BackendComponents\Concerns\HasContent;
 use ChatAgency\BackendComponents\Concerns\HasPath;
 use ChatAgency\BackendComponents\Concerns\HasSettings;
@@ -12,6 +13,7 @@ use ChatAgency\BackendComponents\Concerns\HasSlots;
 use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
 use ChatAgency\BackendComponents\Concerns\IsLivewireComponent;
 use ChatAgency\BackendComponents\Concerns\IsThemeable;
+use ChatAgency\BackendComponents\Contracts\AttributeBag;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\ContentComponent;
 use ChatAgency\BackendComponents\Contracts\LivewireComponent;
@@ -30,7 +32,7 @@ final class MainBackendComponent implements Arrayable, BackendComponent, Content
         HasPath,
         HasSettings,
         HasSlots,
-        IsBackendComponent ,
+        IsBackendComponent,
         IsLivewireComponent,
         IsThemeable;
 
@@ -38,6 +40,21 @@ final class MainBackendComponent implements Arrayable, BackendComponent, Content
         private string|BackedEnum $name,
         private ThemeManager $themeManager = new DefaultThemeManager
     ) {}
+
+    public function getAttributeBag(): AttributeBag
+    {
+        return new DefaultAttributeBag(
+            $this->getAttributes(),
+            $this->processContent(),
+            $this->compileTheme(),
+            $this->getComponentPath(),
+            $this->getSlots(),
+            $this->getSettings(),
+            $this->isLivewire(),
+            $this->getLivewireKey(),
+            $this->getLivewireParams(),
+        );
+    }
 
     public function toArray(): array
     {
@@ -61,7 +78,7 @@ final class MainBackendComponent implements Arrayable, BackendComponent, Content
 
     public function toHtml()
     {
-        return view(backendComponentNamespace().'_utilities.resolve-component')
+        return \view(backendComponentNamespace().'_utilities.resolve-component')
             ->with('component', $this)
             ->render();
 

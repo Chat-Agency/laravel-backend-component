@@ -49,15 +49,6 @@ class DivComponent implements Arrayable, BackendComponent, Htmlable, ThemeCompon
         return ComponentEnum::DIV->value;
     }
 
-    public function getAttributeBag(): AttributeBag
-    {
-        return new DefaultAttributeBag(
-            $this->getAttributes(),
-            $this->processContent(),
-            $this->compileTheme(),
-        );
-    }
-
     public function getComponentPath()
     {
         return backendComponentNamespace()
@@ -68,15 +59,11 @@ class DivComponent implements Arrayable, BackendComponent, Htmlable, ThemeCompon
     public function toHtml()
     {
         return view($this->getComponentPath())
-            ->with('attrs', new DefaultAttributeBag(
-                $this->getAttributes(),
-                $this->processContent(),
-                $this->compileTheme(),
-            ))
+            ->with('attrs', $this->getAttributeBag())
             ->render();
     }
 
-    public function getContent($key = null): string|Arrayable|BackendComponent|Htmlable|ThemeComponent|null
+    public function getContent($key = null): string|BackendComponent|ThemeComponent|null
     {
         return $this->content[$key] ?? null;
     }
@@ -111,5 +98,14 @@ class DivComponent implements Arrayable, BackendComponent, Htmlable, ThemeCompon
     public function processContent(): ContentsComponent
     {
         return new DefaultContentsComponent($this->getContents());
+    }
+
+    public function getAttributeBag(): AttributeBag
+    {
+        return new DefaultAttributeBag(
+            $this->getAttributes(),
+            $this->processContent(),
+            $this->compileTheme(),
+        );
     }
 }

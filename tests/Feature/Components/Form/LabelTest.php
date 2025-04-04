@@ -9,7 +9,7 @@ use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\getThemes;
+use function ChatAgency\BackendComponents\processThemes;
 
 class LabelTest extends TestCase
 {
@@ -84,8 +84,8 @@ class LabelTest extends TestCase
         $this->blade('{{ $label }}', [
             'label' => $label,
         ])
-            ->assertSee('class="'.getThemes($theme), false);
+            ->assertSee('class="'.processThemes($theme), false);
 
-        $this->assertNotEmpty(getThemes($theme));
+        $this->assertNotEmpty(processThemes($theme));
     }
 }

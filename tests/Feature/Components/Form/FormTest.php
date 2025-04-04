@@ -9,7 +9,7 @@ use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-use function ChatAgency\BackendComponents\getThemes;
+use function ChatAgency\BackendComponents\processThemes;
 
 class FormTest extends TestCase
 {
@@ -94,9 +94,9 @@ class FormTest extends TestCase
         $this->blade('{{ $form }}', [
             'form' => $form,
         ])
-            ->assertSee('class="'.getThemes($theme), false);
+            ->assertSee('class="'.processThemes($theme), false);
 
-        $this->assertNotEmpty(getThemes($theme));
+        $this->assertNotEmpty(processThemes($theme));
     }
 
     #[Test]
@@ -113,6 +113,17 @@ class FormTest extends TestCase
 
         $form->setSetting('disable_csrf', true)
             ->setSetting('disable_method_input', true);
+
+        $this->assertEquals(true, $form->getSetting('disable_csrf'));
+        $this->assertEquals(true, $form->getSetting('disable_method_input'));
+
+        $form->unsetSetting('disable_csrf')
+            ->unsetSetting('disable_method_input');
+
+        $form->setSettings([
+            'disable_csrf' => true,
+            'disable_method_input' => true,
+        ]);
 
         $this->blade('{{ $form }}', [
             'form' => $form,

@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Concerns;
 
-use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
-use ChatAgency\BackendComponents\Contracts\AttributeBag;
-
 trait IsBackendComponent
 {
     private array $attributes = [];
@@ -19,21 +16,6 @@ trait IsBackendComponent
     public function getAttribute(string $name): ?string
     {
         return $this->getAttributes()[$name] ?? null;
-    }
-
-    public function getAttributeBag(): AttributeBag
-    {
-        return new DefaultAttributeBag(
-            $this->getAttributes(),
-            $this->processContent(),
-            $this->compileTheme(),
-            $this->getComponentPath(),
-            $this->getSlots(),
-            $this->getSettings(),
-            $this->isLivewire(),
-            $this->getLivewireKey(),
-            $this->getLivewireParams(),
-        );
     }
 
     public function setAttribute(string $name, $content): static

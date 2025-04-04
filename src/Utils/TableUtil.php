@@ -15,16 +15,24 @@ final class TableUtil
 {
     private $themes = [
         'table' => [
-            'name' => 'table',
-            'style' => 'table',
+            'table' => 'table',
         ],
         'th' => [
-            'name' => 'table',
-            'style' => 'th',
+            'table' => 'th',
         ],
         'td' => [
-            'name' => 'table',
-            'style' => 'td',
+            'table' => 'td',
+        ],
+        'cells' => [
+            /**
+             * head cell number
+             */
+            'hcell' => [],
+            /**
+             * body cell coordinate [row,cell]
+             * ej: '2,4'
+             */
+            'bcell' => [],
         ],
     ];
 
@@ -39,16 +47,18 @@ final class TableUtil
         return new self($head, $body, $themeManager);
     }
 
-    public function setTheme($name, $style): self
+    public function setTheme(string $name, array $style): self
     {
-        $this->themes[$name] = $style ?? null;
+        $theme = $this->themes[$name];
+        $this->themes[$name] = array_merge($theme, $style);
 
         return $this;
     }
 
-    public function unsetTheme($name): self
+    public function setCellTheme(string $name, $coord, array $style): self
     {
-        unset($this->themes[$name]);
+        $theme = $this->themes['cells'][$name][$coord] ?? [];
+        $this->themes['cells'][$name][$coord] = array_merge($theme, $style);
 
         return $this;
     }
@@ -58,10 +68,15 @@ final class TableUtil
 
         $theme = $this->themes['table'] ?? null;
 
-        return $this->composeComponent(ComponentEnum::TABLE, [
-            $this->head(),
-            $this->body(),
-        ], $theme);
+        $contents = [];
+
+        if (count($this->head)) {
+            $contents[] = $this->head();
+        }
+
+        $contents[] = $this->body();
+
+        return $this->composeComponent(ComponentEnum::TABLE, $contents, $theme);
     }
 
     private function head(): BackendComponent
@@ -70,8 +85,13 @@ final class TableUtil
 
         $theme = $this->themes['th'] ?? null;
 
-        foreach ($this->head as $value) {
-            $columns[] = $this->composeComponent(ComponentEnum::TH, $value, $theme);
+        foreach ($this->head as $key => $value) {
+
+            $columns[] = $this->composeComponent(
+                ComponentEnum::TH,
+                $value,
+                $this->themes['cells']['hcell'][$key] ?? $theme
+            );
         }
 
         return $this->composeComponent(ComponentEnum::THEAD, [
@@ -86,27 +106,39 @@ final class TableUtil
 
         $theme = $this->themes['tr'] ?? null;
 
-        foreach ($this->body as $row) {
-            $rows[] = $this->composeComponent(ComponentEnum::TR, $this->rows($row), $theme);
+        foreach ($this->body as $key => $row) {
+            $rows[] = $this->composeComponent(
+                ComponentEnum::TR,
+                $this->rows($row, $key),
+                $theme
+            );
         }
 
         return $this->composeComponent(ComponentEnum::TBODY, $rows);
     }
 
-    private function rows(array $rows): array
+    private function rows(array $rows, int $rowKey): array
     {
         $cells = [];
 
         $theme = $this->themes['td'] ?? null;
 
-        foreach ($rows as $value) {
-            $cells[] = $this->composeComponent(ComponentEnum::TD, $value, $theme);
+        $rowKey = $rowKey + 1;
+        foreach ($rows as $key => $value) {
+
+            $cellKey = $key + 1;
+
+            $cells[] = $this->composeComponent(
+                ComponentEnum::TD,
+                $value,
+                $this->themes['cells']['bcell']["{$rowKey},{$cellKey}"] ?? $theme
+            );
         }
 
         return $cells;
     }
 
-    public function composeComponent(BackedEnum $name, array|string $contents, $theme = null): BackendComponent
+    public function composeComponent(BackedEnum $name, array|string|BackendComponent $contents, $theme = null): BackendComponent
     {
         $contents = is_array($contents) ? $contents : [$contents];
 
@@ -114,7 +146,7 @@ final class TableUtil
             ->setContents($contents);
 
         if ($theme) {
-            $component->setTheme($theme['name'], $theme['style']);
+            $component->setThemes($theme);
         }
 
         return $component;

@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Concerns;
 
-use ChatAgency\BackendComponents\Contracts\ThemeBag;
+use ChatAgency\BackendComponents\Contracts\Cache;
 
 use function ChatAgency\BackendComponents\cache;
 
 trait IsThemeManager
 {
-    public function useLocal($local = true): static
-    {
-        $this->setDefaultPath(resource_path('views/_themes/tailwind/'));
+    private $disableCache = false;
 
-        return $this;
-    }
+    private int $cacheHits = 0;
+
+    private ?Cache $cache = null;
 
     public function setDefaultPath(string $path): static
     {
@@ -29,18 +28,39 @@ trait IsThemeManager
         return $this->defaultPath;
     }
 
+    /** @throws \Exception */
     public function getThemePath(): string
     {
-        $path = realpath($this->defaultPath);
+        $defaultPath = $this->defaultPath;
+        $path = realpath($defaultPath);
 
         if (! $path) {
-            throw new \Exception('The theme path is incorrect', 500);
+            throw new \Exception("The theme path ({$defaultPath}) is incorrect", 500);
         }
 
         return $path;
     }
 
-    public function getThemes(array $themes)
+    public function disableCache(bool $disable = true): static
+    {
+        $this->disableCache = $disable;
+
+        return $this;
+    }
+
+    public function getCacheHits(): int
+    {
+        return $this->cacheHits;
+    }
+
+    public function unsetCacheHits(): static
+    {
+        $this->cacheHits = 0;
+
+        return $this;
+    }
+
+    public function processThemes(array $themes): ?string
     {
         if (! count($themes)) {
             return null;
@@ -49,19 +69,28 @@ trait IsThemeManager
         $classes = '';
 
         foreach ($themes as $type => $theme) {
-            $classes .= $this->getTheme($type, $theme).' ';
+            $classes .= $this->processTheme($type, $theme).' ';
         }
 
         return trim($classes);
     }
 
-    public function getTheme(string $type, string|array|ThemeBag|null $theme = null): string
+    /** @throws \Exception */
+    public function processTheme(string $type, string|array|null $theme = null): ?string
     {
         $themePath = $this->getThemePath();
-        $cache = cache();
+
+        if (! $this->cache) {
+            $this->cache = cache();
+        }
+
+        $cache = $this->cache;
         $cacheKey = $this->resolveCacheKey($type, $theme);
 
-        if ($cache->has($cacheKey)) {
+        if (! $this->disableCache && $cache->has($cacheKey)) {
+
+            $this->cacheHits++;
+
             return $cache->get($cacheKey);
         }
 
@@ -77,50 +106,46 @@ trait IsThemeManager
 
         $theme = $this->resolveTheme($themesArray, $theme);
 
-        $cache->set($cacheKey, $theme);
+        if (! $this->disableCache) {
+            $cache->set($cacheKey, $theme);
+        }
 
         return $theme;
 
     }
 
-    public function resolveTheme(array $styleGroup, string|array|ThemeBag $style): string
+    public function resolveTheme(array $styleGroup, string|array $style): string
     {
         $value = '';
 
-        if ($this->isBag($style)) {
+        if (is_array($style)) {
 
-            foreach ($style->getStyles() as $styleValue) {
-                $value .= $styleGroup[$styleValue].' ';
-            }
-
-        } elseif (is_array($style)) {
-
-            foreach ($style as $styleArrayValue) {
-                $value .= $styleGroup[$styleArrayValue].' ';
-            }
+            $value .= $this->resolveArrayThemes($styleGroup, $style);
 
         } elseif (is_string($style)) {
-            $value = $styleGroup[$style] ?? '';
+            $value = $styleGroup[$style];
         }
 
         return $value;
     }
 
-    public function isBag(string|array|ThemeBag $value): bool
+    public function resolveArrayThemes(array $styleGroup, array $styles): string
     {
-        return is_a($value, ThemeBag::class);
+        $value = '';
+
+        foreach ($styles as $style) {
+            $value .= $styleGroup[$style].' ';
+        }
+
+        return $value;
     }
 
-    private function resolveCacheKey(string $type, string|array|ThemeBag|null $theme): string
+    private function resolveCacheKey(string $type, string|array|null $theme): string
     {
-        if (is_string($theme)) {
-            return $type.$theme;
-        }
-
         if (is_array($theme)) {
-            return $type.implode('.', $theme);
+            return $type.'.'.implode('.', $theme);
         }
 
-        return $type.implode('.', $theme->getStyles());
+        return $type.'.'.$theme;
     }
 }

@@ -13,14 +13,12 @@ use ChatAgency\BackendComponents\Contracts\LivewireComponent;
 use ChatAgency\BackendComponents\Contracts\PathComponent;
 use ChatAgency\BackendComponents\Contracts\SlotsComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeComponent;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Support\Htmlable;
 
 trait HasContent
 {
     private array $content = [];
 
-    public function getContent($key = null): string|Arrayable|BackendComponent|ContentComponent|ExtraParamsComponent|Htmlable|LivewireComponent|PathComponent|SlotsComponent|ThemeComponent|null
+    public function getContent($key = null): string|BackendComponent|ContentComponent|ExtraParamsComponent|LivewireComponent|PathComponent|SlotsComponent|ThemeComponent|null
     {
         return $this->content[$key] ?? null;
     }
