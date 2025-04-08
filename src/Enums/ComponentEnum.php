@@ -9,7 +9,7 @@ enum ComponentEnum: string
     case TEMPLATE = 'template';
 
     /**
-     * A component collection 
+     * A component collection
      * without a wrapper.
      */
     case COLLECTION = 'collection';
