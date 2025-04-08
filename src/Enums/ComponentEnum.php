@@ -9,6 +9,12 @@ enum ComponentEnum: string
     case TEMPLATE = 'template';
 
     /**
+     * A component collection
+     * without a wrapper.
+     */
+    case COLLECTION = 'collection';
+
+    /**
      * Block
      */
     case DIV = 'div';
