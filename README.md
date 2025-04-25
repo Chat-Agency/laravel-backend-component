@@ -1,11 +1,6 @@
 # Laravel Backend Component
 
-[![Tests](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/run-tests.yml/badge.svg)](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/run-tests.yml)
-
-[![PHPStan](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/phpstan.yml/badge.svg)](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/phpstan.yml)
-
-[![Laravel Pint](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/fix-php-code-style-issues.yml/badge.svg)](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/fix-php-code-style-issues.yml)
-
+[![Tests](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/run-tests.yml/badge.svg)](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/run-tests.yml) [![PHPStan](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/phpstan.yml/badge.svg)](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/phpstan.yml) [![Laravel Pint](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/fix-php-code-style-issues.yml/badge.svg)](https://github.com/Chat-Agency/laravel-backend-component/actions/workflows/fix-php-code-style-issues.yml)
 
 
 Backend Components is a package that facilitates the creation of Laravel components using PHP classes.
