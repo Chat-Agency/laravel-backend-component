@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'top-xs' => 'mt-1',
+    'bottom-xs' => 'mb-1',
+    'left-xs' => 'ml-1',
+    'right-xs' => 'mr-1',
+
     'top-sm' => 'mt-3',
     'bottom-sm' => 'mb-3',
     'left-sm' => 'ml-3',
