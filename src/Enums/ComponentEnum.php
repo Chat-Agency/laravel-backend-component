@@ -82,7 +82,7 @@ enum ComponentEnum: string
     case OL = 'lists.ol';
     case UL = 'lists.ul';
     case LI = 'lists.li';
-    
+
     /**
      * Details
      */
