@@ -84,6 +84,12 @@ enum ComponentEnum: string
     case LI = 'lists.li';
 
     /**
+     * Details
+     */
+    case DETAILS = 'details.details';
+    case SUMMARY = 'details.summary';
+
+    /**
      * Custom
      */
     case MODAL = 'custom.modal';
