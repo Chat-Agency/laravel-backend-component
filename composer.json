@@ -61,8 +61,8 @@
         "format": "vendor/bin/pint",
         "phpstan": "vendor/bin/phpstan --memory-limit=1G",
         "qa": [
-            "@composer run analyse",
             "@composer run format",
+            "@composer run analyse",
             "@composer run test"
         ]
     },
