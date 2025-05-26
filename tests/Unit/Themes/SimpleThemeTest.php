@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Themes;
 
+use ChatAgency\BackendComponents\Exceptions\IncorrectThemePathException;
+use ChatAgency\BackendComponents\Exceptions\ThemeDoesNotExistsException;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
-use Exception;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -64,10 +65,26 @@ class SimpleThemeTest extends TestCase
     }
 
     #[Test]
+    public function the_manager_default_path_can_be_set()
+    {
+        $theme = [
+            'test' => 'primary',
+        ];
+
+        $manager = new DefaultThemeManager;
+
+        $manager->setDefaultPath(__DIR__.'/../../Themes/');
+
+        $this->assertEquals($manager->getDefaultPath(), __DIR__.'/../../Themes/');
+
+        $this->assertEquals($manager->processThemes($theme), 'primary-color');
+    }
+
+    #[Test]
     public function an_exception_is_thrown_if_the_theme_default_path_is_incorrect()
     {
 
-        $this->expectException(Exception::class);
+        $this->expectException(IncorrectThemePathException::class);
 
         $theme = [
             'display' => 'flex',
@@ -88,7 +105,7 @@ class SimpleThemeTest extends TestCase
     #[Test]
     public function an_exception_is_thrown_if_the_theme_file_path_is_incorrect()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(ThemeDoesNotExistsException::class);
 
         $theme = [
             'non_existing_theme_file' => 'nope',
