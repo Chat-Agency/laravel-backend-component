@@ -18,10 +18,16 @@ final class TableUtil
             'table' => 'table',
         ],
         'th' => [
-            'table' => 'th',
+            'table' => [
+                'th',
+                'th-dark',
+            ],
         ],
         'td' => [
-            'table' => 'td',
+            'table' => [
+                'td',
+                'td-dark',
+            ],
         ],
         'cells' => [
             /**
@@ -128,17 +134,21 @@ final class TableUtil
 
             $cellKey = $key + 1;
 
+            $content = is_array($value) ? ($value['content'] ?? null) : $value;
+            $attributes = is_array($value) ? ($value['attributes'] ?? []) : [];
+
             $cells[] = $this->composeComponent(
                 ComponentEnum::TD,
-                $value,
-                $this->themes['cells']['bcell']["{$rowKey},{$cellKey}"] ?? $theme
+                $content,
+                $this->themes['cells']['bcell']["{$rowKey},{$cellKey}"] ?? $theme,
+                $attributes
             );
         }
 
         return $cells;
     }
 
-    public function composeComponent(BackedEnum $name, array|string|BackendComponent $contents, $theme = null): BackendComponent
+    public function composeComponent(BackedEnum $name, array|string|BackendComponent $contents, ?array $theme = null, ?array $attributes = null): BackendComponent
     {
         $contents = is_array($contents) ? $contents : [$contents];
 
@@ -147,6 +157,10 @@ final class TableUtil
 
         if ($theme) {
             $component->setThemes($theme);
+        }
+
+        if ($attributes) {
+            $component->setAttributes($attributes);
         }
 
         return $component;
