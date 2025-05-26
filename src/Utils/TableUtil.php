@@ -20,13 +20,13 @@ final class TableUtil
         'th' => [
             'table' => [
                 'th',
-                'th-dark'
+                'th-dark',
             ],
         ],
         'td' => [
             'table' => [
-                'td', 
-                'td-dark'
+                'td',
+                'td-dark',
             ],
         ],
         'cells' => [
@@ -135,7 +135,7 @@ final class TableUtil
             $cellKey = $key + 1;
 
             $content = is_array($value) ? ($value['content'] ?? null) : $value;
-            $attributes = is_array($value) ? ($value['attributes'] ?? []) : []; 
+            $attributes = is_array($value) ? ($value['attributes'] ?? []) : [];
 
             $cells[] = $this->composeComponent(
                 ComponentEnum::TD,
