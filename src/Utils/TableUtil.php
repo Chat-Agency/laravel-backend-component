@@ -93,10 +93,17 @@ final class TableUtil
 
         foreach ($this->head as $key => $value) {
 
+            $theme = $this->themes['cells']['hcell'][$key] ?? $theme;
+
+            $content = is_array($value) ? ($value['content'] ?? null) : $value;
+            $attributes = is_array($value) ? ($value['attributes'] ?? []) : [];
+            $theme = is_array($value) ? ($value['theme'] ?? []) : $theme;
+
             $columns[] = $this->composeComponent(
                 ComponentEnum::TH,
-                $value,
-                $this->themes['cells']['hcell'][$key] ?? $theme
+                $content,
+                $theme,
+                $attributes
             );
         }
 
@@ -134,13 +141,16 @@ final class TableUtil
 
             $cellKey = $key + 1;
 
+            $theme = $this->themes['cells']['bcell']["{$rowKey},{$cellKey}"] ?? $theme;
+
             $content = is_array($value) ? ($value['content'] ?? null) : $value;
             $attributes = is_array($value) ? ($value['attributes'] ?? []) : [];
+            $theme = is_array($value) ? ($value['theme'] ?? []) : $theme;
 
             $cells[] = $this->composeComponent(
                 ComponentEnum::TD,
                 $content,
-                $this->themes['cells']['bcell']["{$rowKey},{$cellKey}"] ?? $theme,
+                $theme,
                 $attributes
             );
         }
