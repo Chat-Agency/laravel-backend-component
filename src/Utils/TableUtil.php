@@ -97,7 +97,7 @@ final class TableUtil
 
             $content = is_array($value) ? ($value['content'] ?? null) : $value;
             $attributes = is_array($value) ? ($value['attributes'] ?? []) : [];
-            $theme = is_array($value) ? ($value['theme'] ?? []) : $theme;
+            $theme = is_array($value) ? ($value['theme'] ?? $theme) : $theme;
 
             $columns[] = $this->composeComponent(
                 ComponentEnum::TH,
@@ -145,7 +145,7 @@ final class TableUtil
 
             $content = is_array($value) ? ($value['content'] ?? null) : $value;
             $attributes = is_array($value) ? ($value['attributes'] ?? []) : [];
-            $theme = is_array($value) ? ($value['theme'] ?? []) : $theme;
+            $theme = is_array($value) ? ($value['theme'] ?? $theme) : $theme;
 
             $cells[] = $this->composeComponent(
                 ComponentEnum::TD,
