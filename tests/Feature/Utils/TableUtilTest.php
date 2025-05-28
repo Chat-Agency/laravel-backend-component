@@ -187,7 +187,7 @@ class TableUtilTest extends TestCase
         ])
             ->assertDontSee('<thead', false);
     }
-    
+
     #[Test]
     public function a_theme_and_attributes_can_be_passed_if_an_array_is_passed_as_content()
     {
@@ -197,19 +197,19 @@ class TableUtilTest extends TestCase
         $theme = [
             'color' => 'error',
         ];
-        
+
         $table = TableUtil::make(
             [
                 [
                     'content' => 'first column',
-                    'theme' => $themeHd,  
+                    'theme' => $themeHd,
                 ],
-                'second column'
+                'second column',
             ],
             [
                 [
                     /**
-                     * Pass an array instead of a string 
+                     * Pass an array instead of a string
                      * to set attributes and theme
                      */
                     [
