@@ -1,0 +1,1 @@
+<x-dynamic-component :component="$path" :attributes="$attributes" >{{ $content }}</x-dynamic-component>
