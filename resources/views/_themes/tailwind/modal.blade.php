@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'default' => 'bg-white dark:bg-slate-800 rounded-lg overflow-hidden transform transition-all shadow-xl',
+    'default' => 'relative bg-white dark:bg-slate-800 rounded-lg overflow-hidden transform transition-all shadow-xl',
     'overlay' => 'absolute inset-0 bg-gray-500 dark:bg-gray-700 opacity-75',
 
     /*

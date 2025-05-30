@@ -14,19 +14,13 @@ use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
 use ChatAgency\BackendComponents\Concerns\IsLivewireComponent;
 use ChatAgency\BackendComponents\Concerns\IsThemeable;
 use ChatAgency\BackendComponents\Contracts\AttributeBag;
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Contracts\ContentComponent;
-use ChatAgency\BackendComponents\Contracts\LivewireComponent;
-use ChatAgency\BackendComponents\Contracts\PathComponent;
-use ChatAgency\BackendComponents\Contracts\SettingsComponent;
-use ChatAgency\BackendComponents\Contracts\SlotsComponent;
-use ChatAgency\BackendComponents\Contracts\ThemeComponent;
+use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
 
-final class MainBackendComponent implements Arrayable, BackendComponent, ContentComponent, Htmlable, LivewireComponent, PathComponent, SettingsComponent, SlotsComponent, ThemeComponent
+final class MainBackendComponent implements Arrayable, CompoundComponent, Htmlable
 {
     use HasContent,
         HasPath,
@@ -56,7 +50,7 @@ final class MainBackendComponent implements Arrayable, BackendComponent, Content
         );
     }
 
-    public function toArray(): array
+    public function toArray()
     {
         return [
             'name' => $this->getName(),
