@@ -28,7 +28,7 @@ namespace ChatAgency\BackendComponents {
     function processLocalThemes(array $themes): ?string
     {
         $manager = new LocalThemeManager;
-        
+
         return $manager->processThemes($themes);
     }
 
