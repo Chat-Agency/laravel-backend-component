@@ -20,4 +20,4 @@
 
 @endphp
 
-<div {{ $attributes->merge($serverAttrs) }}>{{ $content }}{{ $slot }}</div> 
+<details {{ $attributes->merge($serverAttrs) }}>{{ $content }}{{ $slot }}</details> 

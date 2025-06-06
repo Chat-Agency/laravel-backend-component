@@ -19,8 +19,4 @@
 
 @endphp
 
-<p {{ $attributes->merge($serverAttrs) }}> 
-    
-    {{ $content }}{{ $slot }}
-
-</p>
+<p {{ $attributes->merge($serverAttrs) }}>{{ $content }}{{ $slot }}</p>

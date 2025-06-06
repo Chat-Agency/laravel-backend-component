@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace ChatAgency\BackendComponents\Concerns;
 
 use ChatAgency\BackendComponents\Contracts\Cache;
+use ChatAgency\BackendComponents\Exceptions\IncorrectThemePathException;
+use ChatAgency\BackendComponents\Exceptions\ThemeDoesNotExistsException;
 
 use function ChatAgency\BackendComponents\cache;
 
@@ -35,7 +37,7 @@ trait IsThemeManager
         $path = realpath($defaultPath);
 
         if (! $path) {
-            throw new \Exception("The theme path ({$defaultPath}) is incorrect", 500);
+            throw new IncorrectThemePathException("The theme path ({$defaultPath}) is incorrect");
         }
 
         return $path;
@@ -99,7 +101,7 @@ trait IsThemeManager
         $realPath = realpath($filePath);
 
         if (! $realPath) {
-            throw new \Exception('The theme file '.$filePath.' does not exist', 500);
+            throw new ThemeDoesNotExistsException('The theme file '.$filePath.' does not exist');
         }
 
         $themesArray = require $realPath;

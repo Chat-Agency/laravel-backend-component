@@ -18,10 +18,16 @@ final class TableUtil
             'table' => 'table',
         ],
         'th' => [
-            'table' => 'th',
+            'table' => [
+                'th',
+                'th-dark',
+            ],
         ],
         'td' => [
-            'table' => 'td',
+            'table' => [
+                'td',
+                'td-dark',
+            ],
         ],
         'cells' => [
             /**
@@ -87,10 +93,17 @@ final class TableUtil
 
         foreach ($this->head as $key => $value) {
 
+            $theme = $this->themes['cells']['hcell'][$key] ?? $theme;
+
+            $content = is_array($value) ? ($value['content'] ?? null) : $value;
+            $attributes = is_array($value) ? ($value['attributes'] ?? []) : [];
+            $theme = is_array($value) ? ($value['theme'] ?? $theme) : $theme;
+
             $columns[] = $this->composeComponent(
                 ComponentEnum::TH,
-                $value,
-                $this->themes['cells']['hcell'][$key] ?? $theme
+                $content,
+                $theme,
+                $attributes
             );
         }
 
@@ -128,17 +141,24 @@ final class TableUtil
 
             $cellKey = $key + 1;
 
+            $theme = $this->themes['cells']['bcell']["{$rowKey},{$cellKey}"] ?? $theme;
+
+            $content = is_array($value) ? ($value['content'] ?? null) : $value;
+            $attributes = is_array($value) ? ($value['attributes'] ?? []) : [];
+            $theme = is_array($value) ? ($value['theme'] ?? $theme) : $theme;
+
             $cells[] = $this->composeComponent(
                 ComponentEnum::TD,
-                $value,
-                $this->themes['cells']['bcell']["{$rowKey},{$cellKey}"] ?? $theme
+                $content,
+                $theme,
+                $attributes
             );
         }
 
         return $cells;
     }
 
-    public function composeComponent(BackedEnum $name, array|string|BackendComponent $contents, $theme = null): BackendComponent
+    public function composeComponent(BackedEnum $name, array|string|BackendComponent $contents, ?array $theme = null, ?array $attributes = null): BackendComponent
     {
         $contents = is_array($contents) ? $contents : [$contents];
 
@@ -147,6 +167,10 @@ final class TableUtil
 
         if ($theme) {
             $component->setThemes($theme);
+        }
+
+        if ($attributes) {
+            $component->setAttributes($attributes);
         }
 
         return $component;

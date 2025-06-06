@@ -10,6 +10,8 @@ use ChatAgency\BackendComponents\Utils\TableUtil;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
+use function ChatAgency\BackendComponents\processThemes;
+
 class TableUtilTest extends TestCase
 {
     #[Test]
@@ -184,5 +186,57 @@ class TableUtilTest extends TestCase
             'table' => $component,
         ])
             ->assertDontSee('<thead', false);
+    }
+
+    #[Test]
+    public function a_theme_and_attributes_can_be_passed_if_an_array_is_passed_as_content()
+    {
+        $themeHd = [
+            'color' => 'success',
+        ];
+        $theme = [
+            'color' => 'error',
+        ];
+
+        $table = TableUtil::make(
+            [
+                [
+                    'content' => 'first column',
+                    'theme' => $themeHd,
+                ],
+                'second column',
+            ],
+            [
+                [
+                    /**
+                     * Pass an array instead of a string
+                     * to set attributes and theme
+                     */
+                    [
+                        'content' => 'first row first column',
+                        'attributes' => [
+                            'rowspan' => '2',
+                        ],
+                        'theme' => $theme,
+                    ],
+                    'first row second column',
+                ],
+                [
+                    'second row second column',
+                ],
+            ]
+
+        );
+
+        $component = $table->getComponent();
+
+        // dd($component);
+
+        $this->blade('{{ $table }}', [
+            'table' => $component,
+        ])
+            ->assertSee('rowspan="2"', false)
+            ->assertSee(processThemes($themeHd), false)
+            ->assertSee(processThemes($theme), false);
     }
 }
