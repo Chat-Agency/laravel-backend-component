@@ -8,7 +8,6 @@ namespace ChatAgency\BackendComponents {
     use ChatAgency\BackendComponents\Contracts\BackendComponent;
     use ChatAgency\BackendComponents\Contracts\ThemeManager;
     use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
-    use ChatAgency\BackendComponents\Themes\LocalThemeManager;
 
     function backendComponentNamespace(): string
     {
@@ -22,13 +21,6 @@ namespace ChatAgency\BackendComponents {
 
     function processThemes(array $themes, ThemeManager $manager = new DefaultThemeManager): ?string
     {
-        return $manager->processThemes($themes);
-    }
-
-    function processLocalThemes(array $themes): ?string
-    {
-        $manager = new LocalThemeManager;
-
         return $manager->processThemes($themes);
     }
 
