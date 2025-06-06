@@ -11,5 +11,10 @@ final class DefaultThemeManager implements ThemeManager
 {
     use IsThemeManager;
 
-    private ?string $defaultPath = __DIR__.'/../../resources/views/_themes/tailwind';
+    private ?string $defaultPath = null;
+
+    public function __construct()
+    {
+        $this->setDefaultPath(__DIR__.'/../../resources/views/_themes/tailwind');
+    }
 }
