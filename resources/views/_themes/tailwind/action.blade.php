@@ -1,6 +1,5 @@
 <?php
 
-$allButtons = 'rounded ';
 $allDarkButtons = 'text-white ';
 $allActions = 'disabled:opacity-30 transition duration-150 ease-in-out ';
 
@@ -8,19 +7,19 @@ return [
     
     // buttons
 
-    'default' => $allButtons.$allDarkButtons.$allActions.'bg-blue-700 hover:bg-blue-800 focus:ring-blue-300',
-    'error' => $allButtons.$allDarkButtons.$allActions.'bg-red-700 hover:bg-red-800 focus:ring-red-300',
-    'success' => $allButtons.$allDarkButtons.$allActions.'bg-green-700 hover:bg-green-800 focus:ring-green-300',
-    'secondary' => $allButtons.$allDarkButtons.$allActions.'bg-gray-700 hover:bg-gray-800 focus:ring-gray-300',
-    'info' => $allButtons.$allDarkButtons.$allActions.'bg-cyan-600 hover:bg-cyan-700 focus:ring-cyan-300',
-    'warning' => $allButtons.$allActions.'text-black bg-yellow-300 hover:bg-yellow-400 focus:ring-yellow-400',
-    'secondary-light' => $allButtons.$allDarkButtons.$allActions.'bg-gray-500 hover:bg-gray-600 focus:ring-gray-300',
+    'default' => $allDarkButtons.$allActions.'bg-blue-700 hover:bg-blue-800 focus:ring-blue-300',
+    'error' => $allDarkButtons.$allActions.'bg-red-700 hover:bg-red-800 focus:ring-red-300',
+    'success' => $allDarkButtons.$allActions.'bg-green-700 hover:bg-green-800 focus:ring-green-300',
+    'secondary' => $allDarkButtons.$allActions.'bg-gray-700 hover:bg-gray-800 focus:ring-gray-300',
+    'info' => $allDarkButtons.$allActions.'bg-cyan-600 hover:bg-cyan-700 focus:ring-cyan-300',
+    'warning' => $allActions.'text-black bg-yellow-300 hover:bg-yellow-400 focus:ring-yellow-400',
+    'secondary-light' => $allDarkButtons.$allActions.'bg-gray-500 hover:bg-gray-600 focus:ring-gray-300',
 
     // lighter
 
-    'success-lighter' => $allButtons.$allActions.'bg-green-200 hover:bg-green-300 focus:ring-green-300',
-    'warning-lighter' => $allButtons.$allActions.'bg-yellow-200 hover:bg-yellow-300 focus:ring-yellow-400',
-    'secondary-lighter' => $allButtons.$allActions.'bg-gray-200 hover:bg-gray-300 focus:ring-gray-300',
+    'success-lighter' => $allActions.'bg-green-200 hover:bg-green-300 focus:ring-green-300',
+    'warning-lighter' => $allActions.'bg-yellow-200 hover:bg-yellow-300 focus:ring-yellow-400',
+    'secondary-lighter' => $allActions.'bg-gray-200 hover:bg-gray-300 focus:ring-gray-300',
 
     // links
 
