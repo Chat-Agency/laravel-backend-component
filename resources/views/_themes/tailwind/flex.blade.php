@@ -4,6 +4,10 @@ return [
     'gap-sm' => 'gap-1',
     'gap-md' => 'gap-3',
     'gap-lg' => 'gap-6',
+
+    'wrap' => 'flex-wrap',
+    'nowrap' => 'flex-nowrap',
+    'wrap-reverse' => 'flex-wrap-reverse',
     
     'col' => 'flex-col',
     'row' => 'flex-row',
