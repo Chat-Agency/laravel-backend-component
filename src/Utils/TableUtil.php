@@ -89,11 +89,11 @@ final class TableUtil
     {
         $columns = [];
 
-        $theme = $this->themes['th'] ?? null;
+        $themeTh = $this->themes['th'] ?? null;
 
         foreach ($this->head as $key => $value) {
 
-            $theme = $this->themes['cells']['hcell'][$key] ?? $theme;
+            $theme = $this->themes['cells']['hcell'][$key] ?? $themeTh;
 
             $content = is_array($value) ? ($value['content'] ?? null) : $value;
             $attributes = is_array($value) ? ($value['attributes'] ?? []) : [];
@@ -134,14 +134,14 @@ final class TableUtil
     {
         $cells = [];
 
-        $theme = $this->themes['td'] ?? null;
+        $themeTd = $this->themes['td'] ?? null;
 
         $rowKey = $rowKey + 1;
         foreach ($rows as $key => $value) {
 
             $cellKey = $key + 1;
 
-            $theme = $this->themes['cells']['bcell']["{$rowKey},{$cellKey}"] ?? $theme;
+            $theme = $this->themes['cells']['bcell']["{$rowKey},{$cellKey}"] ?? $themeTd;
 
             $content = is_array($value) ? ($value['content'] ?? null) : $value;
             $attributes = is_array($value) ? ($value['attributes'] ?? []) : [];
