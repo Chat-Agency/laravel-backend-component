@@ -98,8 +98,9 @@ final class TableUtil
         $columns = [];
 
         $themeTh = $this->themes['th'] ?? null;
+        $key = 0;
 
-        foreach ($this->head as $key => $value) {
+        foreach ($this->head as $value) {
 
             $theme = $this->themes['cells']['hcell'][$key] ?? $themeTh;
 
@@ -113,6 +114,8 @@ final class TableUtil
                 $theme,
                 $attributes
             );
+
+            $key++;
         }
 
         return $this->composeComponent(ComponentEnum::THEAD, [
@@ -143,9 +146,10 @@ final class TableUtil
         $cells = [];
 
         $themeTd = $this->themes['td'] ?? null;
+        $key = 0;
 
         $rowKey = $rowKey + 1;
-        foreach ($rows as $key => $value) {
+        foreach ($rows as $value) {
 
             $cellKey = $key + 1;
 
@@ -161,6 +165,8 @@ final class TableUtil
                 $theme,
                 $attributes
             );
+
+            $key++;
         }
 
         return $cells;

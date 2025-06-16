@@ -1,19 +1,19 @@
 <?php
 
-$allDarkButtons = "text-white ";
+$allButtons = "text-white whitespace-nowrap ";
 $allActions = "disabled:opacity-30 transition duration-150 ease-in-out ";
 
 return [
     
     // buttons
 
-    'default' => $allDarkButtons.$allActions."bg-blue-700 hover:bg-blue-800 focus:ring-blue-300",
-    'error' => $allDarkButtons.$allActions."bg-red-700 hover:bg-red-800 focus:ring-red-300",
-    'success' => $allDarkButtons.$allActions."bg-green-700 hover:bg-green-800 focus:ring-green-300",
-    'secondary' => $allDarkButtons.$allActions."bg-gray-700 hover:bg-gray-800 focus:ring-gray-300",
-    'info' => $allDarkButtons.$allActions."bg-cyan-600 hover:bg-cyan-700 focus:ring-cyan-300",
+    'default' => $allButtons.$allActions."bg-blue-700 hover:bg-blue-800 focus:ring-blue-300",
+    'error' => $allButtons.$allActions."bg-red-700 hover:bg-red-800 focus:ring-red-300",
+    'success' => $allButtons.$allActions."bg-green-700 hover:bg-green-800 focus:ring-green-300",
+    'secondary' => $allButtons.$allActions."bg-gray-700 hover:bg-gray-800 focus:ring-gray-300",
+    'info' => $allButtons.$allActions."bg-cyan-600 hover:bg-cyan-700 focus:ring-cyan-300",
     'warning' => $allActions."text-black bg-yellow-300 hover:bg-yellow-400 focus:ring-yellow-400",
-    'secondary-light' => $allDarkButtons.$allActions."bg-gray-500 hover:bg-gray-600 focus:ring-gray-300",
+    'secondary-light' => $allButtons.$allActions."bg-gray-500 hover:bg-gray-600 focus:ring-gray-300",
 
     // lighter
 
