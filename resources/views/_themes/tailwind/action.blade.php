@@ -1,6 +1,6 @@
 <?php
 
-$allButtons = "text-white whitespace-nowrap ";
+$allButtons = "whitespace-nowrap ";
 $allActions = "disabled:opacity-30 transition duration-150 ease-in-out ";
 
 return [
@@ -12,7 +12,7 @@ return [
     'success' => $allButtons.$allActions."bg-green-700 hover:bg-green-800 focus:ring-green-300",
     'secondary' => $allButtons.$allActions."bg-gray-700 hover:bg-gray-800 focus:ring-gray-300",
     'info' => $allButtons.$allActions."bg-cyan-600 hover:bg-cyan-700 focus:ring-cyan-300",
-    'warning' => $allActions."text-black bg-yellow-300 hover:bg-yellow-400 focus:ring-yellow-400",
+    'warning' => $allButtons.$allActions."bg-yellow-300 hover:bg-yellow-400 focus:ring-yellow-400",
     'secondary-light' => $allButtons.$allActions."bg-gray-500 hover:bg-gray-600 focus:ring-gray-300",
 
     // lighter
