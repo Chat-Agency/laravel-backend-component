@@ -6,10 +6,18 @@ namespace ChatAgency\BackendComponents\Utils;
 
 use BackedEnum;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
+use ChatAgency\BackendComponents\Contracts\ContentComponent;
+use ChatAgency\BackendComponents\Contracts\LivewireComponent;
+use ChatAgency\BackendComponents\Contracts\PathComponent;
+use ChatAgency\BackendComponents\Contracts\SettingsComponent;
+use ChatAgency\BackendComponents\Contracts\SlotsComponent;
+use ChatAgency\BackendComponents\Contracts\ThemeComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\MainBackendComponent;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Htmlable;
 
 final class TableUtil
 {
@@ -89,11 +97,12 @@ final class TableUtil
     {
         $columns = [];
 
-        $theme = $this->themes['th'] ?? null;
+        $themeTh = $this->themes['th'] ?? null;
+        $key = 0;
 
-        foreach ($this->head as $key => $value) {
+        foreach ($this->head as $value) {
 
-            $theme = $this->themes['cells']['hcell'][$key] ?? $theme;
+            $theme = $this->themes['cells']['hcell'][$key] ?? $themeTh;
 
             $content = is_array($value) ? ($value['content'] ?? null) : $value;
             $attributes = is_array($value) ? ($value['attributes'] ?? []) : [];
@@ -105,6 +114,8 @@ final class TableUtil
                 $theme,
                 $attributes
             );
+
+            $key++;
         }
 
         return $this->composeComponent(ComponentEnum::THEAD, [
@@ -113,7 +124,7 @@ final class TableUtil
 
     }
 
-    private function body(): BackendComponent
+    private function body(): Arrayable|BackendComponent|ContentComponent|Htmlable|LivewireComponent|PathComponent|SettingsComponent|SlotsComponent|ThemeComponent
     {
         $rows = [];
 
@@ -134,14 +145,15 @@ final class TableUtil
     {
         $cells = [];
 
-        $theme = $this->themes['td'] ?? null;
+        $themeTd = $this->themes['td'] ?? null;
+        $key = 0;
 
         $rowKey = $rowKey + 1;
-        foreach ($rows as $key => $value) {
+        foreach ($rows as $value) {
 
             $cellKey = $key + 1;
 
-            $theme = $this->themes['cells']['bcell']["{$rowKey},{$cellKey}"] ?? $theme;
+            $theme = $this->themes['cells']['bcell']["{$rowKey},{$cellKey}"] ?? $themeTd;
 
             $content = is_array($value) ? ($value['content'] ?? null) : $value;
             $attributes = is_array($value) ? ($value['attributes'] ?? []) : [];
@@ -153,6 +165,8 @@ final class TableUtil
                 $theme,
                 $attributes
             );
+
+            $key++;
         }
 
         return $cells;

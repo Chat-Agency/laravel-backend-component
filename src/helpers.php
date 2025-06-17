@@ -15,21 +15,21 @@ namespace ChatAgency\BackendComponents {
         return BackendComponentsServiceProvider::namespace().'::';
     }
 
-    function makeBackendComponent(string|\BackedEnum $name): MainBackendComponent
+    function makeBackendComponent(string|\BackedEnum $name, ThemeManager $manager = new DefaultThemeManager): MainBackendComponent
     {
-        return new MainBackendComponent($name);
+        return new MainBackendComponent(name: $name, themeManager: $manager);
     }
 
     function processThemes(array $themes, ThemeManager $manager = new DefaultThemeManager): ?string
     {
-        return $manager->processThemes($themes);
+        return $manager->processThemes(themes: $themes);
     }
 
     function processLocalThemes(array $themes): ?string
     {
         $manager = new LocalThemeManager;
 
-        return $manager->processThemes($themes);
+        return $manager->processThemes(themes: $themes);
     }
 
     function cache(): DefaultCache
