@@ -21,7 +21,7 @@ return [
     'transparent' => "text-transparent",
     'current' => "text-current",
     'uppercase' => "uppercase",
-    'lowercase' =>  "lowercase";
+    'lowercase' =>  "lowercase",
     'capitalize' => "capitalize",
     'normal-case' => "normal-case",
 ];
