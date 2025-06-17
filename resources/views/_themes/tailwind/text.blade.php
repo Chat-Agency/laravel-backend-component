@@ -17,4 +17,7 @@ return [
     'nowrap' => "text-nowrap",
     'balance' => "text-balance",
     'pretty' => "text-pretty",
+    'inherit' => "text-inherit",
+    'transparent' => "text-transparent",
+    'current' => "text-current",
 ];
