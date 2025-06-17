@@ -41,7 +41,7 @@ final class ThemeList
 
         return $themes;
     }
-    
+
     public function getThemes(array $files, $subFile = null): array
     {
         $themes = [];
@@ -81,5 +81,4 @@ final class ThemeList
 
         return $themes;
     }
-
 }
