@@ -17,5 +17,3 @@ return [
     '-top-md' => '-top-6',
     '-top-lg' => '-top-12',
 ];
-
-//<span class="top-1"></span>
