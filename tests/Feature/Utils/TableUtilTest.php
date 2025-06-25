@@ -254,9 +254,9 @@ class TableUtilTest extends TestCase
         $table = TableUtil::make(
             [
                 new CellBag(
-                    content: 'first column',
+                    content: 'first head column',
                 ),
-                'second column',
+                'second head column',
             ],
             [
                 [
@@ -282,6 +282,8 @@ class TableUtilTest extends TestCase
         $this->blade('{{ $table }}', [
             'table' => $component,
         ])
+            ->assertSee('first head column', false)
+            ->assertSee('second row second column', false)
             ->assertSee('rowspan="2"', false)
             ->assertSee(processThemes($theme), false);
 
