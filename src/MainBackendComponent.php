@@ -55,7 +55,7 @@ final class MainBackendComponent implements Arrayable, CompoundComponent, Htmlab
         return [
             'name' => $this->getName(),
             'attributes' => $this->getAttributes(),
-            'content' => $this->processContent()->toArray(),
+            'contents' => $this->processContent()->toArray(),
             'theme' => [
                 'themes' => $this->getThemes(),
                 'path' => $this->themeManager->getDefaultPath(),
