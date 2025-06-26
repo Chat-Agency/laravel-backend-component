@@ -6,6 +6,7 @@ namespace Feature\Utils;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use ChatAgency\BackendComponents\Utils\CellBag;
 use ChatAgency\BackendComponents\Utils\TableUtil;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -169,10 +170,12 @@ class TableUtilTest extends TestCase
             [],
             [
                 [
-                    'first row first column', 'first row first column',
+                    'first row first column',
+                    'first row second column',
                 ],
                 [
-                    'second row first column', 'second row first column',
+                    'second row first column',
+                    'second row second column',
                 ],
             ]
 
@@ -222,6 +225,7 @@ class TableUtilTest extends TestCase
                     'first row second column',
                 ],
                 [
+                    'second row first column',
                     'second row second column',
                 ],
             ]
@@ -238,5 +242,50 @@ class TableUtilTest extends TestCase
             ->assertSee('rowspan="2"', false)
             ->assertSee(processThemes($themeHd), false)
             ->assertSee(processThemes($theme), false);
+    }
+
+    #[Test]
+    public function a_theme_and_attributes_can_be_added_to_a_cell_if_a_cell_bag_is_passed_as_content()
+    {
+        $theme = [
+            'color' => 'error',
+        ];
+
+        $table = TableUtil::make(
+            [
+                new CellBag(
+                    content: 'first head column',
+                ),
+                'second head column',
+            ],
+            [
+                [
+                    new CellBag(
+                        content: 'first row first column',
+                        attributes: [
+                            'rowspan' => '2',
+                        ],
+                        theme: $theme,
+                    ),
+                    'first row second column',
+                ],
+                [
+                    'second row first column',
+                    'second row second column',
+                ],
+            ]
+
+        );
+
+        $component = $table->getComponent();
+
+        $this->blade('{{ $table }}', [
+            'table' => $component,
+        ])
+            ->assertSee('first head column', false)
+            ->assertSee('second row second column', false)
+            ->assertSee('rowspan="2"', false)
+            ->assertSee(processThemes($theme), false);
+
     }
 }

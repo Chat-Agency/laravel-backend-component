@@ -104,15 +104,11 @@ final class TableUtil
 
             $theme = $this->themes['cells']['hcell'][$key] ?? $themeTh;
 
-            $content = is_array($value) ? ($value['content'] ?? null) : $value;
-            $attributes = is_array($value) ? ($value['attributes'] ?? []) : [];
-            $theme = is_array($value) ? ($value['theme'] ?? $theme) : $theme;
-
             $columns[] = $this->composeComponent(
-                ComponentEnum::TH,
-                $content,
-                $theme,
-                $attributes
+                name: ComponentEnum::TH,
+                contents: $this->resolveContent($value),
+                theme: $this->resolveTheme($theme, $value),
+                attributes: $this->resolveAttributes($value),
             );
 
             $key++;
@@ -155,15 +151,11 @@ final class TableUtil
 
             $theme = $this->themes['cells']['bcell']["{$rowKey},{$cellKey}"] ?? $themeTd;
 
-            $content = is_array($value) ? ($value['content'] ?? null) : $value;
-            $attributes = is_array($value) ? ($value['attributes'] ?? []) : [];
-            $theme = is_array($value) ? ($value['theme'] ?? $theme) : $theme;
-
             $cells[] = $this->composeComponent(
                 ComponentEnum::TD,
-                $content,
-                $theme,
-                $attributes
+                contents: $this->resolveContent($value),
+                theme: $this->resolveTheme($theme, $value),
+                attributes: $this->resolveAttributes($value),
             );
 
             $key++;
@@ -188,5 +180,33 @@ final class TableUtil
         }
 
         return $component;
+    }
+
+    private function resolveContent(array|string|CellBag|BackendComponent $content): string|BackendComponent|ContentComponent|null
+    {
+        $content = is_array($content) ? ($content['content'] ?? null) : $content;
+
+        $content = $content instanceof CellBag && $content->content ? $content->content : $content;
+
+        return $content;
+    }
+
+    private function resolveTheme(array $theme, array|string|CellBag|BackendComponent $content): array
+    {
+        $theme = is_array($content) ? ($content['theme'] ?? $theme) : $theme;
+
+        $theme = $content instanceof CellBag && $content->theme ? $content->theme : $theme;
+
+        return $theme;
+    }
+
+    private function resolveAttributes(array|string|CellBag|BackendComponent $content): array
+    {
+        $attributes = is_array($content) ? ($content['attributes'] ?? []) : [];
+
+        $attributes = $content instanceof CellBag && $content->attributes ? $content->attributes : $attributes;
+
+        return $attributes;
+
     }
 }
