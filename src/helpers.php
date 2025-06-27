@@ -32,16 +32,18 @@ namespace ChatAgency\BackendComponents {
         return $manager->processThemes(themes: $themes);
     }
 
-    function cache(): DefaultCache
+    function cache(string $name): DefaultCache
     {
+        /**
+         * @var array<string, DefaultCache>
+         */
+        static $cache = [];
 
-        static $cache;
-
-        if ($cache === null) {
-            $cache = new DefaultCache;
+        if (! isset($cache[$name])) {
+            $cache[$name] = new DefaultCache;
         }
 
-        return $cache;
+        return $cache[$name];
 
     }
 
