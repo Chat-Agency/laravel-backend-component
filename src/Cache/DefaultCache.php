@@ -8,19 +8,22 @@ use ChatAgency\BackendComponents\Contracts\Cache;
 
 class DefaultCache implements Cache
 {
-    private $values = [];
+    /**
+     * @var array<string, mixed>
+     */
+    private array $values = [];
 
     public function get(string $key): mixed
     {
         return $this->values[$key] ?? null;
     }
 
-    public function set(string $key, $value): void
+    public function set(string $key, mixed $value): void
     {
         $this->values[$key] = $value;
     }
 
-    public function has($key): bool
+    public function has(string $key): bool
     {
         return isset($this->values[$key]);
     }

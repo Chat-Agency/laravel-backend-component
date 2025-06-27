@@ -17,4 +17,9 @@ interface BackendComponent
     public function setAttributes(array $attributes): static;
 
     public function __toString(): string;
+
+    /**
+     * @return array<string, string|int|array<string, string|int>>
+     */
+    public function toArray(): array;
 }

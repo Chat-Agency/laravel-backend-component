@@ -161,13 +161,13 @@ class SimpleComponentTest extends TestCase
         $componentArray = $component->toArray();
 
         $this->assertIsArray($componentArray);
-        $this->assertIsArray($componentArray['content']);
+        $this->assertIsArray($componentArray['contents']);
         $this->assertIsArray($componentArray['attributes']);
 
-        $this->assertIsArray($componentArray['content']['span_1']);
-        $this->assertIsArray($componentArray['content']['span_2']);
+        $this->assertIsArray($componentArray['contents']['span_1']);
+        $this->assertIsArray($componentArray['contents']['span_2']);
 
-        $this->assertIsArray($componentArray['content']['span_2']['content']);
-        $this->assertEquals('this is a link', $componentArray['content']['span_2']['content'][0]['content'][0]);
+        $this->assertIsArray($componentArray['contents']['span_2']['contents']);
+        $this->assertEquals('this is a link', $componentArray['contents']['span_2']['contents'][0]['contents'][0]);
     }
 }

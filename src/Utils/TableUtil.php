@@ -5,19 +5,14 @@ declare(strict_types=1);
 namespace ChatAgency\BackendComponents\Utils;
 
 use BackedEnum;
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Contracts\ContentComponent;
-use ChatAgency\BackendComponents\Contracts\LivewireComponent;
-use ChatAgency\BackendComponents\Contracts\PathComponent;
-use ChatAgency\BackendComponents\Contracts\SettingsComponent;
-use ChatAgency\BackendComponents\Contracts\SlotsComponent;
-use ChatAgency\BackendComponents\Contracts\ThemeComponent;
-use ChatAgency\BackendComponents\Contracts\ThemeManager;
+use Illuminate\Contracts\Support\Htmlable;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\MainBackendComponent;
+use ChatAgency\BackendComponents\Contracts\ThemeManager;
+use ChatAgency\BackendComponents\Contracts\BackendComponent;
+use ChatAgency\BackendComponents\Contracts\ContentComponent;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Support\Htmlable;
+use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 
 final class TableUtil
 {
@@ -120,7 +115,7 @@ final class TableUtil
 
     }
 
-    private function body(): Arrayable|BackendComponent|ContentComponent|Htmlable|LivewireComponent|PathComponent|SettingsComponent|SlotsComponent|ThemeComponent
+    private function body(): Htmlable|CompoundComponent
     {
         $rows = [];
 

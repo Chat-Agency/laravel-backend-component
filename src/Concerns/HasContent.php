@@ -4,31 +4,33 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Concerns;
 
-use ChatAgency\BackendComponents\Components\DefaultContentsComponent;
+use Illuminate\Contracts\Support\Htmlable;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Contracts\ContentComponent;
+use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 use ChatAgency\BackendComponents\Contracts\ContentsComponent;
-use ChatAgency\BackendComponents\Contracts\ExtraParamsComponent;
-use ChatAgency\BackendComponents\Contracts\LivewireComponent;
-use ChatAgency\BackendComponents\Contracts\PathComponent;
-use ChatAgency\BackendComponents\Contracts\SlotsComponent;
-use ChatAgency\BackendComponents\Contracts\ThemeComponent;
+use ChatAgency\BackendComponents\Components\DefaultContentsComponent;
 
 trait HasContent
 {
+    /**
+     * @var array<string|int, string|int|CompoundComponent|Htmlable>
+     */
     private array $content = [];
 
-    public function getContent($key = null): string|BackendComponent|ContentComponent|ExtraParamsComponent|LivewireComponent|PathComponent|SlotsComponent|ThemeComponent|null
+    public function getContent(string|int $key): string|int|CompoundComponent|Htmlable
     {
         return $this->content[$key] ?? null;
     }
 
+    /**
+     * @return array<string|int, string|int|CompoundComponent|Htmlable>
+     */
     public function getContents(): array
     {
         return $this->content;
     }
 
-    public function setContent(string|BackendComponent $content, $key = null): static
+    public function setContent(string|BackendComponent $content, string|int|null $key = null): static
     {
         if ($key) {
             $this->content[$key] = $content;

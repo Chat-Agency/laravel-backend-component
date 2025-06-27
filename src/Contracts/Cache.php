@@ -10,7 +10,7 @@ interface Cache
 
     public function set(string $key, $value): void;
 
-    public function has($key): bool;
+    public function has(string $key): bool;
 
     public function delete(string $key): void;
 }

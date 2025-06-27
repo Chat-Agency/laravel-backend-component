@@ -4,15 +4,9 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Concerns;
 
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Contracts\ContentComponent;
-use ChatAgency\BackendComponents\Contracts\ExtraParamsComponent;
-use ChatAgency\BackendComponents\Contracts\LivewireComponent;
-use ChatAgency\BackendComponents\Contracts\PathComponent;
-use ChatAgency\BackendComponents\Contracts\SlotsComponent;
-use ChatAgency\BackendComponents\Contracts\ThemeComponent;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
+use ChatAgency\BackendComponents\Contracts\BackendComponent;
+use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 
 trait HasSlots
 {
@@ -23,7 +17,7 @@ trait HasSlots
         return $this->slots;
     }
 
-    public function getSlot(string $name): Arrayable|BackendComponent|ContentComponent|ExtraParamsComponent|Htmlable|LivewireComponent|PathComponent|SlotsComponent|ThemeComponent
+    public function getSlot(string $name): CompoundComponent|Htmlable
     {
         return $this->getSlots()[$name] ?? null;
     }

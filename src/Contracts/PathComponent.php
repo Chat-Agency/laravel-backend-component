@@ -8,8 +8,6 @@ interface PathComponent
 {
     public function useLocal($local = true): static;
 
-    public function getName(): string;
-
     public function getNamespace(): ?string;
 
     public function getPath(): string;

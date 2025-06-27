@@ -115,13 +115,13 @@ class IndividualDivTest extends TestCase
         $divArray = $div->toArray();
 
         $this->assertIsArray($divArray);
-        $this->assertIsArray($divArray['content']);
+        $this->assertIsArray($divArray['contents']);
         $this->assertIsArray($divArray['attributes']);
 
-        $this->assertIsArray($divArray['content']['span_1']);
-        $this->assertIsArray($divArray['content']['bold_1']);
+        $this->assertIsArray($divArray['contents']['span_1']);
+        $this->assertIsArray($divArray['contents']['bold_1']);
 
-        $this->assertIsArray($divArray['content']['span_1']['content']);
-        $this->assertEquals('Span', $divArray['content']['span_1']['content'][0]);
+        $this->assertIsArray($divArray['contents']['span_1']['contents']);
+        $this->assertEquals('Span', $divArray['contents']['span_1']['contents'][0]);
     }
 }

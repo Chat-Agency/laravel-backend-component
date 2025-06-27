@@ -17,10 +17,9 @@ use ChatAgency\BackendComponents\Contracts\AttributeBag;
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
 
-final class MainBackendComponent implements Arrayable, CompoundComponent, Htmlable
+final class MainBackendComponent implements CompoundComponent, Htmlable
 {
     use HasContent,
         HasPath,
@@ -34,6 +33,17 @@ final class MainBackendComponent implements Arrayable, CompoundComponent, Htmlab
         private string|BackedEnum $name,
         private ThemeManager $themeManager = new DefaultThemeManager
     ) {}
+
+    public function getName(): string
+    {
+        $name = $this->name;
+
+        if ($name instanceof BackedEnum) {
+            return $name->value;
+        }
+
+        return $name;
+    }
 
     public function getAttributeBag(): AttributeBag
     {
@@ -50,7 +60,10 @@ final class MainBackendComponent implements Arrayable, CompoundComponent, Htmlab
         );
     }
 
-    public function toArray()
+    /**
+     * @return array<string, string|int|array<string, string|int>>
+     */
+    public function toArray(): array
     {
         return [
             'name' => $this->getName(),
