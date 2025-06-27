@@ -33,7 +33,7 @@ class DivComponent implements BackendComponent, Htmlable, ThemeComponent
     public function __construct(
         private ThemeManager $themeManager = new DefaultThemeManager
     ) {}
-    
+
     /**
      * @return array<string, string|int|array<string, string|int>>
      */

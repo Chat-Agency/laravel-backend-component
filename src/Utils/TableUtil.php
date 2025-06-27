@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace ChatAgency\BackendComponents\Utils;
 
 use BackedEnum;
-use Illuminate\Contracts\Support\Htmlable;
+use ChatAgency\BackendComponents\Contracts\BackendComponent;
+use ChatAgency\BackendComponents\Contracts\CompoundComponent;
+use ChatAgency\BackendComponents\Contracts\ContentComponent;
+use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\MainBackendComponent;
-use ChatAgency\BackendComponents\Contracts\ThemeManager;
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Contracts\ContentComponent;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
-use ChatAgency\BackendComponents\Contracts\CompoundComponent;
+use Illuminate\Contracts\Support\Htmlable;
 
 final class TableUtil
 {

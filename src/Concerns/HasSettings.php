@@ -18,6 +18,9 @@ trait HasSettings
         return $this;
     }
 
+    /**
+     * @param array<string, bool|string> $settings
+     */
     public function setSettings(array $settings): static
     {
         foreach ($settings as $name => $value) {

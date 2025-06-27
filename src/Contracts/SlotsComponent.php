@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace ChatAgency\BackendComponents\Contracts;
 
 use Illuminate\Contracts\Support\Htmlable;
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 
 interface SlotsComponent
 {

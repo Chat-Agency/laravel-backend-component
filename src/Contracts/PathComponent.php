@@ -6,7 +6,7 @@ namespace ChatAgency\BackendComponents\Contracts;
 
 interface PathComponent
 {
-    public function useLocal($local = true): static;
+    public function useLocal(bool $local = true): static;
 
     public function getNamespace(): ?string;
 

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Concerns;
 
-use Illuminate\Contracts\Support\Htmlable;
+use ChatAgency\BackendComponents\Components\DefaultContentsComponent;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 use ChatAgency\BackendComponents\Contracts\ContentsComponent;
-use ChatAgency\BackendComponents\Components\DefaultContentsComponent;
+use Illuminate\Contracts\Support\Htmlable;
 
 trait HasContent
 {
@@ -43,6 +43,9 @@ trait HasContent
         return $this;
     }
 
+    /**
+     * @param array<string|int, string|int|CompoundComponent|Htmlable> $contents
+     */
     public function setContents(array $contents): static
     {
         foreach ($contents as $key => $content) {

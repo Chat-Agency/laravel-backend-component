@@ -17,7 +17,7 @@ trait HasPath
 
     private bool $useLocal = false;
 
-    public function useLocal($local = true): static
+    public function useLocal(bool $local = true): static
     {
         $this->useLocal = $local;
 

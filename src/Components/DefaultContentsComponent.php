@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Components;
 
-use Illuminate\Contracts\Support\Htmlable;
-use function ChatAgency\BackendComponents\isComponent;
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
-
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 use ChatAgency\BackendComponents\Contracts\ContentsComponent;
+use Illuminate\Contracts\Support\Htmlable;
+
 use function ChatAgency\BackendComponents\backendComponentNamespace;
+use function ChatAgency\BackendComponents\isComponent;
 
 final class DefaultContentsComponent implements ContentsComponent, Htmlable
 {
     /**
-     * @param array<string|int,string|int|Htmlable|CompoundComponent> $contents
+     * @param  array<string|int,string|int|Htmlable|CompoundComponent>  $contents
      */
     public function __construct(
         private array $contents
@@ -28,6 +27,7 @@ final class DefaultContentsComponent implements ContentsComponent, Htmlable
             ->render();
 
     }
+
     /**
      * @return array<string, string|int|array<string, string|int>>
      */
