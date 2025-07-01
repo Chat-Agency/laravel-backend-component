@@ -18,9 +18,21 @@ interface ThemeManager
 
     public function getCacheHits(): int;
 
+    /**
+     * @param  array<string, string|array<string, string>>  $themes
+     */
     public function processThemes(array $themes): ?string;
 
+    /**
+     * @param  string|null|array<string, string|array<int, string>>  $theme
+     *
+     * @throws \Exception
+     */
     public function processTheme(string $type, string|array|null $theme = null): ?string;
 
-    public function resolveTheme(array $styleGroup, string $style): string;
+    /**
+     * @param  array<string, string>  $styleGroup
+     * @param  array<string, string|array<int|string, string>>  $style
+     */
+    public function resolveTheme(array $styleGroup, string|array $style): string;
 }

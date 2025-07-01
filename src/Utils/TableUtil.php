@@ -15,8 +15,11 @@ use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 use Illuminate\Contracts\Support\Htmlable;
 
 final class TableUtil
-{
-    private $themes = [
+{   
+    /**
+     * @var array<string, array<string, list<string>|string>>
+     */
+    private array $themes = [
         'table' => [
             'table' => 'table',
         ],
@@ -45,17 +48,28 @@ final class TableUtil
         ],
     ];
 
+    /**
+     * @param  array<string|int, string|CellBag|array<string|int, mixed>> $head
+     * @param  array<string|int, array<string|int, string|CellBag|array<string|int, mixed>>> $body
+     */
     public function __construct(
         private array $head,
         private array $body,
         private ThemeManager $themeManager = new DefaultThemeManager
     ) {}
-
+    
+    /**
+     * @param  array<string|int, string|CellBag|array<string|int, mixed>> $head
+     * @param  array<string|int, array<string|int, string|CellBag|array<string|int, mixed>>> $body
+     */
     public static function make(array $head, array $body, ThemeManager $themeManager = new DefaultThemeManager): static
     {
         return new self($head, $body, $themeManager);
     }
 
+    /**
+     * @param array<string, string|array<string|int, string>> $style
+     */
     public function setTheme(string $name, array $style): self
     {
         $theme = $this->themes[$name];
@@ -64,7 +78,10 @@ final class TableUtil
         return $this;
     }
 
-    public function setCellTheme(string $name, $coord, array $style): self
+    /**
+     * @param array<string, string|array<string|int, string>> $style
+     */
+    public function setCellTheme(string $name, int|string $coord, array $style): self
     {
         $theme = $this->themes['cells'][$name][$coord] ?? [];
         $this->themes['cells'][$name][$coord] = array_merge($theme, $style);
@@ -132,6 +149,9 @@ final class TableUtil
         return $this->composeComponent(ComponentEnum::TBODY, $rows);
     }
 
+    /**
+     * @param array<int, string|CellBag|array<string|int, mixed>> $rows
+     */
     private function rows(array $rows, int $rowKey): array
     {
         $cells = [];
@@ -159,8 +179,14 @@ final class TableUtil
         return $cells;
     }
 
-    public function composeComponent(BackedEnum $name, array|string|BackendComponent $contents, ?array $theme = null, ?array $attributes = null): BackendComponent
+    /**
+     * @param int|string|BackendComponent|array<string|int, int|string|BackendComponent> $contents
+     * @param array<string, string|array<string|int, string>>|null $theme
+     * @param array<string, string|null>|null $attributes
+     */
+    public function composeComponent(BackedEnum $name, int|array|string|BackendComponent $contents, ?array $theme = null, ?array $attributes = null): BackendComponent
     {
+        dump($contents);
         $contents = is_array($contents) ? $contents : [$contents];
 
         $component = (new MainBackendComponent($name, $this->themeManager))
@@ -177,6 +203,9 @@ final class TableUtil
         return $component;
     }
 
+    /**
+     * @param @param  array<string|int, string|CellBag|array<string|int, mixed>> $head $content
+     */
     private function resolveContent(array|string|CellBag|BackendComponent $content): string|BackendComponent|ContentComponent|null
     {
         $content = is_array($content) ? ($content['content'] ?? null) : $content;

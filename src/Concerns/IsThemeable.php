@@ -47,7 +47,7 @@ trait IsThemeable
     }
 
     /**
-     * @param  array<string, string|array<string|int, string>>  $themes
+     * @param array<string, string|array<string|int, string>> $themes
      */
     public function setThemes(array $themes): static
     {

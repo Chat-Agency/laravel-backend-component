@@ -25,7 +25,7 @@ interface BackendComponent
     public function __toString(): string;
 
     /**
-     * @return array<string, string|int|array<string, string|int>>
+     * @return array<string, array<mixed>|bool|string|null>
      */
     public function toArray(): array;
 }
