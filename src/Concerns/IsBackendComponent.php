@@ -6,12 +6,12 @@ namespace ChatAgency\BackendComponents\Concerns;
 
 trait IsBackendComponent
 {
-    /** 
+    /**
      * @var array<string, string|null>
      */
     private array $attributes = [];
 
-    /** 
+    /**
      * @return array<string, string|null>
      */
     public function getAttributes(): array
@@ -31,8 +31,8 @@ trait IsBackendComponent
         return $this;
     }
 
-    /** 
-     * @param array<string, string|null> $attributes
+    /**
+     * @param  array<string, string|null>  $attributes
      */
     public function setAttributes(array $attributes): static
     {

@@ -44,7 +44,7 @@ trait HasContent
     }
 
     /**
-     * @param array<string|int, string|int|CompoundComponent|Htmlable> $contents
+     * @param  array<string|int, string|int|CompoundComponent|Htmlable>  $contents
      */
     public function setContents(array $contents): static
     {

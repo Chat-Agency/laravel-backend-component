@@ -13,7 +13,7 @@ use function ChatAgency\BackendComponents\cache;
 trait IsThemeManager
 {
     const THEME_CACHE_NAME = 'theme_cache';
-    
+
     private bool $disableCache = false;
 
     private int $cacheHits = 0;
@@ -65,7 +65,7 @@ trait IsThemeManager
     }
 
     /**
-     * @param array<string, string|array<string, string>> $themes
+     * @param  array<string, string|array<string, string>>  $themes
      */
     public function processThemes(array $themes): ?string
     {
@@ -82,7 +82,11 @@ trait IsThemeManager
         return trim($classes);
     }
 
-    /** @throws \Exception */
+    /**
+     * @param  string|null|array<string, string|array<int, string>>  $theme
+     *
+     * @throws \Exception
+     */
     public function processTheme(string $type, string|array|null $theme = null): ?string
     {
         $themePath = $this->getThemePath();
@@ -122,8 +126,8 @@ trait IsThemeManager
     }
 
     /**
-     * @param array<string, string> $styleGroup
-     * @param array<string, string|array<string, string>> $style
+     * @param  array<string, string>  $styleGroup
+     * @param  array<string, string|array<int|string, string>>  $style
      */
     public function resolveTheme(array $styleGroup, string|array $style): string
     {
@@ -141,8 +145,8 @@ trait IsThemeManager
     }
 
     /**
-     * @param array<string, array<string, string> $styleGroup
-     * @param array<string, string> $style
+     * @param  array<string, string>  $styleGroup
+     * @param  array<int|string, string>  $styles
      */
     public function resolveArrayThemes(array $styleGroup, array $styles): string
     {
@@ -155,6 +159,9 @@ trait IsThemeManager
         return $value;
     }
 
+    /**
+     * @param  array<string, string>  $theme
+     */
     private function resolveCacheKey(string $type, string|array|null $theme): string
     {
         if (is_array($theme)) {

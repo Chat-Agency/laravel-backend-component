@@ -19,7 +19,7 @@ trait HasSettings
     }
 
     /**
-     * @param array<string, bool|string> $settings
+     * @param  array<string, bool|string>  $settings
      */
     public function setSettings(array $settings): static
     {

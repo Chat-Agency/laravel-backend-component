@@ -36,7 +36,7 @@ trait HasSlots
     }
 
     /**
-     * @param array<string, CompoundComponent|Htmlable> $slots
+     * @param  array<string, CompoundComponent|Htmlable>  $slots
      */
     public function setSlots(array $slots): static
     {

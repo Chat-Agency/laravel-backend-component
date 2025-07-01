@@ -23,7 +23,7 @@ trait IsLivewireComponent
     }
 
     /**
-     * @param array<string, mixed> $livewireParams
+     * @param  array<string, mixed>  $livewireParams
      */
     public function setLivewireParams(array $livewireParams): static
     {

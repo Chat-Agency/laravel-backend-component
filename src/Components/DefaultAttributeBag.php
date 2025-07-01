@@ -26,9 +26,7 @@ readonly class DefaultAttributeBag implements AttributeBag
         public readonly array $livewireParams = [],
     ) {}
 
-    /**
-     * @return array<string, string>
-     */
+    /** @return array<string, string> */
     public function getAttributes(): array
     {
         $attrs = $this->attributes;

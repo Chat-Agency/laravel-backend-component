@@ -83,6 +83,11 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
         ];
     }
 
+    /**
+     * Get content as a string of HTML.
+     *
+     * @return string
+     */
     public function toHtml()
     {
         return \view(backendComponentNamespace().'_utilities.resolve-component')
