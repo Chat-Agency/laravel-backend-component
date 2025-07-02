@@ -11,7 +11,7 @@ interface LivewireComponent
     public function setLivewireKey(string $livewireKey): static;
 
     /**
-     * @param  array<string, mixed> $livewireParams
+     * @param  array<string, mixed>  $livewireParams
      */
     public function setLivewireParams(array $livewireParams): static;
 

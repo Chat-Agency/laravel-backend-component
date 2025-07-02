@@ -20,11 +20,17 @@ namespace ChatAgency\BackendComponents {
         return new MainBackendComponent(name: $name, themeManager: $manager);
     }
 
+    /**
+     * @param  array<string, string|array<string|int, string>>  $themes
+     */
     function processThemes(array $themes, ThemeManager $manager = new DefaultThemeManager): ?string
     {
         return $manager->processThemes(themes: $themes);
     }
 
+    /**
+     * @param  array<string, string|array<string|int, string>>  $themes
+     */
     function processLocalThemes(array $themes): ?string
     {
         $manager = new LocalThemeManager;
@@ -47,7 +53,7 @@ namespace ChatAgency\BackendComponents {
 
     }
 
-    function isComponent($component): bool
+    function isComponent(mixed $component): bool
     {
         return $component instanceof BackendComponent ? true : false;
     }

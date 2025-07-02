@@ -6,7 +6,7 @@ namespace ChatAgency\BackendComponents\Utils;
 
 final class ThemeList
 {
-    private $path = __DIR__.'/../../resources/views/_themes/tailwind';
+    private string $path = __DIR__.'/../../resources/views/_themes/tailwind';
 
     public function __construct(?string $path = null)
     {
@@ -16,11 +16,14 @@ final class ThemeList
 
     }
 
-    public static function make()
+    public static function make(): static
     {
         return new self;
     }
 
+    /**
+     * @return array<string, array<string, mixed>>
+     */
     public function scanFiles(): array
     {
         $path = $this->path;
@@ -30,6 +33,7 @@ final class ThemeList
             throw new \Exception("The path path ({$path}) is incorrect", 500);
         }
 
+        /** @var array<int, string> $files */
         $files = scandir($realpath);
 
         $themes = $this->getThemes($files);
@@ -42,7 +46,11 @@ final class ThemeList
         return $themes;
     }
 
-    public function getThemes(array $files, $subFile = null): array
+    /**
+     * @param  array<int, string>  $files
+     * @return array<string, array<string, mixed>>
+     */
+    public function getThemes(array $files, ?string $subFile = null): array
     {
         $themes = [];
 

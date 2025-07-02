@@ -8,8 +8,8 @@ interface ThemeComponent
 {
     public function setTheme(string $name, string $theme): static;
 
-     /**
-     * @param array<string, string|array<string|int, string>> $themes
+    /**
+     * @param  array<string, string|array<string|int, string>>  $themes
      */
     public function setThemes(array $themes): static;
 
