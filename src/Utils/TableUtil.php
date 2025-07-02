@@ -33,17 +33,6 @@ final class TableUtil
                 'td-dark',
             ],
         ],
-        'cells' => [
-            /**
-             * head cell number
-             */
-            'hcell' => [],
-            /**
-             * body cell coordinate [row,cell]
-             * ej: '2,4'
-             */
-            'bcell' => [],
-        ],
     ];
 
     /**
@@ -76,17 +65,6 @@ final class TableUtil
         return $this;
     }
 
-    /**
-     * @param  array<string, string|array<string|int, string>>  $style
-     */
-    public function setCellTheme(string $name, int|string $coord, array $style): self
-    {
-        $theme = $this->themes['cells'][$name][$coord] ?? [];
-        $this->themes['cells'][$name][$coord] = array_merge($theme, $style);
-
-        return $this;
-    }
-
     public function getComponent(): BackendComponent
     {
 
@@ -108,20 +86,16 @@ final class TableUtil
         $columns = [];
 
         $themeTh = $this->themes['th'] ?? null;
-        $key = 0;
 
         foreach ($this->head as $value) {
-
-            $theme = $this->themes['cells']['hcell'][$key] ?? $themeTh;
 
             $columns[] = $this->composeComponent(
                 name: ComponentEnum::TH,
                 contents: $this->resolveContent($value),
-                theme: $this->resolveTheme($theme, $value),
+                theme: $this->resolveTheme($themeTh, $value),
                 attributes: $this->resolveAttributes($value),
             );
 
-            $key++;
         }
 
         return $this->composeComponent(ComponentEnum::THEAD, [
@@ -161,16 +135,10 @@ final class TableUtil
         $rowKey = $rowKey + 1;
         foreach ($rows as $value) {
 
-            $cellKey = $key + 1;
-
-            $coords = "{$rowKey},{$cellKey}";
-
-            $theme = $this->themes['cells']['bcell'][$coords] ?? $themeTd;
-
             $cells[] = $this->composeComponent(
                 ComponentEnum::TD,
                 contents: $this->resolveContent($value),
-                theme: $this->resolveTheme($theme, $value),
+                theme: $this->resolveTheme($themeTd, $value),
                 attributes: $this->resolveAttributes($value),
             );
 
