@@ -61,7 +61,7 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
     }
 
     /**
-     * @return array<string, array<mixed>|bool|string|null>
+     * @return array<string, array<string, mixed>|bool|int|string|null>
      */
     public function toArray(): array
     {

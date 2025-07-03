@@ -29,6 +29,7 @@ class DefaultThemeManagerTest extends TestCase
     public function default_theme_manager_helps_creating_themes_when_an_array_of_themes_is_passed()
     {
         $theme = [
+            'color' => 'default',
             'flex' => [
                 'gap-sm',
                 'wrap',

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ChatAgency\BackendComponents\Components;
 
 use ChatAgency\BackendComponents\Contracts\AttributeBag;
+use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 
 readonly class DefaultAttributeBag implements AttributeBag
@@ -15,7 +16,7 @@ readonly class DefaultAttributeBag implements AttributeBag
         public readonly ?ContentsComponent $content = null,
         public readonly ?string $themes = null,
         public readonly ?string $path = null,
-        /** @var array<int|string, ContentsComponent> $slots */
+        /** @var array<int|string, CompoundComponent> $slots */
         public readonly array $slots = [],
         /** @var array<string, bool|string> $settings */
         public readonly array $settings = [],

@@ -4,19 +4,26 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Contracts;
 
+use ChatAgency\BackendComponents\Exceptions\IncorrectThemePathException;
+use ChatAgency\BackendComponents\Exceptions\ThemeDoesNotExistsException;
+
 interface ThemeManager
 {
     public function setDefaultPath(string $path): static;
 
+    /**
+     * @throws \Exception
+     */
     public function getDefaultPath(): string;
 
+    /** @throws IncorrectThemePathException */
     public function getThemePath(): string;
 
     public function disableCache(bool $disable = true): static;
 
-    public function unsetCacheHits(): static;
-
     public function getCacheHits(): int;
+
+    public function unsetCacheHits(): static;
 
     /**
      * @param  array<string, string|array<string, string>>  $themes
@@ -24,15 +31,22 @@ interface ThemeManager
     public function processThemes(array $themes): ?string;
 
     /**
-     * @param  string|null|array<string, string|array<int, string>>  $theme
+     * @param  string|array<string, string|array<int, string>>  $theme
      *
-     * @throws \Exception
+     * @throws ThemeDoesNotExistsException
      */
-    public function processTheme(string $type, string|array|null $theme = null): ?string;
+    public function processTheme(string $type, string|array $theme): string;
 
     /**
      * @param  array<string, string>  $styleGroup
-     * @param  array<string, string|array<int|string, string>>  $style
+     * @param  array<string, array<string, string>|string> $style
      */
-    public function resolveTheme(array $styleGroup, string|array $style): string;
+    public function resolveTheme(array $styleGroup, array $style): string;
+
+    /**
+     * @param  array<string, string>  $styleGroup
+     * @param  array<int, string>  $styles
+     */
+    public function resolveArrayThemes(array $styleGroup, array $styles): string;
+
 }

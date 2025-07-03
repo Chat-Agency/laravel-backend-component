@@ -4,31 +4,29 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Concerns;
 
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
-use Illuminate\Contracts\Support\Htmlable;
 
 trait HasSlots
 {
     /**
-     * @var array<string, CompoundComponent|Htmlable>
+     * @var array<string, CompoundComponent>
      */
     private array $slots = [];
 
     /**
-     * @return array<string, CompoundComponent|Htmlable>
+     * @return array<string, CompoundComponent>
      */
     public function getSlots(): array
     {
         return $this->slots;
     }
 
-    public function getSlot(string $name): CompoundComponent|Htmlable
+    public function getSlot(string $name): CompoundComponent|null
     {
         return $this->getSlots()[$name] ?? null;
     }
 
-    public function setSlot(string $name, BackendComponent $slot): static
+    public function setSlot(string $name, CompoundComponent $slot): static
     {
         $this->slots[$name] = $slot;
 
@@ -36,7 +34,7 @@ trait HasSlots
     }
 
     /**
-     * @param  array<string, CompoundComponent|Htmlable>  $slots
+     * @param  array<string, CompoundComponent>  $slots
      */
     public function setSlots(array $slots): static
     {

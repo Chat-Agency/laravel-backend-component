@@ -11,6 +11,7 @@ use ChatAgency\BackendComponents\Concerns\IsThemeable;
 use ChatAgency\BackendComponents\Contracts\AttributeBag;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
+use ChatAgency\BackendComponents\Contracts\ContentComponent;
 use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
@@ -120,9 +121,9 @@ class DivComponent implements BackendComponent, Htmlable, ThemeComponent
     public function getAttributeBag(): AttributeBag
     {
         return new DefaultAttributeBag(
-            $this->getAttributes(),
-            $this->processContent(),
-            $this->compileTheme(),
+            attributes: $this->getAttributes(),
+            content: $this->processContent(),
+            themes: $this->compileTheme(),
         );
     }
 }
