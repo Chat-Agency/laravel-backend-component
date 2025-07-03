@@ -87,7 +87,7 @@ class DivComponent implements BackendComponent, Htmlable, ThemeComponent
         return $this->content;
     }
 
-    public function setContent(int|string|BackendComponent $content, string|int|null $key = null): static
+    public function setContent(int|string|CompoundComponent $content, string|int|null $key = null): static
     {
         if ($key) {
             $this->content[$key] = $content;
@@ -95,7 +95,7 @@ class DivComponent implements BackendComponent, Htmlable, ThemeComponent
             return $this;
         }
 
-        $this->content[] = $content;
+        array_push($this->content, $content);
 
         return $this;
     }

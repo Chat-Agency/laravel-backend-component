@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace ChatAgency\BackendComponents\Concerns;
 
 use ChatAgency\BackendComponents\Components\DefaultContentsComponent;
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 use Illuminate\Contracts\Support\Htmlable;
@@ -13,24 +12,24 @@ use Illuminate\Contracts\Support\Htmlable;
 trait HasContent
 {
     /**
-     * @var array<string|int, string|int|CompoundComponent|Htmlable>
+     * @var array<string|int, string|int|CompoundComponent>
      */
     private array $content = [];
 
-    public function getContent(string|int $key): string|int|CompoundComponent|Htmlable
+    public function getContent(string|int $key): CompoundComponent|int|string|null
     {
         return $this->content[$key] ?? null;
     }
 
     /**
-     * @return array<string|int, string|int|CompoundComponent|Htmlable>
+     * @return array<string|int, string|int|CompoundComponent>
      */
     public function getContents(): array
     {
         return $this->content;
     }
 
-    public function setContent(string|BackendComponent $content, string|int|null $key = null): static
+    public function setContent(int|string|CompoundComponent $content, string|int|null $key = null): static
     {
         if ($key) {
             $this->content[$key] = $content;
@@ -38,13 +37,13 @@ trait HasContent
             return $this;
         }
 
-        $this->content[] = $content;
+        array_push($this->content, $content);
 
         return $this;
     }
 
     /**
-     * @param  array<string|int, string|int|CompoundComponent|Htmlable>  $contents
+     * @param  array<string|int, string|int|CompoundComponent>  $contents
      */
     public function setContents(array $contents): static
     {

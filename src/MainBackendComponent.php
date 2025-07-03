@@ -34,11 +34,11 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
         private ThemeManager $themeManager = new DefaultThemeManager
     ) {}
 
-    public function getName(): string
+    public function getName(): int|string
     {
         $name = $this->name;
 
-        if ($name instanceof BackedEnum) {
+        if (isBackedEnum($name)) {
             return $name->value;
         }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents {
 
+    use BackedEnum;
     use ChatAgency\BackendComponents\Cache\DefaultCache;
     use ChatAgency\BackendComponents\Contracts\BackendComponent;
     use ChatAgency\BackendComponents\Contracts\ThemeManager;
@@ -56,6 +57,12 @@ namespace ChatAgency\BackendComponents {
     /** @phpstan-assert-if-true BackendComponent $component */
     function isComponent(mixed $component): bool
     {
-        return $component instanceof BackendComponent ? true : false;
+        return $component instanceof BackendComponent;
+    }
+
+    /** @phpstan-assert-if-true BackedEnum $enum */
+    function isBackedEnum(mixed $enum): bool 
+    {
+        return $enum instanceof BackedEnum;
     }
 }
