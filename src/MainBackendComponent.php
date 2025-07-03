@@ -90,6 +90,11 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
      */
     public function toHtml()
     {
+        /** 
+         * PHPStan bug 
+         * https://github.com/larastan/larastan/issues/2213
+         * @phpstan-ignore argument.type
+         */
         return \view(backendComponentNamespace().'_utilities.resolve-component')
             ->with('component', $this)
             ->render();

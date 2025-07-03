@@ -53,6 +53,7 @@ namespace ChatAgency\BackendComponents {
 
     }
 
+    /** @phpstan-assert-if-true BackendComponent $component */
     function isComponent(mixed $component): bool
     {
         return $component instanceof BackendComponent ? true : false;

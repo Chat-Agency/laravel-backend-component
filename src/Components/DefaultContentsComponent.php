@@ -14,7 +14,7 @@ use function ChatAgency\BackendComponents\isComponent;
 final class DefaultContentsComponent implements ContentsComponent, Htmlable
 {
     /**
-     * @param  array<string|int,string|int|Htmlable|CompoundComponent>  $contents
+     * @param  array<string|int,string|int|CompoundComponent>  $contents
      */
     public function __construct(
         private array $contents
@@ -22,23 +22,31 @@ final class DefaultContentsComponent implements ContentsComponent, Htmlable
 
     public function toHtml()
     {
-        return view(backendComponentNamespace().'_utilities.resolve-content')
+        /** @var non-falsy-string $view */
+        $view = backendComponentNamespace().'_utilities.resolve-content';
+
+        /** 
+         * PHPStan bug 
+         * https://github.com/larastan/larastan/issues/2213
+         * @phpstan-ignore argument.type
+         */
+        return view($view)
             ->with('contents', $this->contents)
             ->render();
 
     }
 
     /**
-     * @return array<string, string|int|array<string, string|int>>
+     * @return array<int|string, string|int|array<string, array<mixed>|bool|string|null>>
      */
     public function toArray(): array
     {
-        $contents = [];
+        $contentArray = [];
 
         foreach ($this->contents as $key => $content) {
-            $contents[$key] = isComponent($content) ? $content->toArray() : $content;
+            $contentArray[$key] = isComponent($content) ? $content->toArray() : $content;
         }
 
-        return $contents;
+        return $contentArray;
     }
 }

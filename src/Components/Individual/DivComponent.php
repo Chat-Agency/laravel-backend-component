@@ -26,7 +26,7 @@ class DivComponent implements BackendComponent, Htmlable, ThemeComponent
         IsThemeable;
 
     /**
-     * @var array<string, string|int|array<string, string|int>>
+     * @var array<string|int, string|int|CompoundComponent>
      */
     private array $content = [];
 
@@ -35,7 +35,7 @@ class DivComponent implements BackendComponent, Htmlable, ThemeComponent
     ) {}
 
     /**
-     * @return array<string, string|int|array<string, string|int>>
+     * @return array<string, array<string, array<string, int|string>|int|string|null>|string|null>
      */
     public function toArray(): array
     {
@@ -64,25 +64,30 @@ class DivComponent implements BackendComponent, Htmlable, ThemeComponent
 
     public function toHtml()
     {
+        /** 
+         * PHPStan bug 
+         * https://github.com/larastan/larastan/issues/2213
+         * @phpstan-ignore argument.type
+         */
         return view($this->getComponentPath())
             ->with('attrs', $this->getAttributeBag())
             ->render();
     }
 
-    public function getContent(string|int $key): string|BackendComponent|ThemeComponent
+    public function getContent(string|int $key): CompoundComponent|int|string|null
     {
         return $this->content[$key] ?? null;
     }
 
     /**
-     * @return array<string|int, string|int|CompoundComponent|Htmlable>
+     * @return array<string|int, string|int|CompoundComponent>
      */
     public function getContents(): array
     {
         return $this->content;
     }
 
-    public function setContent(string|BackendComponent $content, string|int|null $key = null): static
+    public function setContent(int|string|BackendComponent $content, string|int|null $key = null): static
     {
         if ($key) {
             $this->content[$key] = $content;
@@ -96,7 +101,7 @@ class DivComponent implements BackendComponent, Htmlable, ThemeComponent
     }
 
     /**
-     * @param  array<string|int, string|int|CompoundComponent|Htmlable>  $contents
+     * @param  array<string|int, string|int|CompoundComponent> $contents
      */
     public function setContents(array $contents): static
     {
