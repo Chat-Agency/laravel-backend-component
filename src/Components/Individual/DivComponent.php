@@ -10,33 +10,39 @@ use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
 use ChatAgency\BackendComponents\Concerns\IsThemeable;
 use ChatAgency\BackendComponents\Contracts\AttributeBag;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
+use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
 
 use function ChatAgency\BackendComponents\backendComponentNamespace;
 
-class DivComponent implements Arrayable, BackendComponent, Htmlable, ThemeComponent
+class DivComponent implements BackendComponent, Htmlable, ThemeComponent
 {
     use IsBackendComponent,
         IsThemeable;
 
+    /**
+     * @var array<string, string|int|array<string, string|int>>
+     */
     private array $content = [];
 
     public function __construct(
         private ThemeManager $themeManager = new DefaultThemeManager
     ) {}
 
+    /**
+     * @return array<string, string|int|array<string, string|int>>
+     */
     public function toArray(): array
     {
         return [
             'name' => $this->getName(),
             'attributes' => $this->getAttributes(),
-            'content' => $this->processContent()->toArray(),
+            'contents' => $this->processContent()->toArray(),
             'themes' => $this->compileTheme(),
             'path' => $this->getComponentPath(),
             'themeManagerPath' => $this->themeManager->getDefaultPath(),
@@ -49,7 +55,7 @@ class DivComponent implements Arrayable, BackendComponent, Htmlable, ThemeCompon
         return ComponentEnum::DIV->value;
     }
 
-    public function getComponentPath()
+    public function getComponentPath(): string
     {
         return backendComponentNamespace()
             .'components.'
@@ -63,17 +69,20 @@ class DivComponent implements Arrayable, BackendComponent, Htmlable, ThemeCompon
             ->render();
     }
 
-    public function getContent($key = null): string|BackendComponent|ThemeComponent|null
+    public function getContent(string|int $key): string|BackendComponent|ThemeComponent
     {
         return $this->content[$key] ?? null;
     }
 
+    /**
+     * @return array<string|int, string|int|CompoundComponent|Htmlable>
+     */
     public function getContents(): array
     {
         return $this->content;
     }
 
-    public function setContent(string|BackendComponent $content, $key = null): static
+    public function setContent(string|BackendComponent $content, string|int|null $key = null): static
     {
         if ($key) {
             $this->content[$key] = $content;
@@ -86,6 +95,9 @@ class DivComponent implements Arrayable, BackendComponent, Htmlable, ThemeCompon
         return $this;
     }
 
+    /**
+     * @param  array<string|int, string|int|CompoundComponent|Htmlable>  $contents
+     */
     public function setContents(array $contents): static
     {
         foreach ($contents as $key => $content) {

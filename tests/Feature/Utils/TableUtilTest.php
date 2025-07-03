@@ -109,61 +109,6 @@ class TableUtilTest extends TestCase
     }
 
     #[Test]
-    public function a_different_theme_can_be_added_to_a_specific_head_cell()
-    {
-        $table = TableUtil::make(
-            ['first column', 'second column'],
-            [
-                [
-                    'first row first column', 'first row first column',
-                ],
-                [
-                    'second row first column', 'second row first column',
-                ],
-            ]
-
-        )
-            ->setCellTheme('hcell', 1, [
-                'color' => 'info-dark',
-            ])
-            ->getComponent();
-
-        $this->blade('{{ $table }}', [
-            'table' => $table,
-        ])
-            ->assertSee('dark:text-cyan-300', false);
-    }
-
-    #[Test]
-    public function a_different_theme_can_be_added_to_a_specific_body_cell()
-    {
-        $table = TableUtil::make(
-            ['first column', 'second column'],
-            [
-                [
-                    'first row first column', 'first row second column',
-                ],
-                [
-                    'second row first column', 'second row second column',
-                ],
-            ]
-
-        )
-            ->setCellTheme('bcell', '1,2', [
-                'color' => 'light-dark',
-            ]);
-
-        $component = $table->getComponent();
-
-        // dd($table);
-
-        $this->blade('{{ $table }}', [
-            'table' => $component,
-        ])
-            ->assertSee('dark:text-black', false);
-    }
-
-    #[Test]
     public function when_provided_an_empty_head_array_no_head_is_created()
     {
         $table = TableUtil::make(

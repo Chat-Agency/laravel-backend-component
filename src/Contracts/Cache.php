@@ -8,9 +8,9 @@ interface Cache
 {
     public function get(string $key): mixed;
 
-    public function set(string $key, $value): void;
+    public function set(string $key, mixed $value): void;
 
-    public function has($key): bool;
+    public function has(string $key): bool;
 
     public function delete(string $key): void;
 }

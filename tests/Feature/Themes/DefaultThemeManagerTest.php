@@ -24,4 +24,20 @@ class DefaultThemeManagerTest extends TestCase
         $this->assertEquals($manager->processThemes($theme), processThemes($theme));
 
     }
+
+    #[Test]
+    public function default_theme_manager_helps_creating_themes_when_an_array_of_themes_is_passed()
+    {
+        $theme = [
+            'flex' => [
+                'gap-sm',
+                'wrap',
+            ],
+        ];
+
+        $manager = new DefaultThemeManager;
+
+        $this->assertEquals($manager->processThemes($theme), processThemes($theme));
+
+    }
 }

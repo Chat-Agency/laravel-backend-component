@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Concerns;
 
-use BackedEnum;
-
 use function ChatAgency\BackendComponents\backendComponentNamespace;
 
 trait HasPath
@@ -19,22 +17,11 @@ trait HasPath
 
     private bool $useLocal = false;
 
-    public function useLocal($local = true): static
+    public function useLocal(bool $local = true): static
     {
         $this->useLocal = $local;
 
         return $this;
-    }
-
-    public function getName(): string
-    {
-        $name = $this->name;
-
-        if ($name instanceof BackedEnum) {
-            return $name->value;
-        }
-
-        return $name;
     }
 
     public function getNamespace(): ?string

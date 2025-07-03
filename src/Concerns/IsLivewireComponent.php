@@ -10,6 +10,9 @@ trait IsLivewireComponent
 
     private ?string $livewireKey = null;
 
+    /**
+     * @var array<string, mixed>
+     */
     private array $livewireParams = [];
 
     public function setLivewire(bool $livewire = true): static
@@ -19,6 +22,9 @@ trait IsLivewireComponent
         return $this;
     }
 
+    /**
+     * @param  array<string, mixed>  $livewireParams
+     */
     public function setLivewireParams(array $livewireParams): static
     {
         $this->livewireParams = $livewireParams;
@@ -38,6 +44,9 @@ trait IsLivewireComponent
         return $this->isLiveWire;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getLivewireParams(): array
     {
         return $this->livewireParams;

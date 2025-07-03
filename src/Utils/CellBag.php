@@ -9,7 +9,8 @@ use ChatAgency\BackendComponents\Contracts\BackendComponent;
 final readonly class CellBag
 {
     /**
-     * @param  array<string,int>  $attributes
+     * @param  array<string|int, string|null>|null  $attributes
+     * @param  array<string, string|array<string|int, string>>|null  $theme
      */
     public function __construct(
         public string|BackendComponent $content,

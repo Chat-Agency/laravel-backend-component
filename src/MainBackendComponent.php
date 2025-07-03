@@ -17,10 +17,9 @@ use ChatAgency\BackendComponents\Contracts\AttributeBag;
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Htmlable;
 
-final class MainBackendComponent implements Arrayable, CompoundComponent, Htmlable
+final class MainBackendComponent implements CompoundComponent, Htmlable
 {
     use HasContent,
         HasPath,
@@ -34,6 +33,17 @@ final class MainBackendComponent implements Arrayable, CompoundComponent, Htmlab
         private string|BackedEnum $name,
         private ThemeManager $themeManager = new DefaultThemeManager
     ) {}
+
+    public function getName(): string
+    {
+        $name = $this->name;
+
+        if ($name instanceof BackedEnum) {
+            return $name->value;
+        }
+
+        return $name;
+    }
 
     public function getAttributeBag(): AttributeBag
     {
@@ -50,12 +60,15 @@ final class MainBackendComponent implements Arrayable, CompoundComponent, Htmlab
         );
     }
 
-    public function toArray()
+    /**
+     * @return array<string, array<mixed>|bool|string|null>
+     */
+    public function toArray(): array
     {
         return [
             'name' => $this->getName(),
             'attributes' => $this->getAttributes(),
-            'content' => $this->processContent()->toArray(),
+            'contents' => $this->processContent()->toArray(),
             'theme' => [
                 'themes' => $this->getThemes(),
                 'path' => $this->themeManager->getDefaultPath(),
@@ -70,6 +83,11 @@ final class MainBackendComponent implements Arrayable, CompoundComponent, Htmlab
         ];
     }
 
+    /**
+     * Get content as a string of HTML.
+     *
+     * @return string
+     */
     public function toHtml()
     {
         return \view(backendComponentNamespace().'_utilities.resolve-component')
