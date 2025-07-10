@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents {
 
-use ChatAgency\BackendComponents\Utils\CellBag;
-
     use BackedEnum;
     use ChatAgency\BackendComponents\Cache\DefaultCache;
     use ChatAgency\BackendComponents\Contracts\BackendComponent;
     use ChatAgency\BackendComponents\Contracts\ThemeManager;
     use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
     use ChatAgency\BackendComponents\Themes\LocalThemeManager;
+    use ChatAgency\BackendComponents\Utils\CellBag;
 
     function backendComponentNamespace(): string
     {
@@ -32,7 +31,7 @@ use ChatAgency\BackendComponents\Utils\CellBag;
     }
 
     /**
-     * @param  array<string, string|array<string, string>> $themes
+     * @param  array<string, string|array<string, string>>  $themes
      */
     function processLocalThemes(array $themes): ?string
     {
@@ -63,13 +62,13 @@ use ChatAgency\BackendComponents\Utils\CellBag;
     }
 
     /** @phpstan-assert-if-true BackedEnum $enum */
-    function isBackedEnum(mixed $enum): bool 
+    function isBackedEnum(mixed $enum): bool
     {
         return $enum instanceof BackedEnum;
     }
 
     /** @phpstan-assert-if-true CellBag $bag */
-    function isCellBag(mixed $bag): bool 
+    function isCellBag(mixed $bag): bool
     {
         return $bag instanceof CellBag;
     }

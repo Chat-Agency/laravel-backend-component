@@ -7,7 +7,6 @@ namespace ChatAgency\BackendComponents\Concerns;
 use ChatAgency\BackendComponents\Components\DefaultContentsComponent;
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 use ChatAgency\BackendComponents\Contracts\ContentsComponent;
-use Illuminate\Contracts\Support\Htmlable;
 
 trait HasContent
 {

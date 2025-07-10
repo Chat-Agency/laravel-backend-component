@@ -11,7 +11,6 @@ use ChatAgency\BackendComponents\Concerns\IsThemeable;
 use ChatAgency\BackendComponents\Contracts\AttributeBag;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
-use ChatAgency\BackendComponents\Contracts\ContentComponent;
 use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
@@ -65,9 +64,10 @@ class DivComponent implements BackendComponent, Htmlable, ThemeComponent
 
     public function toHtml()
     {
-        /** 
-         * PHPStan bug 
+        /**
+         * PHPStan bug
          * https://github.com/larastan/larastan/issues/2213
+         *
          * @phpstan-ignore argument.type
          */
         return view($this->getComponentPath())
@@ -102,7 +102,7 @@ class DivComponent implements BackendComponent, Htmlable, ThemeComponent
     }
 
     /**
-     * @param  array<string|int, string|int|CompoundComponent> $contents
+     * @param  array<string|int, string|int|CompoundComponent>  $contents
      */
     public function setContents(array $contents): static
     {

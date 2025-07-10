@@ -14,7 +14,7 @@ use function ChatAgency\BackendComponents\isComponent;
 final class DefaultContentsComponent implements ContentsComponent, Htmlable
 {
     /**
-     * @param  array<string|int, string|int|CompoundComponent> $contents
+     * @param  array<string|int, string|int|CompoundComponent>  $contents
      */
     public function __construct(
         private array $contents
@@ -25,9 +25,10 @@ final class DefaultContentsComponent implements ContentsComponent, Htmlable
         /** @var non-falsy-string $view */
         $view = backendComponentNamespace().'_utilities.resolve-content';
 
-        /** 
-         * PHPStan bug 
+        /**
+         * PHPStan bug
          * https://github.com/larastan/larastan/issues/2213
+         *
          * @phpstan-ignore argument.type
          */
         return view($view)

@@ -21,7 +21,7 @@ trait HasSlots
         return $this->slots;
     }
 
-    public function getSlot(string $name): CompoundComponent|null
+    public function getSlot(string $name): ?CompoundComponent
     {
         return $this->getSlots()[$name] ?? null;
     }

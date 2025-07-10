@@ -39,7 +39,7 @@ interface ThemeManager
 
     /**
      * @param  array<string|int, string>  $styleGroup
-     * @param  array<string, array<string|int, string>|string> $style
+     * @param  array<string, array<string|int, string>|string>  $style
      */
     public function resolveTheme(array $styleGroup, array $style): string;
 
@@ -48,5 +48,4 @@ interface ThemeManager
      * @param  array<int, string>  $styles
      */
     public function resolveArrayThemes(array $styleGroup, array $styles): string;
-
 }

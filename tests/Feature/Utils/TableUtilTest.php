@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Utils;
 
-use Tests\TestCase;
-use PHPUnit\Framework\Attributes\Test;
+use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Utils\CellBag;
 use ChatAgency\BackendComponents\Utils\TableUtil;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
-use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 use function ChatAgency\BackendComponents\processThemes;
 
@@ -22,7 +22,7 @@ final class TableUtilTest extends TestCase
             ['first column', 'second column'],
             [
                 [
-                   ComponentBuilder::make(ComponentEnum::SPAN)
+                    ComponentBuilder::make(ComponentEnum::SPAN)
                         ->setContent('Inside a span'),
                     'first row first column',
                     'first row second column',
@@ -49,7 +49,6 @@ final class TableUtilTest extends TestCase
             ->assertSee('second row second column', false)
             ->assertSee('</table>', false);
     }
-
 
     #[Test]
     public function it_can_contain_components_in_cells()
@@ -222,7 +221,4 @@ final class TableUtilTest extends TestCase
         $td = $trBody->getContent(0);
         $this->assertEquals($td->getThemes(), $tdThemes);
     }
-
-    
 }
-

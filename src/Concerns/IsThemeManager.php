@@ -35,7 +35,7 @@ trait IsThemeManager
     {
         $path = $this->defaultPath;
 
-        if(!$path) {
+        if (! $path) {
             throw new Exception('No Theme folder path was provided', 500);
         }
 
@@ -143,17 +143,15 @@ trait IsThemeManager
     {
         $value = '';
 
-
-        
         if (is_string($theme)) {
-            
+
             $value = $styleGroup[$theme];
 
         } elseif (is_array($theme)) {
 
             $value .= $this->resolveArrayThemes($styleGroup, $theme);
 
-        } 
+        }
 
         return $value;
     }
@@ -178,7 +176,7 @@ trait IsThemeManager
      */
     private function resolveCacheKey(string $type, string|array $theme): string
     {
-        
+
         if (is_array($theme)) {
             return $type.'.'.implode('.', $theme);
         }

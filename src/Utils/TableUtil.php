@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace ChatAgency\BackendComponents\Utils;
 
 use BackedEnum;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
-use ChatAgency\BackendComponents\Contracts\ThemeManager;
-use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
+use ChatAgency\BackendComponents\Contracts\ThemeManager;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\MainBackendComponent;
+use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 
 use function ChatAgency\BackendComponents\isCellBag;
 
@@ -61,7 +61,7 @@ final class TableUtil
         private array $body,
         private ThemeManager $themeManager = new DefaultThemeManager
     ) {}
-    
+
     /**
      * @param  array<string|int, string|CompoundComponent|CellBag|array<string|int, mixed>>  $head
      * @param  array<string|int, array<string|int, string|CompoundComponent|CellBag|array<string|int, mixed>>>  $body
@@ -72,7 +72,7 @@ final class TableUtil
     }
 
     /**
-     * @param array<string, string|array<string|int, string>> $themes
+     * @param  array<string, string|array<string|int, string>>  $themes
      */
     public function setTableThemes(array $themes): static
     {
@@ -82,7 +82,7 @@ final class TableUtil
     }
 
     /**
-     * @param array<string, string|array<string|int, string>> $themes
+     * @param  array<string, string|array<string|int, string>>  $themes
      */
     public function setThThemes(array $themes): static
     {
@@ -92,7 +92,7 @@ final class TableUtil
     }
 
     /**
-     * @param array<string, string|array<string|int, string>> $themes
+     * @param  array<string, string|array<string|int, string>>  $themes
      */
     public function setTrThemes(array $themes): static
     {
@@ -102,7 +102,7 @@ final class TableUtil
     }
 
     /**
-     * @param array<string, string|array<string|int, string>> $themes
+     * @param  array<string, string|array<string|int, string>>  $themes
      */
     public function setTdThemes(array $themes): static
     {
@@ -166,6 +166,7 @@ final class TableUtil
 
         return $this->composeComponent(ComponentEnum::TBODY, $rows);
     }
+
     /**
      * @param  array<string|int, string|CompoundComponent|CellBag|array<string|int, mixed>>  $rows
      * @return array<int, CompoundComponent>
@@ -191,7 +192,7 @@ final class TableUtil
     }
 
     /**
-     * @param  string|CompoundComponent|CellBag|array<string|int, mixed> $content
+     * @param  string|CompoundComponent|CellBag|array<string|int, mixed>  $content
      */
     private function resolveContent(array|string|CellBag|CompoundComponent $content): string|CompoundComponent
     {
@@ -203,8 +204,8 @@ final class TableUtil
     }
 
     /**
-     * @param  string|CompoundComponent|CellBag|array<string|int, mixed> $content
-     * @param  array<string, string|array<string|int, string>> $theme
+     * @param  string|CompoundComponent|CellBag|array<string|int, mixed>  $content
+     * @param  array<string, string|array<string|int, string>>  $theme
      * @return array<string, string|array<string|int, string>>
      */
     private function resolveTheme(array $theme, array|string|CellBag|CompoundComponent $content): array
@@ -217,7 +218,7 @@ final class TableUtil
     }
 
     /**
-     * @param  string|CompoundComponent|CellBag|array<string|int, mixed> $content
+     * @param  string|CompoundComponent|CellBag|array<string|int, mixed>  $content
      * @return array<string, string|null>
      */
     private function resolveAttributes(array|string|CellBag|CompoundComponent $content): array
@@ -252,5 +253,4 @@ final class TableUtil
 
         return $component;
     }
-
 }

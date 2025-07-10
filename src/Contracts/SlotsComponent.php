@@ -11,8 +11,7 @@ interface SlotsComponent
      */
     public function getSlots(): array;
 
-
-    public function getSlot(string $name): CompoundComponent|null;
+    public function getSlot(string $name): ?CompoundComponent;
 
     public function setSlot(string $name, CompoundComponent $slot): static;
 
