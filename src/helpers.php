@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents {
 
+use ChatAgency\BackendComponents\Utils\CellBag;
+
     use BackedEnum;
     use ChatAgency\BackendComponents\Cache\DefaultCache;
     use ChatAgency\BackendComponents\Contracts\BackendComponent;
@@ -22,7 +24,7 @@ namespace ChatAgency\BackendComponents {
     }
 
     /**
-     * @param  array<string, string|array<string|int, string>>  $themes
+     * @param  array<string, string|array<string, string>>  $themes
      */
     function processThemes(array $themes, ThemeManager $manager = new DefaultThemeManager): ?string
     {
@@ -30,7 +32,7 @@ namespace ChatAgency\BackendComponents {
     }
 
     /**
-     * @param  array<string, string|array<string|int, string>>  $themes
+     * @param  array<string, string|array<string, string>> $themes
      */
     function processLocalThemes(array $themes): ?string
     {
@@ -64,5 +66,11 @@ namespace ChatAgency\BackendComponents {
     function isBackedEnum(mixed $enum): bool 
     {
         return $enum instanceof BackedEnum;
+    }
+
+    /** @phpstan-assert-if-true CellBag $bag */
+    function isCellBag(mixed $bag): bool 
+    {
+        return $bag instanceof CellBag;
     }
 }
