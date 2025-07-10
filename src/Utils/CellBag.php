@@ -13,7 +13,7 @@ final readonly class CellBag
      * @param  array<string, string|array<string|int, string>>|null  $theme
      */
     public function __construct(
-        public string|BackendComponent $content,
+        public int|string|BackendComponent $content,
         public ?array $theme = null,
         public ?array $attributes = null
     ) {}

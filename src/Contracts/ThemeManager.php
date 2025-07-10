@@ -26,7 +26,7 @@ interface ThemeManager
     public function unsetCacheHits(): static;
 
     /**
-     * @param  array<string, string|array<string, string>>  $themes
+     * @param  array<string, string|array<string|int, string>>  $themes
      */
     public function processThemes(array $themes): ?string;
 
@@ -38,13 +38,13 @@ interface ThemeManager
     public function processTheme(string $type, string|array $theme): string;
 
     /**
-     * @param  array<string, string>  $styleGroup
-     * @param  array<string, array<string, string>|string> $style
+     * @param  array<string|int, string>  $styleGroup
+     * @param  array<string, array<string|int, string>|string> $style
      */
     public function resolveTheme(array $styleGroup, array $style): string;
 
     /**
-     * @param  array<string, string>  $styleGroup
+     * @param  array<string|int, string>  $styleGroup
      * @param  array<int, string>  $styles
      */
     public function resolveArrayThemes(array $styleGroup, array $styles): string;
