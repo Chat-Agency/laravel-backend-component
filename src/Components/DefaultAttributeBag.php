@@ -11,7 +11,7 @@ use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 readonly class DefaultAttributeBag implements AttributeBag
 {
     public function __construct(
-        /** @var array<string, string|null> $attributes */
+        /** @var array<string, int|string|null> $attributes */
         private array $attributes,
         public readonly ?ContentsComponent $content = null,
         public readonly ?string $themes = null,
@@ -26,7 +26,7 @@ readonly class DefaultAttributeBag implements AttributeBag
         public readonly array $livewireParams = [],
     ) {}
 
-    /** @return  array<string, string|null> */
+    /** @return  array<string, int|string|null> */
     public function getAttributes(): array
     {
         $attrs = $this->attributes;
