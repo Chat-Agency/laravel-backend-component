@@ -7,6 +7,7 @@ namespace ChatAgency\BackendComponents\Concerns;
 use ChatAgency\BackendComponents\Contracts\Cache;
 use ChatAgency\BackendComponents\Exceptions\IncorrectThemePathException;
 use ChatAgency\BackendComponents\Exceptions\ThemeDoesNotExistsException;
+use Exception;
 
 use function ChatAgency\BackendComponents\cache;
 
@@ -27,15 +28,24 @@ trait IsThemeManager
         return $this;
     }
 
+    /**
+     * @throws Exception
+     */
     public function getDefaultPath(): string
     {
-        return $this->defaultPath;
+        $path = $this->defaultPath;
+
+        if (! $path) {
+            throw new Exception('No Theme folder path was provided', 500);
+        }
+
+        return $path;
     }
 
-    /** @throws \Exception */
+    /** @throws IncorrectThemePathException */
     public function getThemePath(): string
     {
-        $defaultPath = $this->defaultPath;
+        $defaultPath = $this->getDefaultPath();
         $path = realpath($defaultPath);
 
         if (! $path) {
@@ -83,11 +93,11 @@ trait IsThemeManager
     }
 
     /**
-     * @param  string|null|array<string, string|array<int, string>>  $theme
+     * @param  string|array<int|string, string>  $theme
      *
-     * @throws \Exception
+     * @throws ThemeDoesNotExistsException
      */
-    public function processTheme(string $type, string|array|null $theme = null): ?string
+    public function processTheme(string $type, string|array $theme): string
     {
         $themePath = $this->getThemePath();
 
@@ -127,18 +137,20 @@ trait IsThemeManager
 
     /**
      * @param  array<string, string>  $styleGroup
-     * @param  array<string, string|array<int|string, string>>  $style
+     * @param  string|array<int|string, string>  $theme
      */
-    public function resolveTheme(array $styleGroup, string|array $style): string
+    public function resolveTheme(array $styleGroup, string|array $theme): string
     {
         $value = '';
 
-        if (is_array($style)) {
+        if (is_string($theme)) {
 
-            $value .= $this->resolveArrayThemes($styleGroup, $style);
+            $value = $styleGroup[$theme];
 
-        } elseif (is_string($style)) {
-            $value = $styleGroup[$style];
+        } elseif (is_array($theme)) {
+
+            $value .= $this->resolveArrayThemes($styleGroup, $theme);
+
         }
 
         return $value;
@@ -146,13 +158,13 @@ trait IsThemeManager
 
     /**
      * @param  array<string, string>  $styleGroup
-     * @param  array<int|string, string>  $styles
+     * @param  array<int|string, string>  $theme
      */
-    public function resolveArrayThemes(array $styleGroup, array $styles): string
+    public function resolveArrayThemes(array $styleGroup, array $theme): string
     {
         $value = '';
 
-        foreach ($styles as $style) {
+        foreach ($theme as $style) {
             $value .= $styleGroup[$style].' ';
         }
 
@@ -160,10 +172,11 @@ trait IsThemeManager
     }
 
     /**
-     * @param  array<string, string>  $theme
+     * @param  string|array<int|string, string>  $theme
      */
-    private function resolveCacheKey(string $type, string|array|null $theme): string
+    private function resolveCacheKey(string $type, string|array $theme): string
     {
+
         if (is_array($theme)) {
             return $type.'.'.implode('.', $theme);
         }

@@ -4,21 +4,19 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Contracts;
 
-use Illuminate\Contracts\Support\Htmlable;
-
 interface SlotsComponent
 {
     /**
-     * @return array<string, BackendComponent|Htmlable>
+     * @return array<string, CompoundComponent>
      */
     public function getSlots(): array;
 
-    public function getSlot(string $name): CompoundComponent|Htmlable;
+    public function getSlot(string $name): ?CompoundComponent;
 
-    public function setSlot(string $name, BackendComponent $slot): static;
+    public function setSlot(string $name, CompoundComponent $slot): static;
 
     /**
-     * @param  array<string, BackendComponent|Htmlable>  $slots
+     * @param  array<string, CompoundComponent>  $slots
      */
     public function setSlots(array $slots): static;
 }

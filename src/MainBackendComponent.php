@@ -34,11 +34,11 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
         private ThemeManager $themeManager = new DefaultThemeManager
     ) {}
 
-    public function getName(): string
+    public function getName(): int|string
     {
         $name = $this->name;
 
-        if ($name instanceof BackedEnum) {
+        if (isBackedEnum($name)) {
             return $name->value;
         }
 
@@ -61,7 +61,7 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
     }
 
     /**
-     * @return array<string, array<mixed>|bool|string|null>
+     * @return array<string, array<string, mixed>|bool|int|string|null>
      */
     public function toArray(): array
     {
@@ -90,6 +90,12 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
      */
     public function toHtml()
     {
+        /**
+         * PHPStan bug
+         * https://github.com/larastan/larastan/issues/2213
+         *
+         * @phpstan-ignore argument.type
+         */
         return \view(backendComponentNamespace().'_utilities.resolve-component')
             ->with('component', $this)
             ->render();
