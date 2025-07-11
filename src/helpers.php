@@ -11,6 +11,7 @@ namespace ChatAgency\BackendComponents {
     use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
     use ChatAgency\BackendComponents\Themes\LocalThemeManager;
     use ChatAgency\BackendComponents\Utils\CellBag;
+    use ChatAgency\BackendComponents\Contracts\Cache;
 
     function backendComponentNamespace(): string
     {
@@ -40,10 +41,13 @@ namespace ChatAgency\BackendComponents {
         return $manager->processThemes(themes: $themes);
     }
 
+    /**
+     * @return DefaultCache<string|null>
+     */
     function cache(string $name): DefaultCache
     {
         /**
-         * @var array<string, DefaultCache>
+         * @var array<string, DefaultCache<string|null>>
          */
         static $cache = [];
 
