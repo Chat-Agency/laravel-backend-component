@@ -36,10 +36,7 @@ final class TableUtil
      * @var array<string, string|array<string|int, string>>
      */
     private array $trThemes = [
-        'table' => [
-            'th',
-            'th-dark',
-        ],
+        'table' => [],
     ];
 
     /**
