@@ -50,8 +50,16 @@ final class TableUtil
     ];
 
     /**
-     * @param  array<string|int, string|CompoundComponent|CellBag|array<string|int, mixed>>  $head
-     * @param  array<string|int, array<string|int, string|CompoundComponent|CellBag|array<string|int, mixed>>>  $body
+     * @param  array<string|int, string|CompoundComponent|CellBag|array<string|int, array{
+     *  content: string|int|CompoundComponent,
+     *  theme?: array<string, string|array<string|int, string>>,
+     *  attributes?: array<string, string|int|null>
+     * }>>  $head
+     * @param  array<string|int, array<string|int, string|CompoundComponent|CellBag|array<string|int, array{
+     *  content: string|int|CompoundComponent,
+     *  theme?: array<string, string|array<string|int, string>>,
+     *  attributes?: array<string, string|int|null>
+     * }>>>  $body
      */
     public function __construct(
         private array $head,
