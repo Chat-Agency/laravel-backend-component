@@ -11,7 +11,6 @@ namespace ChatAgency\BackendComponents {
     use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
     use ChatAgency\BackendComponents\Themes\LocalThemeManager;
     use ChatAgency\BackendComponents\Utils\CellBag;
-    use ChatAgency\BackendComponents\Contracts\Cache;
 
     function backendComponentNamespace(): string
     {

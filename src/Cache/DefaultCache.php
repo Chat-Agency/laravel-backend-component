@@ -8,19 +8,20 @@ use ChatAgency\BackendComponents\Contracts\Cache;
 
 /**
  * @template T
+ *
  * @implements Cache<DefaultCache<T>>
  */
 class DefaultCache implements Cache
 {
     /** @var array<string, T> */
     private array $values = [];
-    
+
     /** @return T|null */
     public function get(string $key): mixed
     {
         return $this->values[$key] ?? null;
     }
-    
+
     /** @param  T  $value */
     public function set(string $key, mixed $value): void
     {
