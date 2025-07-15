@@ -68,7 +68,6 @@ final class ThemeList
                 throw new \Exception('The theme file '.$file.' does not exist', 500);
             }
 
-
             if (is_dir($realPath)) {
                 /**
                  * @todo recursively get themes from subdirectories

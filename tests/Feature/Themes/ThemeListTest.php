@@ -19,11 +19,10 @@ class ThemeListTest extends TestCase
         $this->assertIsArray($list->scanFiles());
     }
 
-    
     #[Test]
     public function all_theme_sub_folders_are_ignored()
     {
-        $list = ThemeList::make(__DIR__ . '../../../Themes/');
+        $list = ThemeList::make(__DIR__.'../../../Themes/');
 
         $list = $list->scanFiles();
 
@@ -48,12 +47,11 @@ class ThemeListTest extends TestCase
     #[Test]
     public function if_the_file_does_not_exist_an_exception_is_thrown()
     {
-        $list = new ThemeList();
+        $list = new ThemeList;
 
         $this->expectException(Exception::class);
 
         $list->getThemes(['non_existent_file']);
 
     }
-    
 }
