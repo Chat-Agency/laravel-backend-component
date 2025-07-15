@@ -30,7 +30,7 @@ final class ThemeList
         $realpath = realpath($path);
 
         if (! $realpath) {
-            throw new \Exception("The path path ({$path}) is incorrect", 500);
+            throw new \Exception("The path ({$path}) is incorrect", 500);
         }
 
         /** @var array<int, string> $files */
