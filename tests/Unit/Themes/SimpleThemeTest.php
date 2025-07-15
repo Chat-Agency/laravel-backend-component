@@ -73,9 +73,9 @@ class SimpleThemeTest extends TestCase
 
         $manager = new DefaultThemeManager;
 
-        $manager->setDefaultPath(__DIR__.'/../../themes/');
+        $manager->setDefaultPath(__DIR__.'/../../Themes/');
 
-        $this->assertEquals($manager->getDefaultPath(), __DIR__.'/../../themes/');
+        $this->assertEquals($manager->getDefaultPath(), __DIR__.'/../../Themes/');
 
         $this->assertEquals($manager->processThemes($theme), 'primary-color');
     }
