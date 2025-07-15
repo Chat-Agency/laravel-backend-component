@@ -22,7 +22,7 @@ class ThemeListTest extends TestCase
     #[Test]
     public function all_theme_sub_folders_are_ignored()
     {
-        $list = ThemeList::make(__DIR__.'../../../Themes/');
+        $list = ThemeList::make(__DIR__.'/../../themes/');
 
         $list = $list->scanFiles();
 
