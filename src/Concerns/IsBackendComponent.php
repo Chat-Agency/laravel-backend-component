@@ -7,24 +7,24 @@ namespace ChatAgency\BackendComponents\Concerns;
 trait IsBackendComponent
 {
     /**
-     * @var array<string, string|null>
+     * @var array<string, int|string|null>
      */
     private array $attributes = [];
 
     /**
-     * @return array<string, string|null>
+     * @return array<string, int|string|null>
      */
     public function getAttributes(): array
     {
         return $this->attributes;
     }
 
-    public function getAttribute(string $name): ?string
+    public function getAttribute(string $name): int|string|null
     {
         return $this->getAttributes()[$name] ?? null;
     }
 
-    public function setAttribute(string $name, ?string $content): static
+    public function setAttribute(string $name, int|string|null $content): static
     {
         $this->attributes[$name] = $content;
 
@@ -32,7 +32,7 @@ trait IsBackendComponent
     }
 
     /**
-     * @param  array<string, string|null>  $attributes
+     * @param  array<string, int|string|null>  $attributes
      */
     public function setAttributes(array $attributes): static
     {

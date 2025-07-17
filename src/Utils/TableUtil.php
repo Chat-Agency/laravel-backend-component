@@ -12,6 +12,7 @@ use ChatAgency\BackendComponents\MainBackendComponent;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 
 use function ChatAgency\BackendComponents\isCellBag;
+use function ChatAgency\BackendComponents\isComponent;
 
 final class TableUtil
 {
@@ -36,10 +37,7 @@ final class TableUtil
      * @var array<string, string|array<string|int, string>>
      */
     private array $trThemes = [
-        'table' => [
-            'th',
-            'th-dark',
-        ],
+        'table' => [],
     ];
 
     /**
@@ -53,8 +51,16 @@ final class TableUtil
     ];
 
     /**
-     * @param  array<string|int, string|CompoundComponent|CellBag|array<string|int, mixed>>  $head
-     * @param  array<string|int, array<string|int, string|CompoundComponent|CellBag|array<string|int, mixed>>>  $body
+     * @param  array<string|int, string|CompoundComponent|CellBag|array{
+     *   content: string|int|CompoundComponent,
+     *   theme?: array<string, string|array<string|int, string>>,
+     *   attributes?: array<string, int|string|null>
+     * }>  $head
+     * @param  array<string|int, array<string|int, string|CompoundComponent|CellBag|array{
+     *   content: string|int|CompoundComponent,
+     *   theme?: array<string, string|array<string|int, string>>,
+     *   attributes?: array<string, string|int|null>
+     * }>>  $body
      */
     public function __construct(
         private array $head,
@@ -63,8 +69,16 @@ final class TableUtil
     ) {}
 
     /**
-     * @param  array<string|int, string|CompoundComponent|CellBag|array<string|int, mixed>>  $head
-     * @param  array<string|int, array<string|int, string|CompoundComponent|CellBag|array<string|int, mixed>>>  $body
+     * @param  array<string|int, string|CompoundComponent|CellBag|array{
+     *   content: string|int|CompoundComponent,
+     *   theme?: array<string, string|array<string|int, string>>,
+     *   attributes?: array<string, string|int|null>
+     * }>  $head
+     * @param  array<string|int, array<string|int, string|CompoundComponent|CellBag|array{
+     *   content: string|int|CompoundComponent,
+     *   theme?: array<string, string|array<string|int, string>>,
+     *   attributes?: array<string, string|int|null>
+     * }>>  $body
      */
     public static function make(array $head, array $body, ThemeManager $themeManager = new DefaultThemeManager): static
     {
@@ -156,7 +170,7 @@ final class TableUtil
 
         $theme = $this->trThemes;
 
-        foreach ($this->body as $key => $row) {
+        foreach ($this->body as $row) {
             $rows[] = $this->composeComponent(
                 ComponentEnum::TR,
                 $this->rows($row),
@@ -168,7 +182,11 @@ final class TableUtil
     }
 
     /**
-     * @param  array<string|int, string|CompoundComponent|CellBag|array<string|int, mixed>>  $rows
+     * @param  array<string|int, string|CompoundComponent|CellBag|array{
+     *   content: string|int|CompoundComponent,
+     *   theme?: array<string, string|array<string|int, string>>,
+     *   attributes?: array<string, string|int|null>
+     * }>  $rows
      * @return array<int, CompoundComponent>
      */
     private function rows(array $rows): array
@@ -192,49 +210,79 @@ final class TableUtil
     }
 
     /**
-     * @param  string|CompoundComponent|CellBag|array<string|int, mixed>  $content
+     * @param string|CompoundComponent|CellBag|array{
+     *   content: string|int|CompoundComponent,
+     *   theme?: array<string, string|array<string|int, string>>,
+     *   attributes?: array<string, string|int|null>
+     * } $content
      */
-    private function resolveContent(array|string|CellBag|CompoundComponent $content): string|CompoundComponent
+    private function resolveContent(array|string|CellBag|CompoundComponent $content): string|int|CompoundComponent
     {
-        $content = is_array($content) ? ($content['content'] ?? null) : $content;
+        if (isCellBag($content)) {
+            return $content->content;
+        }
 
-        $content = $content instanceof CellBag && $content->content ? $content->content : $content;
+        if (is_array($content)) {
+            return $content['content'];
+        }
 
-        return $content ?? (string) $content;
+        if (isComponent($content)) {
+            return $content;
+        }
+
+        return $content;
+
     }
 
     /**
-     * @param  string|CompoundComponent|CellBag|array<string|int, mixed>  $content
+     * @param string|CompoundComponent|CellBag|array{
+     *   content: string|int|CompoundComponent,
+     *   theme?: array<string, string|array<string|int, string>>,
+     *   attributes?: array<string, string|int|null>
+     * } $content
      * @param  array<string, string|array<string|int, string>>  $theme
      * @return array<string, string|array<string|int, string>>
      */
     private function resolveTheme(array $theme, array|string|CellBag|CompoundComponent $content): array
     {
-        $theme = is_array($content) ? ($content['theme'] ?? $theme) : $theme;
+        if (isCellBag($content) && $content->theme) {
+            return $content->theme;
+        }
 
-        $theme = isCellBag($content) && $content->theme ? $content->theme : $theme;
+        if (is_array($content) && isset($content['theme'])) {
+            return $content['theme'];
+        }
 
         return $theme;
+
     }
 
     /**
-     * @param  string|CompoundComponent|CellBag|array<string|int, mixed>  $content
-     * @return array<string, string|null>
+     * @param string|CompoundComponent|CellBag|array{
+     *   content: string|int|CompoundComponent,
+     *   theme?: array<string, string|array<string|int, string>>,
+     *   attributes?: array<string, string|int|null>
+     * } $content
+     * @return array<string, int|string|null>
      */
     private function resolveAttributes(array|string|CellBag|CompoundComponent $content): array
     {
-        $attributes = is_array($content) ? ($content['attributes'] ?? []) : [];
+        if (isCellBag($content) && $content->attributes) {
+            return $content->attributes;
+        }
 
-        $attributes = isCellBag($content) && $content->attributes ? $content->attributes : $attributes;
+        if (is_array($content) && isset($content['attributes'])) {
+            return $content['attributes'];
+        }
 
-        return $attributes;
+        return [];
 
     }
 
     /**
      * @param  int|string|CompoundComponent|array<string|int, int|string|CompoundComponent>  $contents
      * @param  array<string, string|array<string|int, string>>|null  $theme
-     * @param  array<string, string|null>|null  $attributes
+     * @param  array<string, int|string|null>  $attributes
      */
     public function composeComponent(BackedEnum $name, int|array|string|CompoundComponent $contents, ?array $theme = null, ?array $attributes = null): CompoundComponent
     {

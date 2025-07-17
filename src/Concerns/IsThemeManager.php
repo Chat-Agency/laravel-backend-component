@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Concerns;
 
-use ChatAgency\BackendComponents\Contracts\Cache;
+use ChatAgency\BackendComponents\Cache\DefaultCache;
 use ChatAgency\BackendComponents\Exceptions\IncorrectThemePathException;
 use ChatAgency\BackendComponents\Exceptions\ThemeDoesNotExistsException;
 use Exception;
@@ -19,7 +19,8 @@ trait IsThemeManager
 
     private int $cacheHits = 0;
 
-    private ?Cache $cache = null;
+    /** @var DefaultCache<string|null>|null */
+    private ?DefaultCache $cache = null;
 
     public function setDefaultPath(string $path): static
     {
@@ -97,7 +98,7 @@ trait IsThemeManager
      *
      * @throws ThemeDoesNotExistsException
      */
-    public function processTheme(string $type, string|array $theme): string
+    public function processTheme(string $type, string|array $theme): ?string
     {
         $themePath = $this->getThemePath();
 

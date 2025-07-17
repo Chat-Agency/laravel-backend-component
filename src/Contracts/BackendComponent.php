@@ -7,18 +7,18 @@ namespace ChatAgency\BackendComponents\Contracts;
 interface BackendComponent
 {
     /**
-     * @return array<string, string|null>
+     * @return array<string, int|string|null>
      */
     public function getAttributes(): array;
 
-    public function getAttribute(string $name): ?string;
+    public function getAttribute(string $name): int|string|null;
 
     public function getAttributeBag(): AttributeBag;
 
-    public function setAttribute(string $name, ?string $content): static;
+    public function setAttribute(string $name, int|string|null $content): static;
 
     /**
-     * @param  array<string, string|null>  $attributes
+     * @param  array<string, int|string|null>  $attributes
      */
     public function setAttributes(array $attributes): static;
 

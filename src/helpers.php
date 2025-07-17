@@ -40,10 +40,13 @@ namespace ChatAgency\BackendComponents {
         return $manager->processThemes(themes: $themes);
     }
 
+    /**
+     * @return DefaultCache<string|null>
+     */
     function cache(string $name): DefaultCache
     {
         /**
-         * @var array<string, DefaultCache>
+         * @var array<string, DefaultCache<string|null>>
          */
         static $cache = [];
 

@@ -35,7 +35,7 @@ interface ThemeManager
      *
      * @throws ThemeDoesNotExistsException
      */
-    public function processTheme(string $type, string|array $theme): string;
+    public function processTheme(string $type, string|array $theme): ?string;
 
     /**
      * @param  array<string|int, string>  $styleGroup

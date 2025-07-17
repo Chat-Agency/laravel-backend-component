@@ -16,9 +16,9 @@ final class ThemeList
 
     }
 
-    public static function make(): static
+    public static function make(?string $path = null): static
     {
-        return new self;
+        return new self($path);
     }
 
     /**
@@ -30,7 +30,7 @@ final class ThemeList
         $realpath = realpath($path);
 
         if (! $realpath) {
-            throw new \Exception("The path path ({$path}) is incorrect", 500);
+            throw new \Exception("The path ({$path}) is incorrect", 500);
         }
 
         /** @var array<int, string> $files */
@@ -60,23 +60,23 @@ final class ThemeList
                 continue;
             }
 
-            if (is_dir($file)) {
-                /**
-                 * @todo recursively get themes from subdirectories
-                 */
-                continue;
-            }
-
             $path = $this->path;
-
-            // Get the theme name from the file name
-            $themeName = str_replace('.blade', '', pathinfo($file, PATHINFO_FILENAME));
 
             $realPath = realpath($path.'/'.$subFile.'/'.$file);
 
             if (! $realPath) {
                 throw new \Exception('The theme file '.$file.' does not exist', 500);
             }
+
+            if (is_dir($realPath)) {
+                /**
+                 * @todo recursively get themes from subdirectories
+                 */
+                continue;
+            }
+
+            // Get the theme name from the file name
+            $themeName = str_replace('.blade', '', pathinfo($file, PATHINFO_FILENAME));
 
             $themeArray = require $realPath;
 
