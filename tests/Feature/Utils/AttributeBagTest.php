@@ -1,15 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Feature\Utils;
 
-use BackedEnum;
-use Tests\TestCase;
-use PHPUnit\Framework\Attributes\Test;
-use ChatAgency\BackendComponents\Enums\ComponentEnum;
-use ChatAgency\BackendComponents\Contracts\AttributeBag;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
+use ChatAgency\BackendComponents\Contracts\AttributeBag;
+use ChatAgency\BackendComponents\Contracts\BackendComponent;
+use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class AttributeBagTest extends TestCase
 {
@@ -37,7 +38,6 @@ class AttributeBagTest extends TestCase
         $bag = new DefaultAttributeBag(
             attributes: $attributes,
         );
-
 
         $this->assertInstanceOf(AttributeBag::class, $bag);
         $this->assertEquals($attributes, $bag->getAttributes());
@@ -133,7 +133,7 @@ class AttributeBagTest extends TestCase
 
     #[Test]
     public function a_bag_can_handle_settings()
-    { 
+    {
         $settings = [
             'setting1' => true,
             'setting2' => 'value',
@@ -150,5 +150,5 @@ class AttributeBagTest extends TestCase
 
         $this->assertTrue($bag->settings['setting1']);
         $this->assertEquals('value', $bag->settings['setting2']);
-    }   
+    }
 }

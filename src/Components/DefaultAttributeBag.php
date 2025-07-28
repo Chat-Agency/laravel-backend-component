@@ -6,8 +6,8 @@ namespace ChatAgency\BackendComponents\Components;
 
 use ChatAgency\BackendComponents\Contracts\AttributeBag;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
+use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 
 readonly class DefaultAttributeBag implements AttributeBag
 {
