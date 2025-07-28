@@ -7,16 +7,16 @@ namespace ChatAgency\BackendComponents\Contracts;
 interface SlotsComponent
 {
     /**
-     * @return array<string, CompoundComponent>
+     * @return array<string, CompoundComponent|BackendComponent>
      */
     public function getSlots(): array;
 
-    public function getSlot(string $name): ?CompoundComponent;
+    public function getSlot(string $name): CompoundComponent|BackendComponent|null;
 
     public function setSlot(string $name, CompoundComponent $slot): static;
 
     /**
-     * @param  array<string, CompoundComponent>  $slots
+     * @param  array<string, CompoundComponent|BackendComponent>  $slots
      */
     public function setSlots(array $slots): static;
 }
