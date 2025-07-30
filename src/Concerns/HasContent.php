@@ -5,30 +5,31 @@ declare(strict_types=1);
 namespace ChatAgency\BackendComponents\Concerns;
 
 use ChatAgency\BackendComponents\Components\DefaultContentsComponent;
+use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 
 trait HasContent
 {
     /**
-     * @var array<string|int, string|int|CompoundComponent>
+     * @var array<string|int, string|int|CompoundComponent|BackendComponent>
      */
     private array $content = [];
 
-    public function getContent(string|int $key): CompoundComponent|int|string|null
+    public function getContent(string|int $key): CompoundComponent|BackendComponent|int|string|null
     {
         return $this->content[$key] ?? null;
     }
 
     /**
-     * @return array<string|int, string|int|CompoundComponent>
+     * @return array<string|int, string|int|CompoundComponent|BackendComponent>
      */
     public function getContents(): array
     {
         return $this->content;
     }
 
-    public function setContent(int|string|CompoundComponent $content, string|int|null $key = null): static
+    public function setContent(int|string|CompoundComponent|BackendComponent $content, string|int|null $key = null): static
     {
         if ($key) {
             $this->content[$key] = $content;
@@ -42,7 +43,7 @@ trait HasContent
     }
 
     /**
-     * @param  array<string|int, string|int|CompoundComponent>  $contents
+     * @param  array<string|int, string|int|CompoundComponent|BackendComponent>  $contents
      */
     public function setContents(array $contents): static
     {

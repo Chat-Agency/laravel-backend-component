@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ChatAgency\BackendComponents\Components;
 
 use ChatAgency\BackendComponents\Contracts\AttributeBag;
+use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 
@@ -16,7 +17,7 @@ readonly class DefaultAttributeBag implements AttributeBag
         public readonly ?ContentsComponent $content = null,
         public readonly ?string $themes = null,
         public readonly ?string $path = null,
-        /** @var array<int|string, CompoundComponent> $slots */
+        /** @var array<string, CompoundComponent|BackendComponent> $slots */
         public readonly array $slots = [],
         /** @var array<string, bool|string> $settings */
         public readonly array $settings = [],
@@ -42,8 +43,8 @@ readonly class DefaultAttributeBag implements AttributeBag
 
     private function mergeClasses(): string
     {
-        $class = $this->attributes['class'] ?? null ? $this->attributes['class'].'' : null;
+        $class = $this->attributes['class'] ?? null ? $this->attributes['class'].' ' : null;
 
-        return $class.$this->themes;
+        return trim($class.$this->themes);
     }
 }
