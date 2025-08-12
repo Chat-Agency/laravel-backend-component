@@ -15,11 +15,13 @@ trait IsThemeManager
 {
     const THEME_CACHE_NAME = 'theme_cache';
 
+    const THEME_CACHE_PREFIX = 'theme_cache_';
+
     private bool $disableCache = false;
 
     private int $cacheHits = 0;
 
-    /** @var DefaultCache<string|null>|null */
+    /** @var DefaultCache<string|null> */
     private ?DefaultCache $cache = null;
 
     public function setDefaultPath(string $path): static
@@ -107,14 +109,7 @@ trait IsThemeManager
         }
 
         $cache = $this->cache;
-        $cacheKey = $this->resolveCacheKey($type, $theme);
-
-        if (! $this->disableCache && $cache->has($cacheKey)) {
-
-            $this->cacheHits++;
-
-            return $cache->get($cacheKey);
-        }
+        $cacheKey = $this->resolveCacheKey($type);
 
         $filePath = $themePath.'/'.$type.'.blade.php';
 
@@ -124,13 +119,18 @@ trait IsThemeManager
             throw new ThemeDoesNotExistsException('The theme file '.$filePath.' does not exist');
         }
 
-        $themesArray = require $realPath;
+        if (! $this->disableCache && $cache->has($cacheKey)) {
+            $themesArray = $cache->get($cacheKey);
+        } else {
+            $themesArray = require $realPath;
+
+            if (! $this->disableCache) {
+                $cache->set($cacheKey, $themesArray);
+            }
+
+        }
 
         $theme = $this->resolveTheme($themesArray, $theme);
-
-        if (! $this->disableCache) {
-            $cache->set($cacheKey, $theme);
-        }
 
         return $theme;
 
@@ -172,16 +172,8 @@ trait IsThemeManager
         return $value;
     }
 
-    /**
-     * @param  string|array<int|string, string>  $theme
-     */
-    private function resolveCacheKey(string $type, string|array $theme): string
+    private function resolveCacheKey(string $type): string
     {
-
-        if (is_array($theme)) {
-            return $type.'.'.implode('.', $theme);
-        }
-
-        return $type.'.'.$theme;
+        return self::THEME_CACHE_PREFIX.$type;
     }
 }
