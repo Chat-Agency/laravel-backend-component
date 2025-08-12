@@ -14,7 +14,7 @@ use function ChatAgency\BackendComponents\cache;
 trait IsThemeManager
 {
     const THEME_CACHE_NAME = 'theme_cache';
-    
+
     const THEME_CACHE_PREFIX = 'theme_cache_';
 
     private bool $disableCache = false;
@@ -119,16 +119,15 @@ trait IsThemeManager
             throw new ThemeDoesNotExistsException('The theme file '.$filePath.' does not exist');
         }
 
-
         if (! $this->disableCache && $cache->has($cacheKey)) {
             $themesArray = $cache->get($cacheKey);
         } else {
             $themesArray = require $realPath;
-            
-            if(! $this->disableCache) {
+
+            if (! $this->disableCache) {
                 $cache->set($cacheKey, $themesArray);
             }
-            
+
         }
 
         $theme = $this->resolveTheme($themesArray, $theme);
