@@ -228,6 +228,9 @@ final class TableUtilTest extends TestCase
         $captionThemes = ['color' => 'default'];
 
         $tableUtil = TableUtil::make(['head1'], [['body1']]);
+
+        $this->assertNotEquals('This is a caption', $tableUtil->getComponent()->getContent(0));
+
         $tableUtil->setCaption('This is a caption');
         $tableUtil->setCaptionThemes($captionThemes);
 
