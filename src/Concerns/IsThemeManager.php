@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Concerns;
 
-use ChatAgency\BackendComponents\Cache\DefaultCache;
 use ChatAgency\BackendComponents\Exceptions\IncorrectThemePathException;
 use ChatAgency\BackendComponents\Exceptions\ThemeDoesNotExistsException;
 use Exception;
@@ -17,12 +16,13 @@ trait IsThemeManager
 
     const THEME_CACHE_PREFIX = 'theme_cache_';
 
+    const THEME_EXTENSION = '.blade.php';
+
+    private ?string $defaultPath = null;
+
     private bool $disableCache = false;
 
     private int $cacheHits = 0;
-
-    /** @var DefaultCache<string|null> */
-    private ?DefaultCache $cache = null;
 
     public function setDefaultPath(string $path): static
     {
@@ -104,20 +104,16 @@ trait IsThemeManager
     {
         $themePath = $this->getThemePath();
 
-        if (! $this->cache) {
-            $this->cache = cache(self::THEME_CACHE_NAME);
-        }
-
-        $filePath = $themePath.'/'.$type.'.blade.php';
+        $filePath = $themePath.'/'.$type.self::THEME_EXTENSION;
 
         $realPath = realpath($filePath);
 
-        $cache = $this->cache;
-        $cacheKey = $this->resolveCacheKey($type, $realPath);
-
-        if (! $realPath) {
+        if ($realPath === false) {
             throw new ThemeDoesNotExistsException('The theme file '.$filePath.' does not exist');
         }
+
+        $cache = cache(self::THEME_CACHE_NAME);
+        $cacheKey = $this->resolveCacheKey($type, $realPath);
 
         if (! $this->disableCache && $cache->has($cacheKey)) {
             $themesArray = $cache->get($cacheKey);
@@ -174,6 +170,6 @@ trait IsThemeManager
 
     private function resolveCacheKey(string $type, string $path): string
     {
-        return $path.'.'.self::THEME_CACHE_PREFIX.$type;
+        return (string) $path.'.'.self::THEME_CACHE_PREFIX.$type;
     }
 }
