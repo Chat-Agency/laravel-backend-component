@@ -108,12 +108,12 @@ trait IsThemeManager
             $this->cache = cache(self::THEME_CACHE_NAME);
         }
 
-        $cache = $this->cache;
-        $cacheKey = $this->resolveCacheKey($type);
-
         $filePath = $themePath.'/'.$type.'.blade.php';
 
         $realPath = realpath($filePath);
+
+        $cache = $this->cache;
+        $cacheKey = $this->resolveCacheKey($type, $realPath);
 
         if (! $realPath) {
             throw new ThemeDoesNotExistsException('The theme file '.$filePath.' does not exist');
@@ -172,8 +172,8 @@ trait IsThemeManager
         return $value;
     }
 
-    private function resolveCacheKey(string $type): string
+    private function resolveCacheKey(string $type, string $path): string
     {
-        return self::THEME_CACHE_PREFIX.$type;
+        return $path.'.'.self::THEME_CACHE_PREFIX.$type;
     }
 }
