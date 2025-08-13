@@ -16,6 +16,8 @@ use function ChatAgency\BackendComponents\isComponent;
 
 final class TableUtil
 {
+    private ?string $caption = null;
+
     /**
      * @var array<string, string|array<string|int, string>>
      */
@@ -51,6 +53,13 @@ final class TableUtil
     ];
 
     /**
+     * @var array<string, string|array<string|int, string>>
+     */
+    private array $captionThemes = [
+        'table' => [],
+    ];
+
+    /**
      * @param  array<string|int, string|CompoundComponent|CellBag|array{
      *   content: string|int|CompoundComponent,
      *   theme?: array<string, string|array<string|int, string>>,
@@ -83,6 +92,14 @@ final class TableUtil
     public static function make(array $head, array $body, ThemeManager $themeManager = new DefaultThemeManager): static
     {
         return new self($head, $body, $themeManager);
+    }
+
+    public function setCaption(string $caption): self
+    {
+        $this->caption = $caption;
+
+        return $this;
+
     }
 
     /**
@@ -125,12 +142,27 @@ final class TableUtil
         return $this;
     }
 
+    /**
+     * @param  array<string, string|array<string|int, string>>  $themes
+     */
+    public function setCaptionThemes(array $themes): static
+    {
+        $this->captionThemes = $themes;
+
+        return $this;
+
+    }
+
     public function getComponent(): CompoundComponent
     {
 
         $theme = $this->tableThemes;
 
         $contents = [];
+
+        if ($this->caption !== null) {
+            $contents[] = $this->composeComponent(ComponentEnum::CAPTION, $this->caption, $this->captionThemes);
+        }
 
         if (count($this->head)) {
             $contents[] = $this->head();

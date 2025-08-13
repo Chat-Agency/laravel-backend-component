@@ -221,4 +221,25 @@ final class TableUtilTest extends TestCase
         $td = $trBody->getContent(0);
         $this->assertEquals($td->getThemes(), $tdThemes);
     }
+
+    #[Test]
+    public function it_can_set_caption_and_caption_themes()
+    {
+        $captionThemes = ['color' => 'default'];
+
+        $tableUtil = TableUtil::make(['head1'], [['body1']]);
+
+        $this->assertNotEquals('This is a caption', $tableUtil->getComponent()->getContent(0));
+
+        $tableUtil->setCaption('This is a caption');
+        $tableUtil->setCaptionThemes($captionThemes);
+
+        $component = $tableUtil->getComponent();
+
+        $captionComponent = $component->getContent(0);
+
+        $this->assertEquals('This is a caption', $captionComponent->getContent(0));
+        $this->assertEquals($captionComponent->getThemes(), $captionThemes);
+        $this->assertEquals($captionComponent->compileTheme(), processThemes($captionThemes));
+    }
 }
