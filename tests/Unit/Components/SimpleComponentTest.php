@@ -7,6 +7,8 @@ namespace Tests\Unit\Components;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\MainBackendComponent;
+use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
+use ChatAgency\BackendComponents\Themes\LocalThemeManager;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -169,5 +171,17 @@ class SimpleComponentTest extends TestCase
 
         $this->assertIsArray($componentArray['contents']['span_2']['contents']);
         $this->assertEquals('this is a link', $componentArray['contents']['span_2']['contents'][0]['contents'][0]);
+    }
+
+    #[Test]
+    public function the_theme_manager_can_be_overwritten_after_an_instance_is_created()
+    {
+        $component = new MainBackendComponent('div');
+
+        $this->assertInstanceOf(DefaultThemeManager::class, $component->getThemeManager());
+
+        $component->setThemeManager(new LocalThemeManager);
+
+        $this->assertInstanceOf(LocalThemeManager::class, $component->getThemeManager());
     }
 }
