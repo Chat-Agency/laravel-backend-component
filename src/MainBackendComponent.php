@@ -34,17 +34,6 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
         private ThemeManager $themeManager = new DefaultThemeManager
     ) {}
 
-    public function getName(): int|string
-    {
-        $name = $this->name;
-
-        if (isBackedEnum($name)) {
-            return $name->value;
-        }
-
-        return $name;
-    }
-
     public function getAttributeBag(): AttributeBag
     {
         return new DefaultAttributeBag(

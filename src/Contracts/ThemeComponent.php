@@ -6,6 +6,8 @@ namespace ChatAgency\BackendComponents\Contracts;
 
 interface ThemeComponent
 {
+    public function setThemeManager(ThemeManager $themeManager): static;
+
     /**
      * @param  string|array<string|int, string>  $theme
      */

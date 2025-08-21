@@ -15,6 +15,13 @@ trait IsThemeable
 
     private ThemeManager $themeManager;
 
+    public function setThemeManager(ThemeManager $themeManager): static
+    {
+        $this->themeManager = $themeManager;
+
+        return $this;
+    }
+
     /**
      * @return array<string, string|array<string|int, string>>
      */
