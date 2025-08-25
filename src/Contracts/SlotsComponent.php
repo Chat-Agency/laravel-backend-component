@@ -19,4 +19,6 @@ interface SlotsComponent
      * @param  array<string, CompoundComponent|BackendComponent>  $slots
      */
     public function setSlots(array $slots): static;
+
+    public function processSlots(): ContentsComponent;
 }

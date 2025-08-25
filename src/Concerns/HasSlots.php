@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace ChatAgency\BackendComponents\Concerns;
 
+use ChatAgency\BackendComponents\Components\DefaultContentsComponent;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
+use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 
 trait HasSlots
 {
@@ -44,5 +46,10 @@ trait HasSlots
         }
 
         return $this;
+    }
+
+    public function processSlots(): ContentsComponent
+    {
+        return new DefaultContentsComponent($this->getContents());
     }
 }

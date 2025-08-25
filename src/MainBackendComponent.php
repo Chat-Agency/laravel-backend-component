@@ -56,6 +56,7 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
     {
         return [
             'name' => $this->getName(),
+            'component' => self::class,
             'attributes' => $this->getAttributes(),
             'contents' => $this->processContent()->toArray(),
             'theme' => [
@@ -64,7 +65,7 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
                 'realPath' => $this->themeManager->getThemePath(),
             ],
             'path' => $this->getComponentPath(),
-            'slots' => $this->getSlots(),
+            'slots' => $this->processSlots()->toArray(),
             'settings' => $this->getSettings(),
             'isLivewire' => $this->isLivewire(),
             'livewireKey' => $this->getLivewireKey(),
@@ -88,6 +89,20 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
         return \view(backendComponentNamespace().'_utilities.resolve-component')
             ->with('component', $this)
             ->render();
+
+    }
+
+    public function fromArray(): static
+    {
+        $componentArray = $this->toArray();
+
+        $componentClass = $componentArray['component'];
+
+        $component = new $componentClass($componentArray['name']);
+
+        $component->setAttributes($componentArray['attributes']);
+
+        return $component;
 
     }
 }
