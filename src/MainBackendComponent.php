@@ -14,6 +14,7 @@ use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
 use ChatAgency\BackendComponents\Concerns\IsLivewireComponent;
 use ChatAgency\BackendComponents\Concerns\IsThemeable;
 use ChatAgency\BackendComponents\Contracts\AttributeBag;
+use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
@@ -50,7 +51,23 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
     }
 
     /**
-     * @return array<string, array<string, mixed>|bool|int|string|null>
+     * @return array{
+     *  name:  int|string,
+     *  component: class-string<BackendComponent|CompoundComponent>,
+     *  attributes: array<string, int|string|null>,
+     *  contents: array<string,array<string, int|string>|int|string>,
+     *  theme: array{
+     *    themes: array<string, array<int|string, string>|string>,
+     *    path: string,
+     *    realPath: string,
+     *  },
+     *  path: string,
+     *  slots: array<string, array<string, int|string>|int|string>,
+     *  settings: array<string, bool|string>,
+     *  isLivewire: bool,
+     *  livewireKey: string|null,
+     *  livewireParams: array<string, mixed>
+     * }
      */
     public function toArray(): array
     {
@@ -92,17 +109,46 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
 
     }
 
-    public function fromArray(): static
+    public function fromArray(): BackendComponent|CompoundComponent
+    {
+        return $this->resolveComponent($this->toArray());
+    }
+
+    /**
+     * @param  array<string, array<string, mixed>|bool|int|string|null>  $component
+     */
+    private function resolveComponent(array $component): BackendComponent|CompoundComponent
     {
         $componentArray = $this->toArray();
 
         $componentClass = $componentArray['component'];
 
+        /** @var CompoundComponent $component */
         $component = new $componentClass($componentArray['name']);
 
         $component->setAttributes($componentArray['attributes']);
 
-        return $component;
+        $component->setContents(
+            $this->resolveArrayContents($componentArray['contents'])
+        );
 
+        return $component;
+    }
+
+    /**
+     * @param  array<string,array<string, int|string>|int|string>  $contentsArray
+     * @return array<string|int, string|int|CompoundComponent|BackendComponent>
+     */
+    private function resolveArrayContents(array $contentsArray): array
+    {
+        $contents = [];
+
+        foreach ($contentsArray as $name => $content) {
+            $contentArray[$name] = is_array($content)
+                ? $this->resolveComponent($content)
+                : $content;
+        }
+
+        return $contents;
     }
 }

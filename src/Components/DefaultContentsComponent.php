@@ -39,7 +39,7 @@ final class DefaultContentsComponent implements ContentsComponent, Htmlable
     }
 
     /**
-     * @return array<int|string, string|int|array<string, array<mixed>|bool|string|null>>
+     * @return array<int|string, array<string, array<string, mixed>|bool|int|string|null>|int|string>
      */
     public function toArray(): array
     {
