@@ -5,20 +5,21 @@ declare(strict_types=1);
 namespace ChatAgency\BackendComponents;
 
 use BackedEnum;
-use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
-use ChatAgency\BackendComponents\Concerns\HasContent;
+use Factories\ComponentFactory;
+use Illuminate\Contracts\Support\Htmlable;
 use ChatAgency\BackendComponents\Concerns\HasPath;
-use ChatAgency\BackendComponents\Concerns\HasSettings;
 use ChatAgency\BackendComponents\Concerns\HasSlots;
-use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
-use ChatAgency\BackendComponents\Concerns\IsLivewireComponent;
+use ChatAgency\BackendComponents\Concerns\HasContent;
+use ChatAgency\BackendComponents\Concerns\HasSettings;
 use ChatAgency\BackendComponents\Concerns\IsThemeable;
 use ChatAgency\BackendComponents\Contracts\AttributeBag;
-use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
+use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
-use Illuminate\Contracts\Support\Htmlable;
+use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
+use ChatAgency\BackendComponents\Contracts\CompoundComponent;
+use ChatAgency\BackendComponents\Concerns\IsLivewireComponent;
+use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
 
 final class MainBackendComponent implements CompoundComponent, Htmlable
 {
@@ -57,9 +58,10 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
      *  attributes: array<string, int|string|null>,
      *  contents: array<string,array<string, int|string>|int|string>,
      *  theme: array{
-     *    themes: array<string, array<int|string, string>|string>,
-     *    path: string,
-     *    realPath: string,
+     *   manager: class-string<ThemeManager>,
+     *   themes: array<string, array<int|string, string>|string>,
+     *   path: string,
+     *   realPath: string,
      *  },
      *  path: string,
      *  slots: array<string, array<string, int|string>|int|string>,
@@ -77,6 +79,7 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
             'attributes' => $this->getAttributes(),
             'contents' => $this->processContent()->toArray(),
             'theme' => [
+                'manager' => get_class($this->themeManager),
                 'themes' => $this->getThemes(),
                 'path' => $this->themeManager->getDefaultPath(),
                 'realPath' => $this->themeManager->getThemePath(),
@@ -111,44 +114,7 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
 
     public function fromArray(): BackendComponent|CompoundComponent
     {
-        return $this->resolveComponent($this->toArray());
+        return ComponentFactory::fromArray($this->toArray());
     }
 
-    /**
-     * @param  array<string, array<string, mixed>|bool|int|string|null>  $component
-     */
-    private function resolveComponent(array $component): BackendComponent|CompoundComponent
-    {
-        $componentArray = $this->toArray();
-
-        $componentClass = $componentArray['component'];
-
-        /** @var CompoundComponent $component */
-        $component = new $componentClass($componentArray['name']);
-
-        $component->setAttributes($componentArray['attributes']);
-
-        $component->setContents(
-            $this->resolveArrayContents($componentArray['contents'])
-        );
-
-        return $component;
-    }
-
-    /**
-     * @param  array<string,array<string, int|string>|int|string>  $contentsArray
-     * @return array<string|int, string|int|CompoundComponent|BackendComponent>
-     */
-    private function resolveArrayContents(array $contentsArray): array
-    {
-        $contents = [];
-
-        foreach ($contentsArray as $name => $content) {
-            $contentArray[$name] = is_array($content)
-                ? $this->resolveComponent($content)
-                : $content;
-        }
-
-        return $contents;
-    }
 }

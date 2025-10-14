@@ -12,24 +12,24 @@ use ChatAgency\BackendComponents\Contracts\ContentsComponent;
 trait HasSlots
 {
     /**
-     * @var array<string, CompoundComponent|BackendComponent>
+     * @var array<int|string, CompoundComponent|BackendComponent>
      */
     private array $slots = [];
 
     /**
-     * @return array<string, CompoundComponent|BackendComponent>
+     * @return array<int|string, CompoundComponent|BackendComponent>
      */
     public function getSlots(): array
     {
         return $this->slots;
     }
 
-    public function getSlot(string $name): CompoundComponent|BackendComponent|null
+    public function getSlot(int|string $name): CompoundComponent|BackendComponent|null
     {
         return $this->getSlots()[$name] ?? null;
     }
 
-    public function setSlot(string $name, CompoundComponent|BackendComponent $slot): static
+    public function setSlot(int|string $name, CompoundComponent|BackendComponent $slot): static
     {
         $this->slots[$name] = $slot;
 
@@ -37,7 +37,7 @@ trait HasSlots
     }
 
     /**
-     * @param  array<string, CompoundComponent|BackendComponent>  $slots
+     * @param  array<int|string, CompoundComponent|BackendComponent>  $slots
      */
     public function setSlots(array $slots): static
     {
