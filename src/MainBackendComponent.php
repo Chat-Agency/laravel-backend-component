@@ -5,21 +5,20 @@ declare(strict_types=1);
 namespace ChatAgency\BackendComponents;
 
 use BackedEnum;
-use Factories\ComponentFactory;
-use Illuminate\Contracts\Support\Htmlable;
-use ChatAgency\BackendComponents\Concerns\HasPath;
-use ChatAgency\BackendComponents\Concerns\HasSlots;
+use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
 use ChatAgency\BackendComponents\Concerns\HasContent;
+use ChatAgency\BackendComponents\Concerns\HasPath;
 use ChatAgency\BackendComponents\Concerns\HasSettings;
+use ChatAgency\BackendComponents\Concerns\HasSlots;
+use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
+use ChatAgency\BackendComponents\Concerns\IsLivewireComponent;
 use ChatAgency\BackendComponents\Concerns\IsThemeable;
 use ChatAgency\BackendComponents\Contracts\AttributeBag;
-use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
-use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
-use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
-use ChatAgency\BackendComponents\Concerns\IsLivewireComponent;
-use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
+use ChatAgency\BackendComponents\Contracts\ThemeManager;
+use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
+use Illuminate\Contracts\Support\Htmlable;
 
 final class MainBackendComponent implements CompoundComponent, Htmlable
 {
@@ -63,7 +62,7 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
      *   path: string,
      *   realPath: string,
      *  },
-     *  path: string,
+     *  path: string|null,
      *  slots: array<string, array<string, int|string>|int|string>,
      *  settings: array<string, bool|string>,
      *  isLivewire: bool,
@@ -84,7 +83,7 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
                 'path' => $this->themeManager->getDefaultPath(),
                 'realPath' => $this->themeManager->getThemePath(),
             ],
-            'path' => $this->getComponentPath(),
+            'path' => $this->getPathOnly(),
             'slots' => $this->processSlots()->toArray(),
             'settings' => $this->getSettings(),
             'isLivewire' => $this->isLivewire(),
@@ -111,10 +110,4 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
             ->render();
 
     }
-
-    public function fromArray(): BackendComponent|CompoundComponent
-    {
-        return ComponentFactory::fromArray($this->toArray());
-    }
-
 }

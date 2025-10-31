@@ -50,6 +50,6 @@ trait HasSlots
 
     public function processSlots(): ContentsComponent
     {
-        return new DefaultContentsComponent($this->getContents());
+        return new DefaultContentsComponent($this->getSlots());
     }
 }
