@@ -118,6 +118,12 @@ final class ComponentFactory
 
         foreach ($contentsArray as $name => $content) {
             $contents[$name] = is_array($content)
+                /**
+                 * Don't know hot to resolve concurrency
+                 * here with phpstan
+                 *
+                 * @phpstan-ignore argument.type
+                 */
                 ? $this->resolveComponent($content)
                 : $content;
         }
@@ -141,6 +147,12 @@ final class ComponentFactory
                 throw new \InvalidArgumentException('Slot must be an array representing a component.');
             }
 
+            /**
+             * Don't know hot to resolve concurrency
+             * here with phpstan
+             *
+             * @phpstan-ignore argument.type
+             */
             $slots[$name] = $this->resolveComponent($slot);
         }
 
