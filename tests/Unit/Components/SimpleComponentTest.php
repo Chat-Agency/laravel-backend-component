@@ -194,11 +194,25 @@ class SimpleComponentTest extends TestCase
 
         $componentArray = $component->toArray();
 
-        // dd($componentArray['path']);
-
         $recreatedComponent = ComponentFactory::fromArray($componentArray);
 
-        // dd($recreatedComponent->toArray()['path']);
+        $this->assertEquals($componentArray, $recreatedComponent->toArray());
+    }
+
+    #[Test]
+    public function a_component_with_a_slot_can_be_recreated_from_an_array()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::MODAL)
+            ->setSlot('button', ComponentBuilder::make(ComponentEnum::BUTTON)
+                ->setContent('Click me'))
+            ->setAttribute('@click', 'showModal = true')
+            ->setTheme('action', 'default')
+            ->setAttribute('id', 'modal_id')
+            ->setTheme('size', 'large');
+
+        $componentArray = $component->toArray();
+
+        $recreatedComponent = ComponentFactory::fromArray($componentArray);
 
         $this->assertEquals($componentArray, $recreatedComponent->toArray());
     }

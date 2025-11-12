@@ -40,7 +40,7 @@ final class ComponentFactory
      *  name:  int|string,
      *  component: class-string<BackendComponent|CompoundComponent>,
      *  attributes: array<string, int|string|null>,
-     *  contents?: array<string,array<string, int|string>|int|string>,
+     *  contents?: array<string, array<string, int|string>|int|string>,
      *  theme?: array{
      *   manager: class-string<ThemeManager>,
      *   themes: array<string, array<int|string, string>|string>,
@@ -119,7 +119,7 @@ final class ComponentFactory
         foreach ($contentsArray as $name => $content) {
             $contents[$name] = is_array($content)
                 /**
-                 * Don't know hot to resolve concurrency
+                 * Don't know how to describe concurrency
                  * here with phpstan
                  *
                  * @phpstan-ignore argument.type
@@ -148,7 +148,7 @@ final class ComponentFactory
             }
 
             /**
-             * Don't know hot to resolve concurrency
+             * Don't know how to describe concurrency
              * here with phpstan
              *
              * @phpstan-ignore argument.type
