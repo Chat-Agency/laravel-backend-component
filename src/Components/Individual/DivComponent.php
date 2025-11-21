@@ -19,6 +19,7 @@ use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 use Illuminate\Contracts\Support\Htmlable;
 
 use function ChatAgency\BackendComponents\backendComponentNamespace;
+use function ChatAgency\BackendComponents\isBackedEnum;
 
 class DivComponent implements BackendComponent, Htmlable, ThemeComponent
 {
@@ -56,9 +57,13 @@ class DivComponent implements BackendComponent, Htmlable, ThemeComponent
 
     public function getName(): string
     {
-        return is_string($this->name)
-            ? $this->name
-            : $this->name->value;
+        $name = $this->name;
+
+        if (isBackedEnum($name)) {
+            return $name->value;
+        }
+
+        return $name;
     }
 
     public function getComponentPath(): string
