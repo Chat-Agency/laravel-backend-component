@@ -31,34 +31,45 @@ class DivComponent implements BackendComponent, Htmlable, ThemeComponent
     private array $content = [];
 
     public function __construct(
+        private string|ComponentEnum $name = ComponentEnum::DIV,
         private ThemeManager $themeManager = new DefaultThemeManager
     ) {}
 
     /**
-     * @return array<string, array<string, array<string, int|string>|int|string|null>|string|null>
+     * @return array<string, array<string, array<string, array<int|string, string>|int|string>|int|string|null>|string>
      */
     public function toArray(): array
     {
         return [
             'name' => $this->getName(),
+            'component' => self::class,
             'attributes' => $this->getAttributes(),
             'contents' => $this->processContent()->toArray(),
-            'themes' => $this->compileTheme(),
-            'path' => $this->getComponentPath(),
-            'themeManagerPath' => $this->themeManager->getDefaultPath(),
-            'themeManagerRealPath' => $this->themeManager->getThemePath(),
+            'theme' => [
+                'manager' => get_class($this->themeManager),
+                'themes' => $this->getThemes(),
+                'path' => $this->themeManager->getDefaultPath(),
+                'realPath' => $this->themeManager->getThemePath(),
+            ],
         ];
     }
 
     public function getName(): string
     {
-        return ComponentEnum::DIV->value;
+        return is_string($this->name)
+            ? $this->name
+            : $this->name->value;
     }
 
     public function getComponentPath(): string
     {
         return backendComponentNamespace()
-            .'components.'
+            .$this->getPathOnly();
+    }
+
+    public function getPathOnly(): string
+    {
+        return 'components.'
             .$this->getName();
     }
 
