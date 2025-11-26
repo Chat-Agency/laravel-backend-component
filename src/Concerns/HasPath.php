@@ -48,6 +48,11 @@ trait HasPath
         return $this->getNamespace().$this->path;
     }
 
+    public function getPathOnly(): ?string
+    {
+        return $this->path;
+    }
+
     public function getComponentPath(): string
     {
         return $this->getPath().$this->getName();

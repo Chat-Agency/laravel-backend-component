@@ -14,6 +14,7 @@ use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
 use ChatAgency\BackendComponents\Concerns\IsLivewireComponent;
 use ChatAgency\BackendComponents\Concerns\IsThemeable;
 use ChatAgency\BackendComponents\Contracts\AttributeBag;
+use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\CompoundComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
@@ -50,21 +51,40 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
     }
 
     /**
-     * @return array<string, array<string, mixed>|bool|int|string|null>
+     * @return array{
+     *  name:  int|string,
+     *  component: class-string<BackendComponent|CompoundComponent>,
+     *  attributes: array<string, int|string|null>,
+     *  contents: array<string,array<string, int|string>|int|string>,
+     *  theme: array{
+     *   manager: class-string<ThemeManager>,
+     *   themes: array<string, array<int|string, string>|string>,
+     *   path: string,
+     *   realPath: string,
+     *  },
+     *  path: string|null,
+     *  slots: array<string, array<string, int|string>|int|string>,
+     *  settings: array<string, bool|string>,
+     *  isLivewire: bool,
+     *  livewireKey: string|null,
+     *  livewireParams: array<string, mixed>
+     * }
      */
     public function toArray(): array
     {
         return [
             'name' => $this->getName(),
+            'component' => self::class,
             'attributes' => $this->getAttributes(),
             'contents' => $this->processContent()->toArray(),
             'theme' => [
+                'manager' => get_class($this->themeManager),
                 'themes' => $this->getThemes(),
                 'path' => $this->themeManager->getDefaultPath(),
                 'realPath' => $this->themeManager->getThemePath(),
             ],
-            'path' => $this->getComponentPath(),
-            'slots' => $this->getSlots(),
+            'path' => $this->getPathOnly(),
+            'slots' => $this->processSlots()->toArray(),
             'settings' => $this->getSettings(),
             'isLivewire' => $this->isLivewire(),
             'livewireKey' => $this->getLivewireKey(),

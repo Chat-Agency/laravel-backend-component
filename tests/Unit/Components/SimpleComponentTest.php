@@ -6,6 +6,7 @@ namespace Tests\Unit\Components;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use ChatAgency\BackendComponents\Factories\ComponentFactory;
 use ChatAgency\BackendComponents\MainBackendComponent;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 use ChatAgency\BackendComponents\Themes\LocalThemeManager;
@@ -171,6 +172,49 @@ class SimpleComponentTest extends TestCase
 
         $this->assertIsArray($componentArray['contents']['span_2']['contents']);
         $this->assertEquals('this is a link', $componentArray['contents']['span_2']['contents'][0]['contents'][0]);
+    }
+
+    #[Test]
+    public function a_component_can_be_recreated_from_an_array()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::DIV)
+            ->setContents([
+                'span_1' => ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent('inside a span'),
+                'span_2' => ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent(
+                        ComponentBuilder::make(ComponentEnum::LINK)
+                            ->setAttribute('href', 'https://google.com')
+                            ->setContent('this is a link')
+                            ->setTheme('action', 'success')
+                    ),
+            ])
+            ->setAttribute('id', 'div_id')
+            ->setTheme('display', 'block');
+
+        $componentArray = $component->toArray();
+
+        $recreatedComponent = ComponentFactory::fromArray($componentArray);
+
+        $this->assertEquals($componentArray, $recreatedComponent->toArray());
+    }
+
+    #[Test]
+    public function a_component_with_a_slot_can_be_recreated_from_an_array()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::MODAL)
+            ->setSlot('button', ComponentBuilder::make(ComponentEnum::BUTTON)
+                ->setContent('Click me'))
+            ->setAttribute('@click', 'showModal = true')
+            ->setTheme('action', 'default')
+            ->setAttribute('id', 'modal_id')
+            ->setTheme('size', 'large');
+
+        $componentArray = $component->toArray();
+
+        $recreatedComponent = ComponentFactory::fromArray($componentArray);
+
+        $this->assertEquals($componentArray, $recreatedComponent->toArray());
     }
 
     #[Test]

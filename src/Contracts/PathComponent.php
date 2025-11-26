@@ -14,6 +14,8 @@ interface PathComponent
 
     public function getPath(): string;
 
+    public function getPathOnly(): ?string;
+
     public function getComponentPath(): string;
 
     public function setNamespace(string $namespace): static;
