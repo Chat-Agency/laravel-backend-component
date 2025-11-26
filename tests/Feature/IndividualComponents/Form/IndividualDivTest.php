@@ -7,7 +7,7 @@ namespace Feature\IndividualComponents\Form;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Components\Individual\DivComponent;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
-use ChatAgency\BackendComponents\Factories\ComponentFactory;
+use ChatAgency\BackendComponents\Factories\IndividualComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -146,7 +146,7 @@ class IndividualDivTest extends TestCase
 
         $componentArray = $component->toArray();
 
-        $recreatedComponent = ComponentFactory::fromArray($componentArray);
+        $recreatedComponent = IndividualComponentFactory::fromArray($componentArray);
 
         $this->assertEquals($componentArray, $recreatedComponent->toArray());
     }

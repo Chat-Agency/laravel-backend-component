@@ -70,11 +70,14 @@ trait isFactory
         }
 
         if ($componentArray['theme'] ?? null) {
-            $component->setThemes($componentArray['theme']['themes']);
 
-            $themeManager = $this->resolveThemeManager($componentArray['theme']['manager']);
-            $themeManager->setDefaultPath($componentArray['theme']['path']);
+            $themeManager = $this->resolveThemeManager(
+                $componentArray['theme']['manager'],
+                $componentArray['theme']['path']
+            );
+
             $component->setThemeManager($themeManager);
+            $component->setThemes($componentArray['theme']['themes']);
         }
 
         if (($componentArray['slots'] ?? null) && count($componentArray['slots'])) {
@@ -173,8 +176,11 @@ trait isFactory
     /**
      * @param  class-string<ThemeManager>  $managerClass
      */
-    public function resolveThemeManager(string $managerClass): ThemeManager
+    public function resolveThemeManager(string $managerClass, string $path): ThemeManager
     {
-        return new $managerClass;
+        $manager = new $managerClass;
+        $manager->setDefaultPath($path);
+
+        return $manager;
     }
 }

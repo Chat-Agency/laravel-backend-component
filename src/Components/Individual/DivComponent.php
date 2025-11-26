@@ -6,6 +6,7 @@ namespace ChatAgency\BackendComponents\Components\Individual;
 
 use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
 use ChatAgency\BackendComponents\Concerns\HasContent;
+use ChatAgency\BackendComponents\Concerns\IndividualComponent;
 use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
 use ChatAgency\BackendComponents\Concerns\IsThemeable;
 use ChatAgency\BackendComponents\Contracts\AttributeBag;
@@ -18,16 +19,14 @@ use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 use Illuminate\Contracts\Support\Htmlable;
 
 use function ChatAgency\BackendComponents\backendComponentNamespace;
-use function ChatAgency\BackendComponents\isBackedEnum;
 
-class DivComponent implements BackendComponent, ContentsComponent, Htmlable, ThemeComponent
+class DivComponent implements BackendComponent, ContentsComponent, Htmlable, IndividualComponent, ThemeComponent
 {
     use HasContent,
         IsBackendComponent,
         IsThemeable;
 
     public function __construct(
-        private string|ComponentEnum $name = ComponentEnum::DIV,
         private ThemeManager $themeManager = new DefaultThemeManager
     ) {}
 
@@ -74,13 +73,7 @@ class DivComponent implements BackendComponent, ContentsComponent, Htmlable, The
 
     public function getName(): string
     {
-        $name = $this->name;
-
-        if (isBackedEnum($name)) {
-            return $name->value;
-        }
-
-        return $name;
+        return ComponentEnum::DIV->value;
     }
 
     public function getComponentPath(): string
