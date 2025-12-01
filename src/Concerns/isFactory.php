@@ -157,10 +157,6 @@ trait isFactory
 
         foreach ($slotsArray as $name => $slot) {
 
-            if (! is_array($slot)) {
-                throw new \InvalidArgumentException('Slot must be an array representing a component.');
-            }
-
             /**
              * Don't know how to describe concurrency
              * here with phpstan
