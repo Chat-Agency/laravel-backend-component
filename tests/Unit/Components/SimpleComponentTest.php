@@ -146,6 +146,18 @@ class SimpleComponentTest extends TestCase
     }
 
     #[Test]
+    public function the_theme_manager_can_be_overwritten_after_an_instance_is_created()
+    {
+        $component = new MainBackendComponent('div');
+
+        $this->assertInstanceOf(DefaultThemeManager::class, $component->getThemeManager());
+
+        $component->setThemeManager(new LocalThemeManager);
+
+        $this->assertInstanceOf(LocalThemeManager::class, $component->getThemeManager());
+    }
+
+    #[Test]
     public function a_component_can_return_an_array_representation()
     {
         $component = ComponentBuilder::make(ComponentEnum::DIV)
@@ -192,9 +204,19 @@ class SimpleComponentTest extends TestCase
             ->setAttribute('id', 'div_id')
             ->setTheme('display', 'block');
 
+        $this->blade('{{ $component }}', [
+            'component' => $component,
+        ])
+            ->assertSee('<div', false);
+
         $componentArray = $component->toArray();
 
         $recreatedComponent = ComponentFactory::fromArray($componentArray);
+
+        $this->blade('{{ $recreatedComponent }}', [
+            'recreatedComponent' => $recreatedComponent,
+        ])
+            ->assertSee('<div', false);
 
         $this->assertEquals($componentArray, $recreatedComponent->toArray());
     }
@@ -218,14 +240,46 @@ class SimpleComponentTest extends TestCase
     }
 
     #[Test]
-    public function the_theme_manager_can_be_overwritten_after_an_instance_is_created()
+    public function a_component_with_a_settings_can_be_recreated_from_an_array()
     {
-        $component = new MainBackendComponent('div');
+        $component = ComponentBuilder::make(ComponentEnum::MODAL)
+            ->setSettings([
+                'setting_1' => 'value_1',
+                'setting_2' => 'value_2',
+            ])
+            ->setAttribute('@click', 'showModal = true')
+            ->setTheme('action', 'default')
+            ->setAttribute('id', 'modal_id')
+            ->setTheme('size', 'large');
 
-        $this->assertInstanceOf(DefaultThemeManager::class, $component->getThemeManager());
+        $componentArray = $component->toArray();
 
-        $component->setThemeManager(new LocalThemeManager);
+        $recreatedComponent = ComponentFactory::fromArray($componentArray);
 
-        $this->assertInstanceOf(LocalThemeManager::class, $component->getThemeManager());
+        $this->assertEquals($componentArray, $recreatedComponent->toArray());
+    }
+
+    #[Test]
+    public function a_component_with_a_different_path_can_be_recreated_from_an_array()
+    {
+        $component = ComponentBuilder::make('img')
+            ->setPath('inline')
+            ->setContent('Custom path content');
+
+        $this->blade('{{ $component }}', [
+            'component' => $component,
+        ])
+            ->assertSee('<img', false);
+
+        $componentArray = $component->toArray();
+
+        $recreatedComponent = ComponentFactory::fromArray($componentArray);
+
+        $this->blade('{{ $recreatedComponent }}', [
+            'recreatedComponent' => $recreatedComponent,
+        ])
+            ->assertSee('<img', false);
+
+        $this->assertEquals($componentArray, $recreatedComponent->toArray());
     }
 }
