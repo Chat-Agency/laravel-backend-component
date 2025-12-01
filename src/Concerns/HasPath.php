@@ -45,7 +45,7 @@ trait HasPath
 
     public function getPath(): string
     {
-        return $this->getNamespace().$this->path;
+        return $this->getNamespace().$this->getPathOnly();
     }
 
     public function getPathOnly(): ?string
@@ -55,7 +55,10 @@ trait HasPath
 
     public function getComponentPath(): string
     {
-        return $this->getPath().$this->getName();
+        return rtrim(
+            $this->getPath(), '.'
+        )
+        .'.'.$this->getName();
     }
 
     public function setNamespace(string $namespace): static
