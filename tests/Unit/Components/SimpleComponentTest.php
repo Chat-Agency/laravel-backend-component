@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Components;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Contracts\LivewireComponent;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
 use ChatAgency\BackendComponents\Factories\ComponentFactory;
 use ChatAgency\BackendComponents\MainBackendComponent;
@@ -257,6 +258,24 @@ class SimpleComponentTest extends TestCase
         $recreatedComponent = ComponentFactory::fromArray($componentArray);
 
         $this->assertEquals($componentArray, $recreatedComponent->toArray());
+    }
+
+    #[Test]
+    public function a_livewire_component_with_can_be_recreated_from_an_array()
+    {
+        $component = ComponentBuilder::make(LivewireComponent::class)
+            ->setLivewire()
+            ->setLivewireKey('livewire-key')
+            ->setLivewireParams([
+                'first_param' => 'First',
+            ]);
+
+        $componentArray = $component->toArray();
+
+        $recreatedComponent = ComponentFactory::fromArray($componentArray);
+
+        $this->assertEquals($componentArray, $recreatedComponent->toArray());
+
     }
 
     #[Test]
