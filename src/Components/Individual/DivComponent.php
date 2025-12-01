@@ -6,12 +6,12 @@ namespace ChatAgency\BackendComponents\Components\Individual;
 
 use ChatAgency\BackendComponents\Components\DefaultAttributeBag;
 use ChatAgency\BackendComponents\Concerns\HasContent;
-use ChatAgency\BackendComponents\Concerns\IndividualComponent;
 use ChatAgency\BackendComponents\Concerns\IsBackendComponent;
 use ChatAgency\BackendComponents\Concerns\IsThemeable;
 use ChatAgency\BackendComponents\Contracts\AttributeBag;
 use ChatAgency\BackendComponents\Contracts\BackendComponent;
 use ChatAgency\BackendComponents\Contracts\ContentsComponent;
+use ChatAgency\BackendComponents\Contracts\IndividualComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeComponent;
 use ChatAgency\BackendComponents\Contracts\ThemeManager;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
