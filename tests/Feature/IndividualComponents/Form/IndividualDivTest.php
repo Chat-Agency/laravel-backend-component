@@ -7,6 +7,7 @@ namespace Feature\IndividualComponents\Form;
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
 use ChatAgency\BackendComponents\Components\Individual\DivComponent;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use ChatAgency\BackendComponents\Factories\IndividualComponentFactory;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -123,5 +124,30 @@ class IndividualDivTest extends TestCase
 
         $this->assertIsArray($divArray['contents']['span_1']['contents']);
         $this->assertEquals('Span', $divArray['contents']['span_1']['contents'][0]);
+    }
+
+    #[Test]
+    public function a_div_component_can_be_recreated_from_an_array()
+    {
+        $component = (new DivComponent)
+            ->setContents([
+                'span_1' => ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent('inside a span'),
+                'span_2' => ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent(
+                        ComponentBuilder::make(ComponentEnum::LINK)
+                            ->setAttribute('href', 'https://google.com')
+                            ->setContent('this is a link')
+                            ->setTheme('action', 'success')
+                    ),
+            ])
+            ->setAttribute('id', 'div_id')
+            ->setTheme('display', 'block');
+
+        $componentArray = $component->toArray();
+
+        $recreatedComponent = IndividualComponentFactory::fromArray($componentArray);
+
+        $this->assertEquals($componentArray, $recreatedComponent->toArray());
     }
 }

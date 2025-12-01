@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Tests\Unit\Components;
 
 use ChatAgency\BackendComponents\Builders\ComponentBuilder;
+use ChatAgency\BackendComponents\Contracts\LivewireComponent;
 use ChatAgency\BackendComponents\Enums\ComponentEnum;
+use ChatAgency\BackendComponents\Factories\ComponentFactory;
 use ChatAgency\BackendComponents\MainBackendComponent;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
 use ChatAgency\BackendComponents\Themes\LocalThemeManager;
@@ -145,6 +147,18 @@ class SimpleComponentTest extends TestCase
     }
 
     #[Test]
+    public function the_theme_manager_can_be_overwritten_after_an_instance_is_created()
+    {
+        $component = new MainBackendComponent('div');
+
+        $this->assertInstanceOf(DefaultThemeManager::class, $component->getThemeManager());
+
+        $component->setThemeManager(new LocalThemeManager);
+
+        $this->assertInstanceOf(LocalThemeManager::class, $component->getThemeManager());
+    }
+
+    #[Test]
     public function a_component_can_return_an_array_representation()
     {
         $component = ComponentBuilder::make(ComponentEnum::DIV)
@@ -174,14 +188,117 @@ class SimpleComponentTest extends TestCase
     }
 
     #[Test]
-    public function the_theme_manager_can_be_overwritten_after_an_instance_is_created()
+    public function a_component_can_be_recreated_from_an_array()
     {
-        $component = new MainBackendComponent('div');
+        $component = ComponentBuilder::make(ComponentEnum::DIV)
+            ->setContents([
+                'span_1' => ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent('inside a span'),
+                'span_2' => ComponentBuilder::make(ComponentEnum::SPAN)
+                    ->setContent(
+                        ComponentBuilder::make(ComponentEnum::LINK)
+                            ->setAttribute('href', 'https://google.com')
+                            ->setContent('this is a link')
+                            ->setTheme('action', 'success')
+                    ),
+            ])
+            ->setAttribute('id', 'div_id')
+            ->setTheme('display', 'block');
 
-        $this->assertInstanceOf(DefaultThemeManager::class, $component->getThemeManager());
+        $this->blade('{{ $component }}', [
+            'component' => $component,
+        ])
+            ->assertSee('<div', false);
 
-        $component->setThemeManager(new LocalThemeManager);
+        $componentArray = $component->toArray();
 
-        $this->assertInstanceOf(LocalThemeManager::class, $component->getThemeManager());
+        $recreatedComponent = ComponentFactory::fromArray($componentArray);
+
+        $this->blade('{{ $recreatedComponent }}', [
+            'recreatedComponent' => $recreatedComponent,
+        ])
+            ->assertSee('<div', false);
+
+        $this->assertEquals($componentArray, $recreatedComponent->toArray());
+    }
+
+    #[Test]
+    public function a_component_with_a_slot_can_be_recreated_from_an_array()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::MODAL)
+            ->setSlot('button', ComponentBuilder::make(ComponentEnum::BUTTON)
+                ->setContent('Click me'))
+            ->setAttribute('@click', 'showModal = true')
+            ->setTheme('action', 'default')
+            ->setAttribute('id', 'modal_id')
+            ->setTheme('size', 'large');
+
+        $componentArray = $component->toArray();
+
+        $recreatedComponent = ComponentFactory::fromArray($componentArray);
+
+        $this->assertEquals($componentArray, $recreatedComponent->toArray());
+    }
+
+    #[Test]
+    public function a_component_with_a_settings_can_be_recreated_from_an_array()
+    {
+        $component = ComponentBuilder::make(ComponentEnum::MODAL)
+            ->setSettings([
+                'setting_1' => 'value_1',
+                'setting_2' => 'value_2',
+            ])
+            ->setAttribute('@click', 'showModal = true')
+            ->setTheme('action', 'default')
+            ->setAttribute('id', 'modal_id')
+            ->setTheme('size', 'large');
+
+        $componentArray = $component->toArray();
+
+        $recreatedComponent = ComponentFactory::fromArray($componentArray);
+
+        $this->assertEquals($componentArray, $recreatedComponent->toArray());
+    }
+
+    #[Test]
+    public function a_livewire_component_with_can_be_recreated_from_an_array()
+    {
+        $component = ComponentBuilder::make(LivewireComponent::class)
+            ->setLivewire()
+            ->setLivewireKey('livewire-key')
+            ->setLivewireParams([
+                'first_param' => 'First',
+            ]);
+
+        $componentArray = $component->toArray();
+
+        $recreatedComponent = ComponentFactory::fromArray($componentArray);
+
+        $this->assertEquals($componentArray, $recreatedComponent->toArray());
+
+    }
+
+    #[Test]
+    public function a_component_with_a_different_path_can_be_recreated_from_an_array()
+    {
+        $component = ComponentBuilder::make('img')
+            ->setPath('inline')
+            ->setContent('Custom path content');
+
+        $this->blade('{{ $component }}', [
+            'component' => $component,
+        ])
+            ->assertSee('<img', false);
+
+        $componentArray = $component->toArray();
+
+        $recreatedComponent = ComponentFactory::fromArray($componentArray);
+
+        $this->blade('{{ $recreatedComponent }}', [
+            'recreatedComponent' => $recreatedComponent,
+        ])
+            ->assertSee('<img', false);
+
+        $this->assertEquals($componentArray, $recreatedComponent->toArray());
     }
 }
