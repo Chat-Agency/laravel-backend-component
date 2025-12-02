@@ -7,8 +7,10 @@ namespace Tests\Unit\Themes;
 use ChatAgency\BackendComponents\Exceptions\IncorrectThemePathException;
 use ChatAgency\BackendComponents\Exceptions\ThemeDoesNotExistsException;
 use ChatAgency\BackendComponents\Themes\DefaultThemeManager;
+use Exception;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
+use Tests\Themes\Managers\TestThemeManager;
 
 class SimpleThemeTest extends TestCase
 {
@@ -115,5 +117,19 @@ class SimpleThemeTest extends TestCase
 
         $manager->processThemes($theme);
 
+    }
+
+    #[Test]
+    public function if_the_manager_path_has_not_been_set_an_exception_is_thrown()
+    {
+         $this->expectException(Exception::class);
+
+        $theme = [
+            'display' => 'flex',
+        ];
+
+        $manager = new TestThemeManager;
+
+        $manager->processThemes($theme);
     }
 }
