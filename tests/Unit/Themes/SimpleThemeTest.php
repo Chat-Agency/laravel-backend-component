@@ -122,7 +122,7 @@ class SimpleThemeTest extends TestCase
     #[Test]
     public function if_the_manager_path_has_not_been_set_an_exception_is_thrown()
     {
-         $this->expectException(Exception::class);
+        $this->expectException(Exception::class);
 
         $theme = [
             'display' => 'flex',
