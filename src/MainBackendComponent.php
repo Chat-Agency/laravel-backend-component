@@ -105,8 +105,9 @@ final class MainBackendComponent implements CompoundComponent, Htmlable
          *
          * @phpstan-ignore argument.type
          */
-        return \view(backendComponentNamespace().'_utilities.resolve-component')
+        return \view($this->getContext().'_utilities.resolve-components')
             ->with('component', $this)
+            ->with('namespace', $this->getContext())
             ->render();
 
     }

@@ -10,6 +10,8 @@ interface PathComponent
 
     public function useLocal(bool $local = true): static;
 
+    public function getContext(): string;
+
     public function getNamespace(): ?string;
 
     public function getPath(): string;

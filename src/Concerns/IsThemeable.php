@@ -67,9 +67,13 @@ trait IsThemeable
 
     public function compileTheme(): ?string
     {
+        $themes = $this->getThemes();
+
+        if (! count($themes)) {
+            return null;
+        }
+
         return $this->getThemeManager()
-            ->processThemes(
-                $this->getThemes()
-            );
+            ->processThemes(themes: $themes);
     }
 }
