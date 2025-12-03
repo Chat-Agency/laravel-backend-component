@@ -36,11 +36,16 @@ trait HasPath
         return $this;
     }
 
+    public function getContext(): string
+    {
+        return $this->namespace ?? backendComponentNamespace();
+    }
+
     public function getNamespace(): ?string
     {
         return $this->useLocal
             ? null :
-            ($this->namespace ?? backendComponentNamespace());
+            $this->getContext();
     }
 
     public function getPath(): string
