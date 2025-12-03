@@ -10,7 +10,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 use function ChatAgency\BackendComponents\backendComponentNamespace;
 
-class DefaultLivewireComponent implements Htmlable, LivewireComponent
+final class DefaultLivewireComponent implements Htmlable, LivewireComponent
 {
     use IsLivewireComponent;
 
@@ -20,6 +20,14 @@ class DefaultLivewireComponent implements Htmlable, LivewireComponent
     public function __construct(
         private string $name
     ) {}
+
+    /**
+     * @param  class-string  $name
+     */
+    public static function make(string $name): static
+    {
+        return new self($name);
+    }
 
     public function getName(): string
     {

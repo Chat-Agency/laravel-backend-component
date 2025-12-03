@@ -20,7 +20,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 use function ChatAgency\BackendComponents\backendComponentNamespace;
 
-class DivComponent implements BackendComponent, ContentsComponent, Htmlable, IndividualComponent, ThemeComponent
+final class DivComponent implements BackendComponent, ContentsComponent, Htmlable, IndividualComponent, ThemeComponent
 {
     use HasContent,
         IsBackendComponent,
@@ -29,6 +29,11 @@ class DivComponent implements BackendComponent, ContentsComponent, Htmlable, Ind
     public function __construct(
         private ThemeManager $themeManager = new DefaultThemeManager
     ) {}
+
+    public static function make(ThemeManager $themeManager = new DefaultThemeManager): static
+    {
+        return new self($themeManager);
+    }
 
     /**
      * @return array<string, array<string, array<string, array<int|string, string>|int|string>|int|string|null>|string>
