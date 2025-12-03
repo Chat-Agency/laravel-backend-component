@@ -14,7 +14,7 @@ class DefaultLivewireComponentTest extends TestCase
     #[Test]
     public function it_can_render_a_livewire_component()
     {
-        $component = new DefaultLivewireComponent(
+        $component = DefaultLivewireComponent::make(
             // Livewire component class
             // cannot test since Livewire is not installed
             name: LivewireComponent::class
