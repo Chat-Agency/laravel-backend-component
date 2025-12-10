@@ -129,7 +129,7 @@ class IndividualDivTest extends TestCase
     #[Test]
     public function a_div_component_can_be_recreated_from_an_array()
     {
-        $component = (new DivComponent)
+        $component = DivComponent::make()
             ->setContents([
                 'span_1' => ComponentBuilder::make(ComponentEnum::SPAN)
                     ->setContent('inside a span'),
