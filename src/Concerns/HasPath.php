@@ -60,10 +60,10 @@ trait HasPath
 
     public function getComponentPath(): string
     {
-        return rtrim(
-            $this->getPath(), '.'
-        )
-        .'.'.$this->getName();
+        return trim(
+            string: $this->getPath().'.'.$this->getName(),
+            characters: '.',
+        );
     }
 
     public function setNamespace(string $namespace): static
